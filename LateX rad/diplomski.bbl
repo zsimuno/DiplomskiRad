@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+  \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+  \providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+  % \MRhref is called by the amsart/book/proc definition of \MR.
+  \providecommand{\MRhref}[2]{%
+    \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+  }
+  \providecommand{\href}[2]{#2}
+  \providebibliographyfont{name}{}%
+  \providebibliographyfont{lastname}{}%
+  \providebibliographyfont{title}{\emph}%
+  \providebibliographyfont{jtitle}{\btxtitlefont}%
+  \providebibliographyfont{etal}{}%
+  \providebibliographyfont{journal}{}%
+  \providebibliographyfont{volume}{\textbf}%
+  \providebibliographyfont{ISBN}{\MakeUppercase}%
+  \providebibliographyfont{ISSN}{\MakeUppercase}%
+  \providebibliographyfont{url}{\url}%
+  \providebibliographyfont{numeral}{}%
+  \providecommand\btxprintamslanguage[1]{\ (#1)}
+  \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+
+\expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+\bibitem {GangOfFourPatterns}
+\btxnamefont {Ralph\btxfnamespacelong Johnson \btxlastnamefont {Erich~Gamma},
+  Richard~Helm} \btxandlong {} \btxnamefont {John \btxlastnamefont
+  {Vlissides}}, \btxtitlefont {\btxifchangecase {Elements of reusable
+  object-oriented software}{Elements of Reusable Object-Oriented Software}},
+  \btxpublisherfont {Addison-Wesley}, 1994, {\latintext
+  \btxurlfont{https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612}}.
+
+\bibitem {sfmlweb}
+\btxnamefont {Laurent \btxlastnamefont {Gomila}}, \btxtitlefont
+  {\btxifchangecase {Web stranica sfml-a}{Web stranica SFML-a}}, {\latintext
+  \btxurlfont{https://www.sfml-dev.org/}}.
+
+\bibitem {HortonBeginning}
+\btxnamefont {J.~\btxlastnamefont {Horton}}, \btxtitlefont {\btxifchangecase
+  {Beginning c++ game programming}{Beginning C++ Game Programming}},
+  \btxpublisherfont {Pact Publishing}, 2016, {\latintext
+  \btxurlfont{https://www.packtpub.com/game-development/beginning-c-game-programming}}.
+
+\bibitem {NystromPatterns}
+\btxnamefont {R.~\btxlastnamefont {Nystrom}}, \btxtitlefont {\btxifchangecase
+  {Game programming patterns}{Game Programming Patterns}}, \btxpublisherfont
+  {Genever Benning}, 2014, {\latintext
+  \btxurlfont{https://gameprogrammingpatterns.com/}}.
+
+\end{thebibliography}

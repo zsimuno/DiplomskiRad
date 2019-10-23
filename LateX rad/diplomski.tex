@@ -1,0 +1,1132 @@
+% Predlozak za pisanje diplomskog rada na PMF-MO
+% Opcenita uputstva za LaTeX se mogu npr. naci na 
+% http://web.math.hr/nastava/rp3, http://web.math.hr/nastava/s4-prof/latex.pdf
+% NE PREPORUCA se "Ne baš tako kratak uvod u TEX", buduci se radi o vrlo starom prirucniku
+% koji nije pogodan za moderne verzije LaTEXa.
+% Originalna verzija "The not so short..." na http://tobi.oetiker.ch/lshort/lshort.pdf 
+% je obnovljena i daje bolji uvid u moderne verzije LaTeXa
+
+% Stil je optimiziran za kreiranje pdf dokumenta (npr. pomocu pdflatex-a, XeLaTeX-a)
+
+\documentclass[a4paper,twoside,12pt]{memoir} % jednostrano: promijeniti twoside u oneside
+
+% Paket inputenc omogucava direktno unosenje hrvatskih dijakritickih znakova 
+% opcija utf8 za unicode (unix, linux, mac)
+% opcija cp1250 za windowse
+\usepackage[cp1250]{inputenc}  % ukoliko se koristi XeLaTeX onda je \usepackage{xunicode}\usepackage{xltxtra}
+
+% Stil za diplomski, unutra je ukljucena podrska za hrvatski jezik
+\usepackage{diplomski}
+% bibliografija na hrvatskom
+\usepackage[languagenames,fixlanguage,croatian]{babelbib} % zahtijeva datoteku croatian.bdf
+% hiperlinkovi 
+\usepackage[pdftex]{hyperref} % ukoliko se koristi XeLaTeX onda je \usepackage[xetex]{hyperref}
+
+% Odabir familije fontova:
+% koristenjem XeLaTeX-a mogu se koristiti svi fontovi instalirani na racunalu, npr
+% \defaultfontfeatures{Mapping=tex-text}
+% \setmainfont[Ligatures={Common}]{Hoefler Text}
+% ili
+% \newcommand{\nas}[1]{\fontspec{Adobe Garamond Pro}\fontsize{24pt}{24pt}\color{Chocolate}\selectfont #1}
+% i onda \nas{Naslov ...}
+\usepackage{txfonts} % times new roman 
+
+% Paket graphicx sluzi za manipuliranje grafikom 
+\usepackage[pdftex]{graphicx} % ukoliko se koristi XeLaTeX onda je \usepackage[xetex]{graphicx}
+% Paket amsmath je vec ukljucen
+% Dodatno definirane matematicke okoline:
+% teorem (okolina: thm), lema (okolina: lem), korolar (okolina: cor),
+% propozicija (okolina: prop), definicija (okolina: defn), napomena (okolina: rem),
+% slutnja (okolina: conj), primjer (okolina: exa), dokaz (okolina: proof)
+% Definirane su naredbe za ispisivanje skupova N, Z, Q, R i C
+% Definirane su naredbe za funkcije koje se u hrvatskoj notaciji oznacavaju drukcije 
+% nego u americkoj: tg, ctg, ... (\tgh za tangens hiperbolni)
+% Takodjer su definirane naredbe za Ker i Im (da bi se razlikovala od naredbe za imaginarni dio kompleksnog
+% broja, naredba se zove \slika).
+
+% Paket koji omoguæava pisanje C++ koda
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset { %
+	language=C++,
+	showstringspaces=false, % don't mark spaces in strings
+	tabsize=2, % tab space width
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{green}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#}
+}
+
+\pagestyle{headings}
+% uz paket fancyhdr mogu se lako kreirati fancy zaglavlja i podnozja
+
+% Podaci koje treba unijeti
+\title{Programiranje video igara u biblioteci SFML}
+\author{Zvonimir Šimunoviæ}
+\advisor{Prof. dr. sc. Mladen Jurak}  % obavezno s titulom (prof. dr. sc ili doc. dr. sc.)
+\date{Rujan, 2019.}  % oblika mjesec, godina
+
+
+\begin{document}
+	
+	% Naredna frontmatter generira naslovnu stranicu, stranicu za potpise povjerenstva, eventualnu posvetu i sadrzaj
+	% Moze se iskomentirati ukoliko nije u pitanju konacna verzija
+	\frontmatter
+	
+	% Tekst diplomskog ...
+	
+	% Diplomski rad treba poceti s uvodnim poglavljem  
+	\begin{intro}
+		U današnjem svijetu neobièno je sresti neku osobu koja se nije susrela barem s jednom videoigrom. Igre više nisu samo na raèunalima i konzolama, prisutne su i na našim mobilnim ureðajima. Uz razne moguæe podjele jedna od postojeæih podjela je na igre koje su u dvije (2D) i igre koje su u tri dimenzije (3D). 2D igre znaèajno su dominirale tržištem do 90-ih godina dok nismo razvili dovoljno dobru tehnologiju kako bismo mogli efikasno pokretati 3D igre.
+		
+		Premda su najveæe i najpoznatije igre današnjice najèešæe 3D, 2D je još uvijek prisutan i èesto ga susreæemo, pogotovo u svijetu nezavisnih (indie) igara. Svijet 2D-a prepun je moguænosti, pa se takve igre neæe tako skoro prestati programirati. Pojavom modernijih, objektno orijentiranih jezika došle su i biblioteke koje omoguæuju pisanje koda za igre. Ti jezici i biblioteke omoguæuju brzo, efikasno i pregledno pisanje koda za igre. 
+		
+		Jedna od takvih biblioteka za jezik C++ i 2D igre je Simple and Fast Multimedia Library ili SFML. Ona donosi moæne alate za programiranje igara koji omoguæuju jednostavno i brzo programiranje.
+		
+		Sama biblioteka nije dovoljna za pisanje kvalitetnog koda za igre, veæ je bitna i organizacija koda. Objektno orijentirani jezici omoguæuju nam organizaciju koda tako da je taj kod spreman za održavanje i nadogradnju. Još su jedna pomoæ u tome oblikovni obrasci. To su isprobani naèini organizacije koda koji rješavaju neke standardne probleme s kojima se susreæu programeri. 
+		
+		Ovaj diplomski rad prikazuje biblioteku SFML, neke njezine osnovne dijelove i moguænosti. Specifièno se osvræe i na neke oblikovne obrasce koji su posebno efikasni u svijetu programiranja igara te ih prikazuje s problemima koje oni rješavaju. Te obrasce gledat æemo kako nam omoguæuju pisanje kvalitetnog i efikasnog koda za videoigre.
+	\end{intro}
+	
+	\chapter{Kratki uvod u C++}
+	C++ je programski jezik s podrškom za objektno orijentirano programiranje. Razvio ga je Bjarne Stroustrup 80-ih godina prošloga stoljeæa. Napisao ga je kao proširenje programskom jeziku C, pa je originalno bio nazvan "C s klasama". Jezik se razvijao s vremenom i još uvijek se razvija. Zadnji standard koji smo dobili je C++17, a C++20 sljedeæi je koji se oèekuje. C++ nam omoguæuje upravljanje memorijom na niskim razinama i zato ga koristimo ako su nam bitne performanse i ogranièeni smo resursima. 
+	
+	Meðu ostalim, danas se koristi èesto u velikim zahtjevnim sustavima, aplikacijama kojima su performanse bitne, i desktop-aplikacijama. Èesto je korišten za programiranje igara i neki poznatiji game enginei (aplikacije koje se koriste za razvoj igara i koje rade na višim razinama razvoja za razliku od SFML-a), poput Unreal i Source enginea, pisani su u njemu. C++ nam je bitan u ovome radu jer je SFML primarno C++ biblioteka za razvoj igara.
+	
+	C++ danas je sveprisutan i razvojem jezika postat æe još bolji i pristupaèniji, pa je vjerojatna njegova duga upotreba i u buduænosti. Ipak, jedna od najveæih kritika jeziku njegova je kompleksnost i èinjenica da je uèenje toga jezika teže od veæine drugih. Kada je pak u pitanju upravljanje memorijom, onda dobivamo bolje performanse, ali treba paziti pri takvom programiranju jer se mogu pojaviti neke greške koje je teško riješiti (npr. može se dogoditi curenje memorije ili memory leak). Zbog toga dosta programera radije piše kod u malo jednostavnijim jezicima ako performanse nisu toliko bitne. 
+	
+	Ovaj diplomski rad pretpostavlja osnovno poznavanje jezika C++ ili barem nekog drugog programskog jezika. Za poèetak uèenja jezika C++ dobra je knjiga Johna Hortona Beginning C++ Game Programming \cite{HortonBeginning} koja uèi C++ baš preko SFML-a i programiranja videoigara.
+	
+	\chapter{SFML}	
+	Kada je u pitanju programiranje igara u 2D-u, imamo razlièite moguænosti u razlièitim jezicima. Neke biblioteke nam nude više, a neke manje moguænosti. U nekima možemo upravljati dijelovima programa bolje nego u drugima. Jedna od biblioteka koja dopušta više moguænosti je Simple and Fast Multimedia Library, odnosno SFML. To je takoðer biblioteka za jezik C++ koji sam po sebi omoguæuje preciznije upravljanje objektima i memorijom koju oni zauzimaju. 
+	
+	Kako bismo koristili SFML, potrebno je skinuti biblioteku sa službene stranice \cite{sfmlweb}. Tu možemo pronaæi i detaljnu dokumentaciju za instaliranje i upotrebu. SFML biblioteka dostupna je na više platformi i èak je, zahvaljujuæi njenoj aktivnoj zajednici, dostupna za više programskih jezika, npr. Java jezik i Python, premda je službena verzija vezana s C i .Net jezicima. SFML je takoðer open-source, što znaèi da svatko može èitati njegov kod u cijelosti i pogledati kako je nešto implementirano.
+	
+	U ovom su poglavlju prikazani neki osnovni segmenti vezani sa SFML-om uz jedan osnovni primjer. Objašnjeni su i neki koncepti poput glavne petlje igre (game loop), renderiranja i organizacije koda.
+	
+	\section{Moduli SFML-a}
+	Kao što joj samo ime govori (Jednostavna i brza biblioteka), SFML biblioteka jednostavna je za korištenje i omoguæuje brze programe i brzo pisanje kodova. Nudi jednostavno aplikacijsko programsko suèelje (engl. application programming interface ili API) koje je pregledno i pristupaèno za korisnike. 
+	
+	Biblioteke za programiranje igara moraju biti i multimedijske. Ne možemo imati igru koja nema grafiku i zvuène efekte. Zato SFML nudi podršku za korištenje raznih medija u našim igrama. Ta je podrška podijeljena u 5 modula.
+	\begin{itemize}
+		\item \textbf{System} (Sustav): Ovo je centralni modul oko kojeg se vrte ostali moduli. Nudi nam vektore, satove, podršku za dretve i još mnogo toga.
+		\item \textbf{Window} (Prozor): Omoguæava stvaranje prozora i prikupljanje korisnikovih unosa kao što je unos preko miša ili tipkovnice.
+		\item \textbf{Graphics} (Grafika): Nudi svu podršku potrebnu za 2D renderanje. Preko njega možemo uèitati teksture i prikazati ih na zaslonu. Možemo takoðer prikazivati oblike i tekstove.
+		\item \textbf{Audio} (Zvuk): Modul koji omoguæava uèitavanje zvukova i puštanje korisniku preko njegovih zvuènika. 
+		\item \textbf{Network} (Mreža): Podrška za slanje podataka preko mreže, bilo to lokalne ili preko interneta. 
+	\end{itemize}
+	Ovdje neæe biti detaljan prikaz svih modula, veæ æemo ih samo prikazati. Za detaljnije informacije o svim modulima preporuèujem pogledati dokumentaciju na službenoj stranici.
+	
+	Za uvoz ovih modula koristimo naredbu include:
+	
+	\begin{lstlisting}
+	#include <SFML/Graphics.hpp>
+	\end{lstlisting}
+	
+	Ili samo za dio nekog modula:
+	
+	\begin{lstlisting}
+	#include <SFML/Audio/Sound.hpp>
+	\end{lstlisting}
+	
+	\newpage
+	\section{Osnovni primjer}
+	
+	Pogledat æemo jedan osnovan primjer programa pisanog u SFML-u i u komentarima ukratko objasniti što se dogaða.
+	
+	\begin{lstlisting}
+	#include <SFML/Graphics.hpp>
+	
+	int main()
+	{
+		// Otvara prozor s naslovom "SFML works!".
+		sf::RenderWindow window(sf::VideoMode(200, 200),
+		"SFML works!");
+		
+		// Definira krug.
+		sf::CircleShape shape(100.f);
+		// Popunjava krug zelenom bojom.
+		shape.setFillColor(sf::Color::Green);
+		
+		// Petlja koja vrti igru dok je prozor otvoren.
+		while (window.isOpen())
+		{
+			// Dogaðaj koji provjerava zatvara li se prozor.
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+				window.close();
+			}
+			
+			// Briše prethodno te crta i prikazuje novo.
+			window.clear();
+			window.draw(shape);
+			window.display();
+		}
+		
+		return 0;
+	}
+	\end{lstlisting}
+	
+	Na slici \ref{prviPrimjer} vidimo što se dobije kada se kod kompajlira i pokrene.
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/start-app.png}
+		\caption{Prvi primjer}
+		\label{prviPrimjer}
+	\end{figure}
+	
+	Vidimo da je otvoren prozor i da je u njemu nacrtan krug zelene boje. Prvo se inicijalizira taj zeleni krug i onda se u glavnoj petlji iscrtava u prozoru sve dok korisnik na neki naèin ne pokrene dogaðaj ili event zatvaranja prozora.
+	
+	\newpage
+	\section{Prozor i Dogaðaji}
+	
+	Kao što se vidi u našem osnovnom primjeru, kako bismo pokrenuli igru i nešto crtali, trebamo otvoriti neki prozor. U tom prozoru odvijaju se svi glavni dogaðaji naše igre i po njemu možemo crtati ono što nam treba. Za otvaranje i upravljanje prozorom koristimo \lstinline{sf::Window} klasu. Jedan osnovan primjer izgledao bi ovako:
+	\begin{lstlisting}
+	#include <SFML/Graphics.hpp>
+	
+	int main()
+	{
+		sf::Window window(sf::VideoMode(500, 500), 
+						"Moj naslov!");
+		window.display();
+		sf::sleep(sf::seconds(3));
+		return 0;
+	}
+	\end{lstlisting}
+	
+	U ovom primjeru inicijalizira se varijabla \lstinline{window} kojoj kasnije pozovemo funkciju èlanicu \lstinline{window.display()} kojom prikazujemo korisniku prozor. U ovom æe se sluèaju taj prozor otvoriti i nakon 3 sekunde zatvoriti. Prozor æe biti velièine 500 x 500 piksela i imat æe naslov "Moj naslov!". 
+	
+	Problem koji tu postoji je da se prozor zatvara samostalno. Ono što nam je potrebno je da taj prozor ostane otvoren dok korisnik to želi i naravno, da se nešto dogaða u tom prozoru. SFML nam omoguæuje razne moguænosti crtanja po zaslonu, ali ono što mi želimo je da tim likovima možemo na neki naèin upravljati. Tu u prièu ulaze \textbf{dogaðaji}. Jedan od takvih je osnovni dogaðaj zatvaranja prozora. Prvo popravljamo naš prijašnji kod i crtamo jedan osnovan oblik. Dodatno dodajemo osnovnu petlju (Game Loop) u kojoj æe se dogaðati sve bitne stvari u našoj igri.
+	
+	\begin{lstlisting}
+	#include <SFML/Window.hpp>
+	
+	int main()
+	{
+		sf::Window window(sf::VideoMode(200, 200), 
+						"SFML works!");
+		
+		sf::CircleShape shape(100.f);
+		shape.setFillColor(sf::Color::Green);
+		
+		// Game loop
+		while (window.isOpen())
+		{
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+				window.close();
+			}
+			
+			window.clear();
+			window.draw(shape);
+			window.display();
+		}
+		
+		return 0;
+	}
+	\end{lstlisting}
+	
+	Sada imamo prozor koji æe ostati otvoren sve dok ga korisnik ne zatvori, a u njemu æe se crtati zeleni krug. Jedan bitan dio koji smo ovdje uveli je glavna petlja igre. Njezin je zadatak držati prozor otvorenim kako bi korisnik mogao igrati igru dok god on želi. Svaka glavna petlja igre ima tri stadija:
+	\begin{enumerate}
+		\item Èitanje unosa - gledamo što je korisnik unio preko ureðaja za unos i prozora
+		\item Ažuriranje slike - na osnovu korisnikova unosa ažuriramo stanje objekata na zaslonu
+		\item Crtanje slike - crtamo novu sliku s novim stanjima objekata.
+	\end{enumerate}
+	Unose èitamo korištenjem klase \lstinline{sf::Event} preko koje odreðujemo dogaðaje koje je korisnik pokrenuo. Ti æe dogaðaji najèešæe utjecati na objekte na ekranu, bilo to pomicanje objekata ili neke radnje (napad, obrana, magija i sl.). Te æemo objekte crtati u novim (ili istim ako nije bilo promjene) stanjima. Za crtanje u prozoru koristi se Double buffer oblikovni obrazac o kojem æe biti govora malo poslije. Ukratko, dok je nešto nacrtano u prozoru, u pozadini pripremamo ono što se crta sljedeæe i kada doðe vrijeme, izbrišemo trenutno stanje i nacrtamo novo.
+	
+	\subsection{Dogaðaji (Events)}
+	
+	Èitanje dogaðaja koje stvara korisnik jedna je od najbitnijih znaèajki vezanih s programiranjem igara. Igre su po samoj definiciji interaktivne, pa je èitanje korisnikovih unosa kljuèno. Dogaðaje možemo èitati preko \lstinline{sf::Window} instance ili èitajuæi stanje samih dogaðaja u stvarnom vremenu. Ako èitamo iz prozora, pozivamo \lstinline{bool Window::pollEvent(sf::Event\& event)} koja vraæa true dok god ima novih dogaðaja koje treba èitati i popunjava varijablu \lstinline{event} s podatcima samog dogaðaja. Bitno je znati da može postojati više od jednog dogaðaja (npr. možemo stisnuti i miš i tipkovnicu u isto vrijeme) i onda moramo paziti da uhvatimo sve dogaðaje. Zbog toga æe kod izgledati ovako:
+	\begin{lstlisting}
+	// Game loop
+	while (window.isOpen())
+	{
+		sf::Event event;
+		
+		// Dok postoje dogaðaji koje treba obraditi.
+		while (window.pollEvent(event))
+		{
+			// Obradi trenutni dogaðaj.
+			if (event.type == sf::Event::EventType::Closed)
+			{
+				window.close();
+			}
+		}
+		
+		// Ažuriraj i crtaj novu sliku.
+	}
+	\end{lstlisting}
+	Ovaj specifièan kod omoguæuje nam da pritisnemo "X" na prozoru i zatvorimo ga. Vidimo da æemo obradu dogaðaja poèeti provjerom njihova tipa. Dogaðaji su tipa \lstinline{Event::EventType}, što je enumeracija unutar \lstinline{Event} klase. Nakon što odredimo njegov tip, gledamo koji se specifièni dogaðaj toga tipa odvio. Zatim njega prevodimo u neku akciju (npr. skok nakon pritiska tipke "Space"). Naše dogaðaje možemo logièki podijeliti u 4 grupe i u svakoj grupi postoje tipovi dogaðaja:
+	\begin{enumerate}
+		\item Prozor - mijenjanje velièine ili fokusa i zatvaranje
+		\item Tipkovnica - pritiskanje ili puštanje tipke i unos teksta
+		\item Miš - micanje miša i pritiskanje ili puštanje tipki na mišu
+		\item Joystick - micanje miša, pritiskanje ili puštanje tipki i povezivanje joysticka.
+	\end{enumerate}
+	Sada možemo provjeravati unose korisnika i na osnovu tih unosa utjecati na likove na zaslonu. U sluèaju da koristimo pollEvents, od koristi nam može biti \lstinline{switch} u kojem su sluèajevi tipovi dogaðaja.
+	\begin{lstlisting}
+	void Game::processEvents()
+	{
+		sf::Event event;
+		while (mWindow.pollEvent(event))
+		{
+			switch (event.type)
+			{
+				case sf::Event::KeyPressed:
+					if (event.key.code == sf::Keyboard::Space)
+						shooting == true;
+				break;
+				case sf::Event::KeyReleased:
+					if (event.key.code == sf::Keyboard::Space)
+						shooting == false;
+				break;
+				case sf::Event::Closed:
+					mWindow.close();
+				break;
+			}
+		}
+	}
+	\end{lstlisting}
+	
+	U ovom primjeru provjeravamo pritiskuje li korisnik tipku za pucanje koja je u ovom sluèaju space. Na ovakav slièan naèin možemo pomicati naše likove po zaslonu, pucati iz oružja ili izvesti neku drugu radnju koju zahtijeva naša igra.
+	
+	Drugi naèin èitanja dogaðaja je u stvarnom vremenu. SFML nam omoguæuje provjeru stanja entiteta u svakom trenutku. Ti entiteti su miš, tipkovnica ili joystick. Ovdje ne obraðujemo dogaðaje kako se pojavljuju, nego samo provjeravamo za svaki dogaðaj je li se dogodio u trenutnom ciklusu. Ovaj pristup drukèiji je od obrade dogaðaja koju smo do sada koristili, ali je odlièan za primjere poput prošlog u kojem želimo obraðivati kretnje lika. Tako bi analizu toga pritiskuje li korisnik tipku za pucanje iz prošlog primjera sveli na sljedeæe:
+	\begin{lstlisting}
+	shooting = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+	\end{lstlisting}
+	Ovakav pristup oèitavanja dogaðaja omoguæuje nam da smanjimo meðusobnu zavisnost meðu klasama. Ako imamo Game klasu u kojoj je funkcija èlanica run() koja pokreæe igru, ne moramo u njoj èitati sve korisnikove unose. Ovime obradu korisnikova unosa možemo prepustiti klasama kojima je taj unos bitan. 
+	
+	Sada kada imamo moguænost komunikacije s korisnikom, rezultat te komunikacije trebamo prikazati na zaslonu. Korisnik æe pomicati likove, izvoditi radnje poput pucanja ili skakanja, odabirati neku opciju u izborniku i slièno. Dalje nam je važno crtati nešto po zaslonu i to nacrtano mijenjati ovisno o korisnikovim željama. 
+	
+	\newpage
+	\section{Crtanje}
+	U poèetku svijeta igara nije bilo mnogo moguænosti pri njihovom programiranju. Sve igre morale su biti jednostavne jer sami hardver nije imao moguænosti za velike svjetove i kompliciranu grafiku. Ako je igra bila zahtjevnija, onda se èesto radilo o igri s jednostavnijom grafikom i mnogo teksta. Neke su avanture èak znale biti u potpunosti tekstualne. Danas svaka igra ima grafièko suèelje i prikazuje nešto na zaslonu, od samog lika igraèa do informacija kao što je kolièina metaka i sl. Praktièki je nemoguæe zamisliti modernu igru bez grafike i zato æe i ovdje biti korištena. SFML nam nudi moguænosti prikazivanja oblika i tekstura na zaslonu. Možemo crtati neke oblike, poput krugova i kvadrata, ili uèitavati i crtati naše slike pohranjene na tvrdom disku. 
+	
+	Prikazano je kako otvoriti prozor i èitati korisnikove unose, sada je potrebno to dalje obraditi. Taj unos možemo iskoristiti tako da prikažemo neki lik na zaslonu i njime upravljamo. Te likove i slike crtamo u prozoru koji smo otvarali u dosadašnjim primjerima, ali sada koristimo primjer klase \lstinline{sf::RenderWindow} klase, a ne \lstinline{sf::Window}. Možemo ponovno uzeti naš poèetni primjer kako bismo demonstrirali ovu funkcionalnost:
+	\begin{lstlisting}
+	#include <SFML/Graphics.hpp>
+	
+	int main()
+	{
+		sf::RenderWindow window(sf::VideoMode(200, 200), 
+								"Crtanje");
+		
+		sf::CircleShape shape(100.f);
+		shape.setFillColor(sf::Color::Green);
+		
+		while (window.isOpen())
+		{
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+			}
+			
+			window.clear();
+			window.draw(shape);
+			window.display();
+		}
+		
+		return 0;
+	}
+	\end{lstlisting}
+	Kao što vidimo u ovom primjeru, u svakom ciklusu prvo se briše sve u prozoru. Nakon toga æe se naš oblik nacrtati i na kraju prikazati. Ovaj dio svake glavne igrine petlje pisan je u "Double Buffer" oblikovnom obrascu. Jednu sliku prikazujemo dok drugu pripremamo za prikazivanje. To nam omoguæuje da se igra bez problema iscrtava na zaslonu, ali o tome više u drugom poglavlju.
+	
+	\subsection{Oblici i transformacije}
+	
+	Kada je u pitanju crtanje oblika, SFML nam nudi poznate oblike, poput kruga i pravokutnika, no možemo i sami napraviti vlastiti oblik. Te oblike stvaramo klasama \lstinline{CircleShape} , \lstinline{RectangleShape} i \lstinline{ConvexShape}. \lstinline{CircleShape} nam omoguæuje crtanje kruga tako da mu zadamo polumjer, a pomoæu \lstinline{RectangleShape} crtamo pravokutnike sa zadanom širinom i visinom. \lstinline{ConvexShape} je oblik koji ima proizvoljni broj vrhova koji mi zadamo. Kao što je navedeno, broj vrhova je proizvoljan, ali pod uvjetom da èini vrhove oblika koji se može nacrtati. 
+	
+	Svaki oblik nasljeðuje klasu \lstinline{Shape} i tako nadjaèava funkcije èlanice \lstinline{Shape::setFillColor()}, \lstinline{Shape::setOutlineColor()} i \lstinline{Shape::setOutlineThickness()}. Ove nam funkcije omoguæavaju da postavljamo izgled oblika onako kako nam odgovara. Pokazat æemo njihovu upotrebu u sljedeæem primjeru:
+	\begin{lstlisting}
+	sf::CircleShape circleShape(30);
+	circleShape.setFillColor(sf::Color::Green);
+	
+	sf::RectangleShape rectangleShape(sf::Vector2f(100, 150));
+	rectangleShape.setFillColor(sf::Color::Black);
+	rectangleShape.setOutlineColor(sf::Color::Blue);
+	rectangleShape.setOutlineThickness(5);
+	
+	sf::ConvexShape pentagonShape;
+	pentagonShape.setPointCount(5);
+	pentagonShape.setPoint(0, sf::Vector2f(90, 0));
+	pentagonShape.setPoint(1, sf::Vector2f(90, 120));
+	pentagonShape.setPoint(2, sf::Vector2f(150, 0));
+	pentagonShape.setPoint(3, sf::Vector2f(120, 60));
+	pentagonShape.setPoint(4, sf::Vector2f(150, 110));
+	rectangleShape.setFillColor(sf::Color::Yellow);
+	\end{lstlisting}
+	Jedna bitna klasa koja se ovdje pojavljuje je \lstinline{Vector2f}. Ona predstavlja 2D vektor koji sadržava dvije \lstinline{float} vrijednosti. Postoje razlièite verzije vektora u SFML-u. Tu je \lstinline{Vector2i} koji sadrži dva cijela (\textit{integer}) broja i \lstinline{Vector3i} koji sadrži tri. Postoje i druge verzije koje sadrže razlièite vrijednosti i vektor koji nam omoguæuje da pohranjujemo tipove koje želimo, \lstinline{Vector2\textless class\textgreater} i \lstinline{Vector3\textless class\textgreater}. Vektore æemo èesto koristiti u crtanju za oznaèavanje dimenzija, smjerova, pozicija i slièno. 
+	
+	Sada želimo na zaslonu prikazati naše oblike, pa æemo koristiti varijablu tipa \lstinline{RenderWindow} koju smo naveli na poèetku ovog poglavlja:
+	\begin{lstlisting}
+	// Nakon što sve izbriše, crta bijelu pozadinu.
+	window.clear(sf::Color::White); 
+	
+	window.draw(rectangleShape);
+	window.draw(circleShape);
+	window.draw(pentagonShape);
+	
+	window.display();
+	\end{lstlisting}
+	
+	U primjeru koristimo funkciju \lstinline{RenderWindow::draw()} kojom crtamo u prozoru. U nastavku je prikazan rezultat pokretanja koda:
+	
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/shape_first.png}
+		\caption{Shape primjer 1}
+		\label{shapePrimjer1}
+	\end{figure}
+	
+	Jedan detalj koji se vidi u ovome primjeru je bitnost redoslijeda crtanja oblika. Vidimo da je crtanje prije pozvano na pravokutniku nego na krugu, zato je pravokutnik na slici ispod kruga.
+	\subsection{Transformacije}
+	Samo crtanje likova nije nam dovoljno za pravu igru, takoðer nam trebaju i neke transformacije. Želimo likove okretati, pomicati, poveæavati i smanjivati. Prije transformiranja potrebno je razumiti kako funkcionira koordinatni sustav u igrama. Njegova orjentacija je drugaèija od standadrdne na koju smo navikli. Gornji lijevi kut prozora predstavlja toèku (0, 0). Os y raste prema dolje dok os x raste prema desno. Kako to izgleda možemo vidjeti u priloženom crtežu: 
+	
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/coordinate.png}
+		\caption{Koordinatni sustav}
+		\label{coordinateSystem}
+	\end{figure}
+	
+	Sada znamo kako æe se ponašati naše transformacije pa ih možemo i poèeti koristiti. Do sada smo koristili klasu \lstinline{Shape} za sve naše oblike i da bi ih crtali, ali ona nudi i još više moguænosti. Ona nasljeðuje \lstinline{sf::Transformable} koja nam nudi neke funkcije za transformiranje. \lstinline{Transformable::setPosition()} postavlja oblik na željenu poziciju, \lstinline{Transformable::setRotation()} koristimo za rotaciju oblika, a \lstinline{Transformable::setScale()} skalira. U nastavku je primjer upotrebe ovih funkcija:
+	\begin{lstlisting}
+	sf::RectangleShape rectangleShape(sf::Vector2f(100, 150));
+	rectangleShape.setFillColor(sf::Color::Black);
+	rectangleShape.setPosition(sf::Vector2f(70,20));
+	rectangleShape.setRotation(20);
+	
+	sf::CircleShape circleShape(30);
+	circleShape.setFillColor(sf::Color::Green);
+	circleShape.setPosition(sf::Vector2f(50,50));
+	circleShape.setScale(sf::Vector2f(2,1));
+	\end{lstlisting}
+	Pokretanjem programa dobivamo sljedeæi rezultat:
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/shape_transform.png}
+		\caption{Shape primjer transform}
+		\label{shapePrimjerTransform}
+	\end{figure}
+	Vidimo da smo krug i pravokutnik pomaknuli. Krug smo skalirali tako da bude dvostruko širi nego poèetno, a pravokutnik smo rotirali za 20 stupnjeva. Vidimo da nam transformacije daju velik broj moguænosti u radu s oblicima. Uz funkciju \lstinline{setPosition}, koja pomièe oblik na neku apsolutnu poziciju, možemo koristiti \lstinline{Transformable::move()} tako da joj predamo vektor koji govori koliko želimo da se oblik pomakne od trenutne pozicije.
+	
+	Još jedna funkcija koja je, uz transformacije, bitna je \lstinline{Transformable::setOrigin()}. Nju koristimo kako bismo postavili izvor oblika. On se koristi kao centralna toèka oko koje se obavljaju sve transformacije. Izvor se gleda relativno na oblik kojemu ga mijenjamo. U poèetku je za svaki oblik postavljen na (0, 0), tj. u gornji lijevi kut. Ako ostavimo tako, onda æe se pri promjeni rotacije ona dogaðati oko te toèke. Ako promijenimo izvor na sredinu oblika, onda æe se rotacija dogaðati oko te sredine, tj. oblik æe se rotirati oko svog centra.
+	
+	\newpage
+	\subsection{Teksture i spriteovi}
+	
+	Za uèitavanje i prikazivanje slika u SFML-u primarno su zadužene 3 klase. To su \lstinline{sf::Image} i \lstinline{sf::Texture} (uèitavanje slika) i \lstinline{sf::Sprite} (prikaz slika). Možemo koristiti i oblike za prikazivanje slika, ali zbog svoje jednostavnosti spriteovi se èešæe koriste.
+	
+	\subsubsection{Uèitavanje slika}
+	Za uèitavanje slika u SFML-u koristimo klase \lstinline{sf::Image} i \lstinline{sf::Texture}. Razlika izmeðu ovih dviju klasa je u moguænostima manipuliranja i prikazivanja. \lstinline{Image} klasu koristimo za uèitavanje i spremanje slika, te manipulaciju piksela dok \lstinline{Texture} koristimo za prikazivanje slika (render). One obe u srži sadržavaju u sebi niz piksela ali se razlikuju po nekim moguænostima koje svaka klasa nudi. Zbog toga SFML nam nudi lako prebacivanje iz jedne klase u drugu ali taj proces može biti skup pa treba ga pažljivo koristiti.
+	
+	Poèinjemo prvo sa \lstinline{Image} klasom. U nju možemo uèitavati slike ali i crtati u nju. Nudi nam moguænost stvaranja slike preko primjerka klase \lstinline{sf::Color}:
+	\begin{lstlisting}
+	sf::Image img;
+	img.create(100, 50, sf::Color::Blue);
+	\end{lstlisting}
+	Prva dva argumenta predstavljaju širinu i visinu a treæi predstavlja boju popune. Takoðer možemo predati ze treæi argument niz brojeva tipa \lstinline{sf::Uint8} koji bi prezentirali individualne piksele kao RGB vrijednosti. 
+	
+	Možemo, naravno, uèitati slike se tvrdog diska.
+	\begin{lstlisting}
+	sf::Image img;
+	if(!img.loadFromFile("mojaSlika.png"))
+	{
+		// Nije uspjelo uèitavanje datoteke.
+		return -1;
+	}
+	\end{lstlisting}
+	
+	Bitan dio \lstinline{Image} je da nam omoguæuje razne funkcije za upravljanje slikom poput mijenjanja vrijednosti individualnog piksela sa \lstinline{Image::setPixel()}. Nudi nam pristup nizu vrijednosti koje predstavljaju sve piksele ili jednom individualnom pikselu. Sliku možemo okrenuti vertikalno sa \lstinline{Image::flipVertically()} ili horizontalno sa \lstinline{Image::flipHorizontally()}. Na kraju svega možemo i sliku spremiti na disk preko funkcije \lstinline{Image::saveToFile()}. Nakon što smo upravljali slikama sada bi trebalo napraviti od njih teksture.
+	
+	Klasa \lstinline{Texture} nam nudi sliène funkcije kao i \lstinline{Image}. Obe mogu pozivati \lstinline{loadFromFile()} funkciju samo postoji jedna bitna razlika. U klasi \lstinline{Texture} imamo moguænost proslijediti još jedan argument uz ime datoteke a to su dimenzije i pozicija pravokutnika koji predstavlja samo dio slike. Taj pristup nam omoguæuje da imamo više tekstura za jednu sliku i da možemo koristiti jednu sliku i uèitavati samo dijelove. To je posebno koristimo jer onda možemo cijeli ciklus animacije jednog lika imati samo u jednoj slici.
+	
+	\begin{lstlisting}
+	sf::Texture texture;
+	if(!texture.loadFromFile("mojaSlika.png",
+					sf::IntRect(20, 0, 50, 50));
+	{
+		// Nije uspjelo uèitavanje datoteke.
+		return -1;
+	}
+	\end{lstlisting}
+	
+	Takoðer možemo uèitati teksturu iz primjerka klase \lstinline{Image} tako da pozovemo funkciju \lstinline{sf::Texture::loadFromImage()} i predamo joj kao argument sliku koju želimo. Još nam je ostalo samo prikazati tu teksturu na zaslonu. 
+	
+	\subsubsection{Teksture i oblici}
+	
+	Veæ smo spomenuli da imamo moguænost uèitavanja tekstura preko oblika. Možemo naše teksture postaviti na oblike poput pravokutnika i tako ih prikazivati na zaslonu. Oblicima možemo limitirati kolièinu slike koja æe se prikazati. Za primjer želimo sada ovu sliku šume nacrtati u krugu:
+	
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/autumn-forest.jpg}
+		\caption{Autumn forest}
+		\label{autumnForest}
+	\end{figure}
+
+	Slijedi kod koji to omoguæuje:
+	\begin{lstlisting}
+	#include <SFML/Graphics.hpp>
+	
+	int main()
+	{
+		sf::RenderWindow window(sf::VideoMode(300, 300), 
+								"Crtanje");
+		
+		sf::Texture texture;
+		texture.loadFromFile("autumn-forest.jpg");
+		
+		sf::CircleShape circleShape(100);
+		circleShape.setTexture(&texture);
+		circleShape.setPosition(50, 50);
+		
+		// Game loop
+	}
+	\end{lstlisting}
+	
+	Izvršavanjem ovog koda dobijemo sljedeæi rezultat:
+	
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/autum-forest-circle.png}
+		\caption{Autumn forest circle}
+		\label{autumnForestCircle}
+	\end{figure}
+
+	Uz oblike imamo opciju crtanja tekstura preko spriteova.
+
+	\subsubsection{Spriteovi}
+	
+	Spriteovi su, poput oblika, površina po kojoj crtamo teksture i meðu njima postoje razlike. Prva je ta razlika da se sprite uvijek renderira kao pravokutnik pa sa njima ne možemo rezati dio teksture kao sa oblicima. Njegova velièina je onolika kolika je velièina teksture. Možemo ju jedino mijenjati tako da koristimo transformacije. \lstinline{sf::Sprite} nasljeðuje \lstinline|Transformable| i \lstinline|Drawable| pa time ih možemo crtati i na njima raditi transformacije isto kao i oblike. Bez obzira što oblici nude više moguænosti mi æemo svejedno èešæe koristiti spriteove zbog njihove jednostavnosti.
+	
+	Njihova je svrha samo uèitati teksturu i prikazati je (uz moguæe neke osnovne transformacije). To se vidi i u tome da, dok oblike možemo koristiti i bez tekstura, spriteovi ih zahtjevaju za korištenje.
+	
+	Pogledajmo jedan osnovni primjer u kojem je oèita ta jednostavnost:
+	\begin{lstlisting}
+		sf::Texture texture;
+		
+		// Load the texture
+	
+		// Shape
+		sf::RectangleShape rect(sf::Vector2f(200, 100));
+		rect.setTexture(&texture);
+		
+		// Sprite
+		sf::Sprite sp(texture);
+	\end{lstlisting}
+	Sada vidimo tu jednostavnost. Bitno je i ovdje naglasiti da, ako želimo nacrtati cijelu teksturu, onda se situacija još malo komplicira. Bez obzira na jednostavnost, sprite svejedno nudi dovoljno moguænosti da ga ima smisla koristiti.
+	
+	\newpage
+	\subsection{Pomicanje oblika}
+	
+	Oblici nisu zanimljivi ako su nepomièni i ako se sami pokreæu. Mi želimo imati moguænost upravljanja tim oblicima. Ovdje æemo iskoristiti dogaðaje i oblike kako bismo napravili jednu interaktivnu igru. Dogaðaje æemo gledati u realnom vremenu jer je, kao što je veæ objašnjeno, praktiènije za ovakve primjere. Jedna mana ovakvoga pristupa je što æe uèitavati unose èak i ako korisnik nije fokusiran na glavni prozor, pa je potrebno imati to na umu pri korištenju. 
+	
+	Prikazat æemo ovdje jedan osnovan primjer da bismo vidjeli kako èesto u praksi pomièemo likove. Lik æe se pomicati dolje ako pritisnemo tipku za dolje, a rotirat æe se za 1 stupanj oko vlastite osi po slièici ako držimo slovo "R".
+	
+	\begin{lstlisting}
+	#include <SFML/Graphics.hpp>
+	
+	int main()
+	{
+		sf::RenderWindow window(sf::VideoMode(500, 500), 
+								"Crtanje");
+		
+		sf::RectangleShape rectangleShape(sf::Vector2f(50, 50));
+		rectangleShape.setFillColor(sf::Color::White);
+		rectangleShape.setPosition(sf::Vector2f(100, 100));
+		rectangleShape.setOrigin(sf::Vector2f(25, 25));
+		
+		while (window.isOpen())
+		{
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+			}
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+			{
+				rectangleShape.rotate(1.f);
+			}
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				rectangleShape.move(sf::Vector2f(0, 1));
+			}
+			window.clear();
+			window.draw(rectangleShape);
+			window.display();
+		}
+		
+		return 0;
+	
+	}
+	\end{lstlisting}
+	Problem koji se javlja u ovome primjeru je taj da æe na bržim raèunalima biti više rotacije i pokreta u sekundi nego na sporijima. To su problemi koje treba rješavati u glavnoj igrinoj petlji. O tome više u drugom poglavlju. Jedno od moguæih rješenja tog problema u SFML-u je korištenje funkcije \lstinline{Window::setFramerateLimit()}. Ako postavimo limit, funkcija \lstinline{Window::display()} usporit æe crtanje po potrebi. Kao što æemo vidjeti poslije, to nije najbolje rješenje, pogotovo kada su u pitanju lošija raèunala koja teško pokreæu našu igru.
+	
+	Sada znamo crtati neke osnovne oblike i pokretati ih. Možemo u svojoj igri konstruirati pravila fizike i odreðivati što korisnik može ili ne može napraviti. To su centralni dijelovi velike veæine igara i moramo se potruditi da rade dobro.
+	
+	U ovom primjeru su korišteni oblici ali isto bi bilo i sa spriteovima. Samo bi umjesto crtanog oblika uèitali teksturu i prikazali je preko spritea i na kraju taj sprite transformirali.
+	\newpage
+	\section{Zvuk}
+	
+	Za sada su pokazani centralni dijelovi bez kojih igra ne može. U veæini sluèajeva poželjno je poboljšati to iskustvo sa zvukom. On omoguæuje da se korisnicima naznaèi da se nešto dogodilo, poput pucnja iz oružja ili koraka neprijatelja. Korisniku se može puštati glazbu koja uvijek upotpunjuje sve dijelove igre i èini ih življima. Zvuk omoguæuje da se korisniku šalju povratne informacije i izazivaju odreðene emocije. Ovdje se vidi na koje naèine SFML omoguæuje korištenje zvuka.  
+	
+	Slièno kao i za slike, za zvuk postoje dvije moguænosti uèitavanja, a to je preko klasa \lstinline{sf::Music} i \lstinline{sf::Sound}. Razlika izmeðu te dvije klase osnovna je, ali vrlo bitna. \lstinline{sf::Sound} uèitava glazbu pohranjenu na tvrdom disku u radnu memoriju te potom pušta zvuk iz memorije. \lstinline{sf::Music} otvara tok (en. stream) prema datoteci na tvrdom  disku i uèitava dio po dio zvuène datoteke. Obje nasljeðuju klasu \lstinline{SoundSource} preko koje imaju neke osnovne glazbene fukncionalnosti. Takoðer pokreæu zvuk u zasebnoj dretvi tako da ne blokiraju trenutnu. Podržani formati su: WAV, OGG/Vorbis i FLAC. Bitno je primijetiti da SFML ne podržava MP3 format. 
+	
+	Oèito je \lstinline{Sound} klasu bolje koristiti kada su u pitanje manje zvuène datoteke koje æe se èesto ponavljati (poput zvuka skoka ili pucnja). Ta se klasa èešæe koristi jer su veæina zvuènih datoteka u igrama efekti. Ovom klasom nakon uèitavanja u RAM možemo, kada god treba, dobiti brz pristup zvuènom zapisu. \lstinline{Music} se koristi kada su u pitanju velike datoteke, a programer je ogranièen kolièinom memorije. Buduæi da ova klasa uèitava dijelove datoteke, ona ima prirodni zastoj zbog toga posla koji obavlja. Ponuðena nam je i moguænost puštanja 3D zvukova. Takvi zvukovi se èuju iz više razlièitih smjerova i daju dojam treæe dimenzije zvuka. Unutar SFML-a možemo i snimati zvuk koristeæi klasu \lstinline{SoundRecorder} ali ovdje æe biti fokus na puštanje zvuka.
+	
+	\subsection{sf::Sound}
+	
+	Klasa \lstinline{sf:Sound} se koristi kao omotaè oko primjerka klase \lstinline{sf::SoundBuffer}. \lstinline{SoundBuffer} predstavlja zvuk u memoriji dok \lstinline{Sound} koristimo za puštanje te glazbe. Ova struktura i odnos izmeðu klasa su isti kao i kod \lstinline{Texture} i \lstinline{Sprite} klasa. To nam omoguæuje da možemo jedan primjerak klase \lstinline{SoundBuffer} koristiti više puta i tako uštediti na memoriji. 
+	
+	Prvo pomoæu \lstinline{SoundBuffer} uèitamo sa diska datoteku preko fukncija oblika \lstinline{SoundBuffer::loadFromX()}. Nama je najbitnija \lstinline{loadFromFile}. Nakon što konstruiramo \lstinline{Sound} objekt kojemu proslijedimo prethodni zvuk kojeg smo uèitali radimo što nam treba. Zvukove možemo puštati, zaustavljati ili pauzirati. Nude se i funkcije koje javljaju status pjesme (je li pauzirana i sl.) i još neke druge. Osnovni primjer isjecka koda bi izgledao ovako: 
+	
+	\begin{lstlisting}
+	sf::SoundBuffer buffer;
+	
+	// Vraca "false" ako se dogodila greska pri ucitavanju
+	if(!sBuffer.loadFromFile("MojZvuk.ogg"));
+		return -1;
+		
+	sf::Sound sound(buffer);
+	
+	sound.setLoop(true);
+	sound.play();
+	// Pomakni zvuk 2 sekunde prema naprijed
+	sound.setPlayingOffset(sf::seconds(2.f));
+	\end{lstlisting}
+	
+	\subsection{sf::Music}
+	
+	Klasa \lstinline{sf::Music} je klasa koju koritimo zasebno (ne treba nam druga klasa za korištenje) za puštanje zvukova. Preporuèuje se kod veæih zvukova kada smo ogranièeni memorijom. Za upravljanje glazbom koristimo ise fukncije kao i prije. Za razliku od \lstinline{SoundBuffer} klase koja uèita cijelu pjesmu u memoeriju, ova klasa otvara datoteku za pristup, tj. koristi \lstinline{openFromFile()} a ne \lstinline{load}. Isjeèak koda: 
+	
+	\begin{lstlisting}
+	sf::Music music;
+	if(!music.openFromFile("MojZvuk.flac"));
+		return -1;
+	music.play;
+	\end{lstlisting}
+	
+	\newpage
+	\section{Mrežna komunikacija}
+	Pojavom i populariziranjem interneta javila se želja da neke igre koriste internet. On nam omoguæuje brzu komunikaciju sa drugim raèunalima diljem svijeta i time možemo igrati igre zajedno ili protiv drugih ljudi. Danas je povezanost na internet èest dio igara. Jedna bitna stavka je da preko njega skidamo nova ažuriranja za igre u redovnim intervalima i tako naše igre dobivaju ili popravke bugova ili nove sadržaje što im produžuje vijek. Prije se za sve moralo kupovati novo izdanje u trgovinama da bi se riješili takvi problemi. Unatoè tome najbitnija novina koju je internet donio u igre je komponenta igranja sa drugim igraèima. To je omoguæilo stvaranje kompetitivnih online igara. Neke igre danas su èak samo moguæe za igranje preko interneta. Iz svega toga je izrasla i e-sport scena u kojoj se može natjecati u igrama i osvojiti novèane nagrade.
+	
+	SFML nudi razne moguænosti i detalje kada je u pitanju komunikacija preko interneta. Mi æemo ovdje proæi neke osnovne. Arhitektura koju æemo koristiti za komunikaciju æe biti klijent-server. Ona funkcionira tako da se klijenti spajaju na jedan centralni server koji sinkronizira dogaðaje i šalje njima trenutna stanja. Da bi znali gdje putuje informacija trebamo znati IP adresu koja æe voditi naš paket do odredišta. U kontekstu igara bi klijenti slali informacije poput pucnja, skoka i slièno dok bi server primao informacije i analizirao bih. Tako bi znali je li metak nekoga pogodio ili ne i nakon toga server šalje svim klijentima trenutno stanje u igri. Taj odnos je kao na prikazanome dijagramu:
+	
+	\begin{figure}[h!t]
+		\centering \includegraphics{slike/Client-server-model.png}
+		\caption{Client server model}
+		\label{clientServerModel}
+	\end{figure}
+	
+	Kada je u pitanju transport onda imamo dva protokola i to su TCP i UDP. Razlike su u pouzdanosti i performansama. Oni rješavaju probleme prebacivanja informacija sa jednog raèunala na drugo. U svakom od primjera æemo slati neke jednostavne podatke ali u pravilu æemo slati pakete. U SFML-u njihova podrška je preko klase \lstinline{sf::Packet} i u njega možemo pohraniti više informacija razlièitog tipa i slati ih preko interneta. Takoðer, u svakome od njih se drukèije programira pa æemo ih pogledati zasebno.
+	
+	
+	\subsection{TCP}
+	Transmission Cotrol Protocol (TCP) koristimo kada želimo osigurati da je paket stigao na svoje odredište. To ga èini pouzdanim protokolom. Zbog toga se šalje više informacija nego što originalno postoji jer pratimo je li stigao svaki paket ili ne. Ako jedan paket ne stigne gdje treba onda se on šalje opet sve dok ne doðe. On osigura da doðu svi paketi i to u pravilnom redoslijedu. Zbog ovoga svega TCP je sporiji i koristimo ga gdje god brzina nije presudna. U veæini sluèajeva neæe biti osim u brzim, akcijskim igrama u kojima je svaki komadiæ vremena bitan. Veæina interneta komunicira preko ovog protokola zato što je veæinom bitnija toènosti pristiglih informacija nego što æemo izgubiti malo vremena.
+	
+	Za spajanje nam trebaju IP adresa odredišta i port na koji se spajamo. TCP se obavlja preko dvije klase \lstinline{sf::TcpSocket} (utiènica) koja uspostavlja vezu (odnosno klijent) i \lstinline{sf::TcpListener} koji prihvaæa vezu (server). Ako je veza uspješna onda \lstinline{sf::TcpListener} otvara \lstinline{sf::TcpSocket} koji se spaja na prethodnu utiènicu i uspostavlja vezu izmeðu njih.
+	
+	Prvo gledamo primjer klijenta: 
+	
+	\begin{lstlisting}
+	sf::TcpSocket socket;
+	
+	// Funkcija connect vraca status konekcije
+	if (socket.connect("192.168.1.10", 
+		12345) != sf::Socket::Done)
+	{
+		// Neuspjela veza
+		return -1;
+	}
+	
+	// Uspostavljena veza pa saljemo poruku
+	const int mSize = 100;
+	char msg[mSize] = "Ja koristim SFML. Ti?";
+	if( socket.send(msg, mSize) != sf::Socket::Done)
+	{
+		// Greska pri slanju 
+	} 
+	
+	\end{lstlisting}
+	
+	Zatim gledamo primjer servera:
+	
+	\begin{lstlisting}
+	// Slusaj na portu 12345
+	sf::TcpListener listener;
+	listener.listen(12345);
+	
+	// Prihvaæamo vezu
+	sf::TcpSocket socket;
+	
+	if (listener.listen(socket) != sf::Socket::Done)
+		return -1;
+	
+	// Uspostavljena veza pa primamo poruku
+	const std::size_t mSize = 100;
+	char msg[mSize];
+	std::size_t readSize;
+	if( socket.recieve(msg, mSize, 
+		readSize) != sf::Socket::Done)
+	{
+		// Greska pri primanju informacija
+		return -1;
+	} 
+	
+	// Obrada podataka
+	
+	socket.disconnect();
+	\end{lstlisting}
+	
+	TCP stvara vezu izmeðu dvije utiènice i onda kada ih spoji radi razmjenu podataka. Nakon obrade zatvaramo utiènicu i prekidamo vezu.
+	
+	\subsection{UDP}
+	User Datagram Protocol (UDP) je nepouzdani protokol koji ne prati ima li paketa koji nisu stigli na svoje odredište ili je li redoslijed paketa pravilan. Zbog toga je ovaj protokol brži i zahtjeva manje memorije za svaki paket. Zbog toga i odredišno raèunalo ne treba èekati izgubljene pakete nego samo nastavlja izvršavanje. Koristimo ga kada je brzina bitna u našim aplikacijama. Ako nam treba puno informacija uskladiti u kratkom vremenu onda nam je UDP poželjniji.
+	
+	Slanje podataka preko UDP-a je slièno kao i preko TCP-a ali samo koristimo \lstinline{sf::UdpSocket}. Za razliku od TCP-a u kojemu jedna utiènica može biti povezana samo sa drugom nekom, ovdje jedna utiènica može slati podatke na više odredišta. Toènije, veza se ne uspostavlja nego se samo pošalju podatci.
+	
+	Opet prvo gledamo primjer klijenta: 
+	
+	\begin{lstlisting}
+	sf::UdpSocket socket;
+	
+	// Saljemo poruku
+	const int mSize = 100;
+	char msg[mSize] = "Ja koristim SFML. Ti?";
+	if( socket.send(msg, mSize, "192.168.1.10",
+		 12345) != sf::Socket::Done)
+	{
+		// Greska pri slanju 
+	} 
+	
+	\end{lstlisting}
+	
+	Zatim gledamo primjer servera:
+	
+	\begin{lstlisting}
+
+	sf::UdpSocket socket;
+	
+	// Vežemo utiènicu za port da zna gdje primiti podatke
+	socket.bind(12345);
+	
+	// Primamo poruku
+	const std::size_t mSize = 100;
+	char msg[mSize];
+	std::size_t readSize;
+	sf::IpAdress clientIP;
+	unsigned short remotePort;
+	if( socket.recieve(msg, mSize, readSize
+		clientIP, remotePort) != sf::Socket::Done)
+	{
+		// Greska pri primanju informacija
+		return -1;
+	} 
+	
+	// Obrada podataka
+	
+	socket.unbind();
+	\end{lstlisting}
+	
+	Ovo je osnovni primjer mrežne komunikacije u UDP a prethodno smo pokazali i u TCP. Vidimo sada kako proširenjem ovoga i korištenjem paketa možemo imati kompleksne programe koji bi nam omoguæili igranje igara preko mreže.
+	\chapter{Oblikovni obrasci u igrama}	
+	
+	U poèetcima programiranja jezici su bili proceduralni. Ti su programi bili brzi i efikasni, ali takav naèin pisanja nepraktièniji je što je kod veæi. Tu nam pomažu klase. S klasama i polimorfizmom možemo imati velike i pregledne kodove koji su pogodni za napredak i održavanje. Takoðer nam pomažu kod ponovne upotrebe koda jer su takvi dijelovi èesto odvojeni od ostatka koda pa se lako iskoriste negdje drugdje. Još jedan segment koji nam u tome može pomoæi su oblikovni obrasci. To su provjereni naèini pisanja koda koji rješavaju neke odreðene probleme te ukazuju na dobru praksu pisanja koda.
+	
+	Obrasci su bitni i za svijet igara. Pomažu nam da naše igre rade dobro i da su otvorene za dodavanje novih dijelova igre. Ovdje æe biti prikazani neki oblikovni obrasci koji se èesto koriste u igrama te su uvelike korisni. Naravno, postoje mnogi drugi obrasci koji mogu pomoæi u pisanju koda za naše igre \cite{NystromPatterns} ili za bilo koji program koji možda pišemo u nekom objektno orijentiranom jeziku. \cite{GangOfFourPatterns}
+	
+	
+	\newcommand{\motivacija}{Motivacija}
+	\newcommand{\primjer}{Primjer}
+	\newcommand{\kada}{Kada ga koristiti}
+	\newcommand{\zaklj}{Zakljuèak}
+	
+	
+	
+	\section{Game loop}
+	\subsection{\motivacija}
+	Game loop je centralni obrazac za igre koji nam služi za pokretanje igara. Dok game enginei sami obavljaju glavnu petlju, SFML nam omoguæava da mi osobno isprogramiramo glavnu igrinu petlju. Svaki put kada se odvrti petlja, naš program uèita korisnikov unos, ažurira stanje igre i prikazuje ju korisniku. Ovo je najbitniji oblikovni obrazac kada je u pitanju programiranje igara i skoro svaka igra ga ima.
+	
+	Kada su u pitanju skripte koje se pokreæu u komandnoj liniji, radi se o programima koji, nakon što se pokrenu, odrade što trebaju sekvencijalno i prestanu s radom. Dosta programa s grafièkim suèeljima funkcionira slièno. Ne rade ništa dok èekaju da korisnik ne ponudi neki unos. Kada korisnik nešto unese, aplikacija odradi što treba i opet èeka novi unos.
+	
+	To nam predstavlja problem jer su igre interaktivne i nešto se konstantno dogaða na zaslonu. Igra se treba kretati èak i kada nema korisnikova unosa. Ako igramo igru u kojoj upravljamo avionom, on neæe èekati da korisnik nešto unese, veæ se kreæe bez njega. To je zapravo prva kljuèna ideja igrine petlje, ona èita korisnikov unos bez da ga èeka. Toènije, petlja se vrti i obavlja sve radnje, ali neæe stati s izvoðenjem da bi èekala korisnikov unos. U našem je primjeru to bilo:
+	\begin{lstlisting}
+	while (true)
+	{
+		processInput();
+		update();
+		render();
+	}
+	\end{lstlisting}
+	Vidimo da svaki put kada petlja prolazi, naša igra èita korisnikov unos, ali ako nema unosa, onda processInput() neæe ništa napraviti. Funkcija update() ažurirat æe stanje na zaslonu neovisno o tome ima li korisnikova unosa ili ne. Ako ima, onda ažurira u skladu s unosom. Na kraju svega toga funkcija render() nacrtat æe na zaslon sve potrebno. Dodatno, negdje u kodu bit æe uvjet koji æe omoguæiti izlazak iz ove petlje. Ovo je bio osnovni konceptualni primjer. Imali smo takav u poglavlju koje nas je uvelo u SFML, gdje je u petlji samo èekano da korisnik zatvori prozor.
+	
+	Sada postavljamo logièno pitanje: koliko se brzo ova petlja izvodi? Petlja æe se izvoditi onoliko puta koliko raèunalo dopušta da se izvodi. Jedan izraz koji se ovdje èesto pojavljuje su slièice po sekundi ili FPS (frames per second). Taj pojam oznaèava koliko slièica u jednoj sekundi naša igra crta, odnosno koliko se puta u sekundi igrina petlja vrti. Više slièica znaèi fluidniju igru i sliku, a manje slièica može biti èak neigrivo. Naravno, ne znaèi da zaslon može toliko FPS-a i prikazati. To je ovisno o brzini osvježavanja zaslona. 
+	
+	Mi takoðer èesto želimo upravljati tim brojem. Oèito je da mali broj slièica nije poželjan, ali isto tako ne želimo nužno uvijek da je velik. Naime, u tom sluèaju naša igra može opteretiti logièke jedinice raèunala i grafièke kartice. Ogromne kolièine FPS-a su ponekad i nepotrebne, pa æemo èesto ogranièiti broj izvoðenja petlje u sekundi. Na starijim raèunalima ovo je bio problem kada su igre ovisile o hardveru na kojem su se izvodile. Brzina nekih igara znala je biti uvjetovana time na kojem raèunalu se izvodila. Danas to više nije tako i zapravo je jedan od bitnih poslova igrine petlje održavanje konzistentne brzine igre neovisno o hardveru.
+	
+	Bitno je imati na umu i da æe se ova petlja vrtiti velik broj puta u sekundi, zato je važno uèiniti je što efikasnijom. 
+	
+	\subsection{\primjer}
+	Primjer koda za ovaj obrazac poprilièno je izravan. Ovdje æemo se više baviti nekim detaljima oko same implementacije glavne petlje te prednostima i manama odreðenih implementacija. Pozivat æemo neke standardne funkcije u igrama, ali ih neæemo implementirati jer u tome ipak nije poanta ovog obrasca. Fokus æe biti na samoj glavnoj petlji.
+	
+	Prvo æemo pogledati najosnovniji oblik ovakve petlje kakav je veæ prikazan:
+	\begin{lstlisting}
+	while (true)
+	{
+		processInput();
+		update();
+		render();
+	}
+	\end{lstlisting}
+	Ovakva petlja vrtit æe se onoliko brzo koliko je raèunalo u mogænosti. Problem s takvim pristupom je što nemamo kontrolu nad brzinom kojom æe se igra vrtiti. Na brzim raèunalima æe se igra vrtiti prebrzo, a na slabijim æe raèunalima biti prespora za igranje. Ako je u pitanju pokretanje nekog lika, onda æe  se na brzom raèunalu lik prebaciti preko cijelog zaslona u manje od pola sekunde, a na slabom raèunalu trebat æe nekoliko sekundi. Zbog toga je poželjnu imati odreðenu kontrolu nad glavnom petljom.
+	
+	\subsubsection{Upravljanje glavnom petljom}
+	Prvi pristup rješavanju ovog problema ujedno je i najjednostavniji. Strategija je odreðivanje koliko æemo puta izvršiti petlju i zatim èekanje odreðene kolièine vremena. Dakle, ako želimo imati petlju koja traje 20 ms, a na jednom raèunalu se izvede u 12 ms, onda æemo pozvati sleep(8 ms) i time dobiti željenu duljinu petlje. Duljina petlje zapravo znaèi koliko æe slièica (ili frameova) biti poslano na crtanje (render). To bi znaèilo da mi zapravo ogranièavamo igru da postiže željeni FPS. Taj bi kod izgledao ovako:
+	\begin{lstlisting}
+	double time_per_loop = 1000/desired_FPS;
+	while (true)
+	{
+		double loop_start = getCurrentTime();
+		processInput();
+		update();
+		render();
+		sleep(loop_start + time_per_loop - getCurrentTime());
+	}
+	\end{lstlisting}
+	Ovdje funkcija sleep omoguæuje da se petlja ne izvršava preèesto. Sada dolazimo do velike mane ovog pristupa, a to su raèunala kojima æe trebati previše vremena da izvrše petlju. Igra æe tada usporiti i neæe biti željene brzine. Jedno rješenje je da ponudimo korisnicima više opcija za grafiku i detalje u igri tako da petlja traje kraæe, ali uvijek æe postojati još slabija raèunala koja i na najmanjoj rezoluciji neæe moæi postiæi zadovoljavajuæe rezultate. Zato ta opcija i nije najpoželjnija.
+	
+	\subsubsection{Pomicanje ovisno o vremenu}
+	Problem u prošlom rješenju nastajao je kada je trebalo duže vremena za obradu jedne slièice. Jedno rješenje toga je pomicanje igre za vrijeme koje nam nedostaje. Dakle, ideja je ta da, ako petlja traje 20 ms, a nama treba više vremena za obradu, onda igru pomaknemo za 20 + višak ms. Toènije, ako se lik pomakne 100 piksela u 20 ms, a nama je potrebno 30 ms, onda æemo pomaknuti lik 150 piksela u jednom izvoðenju petlje.
+	
+	Trebamo odluèiti koliko æe se igra pomaknuti za odreðeno vrijeme i onda gledamo koliko je stvarno trebalo vremena za petlju. Ovisno o tome koliko je vremena prošlo, toliko æe naša funkcija pomaknuti igru. Kod bi izgledao ovako:
+	\begin{lstlisting}
+	double last_time = getCurrentTime();
+	while (true)
+	{
+		double current_time = getCurrentTime();
+		double elapsed_time = current_time - last_time;
+		processInput();
+		update(elapsed_time);
+		render();
+		last_time = current_time;
+	}
+	\end{lstlisting}
+	Vidimo da \lstinline{update} funkcija prima vrijeme koje je prošlo. U toj æemo fuknciji pomaknuti igru ovisno o prošlom vremenu. Za udaljenost koju æe lik prijeæi, to bi bila brzina lika pomnožena s vremenom trajanja petlje. To znaèi da bi se tijekom duljeg vremena lik više pomicao. Time postižemo jednako pomicanje igre na raèunalima razlièite snage.
+	
+	Ovakav pristup donosi sa sobom probleme zbog toga što raèunala zaokružuju pri operacijama s tipom \lstinline{double}. Zamislimo da jedan korsnik u jednoj sekundi proðe petlju 10 puta, a drugi je proðe 60 puta. Korisnik koji proðe glavnu petlju više puta, obavit æe više operacija i podložniji je veæem broju grešaka. U tom trenutku možemo imati dva dogaðaja koja izgledaju drukèije iako su izvedena na isti naèin. Zato nam je teško predvidjeti što se može dogoditi na razlièitim raèunalima jer manje greške u raèunanju mogu dovesti do veæih problema pri izraèunu pravila fizike u igri. Zbog te nestabilnosti nije pametno koristiti ovo rješenje.
+	
+	\subsubsection{Više koraka u jednom}
+	Vidjeli smo da nam je problem što ili preèesto mijenjamo igru ili prerijetko. Taj problem možemo riješiti tako da uvijek crtamo posljednju sliku (što nije zahtjevna operacija), ali da ažuriranje slike obavimo ili više puta u jednoj petlji ili nijednom. To nam omoguæuje fiksan broj ažuriranja koji mi odaberemo. Na sporijim raèunalima ažuriranje æe biti èešæe, a na bržima rjeðe, no ukupan broj bit æe jednak, unatoè tome što æe brže raèunalo i brže crtati trenutno stanje. Ovdje æemo pratiti koliko je vremena prošlo od zadnje slièice, a ažuriranja æemo provoditi ovisno o tome. Kod izgleda ovako:
+	\begin{lstlisting}
+	double previous_time = getCurrentTime();
+	double lag = 0.0;
+	while (true)
+	{
+		double current_time = getCurrentTime();
+		double elapsed_time = current_time - previous_time;
+		previous_time = current_time;
+		lag += elapsed;
+		processInput();
+		while (lag >= time_per_update)
+		{
+			update();
+			lag -= time_per_update;
+		}
+		render();
+	}
+	\end{lstlisting}
+	Sada vidimo da æe se \lstinline{update} funkcija pozivati više puta ako raèunalu treba više vremena za obradu, a na brzom raèunalu neæe uopæe ažurirati par slièica. Svakim novim prolaskom petljom provjeravamo koliko je vremena prošlo od zadnjeg prolaska i akumuliramo to vrijeme. Ako je raèunalo sporo, onda æe zaostatak biti veæi od željenog vremena, pa æe se izvršiti onoliko puta koliko je zaostatak veæi. Ako je raèunalo prebrzo, \lstinline{lag} æe se poveæavati tijekom više prolazaka petljom dok ne doðemo do željene velièine, tek tada æe se stanje ažurirati. Ovime smo postigli jednak broj ažuriranja na razlièitim raèunalima. Na nekim æe raèunalima prikazivanje možda biti sporije, a igra malo usporenija, ali broj ažuriranja igre bit æe isti. 
+	
+	Pri ovoj implementaciji mogu se javiti problemi zbog razlièita vremena ažuriranja i crtanja. Ako se crtanje dogaða na pola puta izmeðu dva ažuriranja, onda možemo oèekivati da se igra nalazi u meðustanju, ali æe zapravo biti u stanju prvog ažuriranja. To možemo popraviti tako da crtanje, tj. \lstinline{render()} funkcija, prima kao argument vrijeme od zadnjeg ažuriranja te crta na osnovi toga. Ovo može dovesti do toga da se objekti nalaze u nedozvoljenim pozicijama (npr. objekt uðe par piksela u zid), a to æe primijetiti tek iduæe ažuriranje. Sreæom, ovakve su greške minimalne u praksi, pa je ovakav pristup i dalje praktièan.
+	
+	\subsection{\zaklj}
+	Za razliku od drugih, ovaj je obrazac takav da veæina igara ne može funkcionirati bez njega. Dobrodošao je èak i u igrama koje ga tehnièki ne trebaju. Takve igre bez njega ne bi mogle imati grafièke efekte ili zvukove. Bilo da sami pišemo petlju svojom bibliotekom ili da je game engine vlasnik petlje, svejedno nam je potreban kako bi naša igra bila igra.
+	
+	\section{Double Buffer}
+	\subsection{\motivacija}
+	Kada programiramo igru, potrebno je neke informacije prikazati igraèu. Pozadinu, likove, efekte i ostalo treba crtati po zaslonu, ali to nije jednostavan zadatak. Objekti na zaslonu prikazuju se tako da prvo crtamo od pozadine prema naprijed. Ono što želimo je da je to crtanje fluidno, brzo i efikasno. Želimo da se svaka prikazana slièica na zaslonu vidi dobro i u cijelosti. 
+	
+	S tim problemom pomaže nam oblikovni obrazac Double Buffer, odnosno dvostruka meðupohrana kojom jednu slièicu pripremamo dok se druga prikazuje. Da bi razumjeli zašto i kada je to potrebno, moramo se malo upoznati s naèinom na koji raèunalo prikazuje slièice na zaslonu. Ono što slijedi je pojednostavljenje toga problema.
+	
+	Raèunalo prikazuje slièice na naèin da crta piksel po piksel i tako red po red piksela od vrha do dna. Kada doðe na dno, vrati se na poèetak i poène ponovno crtati. Brzinu crtanja odreðuje brzina osvježavanja monitora koja najèešæe iznosi 60 puta u sekundi. Raèunalo odreðuje piksele koje æe crtati tako da èita \textit{framebuffer}. To je niz piksela u radnoj memoriji koji sadržava informacije o svakom pikselu koji treba nacrtati. Ako ne koristimo ovaj oblikovni obrazac, onda zapravo pri izraèunima nekih vrijednosti (kao što je pozicija ili rotacija lika) u tom trenutku crtamo direktno u framebuffer.
+	
+	To znaèi da mi èitamo iz toga niza ono što treba prikazati na zaslonu i tu se zapravo javlja problem koji se ovdje pokušava riješiti. Do njega dolazi ako brzina èitanja i crtanja na zaslonu nije usklaðena s našom brzinom pisanja u sami framebuffer. Može se dogoditi da se igra brže crta nego što mi pišemo. Ono što se tada dogodi je to da æemo mi poèeti pisati neku sliku u framebuffer, npr. neki automobil. Mi u isto vrijeme ažuriramo igru, raèunamo raznorazne vrijednosti te crtamo sve to na zaslonu. Dok mi doðemo do, na primjer, guma od automobila, slika se veæ nastavila crtati bez da smo mi uspjeli napisati u frambuffer što dalje želimo. Zato æemo dobiti sliku automobila koji nema gume. Raèunalo zapravo nastavi èitati framebuffer, ali kako mi nismo stigli u njega sve napisati, tamo nisu vrijednosti koje mi želimo. Tada se dogaða \textit{tearing} ili kidanje zaslona.
+	
+	Taj se problem riješi postojanjem dvaju framebuffera. Iz jednoga æe raèunalo èitati što æe crtati na zaslon, a u drugi æemo zapisivati što æe biti na sljedeæoj slièici. Tako zapravo odvojimo crtanje i pisanje u framebufferu na trenutni i sljedeæi buffer. U pozadini pripremamo ono što æe se crtati na iduæoj slièici i zatim na kraju ciklusa predamo raèunalu nove podatke. On ih crta, a mi opet u pozadini pripremamo sljedeæu slièicu. Informacije se èitaju samo iz trenutnog, a pišu samo u sljedeæi buffer. Kada obavimo te operacije, izmijenimo ta dva buffera.
+	
+	Ovo je jedna od centralnih ideja u modernim igrama. Starije konzole nisu nužno to radile, nego su usklaðivale crtanje s brzinom osvježavanja zaslona. To nije bilo jednostavno, ali je bilo potrebno na hardveru koji je imao ogranièene moguænosti. U svijetu izvan igara ovaj obrazac može biti koristan ako se u nekom programu podatcima pristupa u isto vrijeme kada se u njih i piše. Ono èega moramo biti svjesni je da samo mijenjanje buffera može nekada vremenski koštati. Dodatno, moramo biti svjesni da sada imamo dva buffera i da je to optereæenje memorije. Ako koristimo neke ureðaje koji su ogranièeni memorijom, vjerojatno bi neka druga opcija bila bolja.
+	
+	\subsection{\primjer}
+	Kao primjer konstruirat æemo jedan jednostavan oblik grafièkoga sustava. On æe nam omoguæavati pisanje po framebufferu. Ovdje zapravo implementiramo ono što veæ postoji na nižim razinama grafièkoga sustava, ali ovaj æe nam primjer pomoæi da razumijemo o èemu se zapravo radi. Prvo ide samo framebuffer:
+	\begin{lstlisting}
+	class Framebuffer
+	{
+		public:
+			Framebuffer() { clear(); }
+			
+			// 0 - bijeli pikseli, 1 - crni pikseli.
+			void clear()
+			{
+				for (int i = 0; i < width * height; ++i)
+				{
+					pixels[i] = 0;
+				}
+			}
+			
+			void draw(int x, int y)
+			{
+				pixels[(width * y) + x] = 1;
+			}
+			
+			const int* getPixels()
+			{
+				return pixels;
+			}
+		
+		private:
+			const int width = 200;
+			const int height = 300;
+			int pixels[WIDTH * HEIGHT];
+	};
+	\end{lstlisting}
+	Napravili smo funkcije kojima crtamo po bufferu i resetiramo sve na bijelu boju. Takoðer možemo pristupiti cijelom nizu boja preko funkcije \lstinline{getPixels()} koju æe zvati videodriver tako da bi èitao buffer i crtao na zaslon.
+	
+	Sada æemo dodati klasu preko koje æemo crtati u buffer.
+	
+	\begin{lstlisting}
+	class Scene
+	{
+		public:
+			void draw()
+			{
+				buffer.clear();
+				
+				buffer.draw(1, 1);
+				buffer.draw(2, 1);
+				buffer.draw(3, 1);
+				buffer.draw(4, 1);
+				buffer.draw(1, 2);
+				buffer.draw(4, 2);
+				buffer.draw(1, 3);
+				buffer.draw(2, 3);
+				buffer.draw(1, 4);
+				buffer.draw(2, 4);
+				buffer.draw(3, 4);
+			buffer.draw(4, 4);
+			}
+			Framebuffer& getBuffer() { return buffer; }
+		private:
+			Framebuffer buffer;
+	};
+	\end{lstlisting}
+	Funkcija \lstinline{draw()} crta kvadrat velièine 4 x 4  na zaslonu. 
+	
+	Svaku novu slièicu funkcija \lstinline{draw()} briše sve na zaslonu i crta kvadrat. Toènije, ona isprazni buffer i nakon toga piše u njega. Tu imamo i funkciju \lstinline{getBuffer()} preko koje videodriver može pristupiti bufferu.
+	
+	Na prvi pogled ne èini se kako bi ovako mogao nastati neki problem, ali do njega æe doæi kada su naša scena i videodriver neusklaðeni. On može u bilo kojem trenutku zatražiti piksele iz buffera i crtati ih po zaslonu, pa možemo dobiti ovakvu situaciju:
+	\begin{lstlisting}
+	buffer.clear();
+	
+	buffer.draw(1, 1);
+	buffer.draw(2, 1);
+	buffer.draw(3, 1);
+	buffer.draw(4, 1);
+	buffer.draw(1, 2);
+	buffer.draw(4, 2);
+	// Ovdje videodriver èita piksele.
+	buffer.draw(1, 3);
+	buffer.draw(2, 3);
+	buffer.draw(1, 4);
+	buffer.draw(2, 4);
+	buffer.draw(3, 4);
+	buffer.draw(4, 4);
+	
+	\end{lstlisting}
+	U tom æe se sluèaju na zaslon u toj slièici iscrtati samo gornji dio kvadrata. U narednim crtanjima može prekinuti pisanje u bilo kojem trenutku, pa dolazi do treperenja na zaslonu. Ovo se dogaða zato što èitamo iz istog buffera u koji i pišemo. Ovaj problem možemo riješiti uvoðenjem drugog buffera:
+	\begin{lstlisting}
+	class Scene
+	{
+		public:
+			Scene()
+			: current(&buffers[0]),
+			next(&buffers[1])
+			{}
+			
+			void draw()
+			{
+				buffer.clear();
+				
+				next.draw(1, 1);
+				next.draw(2, 1);
+				next.draw(3, 1);
+				next.draw(4, 1);
+				next.draw(1, 2);
+				next.draw(4, 2);
+				next.draw(1, 3);
+				next.draw(2, 3);
+				next.draw(1, 4);
+				next.draw(2, 4);
+				next.draw(3, 4);
+				next.draw(4, 4);
+			}
+			Framebuffer& getBuffer() { return *current; }
+		private:
+			void swap()
+			{
+			// Zamjena pokazivaèa
+				Framebuffer* temp = current;
+				current = next;
+				next = temp;
+			}
+			Framebuffer buffers[2];
+			Framebuffer* current;
+			Framebuffer* next;
+	};
+	\end{lstlisting}
+	Sada imamo dva buffera. Ono što smo ovdje postigli je to da se nikada neæe èitati iz buffera u koji se piše i obrnuto. Uvijek pišemo samo u \lstinline{next} i èitamo samo iz \lstinline{current}. Nakon što završimo crtanje iduæe scene u \lstinline{next}, napravimo zamjenu buffera pozivom funkcije \lstinline{swap()}. Sada vidimo da videodriver može pozvati \lstinline{getBuffer()} u bilo kojem trenutku i problem neæe nastati. Na zaslonu æe se nacrtati potpuna slika bez ikakva treperenja.
+	
+	\subsection{\zaklj}
+	Double buffer nam omoguæuje da prikazujemo naše igre fluidno i u cijelosti. Pod cijenu memorije i brzine dobivamo igru koju je lakše crtati te ne trebamo paziti kakav je zaslon na koji se iscrtava igra. Možemo manje razmišljati o hardveru, a više se fokusirati na svoj kod.
+	
+	
+	\section{State}
+	\subsection{\motivacija}
+	Ovaj oblikovni obrazac koristimo da bi predstavljali stanja u kojima može biti naša igra ili objekti u našoj igri. Igra može imati više razlièitih situacija u kojima se drugaèije ponaša. Na primjer, najèešæe æe imati glavni izbornik iz kojeg možemo ili ugasiti igru ili prijeæi u stanje igranja igre. Mi možemo ono što korisniku prikazujemo pamtiti jednom varijablom ali to stvara probleme ako želimo proširiti kod tako da dodamo u izborniku opciju da korisnik može mijenjati postavke ili pogledati upute kako igrati igru. Dodana su dva nova stanja koja opet pratimo sa tom jednom varijablom. U tom sluèaju može doæi do toga da je glavni dio koda jedna velika \lstinline{switch} naredba koja ima puno sluèajeva. Odmah je oèito zašto je to loša praksa. Uvijek želimo da je naš kod pregledniji i pogodniji za razvijanje i zato je bolje odvojiti u zasebne klase.
+	
+	Takve klase æe biti razna stanja i kod treba imati moguænost da ih mijenja. Objekt æe izgledati kao da je mijenjao klasu ali zapravo je samo došlo do promjene njegovog stanja. To æe nam smanjiti velike dijelove koda u kojima provjeravamo puno uvjeta kod objekata prije neke radnje tako da æe ih odvojiti u zasebne klase.
+	
+	\subsection{\primjer}
+	Za primjer uzimamo igru u kojoj je glavni lik èovjek koji se može transformirati u lava èiji æe napad biti jaèi. Prvi dio æe pokazati zašto koristimo ovaj obrazac. Zamislimo klasu \lstinline{Player} koja predstavlja našeg glavnog lika koji ima moguænost transformiranja u lava u èijem obliku ima jaèi napad i brže kretanje. Jedan osnovni naèin rješavanja ovog problema bi bilo koristiti enumeracije:
+	\begin{lstlisting}
+	enum class States
+	{
+		Human,
+		Lion
+	}
+	\end{lstlisting}
+	Klasa \lstinline{Player} bi u tome sluèaju sadržavala varijablu koja bi oznaèavala trenutno stanje. Sada treba èitati unos korisnika koji može napasti èudovište pritiskom na tipku "Space": 
+	\begin{lstlisting}
+	void Player::processInput()
+	{
+	 	sf::Event event;
+	 	while (mWindow.pollEvent(event))
+	 	{
+		 	switch (event.type)
+		 	{
+		 	case sf::Event::KeyPressed:
+			 	if (event.key.code == sf::Keyboard::Space)
+			 	{
+			 		if(state == States:Human)
+			 		{
+			 			// 30 oznacava koliko je snazan napad
+			 			attack(30); 
+			 		} else if( state == States:Lion ) 
+			 		{
+			 			attack(80);	
+			 		}
+			 	} 
+		 	break;
+			 	case sf::Event::Closed:
+			 	mWindow.close();
+		 	break;
+		 	}
+	 	}
+	
+	}
+	\end{lstlisting}
+	Veæ je ovdje oèito u kodu da se stvari lako zakompliciraju kada obraðujemo stanja na ovakav naèin. Još bi veæi problem bio kada bi htjeli da se naš lik može transformirati u vuka ili medvjeda. Dodatne komplikacije ako želimo da to mijenja i brzinu. To može dovesti do koda koji je prekompliciran i neodrživ. Zato želimo ove dijelove prebaciti u zasebne klase koje æe sve naslijediti \lstinline{State} klasu koja æe imati èisto virtualnu \lstinline{processInput()} èlansku funkciju. Tako možemo iskoristiti polimorfizam da bi poboljšali kvalitetu koda.
+	
+	Uz veæ spomenutu klasu æemo imati i \lstinline{HumanState} i \lstinline{LionState} koje æe implementirati \lstinline{processInput()} funkciju. \lstinline{Player} klasa æe sadržavati pokazivaè koji pokazuje na trenutno stanje. Kod sada izgleda ovako:
+	\begin{lstlisting}
+	Class State
+	{
+		virtual void processInput(sf::Event event) = 0;
+	}
+	// ...
+	Class HumanState : public State
+	{
+		void processInput(sf::Event event)
+		{	
+			if ( event.type == sf::Event::KeyPressed 
+				&& event.key.code == sf::Keyboard::Space)
+			{
+				attack(30); // 30 oznacava koliko je snazan napad
+			}
+		}
+	}
+	// ...
+	Class LionState : public State
+	{
+		void processInput(sf::Event event)
+		{
+			if ( event.type == sf::Event::KeyPressed 
+				&& event.key.code == sf::Keyboard::Space)
+			{
+				attack(80);
+			}
+
+		}
+	}
+	// ...
+	void Player::processInput()
+	{
+		// ...
+		while (mWindow.pollEvent(event))
+		{
+			currentState->processInput(event);
+			// ...
+		}
+		
+	}
+	\end{lstlisting}
+	Oèito je ovaj kod puno pregledniji i lakši za održavanje. Omoguæuje nam jednostavno dodavanje novih stanja. 
+	
+	U zadnje primjeru se samo èitaju unosi korisnika ali je dobra ideja ovako pozivati još i \lstinline{update()} i \lstinline{draw()} funkcije jer æemo ovisno o trenutnom stanju pomicati i crtati glavnog lika. 
+	
+	\subsection{\zaklj}
+	Glavna primjena ovog obrasca je zbog bolje organizacije koda. Bez njega neke funkcije mogu biti ogromne i neodržive. Ako je funkcija dovoljno velika i ima puno \lstinline{if/else} ili prevelik \lstinline{switch} onda nam treba \lstinline{State} oblikovni obrazac. Toènije ako neki objekt treba mijenjati ponašanje ovisno o stanju. Sa njime jednostavno mijenjamo stanje glavno lika i dodajemo nove dijelove po potrebi. 
+	
+	\section{Component}
+	\subsection{\motivacija}
+	\subsection{\primjer}
+	\subsection{\zaklj}
+	
+	
+	
+	\chapter{Implementacija igre u SFML-u}
+	
+	
+	
+	
+	% Na kraju diplomkog rada stavlja se  bibliografija
+	% Najprije definiramo nacin prikazivanja bibliografije, u ovom slucaju verzija amsplain stila
+	\bibliographystyle{babamspl} % babamspl ili babplain
+	
+	% U datoteku diplomski.bib se stavljaju bibliografske reference
+	% Bibliografske reference u bib formatu se mogu dobiti iz MathSciNet baze, Google Scholara, ArXiva, ...
+	\bibliography{diplomski}
+	
+	\pagestyle{empty} % ne zelimo brojanje sljedecih stranica
+	
+	% I na koncu idu sazeci na hrvatskom i engleskom
+	
+	\begin{sazetak}
+		U ovom radu upoznali smo se s moguænostima programiranja igara u SFML-u. Pokazali smo što sve SFML može te sve njegove glavne dijelove. Uz to je još objašnjeno kako organizirati kod kada je u pitanju programiranje igara kako bi kod bio spreman za održavanje.
+	\end{sazetak}
+	
+	\begin{summary}
+		In this ...
+	\end{summary}
+	
+	% te zivotopis
+	
+	\begin{cv}
+		Zvonimir Šimunoviæ roðen je 27.10.1993. u Splitu, a odrastao je u gradu Imotskom. Tu završava Osnovnu školu "Stjepan Radiæ" i prirodoslovno-matematièku gimnaziju u Gimnaziji dr. Mate Ujeviæa.
+		
+		Nakon toga u Zagrebu upisuje preddiplomski studijski program Matematika na Prirodoslovno-matematièkom fakultetu. Nakon završavanja preddiplomskog upisuje dimplomski Raèunarstvo i matematika.
+	\end{cv}
+	
+\end{document}

@@ -1,0 +1,7 @@
+﻿  Player.cpp
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Player.cpp(56,25): warning C4305: '*=': truncation from 'double' to 'T'
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Player.cpp(56,25): warning C4305:         with
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Player.cpp(56,25): warning C4305:         [
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Player.cpp(56,25): warning C4305:             T=float
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Player.cpp(56,25): warning C4305:         ]
+  Diplomski Rad - Crazy Tower.vcxproj -> D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Debug\Diplomski Rad - Crazy Tower.exe

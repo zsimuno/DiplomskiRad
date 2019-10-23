@@ -1,0 +1,49 @@
+\babel@toc {croatian}{}
+\contentsline {chapter}{Sadr\v {z}aj}{iii}{section*.1}% 
+\contentsline {chapter}{Uvod}{1}{chapter*.2}% 
+\contentsline {chapter}{\chapternumberline {1}Kratki uvod u C++}{3}{chapter.1}% 
+\contentsline {chapter}{\chapternumberline {2}SFML}{5}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Moduli SFML-a}{5}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Osnovni primjer}{7}{section.2.2}% 
+\contentsline {section}{\numberline {2.3}Prozor i Doga\IeC {\dj }aji}{9}{section.2.3}% 
+\contentsline {subsection}{Doga\IeC {\dj }aji (Events)}{10}{section*.3}% 
+\contentsline {section}{\numberline {2.4}Crtanje}{14}{section.2.4}% 
+\contentsline {subsection}{Oblici i transformacije}{15}{section*.4}% 
+\contentsline {subsection}{Transformacije}{17}{section*.5}% 
+\contentsline {subsection}{Teksture i spriteovi}{19}{section*.6}% 
+\contentsline {subsubsection}{U\v citavanje slika}{19}{section*.7}% 
+\contentsline {subsubsection}{Teksture i oblici}{20}{section*.8}% 
+\contentsline {subsubsection}{Spriteovi}{21}{section*.9}% 
+\contentsline {subsection}{Pomicanje oblika}{23}{section*.10}% 
+\contentsline {section}{\numberline {2.5}Zvuk}{25}{section.2.5}% 
+\contentsline {subsection}{sf::Sound}{25}{section*.11}% 
+\contentsline {subsection}{sf::Music}{26}{section*.12}% 
+\contentsline {section}{\numberline {2.6}Mre\v zna komunikacija}{27}{section.2.6}% 
+\contentsline {subsection}{TCP}{27}{section*.13}% 
+\contentsline {subsection}{UDP}{30}{section*.14}% 
+\contentsline {chapter}{\chapternumberline {3}Oblikovni obrasci u igrama}{33}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Game loop}{33}{section.3.1}% 
+\contentsline {subsection}{Motivacija}{33}{section*.15}% 
+\contentsline {subsection}{Primjer}{35}{section*.16}% 
+\contentsline {subsubsection}{Upravljanje glavnom petljom}{35}{section*.17}% 
+\contentsline {subsubsection}{Pomicanje ovisno o vremenu}{36}{section*.18}% 
+\contentsline {subsubsection}{Vi\v se koraka u jednom}{37}{section*.19}% 
+\contentsline {subsection}{Zaklju\v cak}{38}{section*.20}% 
+\contentsline {section}{\numberline {3.2}Double Buffer}{38}{section.3.2}% 
+\contentsline {subsection}{Motivacija}{38}{section*.21}% 
+\contentsline {subsection}{Primjer}{39}{section*.22}% 
+\contentsline {subsection}{Zaklju\v cak}{42}{section*.23}% 
+\contentsline {section}{\numberline {3.3}State}{43}{section.3.3}% 
+\contentsline {subsection}{Motivacija}{43}{section*.24}% 
+\contentsline {subsection}{Primjer}{43}{section*.25}% 
+\contentsline {subsection}{Zaklju\v cak}{46}{section*.26}% 
+\contentsline {section}{\numberline {3.4}Component}{46}{section.3.4}% 
+\contentsline {subsection}{Motivacija}{46}{section*.27}% 
+\contentsline {subsection}{Primjer}{46}{section*.28}% 
+\contentsline {subsection}{Zaklju\v cak}{46}{section*.29}% 
+\contentsline {chapter}{\chapternumberline {4}Implementacija igre u SFML-u}{47}{chapter.4}% 
+\contentsline {chapter}{Bibliografija}{49}{chapter*.30}% 
+\babel@toc {croatian}{}
+\babel@toc {croatian}{}
+\babel@toc {croatian}{}
+\babel@toc {croatian}{}
