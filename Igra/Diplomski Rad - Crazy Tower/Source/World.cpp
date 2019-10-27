@@ -14,7 +14,6 @@ World::World(sf::RenderWindow& window)
 	, mScrollSpeed(-0.f)
 	, mPlayer(nullptr)
 {
-	std::cout << std::to_string(mWorldBounds.left) <<  " x " << std::to_string(mWorldBorderWidth) << " wow";
 	loadTextures();
 	buildScene(); 
 }
@@ -69,12 +68,16 @@ void World::buildScene()
 
 	// Add the background sprite to the scene
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect, mWorldView));
-	std::cout << std::to_string(mWorldBounds.left) <<  " x " << std::to_string(mWorldBounds.top) << " wow";
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
 
+	// Create platforms
+	std::unique_ptr<Platforms> platforms(new Platforms());
+	Platforms* mPlatforms = platforms.get();
+	mSceneLayers[Floors]->attachChild(std::move(platforms));
+
 	// Add player
-	std::unique_ptr<Player> player(new Player(mTextures, &mScrollSpeed));
+	std::unique_ptr<Player> player(new Player(mTextures, mScrollSpeed, *mPlatforms));
 	mPlayer = player.get();
 	mPlayer->setPosition(mSpawnPosition);
 	mSceneLayers[Front]->attachChild(std::move(player));

@@ -50,13 +50,7 @@ void Game::processInput()
 	{
 		switch (event.type)
 		{
-		case sf::Event::KeyPressed:
-			handlePlayerInput(event.key.code, true);
-			break;
 
-		case sf::Event::KeyReleased:
-			handlePlayerInput(event.key.code, false);
-			break;
 
 		case sf::Event::Closed:
 			mWindow.close();
@@ -95,8 +89,4 @@ void Game::updateStatistics(sf::Time elapsedTime)
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
 	}
-}
-
-void Game::handlePlayerInput(sf::Keyboard::Key, bool)
-{
 }

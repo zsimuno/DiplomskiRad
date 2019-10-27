@@ -1,19 +1,25 @@
 #include <Player.hpp>
 #include <ResourceHolder.hpp>
 #include <Utility.hpp>
-#include <PlayerData.hpp>
+#include <PlayerAnimation.hpp>
+#include <Platforms.hpp>
+#include <iostream>
 
-Player::Player(const TextureHolder& textures, float* scrollSpeed)
+Player::Player(const TextureHolder& textures, float& scrollSpeed, Platforms& towerPlatforms)
 	: sprite(textures.get(Textures::ID::Character)),
 	screenScrollSpeed(scrollSpeed),
 	data(initializePlayerData()),
-	playerVelocity(0,0),
-	mirroredSprite(false)
+	playerVelocity(0, 0),
+	mirroredSprite(false),
+	animation(new PlayerAnimation(data, sprite, *this)),
+	platforms(towerPlatforms),
+	currentPlatform(nullptr)
 {
-	Utility::centerOrigin(sprite);
-	setVelocity(sf::Vector2f(data.moveSpeed, *screenScrollSpeed));
+	
+	setVelocity(sf::Vector2f(data.moveSpeed, screenScrollSpeed));
 	sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle1]);
-	sprite.scale(1.5, 1.5);
+	sprite.setScale(sf::Vector2f(1.5, 1.5));
+	Utility::centerOrigin(sprite);
 }
 
 void Player::handleEvent(const sf::Event& event)
@@ -22,6 +28,16 @@ void Player::handleEvent(const sf::Event& event)
 
 void Player::handleRealtimeInput()
 {
+	if (isOnPlatform && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		playerVelocity.y -= data.jumpSpeed;
+		isOnPlatform = false;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		playerVelocity.x -= data.moveSpeed;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		playerVelocity.x += data.moveSpeed;
 }
 
 void Player::setVelocity(sf::Vector2f v)
@@ -34,54 +50,67 @@ void Player::addVelocity(sf::Vector2f v)
 	playerVelocity += v;
 }
 
-sf::Vector2f Player::getVelocity()
+sf::Vector2f Player::getVelocity() const
 {
 	return playerVelocity;
+}
+
+sf::FloatRect Player::getBounds() const
+{
+	return sprite.getGlobalBounds();
+}
+
+float Player::getWorldScrollSpeed() const
+{
+	return screenScrollSpeed;
+}
+
+void Player::setOnPlatform(Platform* platform)
+{
+	currentPlatform = platform;
+	isOnPlatform = true;
+
+	this->setPosition(this->getPosition().x , currentPlatform->getBounds().top - sprite.getGlobalBounds().height - sprite.getGlobalBounds().top - 1);
+	playerVelocity.y = 0.0f;
+}
+
+bool Player::standingOnPlatform() const
+{
+	return isOnPlatform;
+}
+
+void Player::changeState()
+{
 }
 
 
 void Player::updateCurrent(sf::Time dt)
 {
-	sf::Vector2f movement(0.f, 0.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		playerVelocity.y -= data.jumpSpeed;
+	playerVelocity.x *= 0.9f;
+	float dtAsSeconds = dt.asSeconds();
 
+	platforms.isOnPlatform(*this, dtAsSeconds);
 
+	this->handleRealtimeInput();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		playerVelocity.x -= data.moveSpeed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		playerVelocity.x += data.moveSpeed;
-
-	playerVelocity.x *= 0.9;
-
-	move(playerVelocity * dt.asSeconds());
-
-	Textures::ID selectedID;
-	if (abs(playerVelocity.x) < 1) 
+	if (!isOnPlatform)
 	{
-		if (playerVelocity.y != 0)
-		{
-			selectedID = Textures::ID::Jump;
-		} else
-		{
-			selectedID = Textures::ID::Idle1;
-		}
-	} else
+		playerVelocity.y += data.fallSpeed;
+	}
+	else if(currentPlatform != nullptr)
 	{
-		if (playerVelocity.y != 0)
+		sf::FloatRect playerRect(sf::Vector2f(getPosition().x + getBounds().left, getPosition().y + getBounds().top),
+			sf::Vector2f(getBounds().width, getBounds().height));
+		if (!(playerRect.left + playerRect.width > currentPlatform->getBounds().left &&
+			playerRect.left < currentPlatform->getBounds().left + currentPlatform->getBounds().width))
 		{
-			selectedID = Textures::ID::Jump1;
+			isOnPlatform = false;
 		}
-		else
-		{
-			selectedID = Textures::ID::Walk1;
-		}
-		
-	} 
+	}
 
-	sprite.setTextureRect(data.playerTexturesMap[selectedID] );
-	Utility::centerOrigin(sprite);
+	move((playerVelocity + sf::Vector2f(0.f, screenScrollSpeed)) * dtAsSeconds);
+
+	animation->updateSprite(dt);
 
 	if ((playerVelocity.x < -1 && !mirroredSprite) || (playerVelocity.x > 1 && mirroredSprite))
 	{
@@ -90,9 +119,15 @@ void Player::updateCurrent(sf::Time dt)
 	}
 }
 
+
 void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
+
 	target.draw(sprite, states);
+
+	
 }
+
+
 
 

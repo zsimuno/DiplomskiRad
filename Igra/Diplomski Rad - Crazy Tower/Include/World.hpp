@@ -6,6 +6,7 @@
 #include <SceneNode.hpp>
 #include <SpriteNode.hpp>
 #include <Player.hpp>
+#include <Platforms.hpp>
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -36,6 +37,7 @@ private:
 	enum Layer
 	{
 		Background,
+		Floors,
 		Front,
 		LayerCount
 	};
@@ -52,8 +54,8 @@ private:
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
 	float								mScrollSpeed;
-	Player* mPlayer;
-	float	mWorldBorderWidth;
+	Player*								mPlayer;
+	float								mWorldBorderWidth;
 	sf::Sprite mBackground;
 };
 

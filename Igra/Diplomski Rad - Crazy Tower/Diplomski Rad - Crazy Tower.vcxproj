@@ -109,16 +109,18 @@
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameOverState.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
+    <ClCompile Include="Source\InAirState.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="Source\MainMenuState.cpp" />
+    <ClCompile Include="Source\OnPlatformState.cpp" />
     <ClCompile Include="Source\PauseState.cpp" />
     <ClCompile Include="Source\Platform.cpp" />
     <ClCompile Include="Source\Platforms.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerAnimation.cpp" />
     <ClCompile Include="Source\PlayerData.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\SpriteNode.cpp" />
-    <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
@@ -126,12 +128,16 @@
     <ClInclude Include="Include\Game.hpp" />
     <ClInclude Include="Include\GameOverState.hpp" />
     <ClInclude Include="Include\GameState.hpp" />
+    <ClInclude Include="Include\InAirState.hpp" />
     <ClInclude Include="Include\MainMenuState.hpp" />
+    <ClInclude Include="Include\OnPlatformState.hpp" />
     <ClInclude Include="Include\PauseState.hpp" />
     <ClInclude Include="Include\Platform.hpp" />
     <ClInclude Include="Include\Platforms.hpp" />
     <ClInclude Include="Include\Player.hpp" />
+    <ClInclude Include="Include\PlayerAnimation.hpp" />
     <ClInclude Include="Include\PlayerData.hpp" />
+    <ClInclude Include="Include\PlayerState.hpp" />
     <ClInclude Include="Include\ResourceHolder.hpp" />
     <ClInclude Include="Include\ResourceIdentifiers.hpp" />
     <ClInclude Include="Include\SceneNode.hpp" />

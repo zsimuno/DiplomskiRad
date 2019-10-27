@@ -12,9 +12,6 @@
 #include <utility>
 
 
-struct Command;
-class CommandQueue;
-
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
