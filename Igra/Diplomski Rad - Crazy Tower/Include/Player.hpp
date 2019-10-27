@@ -6,17 +6,18 @@
 #include <ResourceIdentifiers.hpp>
 #include <PlayerData.hpp>
 #include <PlayerState.hpp>
+#include <OnPlatformState.hpp>
+#include <InAirState.hpp>
 
 #include <SFML\Graphics\Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include <map>
+#include <PlayerStates.hpp>
 
 class Platforms;
 class Platform;
 class PlayerAnimation;
-class OnPlatformState;
-class InAirState;
 
 class Player :
 	public SceneNode
@@ -25,7 +26,7 @@ class Player :
 public:
 	Player(const TextureHolder& textures, float& scrollSpeed, Platforms& towerPlatforms);
 
-	void					handleEvent(const sf::Event& event);
+	void					handleEvent();
 	void					handleRealtimeInput();
 	void					setVelocity(sf::Vector2f v);
 	void					addVelocity(sf::Vector2f v);
@@ -33,8 +34,10 @@ public:
 	sf::FloatRect			getBounds() const;
 	float					getWorldScrollSpeed() const;
 	void					setOnPlatform(Platform* platform);
-	bool					standingOnPlatform() const;
+	bool					isStandingOnPlatform() const;
 	void					changeState();
+	const Platforms&		getPlatforms();
+	Platform*				getCurrentPlatform();
 
 private:
 
@@ -55,6 +58,10 @@ private:
 	bool					isOnPlatform;
 
 	PlayerState*			currentState;
+	PlayerStates::ID		currentStateID;
+	InAirState				inAirState;
+	OnPlatformState			onPlatformState;
+	PlayerState::PlayerContext			context;
 
 	PlayerAnimation*		animation;
 

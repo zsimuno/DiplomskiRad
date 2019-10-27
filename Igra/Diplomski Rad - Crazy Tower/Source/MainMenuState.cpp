@@ -13,7 +13,7 @@ bool MenuMenuState::update(sf::Time dt)
 	return false;
 }
 
-bool MenuMenuState::handleEvent(const sf::Event& event)
+bool MenuMenuState::handleEvent()
 {
 
 	return false;

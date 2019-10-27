@@ -3,13 +3,27 @@
 
 #include <SFML\System\Time.hpp>
 #include <SFML\Window\Event.hpp>
+#include <PlayerData.hpp>
 
 class PlayerState
 {
 public:
-	virtual void		draw() = 0;
+	struct PlayerContext
+	{
+		PlayerContext(
+			PlayerInfo& data,
+			Player& player);
+		PlayerInfo* data;
+		Player* player;
+	};
+
+	PlayerState( PlayerContext ctx);
+
 	virtual void		update(sf::Time dt) = 0;
-	virtual void		handleEvent(const sf::Event& event) = 0;
+	virtual void		handleRealTimeEvent() = 0;
+
+protected:
+	PlayerContext		context;
 };
 
 #endif // PLAYERSTATE_HPP

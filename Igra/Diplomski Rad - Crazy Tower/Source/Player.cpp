@@ -13,7 +13,11 @@ Player::Player(const TextureHolder& textures, float& scrollSpeed, Platforms& tow
 	mirroredSprite(false),
 	animation(new PlayerAnimation(data, sprite, *this)),
 	platforms(towerPlatforms),
-	currentPlatform(nullptr)
+	currentPlatform(nullptr),
+	context(data, *this),
+	inAirState(context),
+	onPlatformState(context),
+	currentStateID(PlayerStates::ID::OnPlatform)
 {
 	
 	setVelocity(sf::Vector2f(data.moveSpeed, screenScrollSpeed));
@@ -22,7 +26,7 @@ Player::Player(const TextureHolder& textures, float& scrollSpeed, Platforms& tow
 	Utility::centerOrigin(sprite);
 }
 
-void Player::handleEvent(const sf::Event& event)
+void Player::handleEvent()
 {
 }
 
@@ -69,18 +73,40 @@ void Player::setOnPlatform(Platform* platform)
 {
 	currentPlatform = platform;
 	isOnPlatform = true;
-
-	this->setPosition(this->getPosition().x , currentPlatform->getBounds().top - sprite.getGlobalBounds().height - sprite.getGlobalBounds().top - 1);
 	playerVelocity.y = 0.0f;
+	animation->setIdle();
+
+	this->setPosition(this->getPosition().x , currentPlatform->getBounds().top - getBounds().height - getBounds().top - 1);
+	
 }
 
-bool Player::standingOnPlatform() const
+bool Player::isStandingOnPlatform() const
 {
 	return isOnPlatform;
 }
 
 void Player::changeState()
 {
+	if (currentStateID == PlayerStates::ID::InAir)
+	{
+		currentState = &onPlatformState;
+		currentStateID = PlayerStates::ID::OnPlatform;
+	} 
+	else
+	{
+		currentState = &inAirState;
+		currentStateID = PlayerStates::ID::InAir;
+	}
+}
+
+const Platforms& Player::getPlatforms()
+{
+	return platforms;
+}
+
+Platform* Player::getCurrentPlatform()
+{
+	return currentPlatform;
 }
 
 
@@ -122,10 +148,7 @@ void Player::updateCurrent(sf::Time dt)
 
 void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-
 	target.draw(sprite, states);
-
-	
 }
 
 

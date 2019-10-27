@@ -1,11 +1,9 @@
 #include <InAirState.hpp>
 
-InAirState::InAirState(Player& pl)
-	:player(pl)
-{
-}
 
-void InAirState::draw()
+
+InAirState::InAirState(PlayerContext ctx)
+	:PlayerState(ctx)
 {
 }
 
@@ -13,7 +11,7 @@ void InAirState::update(sf::Time dt)
 {
 }
 
-void InAirState::handleEvent(const sf::Event& event)
+void InAirState::handleRealTimeEvent()
 {
 }
 

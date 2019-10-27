@@ -2,8 +2,8 @@
 #include <iostream>
 
 
-Platform::Platform(int floorNumber)
-	: platformRect(0, 730, 1000, 30),
+Platform::Platform(int floorNumber, sf::Vector2i position)
+	: platformRect(position, sf::Vector2i(1000, 30)),
 	rect()
 {
 	int heightLower = 30;
@@ -32,7 +32,6 @@ Platform::Platform(int floorNumber)
 	rect.setSize(sf::Vector2f(platformRect.width, platformRect.height));
 	rect.setPosition(sf::Vector2f(platformRect.left, platformRect.top));
 
-	std::cout << floorNumber << ": " << rect.getPosition().x << ", " << rect.getPosition().y << ", " << rect.getSize().x<< ", " << rect.getSize().y << ", " << std::endl;
 }
 
 sf::IntRect Platform::getBounds()

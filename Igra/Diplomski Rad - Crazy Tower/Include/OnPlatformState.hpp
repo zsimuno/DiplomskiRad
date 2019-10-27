@@ -5,20 +5,18 @@
 
 #include <SFML\System\Time.hpp>
 #include <SFML\Window\Event.hpp>
-#include <Player.hpp>
+
+class Platform;
+class Player;
 
 class OnPlatformState : public PlayerState
 {
 public:
-	OnPlatformState(Player& player);
+	OnPlatformState(PlayerContext ctx);
 
-	virtual void		draw() override;
 	virtual void		update(sf::Time dt) override;
-	virtual void		handleEvent(const sf::Event& event) override;
+	virtual void		handleRealTimeEvent() override;
 
-private:
-
-	Player&				player;
 };
 
 #endif // ONPLATFORMSTATE_HPP

@@ -9,7 +9,7 @@ bool GameState::update(sf::Time dt)
 	return false;
 }
 
-bool GameState::handleEvent(const sf::Event& event)
+bool GameState::handleEvent()
 {
 	return false;
 }

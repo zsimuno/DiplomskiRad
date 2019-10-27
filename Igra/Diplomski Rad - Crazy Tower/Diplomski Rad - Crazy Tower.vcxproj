@@ -121,6 +121,7 @@
     <ClCompile Include="Source\PlayerData.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\SpriteNode.cpp" />
+    <ClCompile Include="Source\StateStack.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>

@@ -19,6 +19,7 @@ public:
 	PlayerAnimation(PlayerInfo& playerData, sf::Sprite& playerSprite, Player& pl);
 
 	void					updateSprite(sf::Time dt);
+	void					setIdle();
 
 private:
 	sf::Sprite&				sprite;

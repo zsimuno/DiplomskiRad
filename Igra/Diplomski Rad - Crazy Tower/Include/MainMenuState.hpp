@@ -14,7 +14,7 @@ public:
 
 	virtual void			draw() override;
 	virtual bool			update(sf::Time dt) override;
-	virtual bool			handleEvent(const sf::Event& event) override;
+	virtual bool			handleEvent() override;
 
 
 private:

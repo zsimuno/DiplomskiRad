@@ -15,7 +15,6 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 	float timeSec = time.asSeconds(); 
 	sf::Vector2f playerVelocity = player.getVelocity();
 
-
 	if (abs(playerVelocity.x) < 1)
 	{
 		if (playerVelocity.y != 0)
@@ -85,6 +84,18 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 				time = sf::Time::Zero;
 			}
 		}
+	}
+}
+
+void PlayerAnimation::setIdle()
+{
+	if (abs(player.getVelocity().x) < 1)
+	{
+		sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle1]);
+	}
+	else
+	{
+		sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Walk1]);
 	}
 }
 

@@ -9,7 +9,7 @@ bool PauseState::update(sf::Time dt)
 	return false;
 }
 
-bool PauseState::handleEvent(const sf::Event& event)
+bool PauseState::handleEvent()
 {
 	return false;
 }
