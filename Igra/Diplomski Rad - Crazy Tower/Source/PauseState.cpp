@@ -15,15 +15,15 @@ PauseState::PauseState(StateStack& stack, Context context)
 	sf::Vector2f windowSize(context.window->getSize());
 
 	pausedText.setFont(font);
-	pausedText.setString("Game Paused \n Press 'escape' to return to game and 'm' to go ti main menu");
-	pausedText.setCharacterSize(70);
+	pausedText.setString("Game Paused \n Press 'escape' to return to game and 'm' to go to main menu");
+	pausedText.setCharacterSize(20);
 	Utility::centerOrigin(pausedText);
 	pausedText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
 
 	sf::RenderWindow& window = *getContext().window;
-	background = sf::RectangleShape(window.getView().getSize() / 5.0f);
+	background = sf::RectangleShape(window.getView().getSize() * 3.0f / 5.0f);
+	background.setPosition(window.getView().getSize() / 5.0f);
 	background.setFillColor(sf::Color(0, 0, 0, 150));
-	background.setSize(window.getView().getSize() * 4.0f / 5.0f);
 }
 
 

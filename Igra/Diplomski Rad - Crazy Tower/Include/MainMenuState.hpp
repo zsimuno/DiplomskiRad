@@ -5,18 +5,17 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <GameState.hpp>
 
-class MenuMenuState : public State
+class MainMenuState : public State
 {
 public:
-	MenuMenuState(StateStack& stack, Context context);
+	MainMenuState(StateStack& stack, Context context);
 
 	virtual void		draw() override;
 	virtual bool		update(sf::Time dt) override;
 	virtual bool		handleEvent(const sf::Event& event) override;
 
-	void					updateOptionText();
+	void				updateOptionText();
 
 private:
 	enum OptionNames
@@ -26,8 +25,6 @@ private:
 	};
 
 private:
-	sf::Sprite				mBackgroundSprite;
-
 	std::vector<sf::Text>	mOptions;
 	std::size_t				mOptionIndex;
 };

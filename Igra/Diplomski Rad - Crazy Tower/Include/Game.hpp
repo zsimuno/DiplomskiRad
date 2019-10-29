@@ -13,14 +13,15 @@ class    Game : sf::NonCopyable
 {
 public:
 	Game();
-	void run();
+	void					 run();
 
 private:
-	void processInput();
-	void update(sf::Time dt);
-	void render();
+	void					processInput();
+	void					update(sf::Time dt);
+	void					render();
 
 	void					updateStatistics(sf::Time elapsedTime);
+	void					registerStates();
 
 private:
 	sf::RenderWindow		mWindow;
