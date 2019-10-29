@@ -7,13 +7,15 @@ const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 Game::Game()
 	: mWindow(sf::VideoMode(1024, 768), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
 	, mWorld(mWindow)
+	, mTextures()
 	, mFont()
+	, mStateStack(State::Context(mWindow, mTextures, mFont))
 	, mStatisticsText()
 	, mStatisticsUpdateTime()
 	, mStatisticsNumFrames(0)
 {
-	mFont.loadFromFile("Media/Sansation.ttf");
-	mStatisticsText.setFont(mFont);
+	mFont.load(Fonts::ID::Main, "Media/Sansation.ttf");
+	mStatisticsText.setFont(mFont.get(Fonts::ID::Main));
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
 }

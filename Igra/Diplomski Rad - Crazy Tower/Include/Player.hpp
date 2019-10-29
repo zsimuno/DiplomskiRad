@@ -18,7 +18,7 @@ class Player :
 	public SceneNode
 {
 public:
-	Player(const TextureHolder& textures, float& scrollSpeed, Platforms& towerPlatforms);
+	Player(const TextureHolder& textures, Platforms& towerPlatforms);
 
 	void					    handleEvent();
 	void					    handleRealtimeInput();
@@ -26,7 +26,6 @@ public:
 	void					    addVelocity(sf::Vector2f v);
 	sf::Vector2f			    getVelocity() const;
 	sf::FloatRect			    getBounds() const;
-	float					    getWorldScrollSpeed() const;
 	void					    setOnPlatform(Platform* platform);
 	bool					    isStandingOnPlatform() const;
 	Platforms&					getPlatforms();
@@ -39,7 +38,6 @@ private:
 
 	sf::Sprite				    sprite;
 	sf::Vector2f			    playerVelocity;
-	float&						screenScrollSpeed;
 	Platforms&					platforms;
 	Platform*					currentPlatform;
 

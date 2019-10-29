@@ -1,9 +1,10 @@
 #ifndef PAUSESTATE_HPP
 #define PAUSESTATE_HPP
 
-#include<State.hpp>
+#include <State.hpp>
 #include <StateStack.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 class PauseState :
 	public State
@@ -16,9 +17,8 @@ public:
 	virtual bool		handleEvent(const sf::Event& event) override;
 
 private:
-	sf::Sprite			mBackgroundSprite;
-	sf::Text			mPausedText;
-	sf::Text			mInstructionText;
+	sf::Text			pausedText;
+	sf::RectangleShape	background;
 };
 
 #endif // PAUSESTATE_HPP

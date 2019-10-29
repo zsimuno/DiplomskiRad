@@ -13,7 +13,7 @@
 class StateStack : private sf::NonCopyable
 {
 public:
-	enum Action
+	enum class Action
 	{
 		Push,
 		Pop,
@@ -43,7 +43,7 @@ private:
 private:
 	struct PendingChange
 	{
-		explicit			PendingChange(Action action, GameStates::ID stateID = GameStates::None);
+		explicit			PendingChange(Action action, GameStates::ID stateID = GameStates::ID::None);
 
 		Action				action;
 		GameStates::ID		stateID;

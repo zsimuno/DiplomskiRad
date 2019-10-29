@@ -1,2 +1,16 @@
-﻿  Player.cpp
+﻿  Game.cpp
+  GameOverState.cpp
+  GameState.cpp
+  MainMenuState.cpp
+  PauseState.cpp
+  Platform.cpp
+  Platforms.cpp
+  Player.cpp
+  PlayerAnimation.cpp
+  State.cpp
+  StateStack.cpp
+  TowerWalls.cpp
+  World.cpp
+  Main.cpp
+  Generating Code...
   Diplomski Rad - Crazy Tower.vcxproj -> D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Debug\Diplomski Rad - Crazy Tower.exe

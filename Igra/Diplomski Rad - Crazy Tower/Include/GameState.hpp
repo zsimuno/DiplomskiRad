@@ -16,7 +16,6 @@ public:
 	virtual bool handleEvent(const sf::Event& event) override;
 private:
 	World				mWorld;
-	Player& mPlayer;
 };
 
 #endif // GAMESTATE_HPP

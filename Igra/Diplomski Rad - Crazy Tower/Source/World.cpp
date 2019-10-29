@@ -95,7 +95,7 @@ void World::buildScene()
 	mSceneLayers[Floors]->attachChild(std::move(platforms));
 
 	// Add player
-	std::unique_ptr<Player> player(new Player(mTextures, mScrollSpeed, *mPlatforms));
+	std::unique_ptr<Player> player(new Player(mTextures, *mPlatforms));
 	mPlayer = player.get();
 	mPlayer->setPosition(mSpawnPosition);
 	mSceneLayers[Front]->attachChild(std::move(player));

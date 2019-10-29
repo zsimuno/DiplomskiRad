@@ -53,11 +53,10 @@ bool Platform::isOnPlatform(Player& player, float dtAsSeconds)
 	}
 
 	sf::Vector2f velocity = player.getVelocity();
-	float ss = player.getWorldScrollSpeed();
 	
 	// Is player this frame above and the next will be below the platform
 	if (playerRect.top + playerRect.height < platformRect.top &&
-		playerRect.top + playerRect.height + (velocity.y + ss) * dtAsSeconds >= platformRect.top)
+		playerRect.top + playerRect.height + (velocity.y) * dtAsSeconds >= platformRect.top)
 	{
 		player.setOnPlatform(this);
 		return true;

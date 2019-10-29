@@ -21,12 +21,11 @@ public:
 
 	struct Context
 	{
-		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Player& player);
+		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts);
 
 		sf::RenderWindow* window;
 		TextureHolder* textures;
 		FontHolder* fonts;
-		Player* player;
 	};
 
 public:
@@ -34,9 +33,16 @@ public:
 	virtual void		draw() = 0;
 	virtual bool		update(sf::Time dt) = 0;
 	virtual bool		handleEvent(const sf::Event& event) = 0;
+
+protected:
+	void				requestStackPush(GameStates::ID stateID);
+	void				requestStackPop();
+	void				requestStateClear();
+
+	Context				getContext() const;
 	
 private:
-	StateStack* mStack;
+	StateStack*			mStack;
 	Context				mContext;
 };
 

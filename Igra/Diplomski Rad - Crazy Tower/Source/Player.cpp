@@ -5,18 +5,18 @@
 #include <Platforms.hpp>
 #include <iostream>
 
-Player::Player(const TextureHolder& textures, float& scrollSpeed, Platforms& towerPlatforms)
+
+Player::Player(const TextureHolder& textures, Platforms& towerPlatforms)
 	: sprite(textures.get(Textures::ID::Character)),
-	screenScrollSpeed(scrollSpeed),
 	data(initializePlayerData()),
 	playerVelocity(0, 0),
 	mirroredSprite(false),
 	animation(new PlayerAnimation(data, sprite, *this)),
 	platforms(towerPlatforms),
 	currentPlatform(nullptr),
-	isInCombo(false)
+	isInCombo(false),
+	isOnPlatform(true)
 {
-	setVelocity(sf::Vector2f(data.moveSpeed, screenScrollSpeed));
 	sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle1]);
 	sprite.setScale(sf::Vector2f(1.5, 1.5));
 	Utility::centerOrigin(sprite);
@@ -60,11 +60,6 @@ sf::FloatRect Player::getBounds() const
 	return sprite.getGlobalBounds();
 }
 
-float Player::getWorldScrollSpeed() const
-{
-	return screenScrollSpeed;
-}
-
 void Player::setOnPlatform(Platform* platform)
 {
 	currentPlatform = platform;
@@ -99,11 +94,10 @@ void Player::updateCurrent(sf::Time dt)
 
 	if (!isOnPlatform)
 	{
-		platforms.isOnPlatform(*this, dtAsSeconds);
 		playerVelocity.y += data.fallSpeed;
+		platforms.isOnPlatform(*this, dtAsSeconds);
 	}
-	else 
-	if (currentPlatform != nullptr)
+	else if (currentPlatform != nullptr)
 	{ 
 		sf::FloatRect playerRect(sf::Vector2f(getPosition().x + getBounds().left, getPosition().y + getBounds().top),
 								sf::Vector2f(getBounds().width, getBounds().height));
@@ -113,11 +107,7 @@ void Player::updateCurrent(sf::Time dt)
 		{
 			isOnPlatform = false;
 		}
-
-		
 	}
-
-	move((playerVelocity + sf::Vector2f(0.f, screenScrollSpeed)) * dtAsSeconds);
 
 	animation->updateSprite(dt);
 
@@ -126,6 +116,8 @@ void Player::updateCurrent(sf::Time dt)
 		sprite.scale(-1.f, 1.f);
 		mirroredSprite = !mirroredSprite;
 	}
+
+	move(playerVelocity * dtAsSeconds);
 
 }
 

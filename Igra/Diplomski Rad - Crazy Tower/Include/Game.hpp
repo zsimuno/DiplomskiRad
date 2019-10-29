@@ -7,6 +7,7 @@
 #include <ResourceHolder.hpp>
 #include <World.hpp>
 #include <PlayerData.hpp>
+#include <StateStack.hpp>
 
 class    Game : sf::NonCopyable
 {
@@ -25,10 +26,12 @@ private:
 	sf::RenderWindow		mWindow;
 	World					mWorld;
 	TextureHolder			mTextures;
+	FontHolder				mFont;
+	StateStack				mStateStack;
 
 	static const sf::Time	TimePerFrame;
 
-	sf::Font				mFont;
+	
 
 	sf::Text				mStatisticsText;
 	sf::Time				mStatisticsUpdateTime;
