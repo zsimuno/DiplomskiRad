@@ -15,9 +15,9 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 	float timeSec = time.asSeconds(); 
 	sf::Vector2f playerVelocity = player.getVelocity();
 
-	if (abs(playerVelocity.x) < 1)
+	if (abs(playerVelocity.x) < 2)
 	{
-		if (playerVelocity.y != 0)
+		if (!player.isStandingOnPlatform())
 		{
 			sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Jump]);
 		}
@@ -44,7 +44,7 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 	}
 	else
 	{
-		if (!player.standingOnPlatform())
+		if (!player.isStandingOnPlatform())
 		{
 			if (playerVelocity.y < -1)
 			{

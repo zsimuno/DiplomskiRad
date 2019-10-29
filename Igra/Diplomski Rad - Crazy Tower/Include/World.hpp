@@ -14,6 +14,7 @@
 
 #include <array>
 #include <SFML\System\Time.hpp>
+#include "TowerWalls.hpp"
 
 namespace sf
 {
@@ -26,8 +27,9 @@ public:
 	explicit							World(sf::RenderWindow& window);
 	void								update(sf::Time dt);
 	void								draw();
-
-
+	float								ScrollSpeed();
+	void								incrementScrollSpeed();
+	void								move(sf::Vector2f v);
 private:
 	void								loadTextures();
 	void								buildScene();
@@ -39,6 +41,7 @@ private:
 		Background,
 		Floors,
 		Front,
+		Walls,
 		LayerCount
 	};
 
@@ -55,7 +58,8 @@ private:
 	sf::Vector2f						mSpawnPosition;
 	float								mScrollSpeed;
 	Player*								mPlayer;
-	float								mWorldBorderWidth;
+	TowerWalls*							mWalls;
+	float								mWorldWallWidth;
 	sf::Sprite mBackground;
 };
 

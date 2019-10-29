@@ -29,8 +29,8 @@ Platform::Platform(int floorNumber, sf::Vector2i position)
 		platformRect.width = 200;
 	}
 
-	rect.setSize(sf::Vector2f(platformRect.width, platformRect.height));
-	rect.setPosition(sf::Vector2f(platformRect.left, platformRect.top));
+	rect.setSize(sf::Vector2f((float)platformRect.width, (float)platformRect.height));
+	rect.setPosition(sf::Vector2f((float)platformRect.left, (float)platformRect.top));
 
 }
 

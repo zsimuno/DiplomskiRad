@@ -1,5 +1,5 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#ifndef  GAME_HPP
+#define  GAME_HPP
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
@@ -8,7 +8,7 @@
 #include <World.hpp>
 #include <PlayerData.hpp>
 
-class Game : sf::NonCopyable
+class    Game : sf::NonCopyable
 {
 public:
 	Game();
@@ -28,13 +28,12 @@ private:
 
 	static const sf::Time	TimePerFrame;
 
+	sf::Font				mFont;
+
 	sf::Text				mStatisticsText;
 	sf::Time				mStatisticsUpdateTime;
 	int						mStatisticsNumFrames;
-	sf::Font				mFont;
 
-	
 };
 
-
-#endif // GAME_HPP
+#endif   // GAME_HPP

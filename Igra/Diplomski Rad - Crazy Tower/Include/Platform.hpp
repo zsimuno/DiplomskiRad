@@ -11,7 +11,7 @@
 class Platform : public sf::Drawable
 {
 public:
-	Platform(int floorNumber, sf::Vector2i position = sf::Vector2i(0.f, 0.f));
+	Platform(int floorNumber, sf::Vector2i position = sf::Vector2i(0, 0));
 
 	sf::IntRect getBounds();
 	bool		isOnPlatform( Player& player, float dtAsSeconds);

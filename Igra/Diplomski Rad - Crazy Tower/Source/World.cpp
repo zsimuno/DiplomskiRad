@@ -1,6 +1,7 @@
 #include <World.hpp>
 #include <PlayerData.hpp>
 #include <iostream>
+#include <TowerWalls.hpp>
 
 World::World(sf::RenderWindow& window)
 	: mWindow(window)
@@ -8,11 +9,11 @@ World::World(sf::RenderWindow& window)
 	, mTextures()
 	, mSceneGraph()
 	, mSceneLayers()
-	, mWorldBorderWidth(100.f)
 	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, mWorldView.getSize().y)
-	, mSpawnPosition(mWorldView.getSize().x / 2.f,  mWorldView.getSize().y - 100.f)
-	, mScrollSpeed(-0.f)
+	, mSpawnPosition(mWorldView.getSize().x / 2.f,  mWorldView.getSize().y - 140.f)
+	, mScrollSpeed(-10.f)
 	, mPlayer(nullptr)
+	, mWorldWallWidth(100.f)
 {
 	loadTextures();
 	buildScene(); 
@@ -20,17 +21,18 @@ World::World(sf::RenderWindow& window)
 
 void World::update(sf::Time dt)
 {
-	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+	mWorldView.move(0.f, ScrollSpeed() * dt.asSeconds());
+	mWalls->move(0.f, ScrollSpeed() * dt.asSeconds());
 
-	// Move the player sidewards (plane scouts follow the main aircraft)
 	sf::Vector2f position = mPlayer->getPosition();
+	sf::FloatRect bounds = mPlayer->getBounds();
 	sf::Vector2f velocity = mPlayer->getVelocity();
 
 	// If player touches borders, flip its X velocity
-	if (position.x <= mWorldBounds.left + 150.f
-		|| position.x >= mWorldBounds.left + mWorldBounds.width - 150.f)
+	if (position.x - bounds.width/2 <= mWorldBounds.left + mWorldWallWidth ||
+		position.x + bounds.width/2 >= mWorldBounds.left + mWorldBounds.width - mWorldWallWidth)
 	{
-		velocity.x = -velocity.x;
+		velocity.x = -2*velocity.x;
 		mPlayer->setVelocity(velocity);
 	}
 
@@ -43,6 +45,22 @@ void World::draw()
 	mWindow.setView(mWorldView);
 	mWindow.draw(mSceneGraph);
 }
+
+float World::ScrollSpeed()
+{
+	return mScrollSpeed; 
+}
+
+void World::incrementScrollSpeed()
+{
+	mScrollSpeed++;
+}
+
+void World::move(sf::Vector2f v)
+{
+	mWorldView.move(v);
+}
+
 
 void World::loadTextures()
 {
@@ -81,5 +99,10 @@ void World::buildScene()
 	mPlayer = player.get();
 	mPlayer->setPosition(mSpawnPosition);
 	mSceneLayers[Front]->attachChild(std::move(player));
+
+	// Add tower walls
+	std::unique_ptr<TowerWalls> towerWalls(new TowerWalls(mWorldWallWidth, mWorldView.getSize().y, *this, *mPlayer));
+	mWalls = towerWalls.get();
+	mSceneLayers[Walls]->attachChild(std::move(towerWalls));
 
 }

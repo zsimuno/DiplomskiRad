@@ -4,7 +4,7 @@
 
 namespace GameStates
 {
-	enum class ID
+	enum ID
 	{
 		None,
 		Title,

@@ -420,14 +420,14 @@
 	Za uèitavanje i prikazivanje slika u SFML-u primarno su zadužene 3 klase. To su \lstinline{sf::Image} i \lstinline{sf::Texture} (uèitavanje slika) i \lstinline{sf::Sprite} (prikaz slika). Možemo koristiti i oblike za prikazivanje slika, ali zbog svoje jednostavnosti spriteovi se èešæe koriste.
 	
 	\subsubsection{Uèitavanje slika}
-	Za uèitavanje slika u SFML-u koristimo klase \lstinline{sf::Image} i \lstinline{sf::Texture}. Razlika izmeðu ovih dviju klasa je u moguænostima manipuliranja i prikazivanja. \lstinline{Image} klasu koristimo za uèitavanje i spremanje slika, te manipulaciju piksela dok \lstinline{Texture} koristimo za prikazivanje slika (render). One obe u srži sadržavaju u sebi niz piksela ali se razlikuju po nekim moguænostima koje svaka klasa nudi. Zbog toga SFML nam nudi lako prebacivanje iz jedne klase u drugu ali taj proces može biti skup pa treba ga pažljivo koristiti.
+	Za uèitavanje slika u SFML-u koristimo klase \lstinline{sf::Image} i \lstinline{sf::Texture}. Razlika izmeðu ovih dviju klasa je u moguænostima manipuliranja i prikazivanja. \lstinline{Image} klasu koristimo za uèitavanje i spremanje slika, te manipulaciju piksela dok \lstinline{Texture} koristimo za prikazivanje slika (render). One obe sadržavaju u sebi niz piksela ali se razlikuju po nekim moguænostima koje svaka klasa nudi. Zbog toga nam SFML nudi lako prebacivanje iz jedne klase u drugu, ali taj proces može biti skup pa treba ga pažljivo koristiti.
 	
 	Poèinjemo prvo sa \lstinline{Image} klasom. U nju možemo uèitavati slike ali i crtati u nju. Nudi nam moguænost stvaranja slike preko primjerka klase \lstinline{sf::Color}:
 	\begin{lstlisting}
 	sf::Image img;
 	img.create(100, 50, sf::Color::Blue);
 	\end{lstlisting}
-	Prva dva argumenta predstavljaju širinu i visinu a treæi predstavlja boju popune. Takoðer možemo predati ze treæi argument niz brojeva tipa \lstinline{sf::Uint8} koji bi prezentirali individualne piksele kao RGB vrijednosti. 
+	Prva dva argumenta predstavljaju širinu i visinu a treæi predstavlja boju popune. Takoðer možemo predati kao treæi argument niz brojeva tipa \lstinline{sf::Uint8} koji bi predstavljali pojedinaène piksele kao RGB vrijednosti. 
 	
 	Možemo, naravno, uèitati slike se tvrdog diska.
 	\begin{lstlisting}
@@ -439,9 +439,9 @@
 	}
 	\end{lstlisting}
 	
-	Bitan dio \lstinline{Image} je da nam omoguæuje razne funkcije za upravljanje slikom poput mijenjanja vrijednosti individualnog piksela sa \lstinline{Image::setPixel()}. Nudi nam pristup nizu vrijednosti koje predstavljaju sve piksele ili jednom individualnom pikselu. Sliku možemo okrenuti vertikalno sa \lstinline{Image::flipVertically()} ili horizontalno sa \lstinline{Image::flipHorizontally()}. Na kraju svega možemo i sliku spremiti na disk preko funkcije \lstinline{Image::saveToFile()}. Nakon što smo upravljali slikama sada bi trebalo napraviti od njih teksture.
+	Bitan dio \lstinline{Image} je to što nam omoguæuje razne funkcije za upravljanje slikom poput mijenjanja vrijednosti individualnog piksela sa \lstinline{Image::setPixel()}. Nudi nam pristup nizu vrijednosti koje predstavljaju sve piksele ili jednom individualnom pikselu. Sliku možemo okrenuti vertikalno sa \lstinline{Image::flipVertically()} ili horizontalno sa \lstinline{Image::flipHorizontally()}. Na kraju svega možemo sliku spremiti na disk preko funkcije \lstinline{Image::saveToFile()}. Nakon što smo upravljali slikama sada bi trebalo napraviti od njih teksture.
 	
-	Klasa \lstinline{Texture} nam nudi sliène funkcije kao i \lstinline{Image}. Obe mogu pozivati \lstinline{loadFromFile()} funkciju samo postoji jedna bitna razlika. U klasi \lstinline{Texture} imamo moguænost proslijediti još jedan argument uz ime datoteke a to su dimenzije i pozicija pravokutnika koji predstavlja samo dio slike. Taj pristup nam omoguæuje da imamo više tekstura za jednu sliku i da možemo koristiti jednu sliku i uèitavati samo dijelove. To je posebno koristimo jer onda možemo cijeli ciklus animacije jednog lika imati samo u jednoj slici.
+	Klasa \lstinline{Texture} nam nudi sliène funkcije kao i \lstinline{Image}. Obe mogu pozivati \lstinline{loadFromFile()} funkciju samo postoji jedna bitna razlika. U klasi \lstinline{Texture} imamo moguænost proslijediti još jedan argument uz ime datoteke a to su dimenzije i pozicija pravokutnika koji predstavlja samo dio slike. Taj pristup omoguæuje da postoji više tekstura za jednu sliku i da se uèitavaju samo dijelovi. To nam omoguæuje da štedimo vrijeme i memoriju.
 	
 	\begin{lstlisting}
 	sf::Texture texture;
@@ -453,7 +453,7 @@
 	}
 	\end{lstlisting}
 	
-	Takoðer možemo uèitati teksturu iz primjerka klase \lstinline{Image} tako da pozovemo funkciju \lstinline{sf::Texture::loadFromImage()} i predamo joj kao argument sliku koju želimo. Još nam je ostalo samo prikazati tu teksturu na zaslonu. 
+	Takoðer možemo uèitati teksturu iz primjerka klase \lstinline{Image} tako da pozovemo funkciju \lstinline{sf::Texture::loadFromImage()} i predamo joj kao argument sliku. Još nam je ostalo samo prikazati tu teksturu na zaslonu. 
 	
 	\subsubsection{Teksture i oblici}
 	
@@ -497,11 +497,11 @@
 
 	\subsubsection{Spriteovi}
 	
-	Spriteovi su, poput oblika, površina po kojoj crtamo teksture i meðu njima postoje razlike. Prva je ta razlika da se sprite uvijek renderira kao pravokutnik pa sa njima ne možemo rezati dio teksture kao sa oblicima. Njegova velièina je onolika kolika je velièina teksture. Možemo ju jedino mijenjati tako da koristimo transformacije. \lstinline{sf::Sprite} nasljeðuje \lstinline|Transformable| i \lstinline|Drawable| pa time ih možemo crtati i na njima raditi transformacije isto kao i oblike. Bez obzira što oblici nude više moguænosti mi æemo svejedno èešæe koristiti spriteove zbog njihove jednostavnosti.
+	Spriteovi su, poput oblika, površina po kojoj crtamo teksture i meðu njima postoje razlike. Prva je ta razlika da se sprite uvijek renderira kao pravokutnik pa sa njima ne možemo rezati dio teksture kao sa oblicima. Njegova velièina je onolika kolika i teksturina. Možemo ju jedino mijenjati tako da koristimo transformacije. \lstinline{sf::Sprite} nasljeðuje \lstinline|Transformable| i \lstinline|Drawable| pa ih možemo crtati i na njima raditi transformacije isto kao i kod oblika. Bez obzira što oblici nude više moguænosti mi æemo svejedno èešæe koristiti spriteove zbog njihove jednostavnosti.
 	
-	Njihova je svrha samo uèitati teksturu i prikazati je (uz moguæe neke osnovne transformacije). To se vidi i u tome da, dok oblike možemo koristiti i bez tekstura, spriteovi ih zahtjevaju za korištenje.
+	Njihova je svrha samo uèitati teksturu i prikazati je (uz neke osnovne transformacije). Bitno je još znati da, dok oblike možemo koristiti i bez tekstura, spriteovi ih zahtjevaju za korištenje.
 	
-	Pogledajmo jedan osnovni primjer u kojem je oèita ta jednostavnost:
+	Pogledajmo jedan osnovni primjer:
 	\begin{lstlisting}
 		sf::Texture texture;
 		
@@ -514,7 +514,7 @@
 		// Sprite
 		sf::Sprite sp(texture);
 	\end{lstlisting}
-	Sada vidimo tu jednostavnost. Bitno je i ovdje naglasiti da, ako želimo nacrtati cijelu teksturu, onda se situacija još malo komplicira. Bez obzira na jednostavnost, sprite svejedno nudi dovoljno moguænosti da ga ima smisla koristiti.
+	Sada vidimo tu jednostavnost. Bitno je i ovdje naglasiti da, ako želimo nacrtati cijelu teksturu preko pravokutnika, onda se situacija još malo komplicira. Bez obzira na jednostavnost, sprite svejedno nudi dovoljno moguænosti da ga ima smisla koristiti.
 	
 	\newpage
 	\subsection{Pomicanje oblika}
@@ -573,7 +573,7 @@
 	
 	Za sada su pokazani centralni dijelovi bez kojih igra ne može. U veæini sluèajeva poželjno je poboljšati to iskustvo sa zvukom. On omoguæuje da se korisnicima naznaèi da se nešto dogodilo, poput pucnja iz oružja ili koraka neprijatelja. Korisniku se može puštati glazbu koja uvijek upotpunjuje sve dijelove igre i èini ih življima. Zvuk omoguæuje da se korisniku šalju povratne informacije i izazivaju odreðene emocije. Ovdje se vidi na koje naèine SFML omoguæuje korištenje zvuka.  
 	
-	Slièno kao i za slike, za zvuk postoje dvije moguænosti uèitavanja, a to je preko klasa \lstinline{sf::Music} i \lstinline{sf::Sound}. Razlika izmeðu te dvije klase osnovna je, ali vrlo bitna. \lstinline{sf::Sound} uèitava glazbu pohranjenu na tvrdom disku u radnu memoriju te potom pušta zvuk iz memorije. \lstinline{sf::Music} otvara tok (en. stream) prema datoteci na tvrdom  disku i uèitava dio po dio zvuène datoteke. Obje nasljeðuju klasu \lstinline{SoundSource} preko koje imaju neke osnovne glazbene fukncionalnosti. Takoðer pokreæu zvuk u zasebnoj dretvi tako da ne blokiraju trenutnu. Podržani formati su: WAV, OGG/Vorbis i FLAC. Bitno je primijetiti da SFML ne podržava MP3 format. 
+	Slièno kao i kod slika, za zvuk postoje dvije moguænosti uèitavanja, a to je preko klasa \lstinline{sf::Music} i \lstinline{sf::Sound}. Razlika izmeðu te dvije klase osnovna je, ali vrlo bitna. \lstinline{sf::Sound} uèitava glazbu pohranjenu na tvrdom disku u radnu memoriju te potom pušta zvuk iz memorije. \lstinline{sf::Music} otvara tok (en. stream) prema datoteci na tvrdom  disku i uèitava dio po dio zvuène datoteke. Obje nasljeðuju klasu \lstinline{SoundSource} preko koje imaju neke osnovne glazbene fukncionalnosti. Takoðer pokreæu zvuk u zasebnoj dretvi tako da ne blokiraju trenutnu. Podržani formati su: WAV, OGG/Vorbis i FLAC. Bitno je primijetiti da SFML ne podržava MP3 format. 
 	
 	Oèito je \lstinline{Sound} klasu bolje koristiti kada su u pitanje manje zvuène datoteke koje æe se èesto ponavljati (poput zvuka skoka ili pucnja). Ta se klasa èešæe koristi jer su veæina zvuènih datoteka u igrama efekti. Ovom klasom nakon uèitavanja u RAM možemo, kada god treba, dobiti brz pristup zvuènom zapisu. \lstinline{Music} se koristi kada su u pitanju velike datoteke, a programer je ogranièen kolièinom memorije. Buduæi da ova klasa uèitava dijelove datoteke, ona ima prirodni zastoj zbog toga posla koji obavlja. Ponuðena nam je i moguænost puštanja 3D zvukova. Takvi zvukovi se èuju iz više razlièitih smjerova i daju dojam treæe dimenzije zvuka. Unutar SFML-a možemo i snimati zvuk koristeæi klasu \lstinline{SoundRecorder} ali ovdje æe biti fokus na puštanje zvuka.
 	
@@ -627,7 +627,7 @@
 	\subsection{TCP}
 	Transmission Cotrol Protocol (TCP) koristimo kada želimo osigurati da je paket stigao na svoje odredište. To ga èini pouzdanim protokolom. Zbog toga se šalje više informacija nego što originalno postoji jer pratimo je li stigao svaki paket ili ne. Ako jedan paket ne stigne gdje treba onda se on šalje opet sve dok ne doðe. On osigura da doðu svi paketi i to u pravilnom redoslijedu. Zbog ovoga svega TCP je sporiji i koristimo ga gdje god brzina nije presudna. U veæini sluèajeva neæe biti osim u brzim, akcijskim igrama u kojima je svaki komadiæ vremena bitan. Veæina interneta komunicira preko ovog protokola zato što je veæinom bitnija toènosti pristiglih informacija nego što æemo izgubiti malo vremena.
 	
-	Za spajanje nam trebaju IP adresa odredišta i port na koji se spajamo. TCP se obavlja preko dvije klase \lstinline{sf::TcpSocket} (utiènica) koja uspostavlja vezu (odnosno klijent) i \lstinline{sf::TcpListener} koji prihvaæa vezu (server). Ako je veza uspješna onda \lstinline{sf::TcpListener} otvara \lstinline{sf::TcpSocket} koji se spaja na prethodnu utiènicu i uspostavlja vezu izmeðu njih.
+	Za spajanje nam trebaju IP adresa odredišta i port na koji se spajamo. TCP koristimo preko dvije klase \lstinline{sf::TcpSocket} (utiènica) koja uspostavlja vezu (odnosno klijent) i \lstinline{sf::TcpListener} koji prihvaæa vezu (server). Ako je veza uspješna onda \lstinline{sf::TcpListener} otvara \lstinline{sf::TcpSocket} koji se spaja na prethodnu utiènicu i uspostavlja vezu izmeðu njih.
 	
 	Prvo gledamo primjer klijenta: 
 	
@@ -684,9 +684,9 @@
 	TCP stvara vezu izmeðu dvije utiènice i onda kada ih spoji radi razmjenu podataka. Nakon obrade zatvaramo utiènicu i prekidamo vezu.
 	
 	\subsection{UDP}
-	User Datagram Protocol (UDP) je nepouzdani protokol koji ne prati ima li paketa koji nisu stigli na svoje odredište ili je li redoslijed paketa pravilan. Zbog toga je ovaj protokol brži i zahtjeva manje memorije za svaki paket. Zbog toga i odredišno raèunalo ne treba èekati izgubljene pakete nego samo nastavlja izvršavanje. Koristimo ga kada je brzina bitna u našim aplikacijama. Ako nam treba puno informacija uskladiti u kratkom vremenu onda nam je UDP poželjniji.
+	User Datagram Protocol (UDP) je nepouzdani protokol koji ne prati ima li paketa koji nisu stigli na svoje odredište ili je li redoslijed paketa pravilan. Zbog toga je ovaj protokol brži i zahtjeva manje memorije za svaki paket. Tada i odredišno raèunalo ne treba èekati izgubljene pakete nego samo nastavlja izvršavanje. Koristimo ga kada je brzina bitna u našim aplikacijama. Ako nam treba puno informacija uskladiti u kratkom vremenu onda nam je UDP poželjniji.
 	
-	Slanje podataka preko UDP-a je slièno kao i preko TCP-a ali samo koristimo \lstinline{sf::UdpSocket}. Za razliku od TCP-a u kojemu jedna utiènica može biti povezana samo sa drugom nekom, ovdje jedna utiènica može slati podatke na više odredišta. Toènije, veza se ne uspostavlja nego se samo pošalju podatci.
+	Slanje podataka preko UDP-a je slièno kao i preko TCP-a ali samo koristimo \lstinline{sf::UdpSocket}. Za razliku od TCP-a u kojemu jedna utiènica može biti povezana samo sa nekom drugom, ovdje jedna utiènica može slati podatke na više odredišta. Toènije, veza se ne uspostavlja nego se samo pošalju podatci.
 	
 	Opet prvo gledamo primjer klijenta: 
 	
@@ -994,12 +994,12 @@
 	
 	\section{State}
 	\subsection{\motivacija}
-	Ovaj oblikovni obrazac koristimo da bi predstavljali stanja u kojima može biti naša igra ili objekti u našoj igri. Igra može imati više razlièitih situacija u kojima se drugaèije ponaša. Na primjer, najèešæe æe imati glavni izbornik iz kojeg možemo ili ugasiti igru ili prijeæi u stanje igranja igre. Mi možemo ono što korisniku prikazujemo pamtiti jednom varijablom ali to stvara probleme ako želimo proširiti kod tako da dodamo u izborniku opciju da korisnik može mijenjati postavke ili pogledati upute kako igrati igru. Dodana su dva nova stanja koja opet pratimo sa tom jednom varijablom. U tom sluèaju može doæi do toga da je glavni dio koda jedna velika \lstinline{switch} naredba koja ima puno sluèajeva. Odmah je oèito zašto je to loša praksa. Uvijek želimo da je naš kod pregledniji i pogodniji za razvijanje i zato je bolje odvojiti u zasebne klase.
+	Ovaj oblikovni obrazac koristimo da bi predstavljali stanja u kojima može biti naša igra ili objekti u našoj igri. Igra može imati više razlièitih situacija u kojima se drugaèije ponaša. Na primjer, najèešæe æe postojati glavni izbornik iz kojeg možemo ili ugasiti igru ili prijeæi u stanje igranja igre. Mi možemo ono što korisniku prikazujemo pamtiti jednom varijablom ali to stvara probleme ako želimo proširiti kod tako da dodamo u izborniku opciju da korisnik može mijenjati postavke ili pogledati upute kako igrati igru. Dodana su dva nova stanja koja opet pratimo sa tom jednom varijablom. U tom sluèaju može doæi do toga da je glavni dio koda jedna velika \lstinline{switch} naredba koja ima puno sluèajeva. Odmah je oèito zašto je to loša praksa. Uvijek želimo da je naš kod pregledniji i pogodniji za razvijanje i zato je bolje odvojiti u zasebne klase.
 	
 	Takve klase æe biti razna stanja i kod treba imati moguænost da ih mijenja. Objekt æe izgledati kao da je mijenjao klasu ali zapravo je samo došlo do promjene njegovog stanja. To æe nam smanjiti velike dijelove koda u kojima provjeravamo puno uvjeta kod objekata prije neke radnje tako da æe ih odvojiti u zasebne klase.
 	
 	\subsection{\primjer}
-	Za primjer uzimamo igru u kojoj je glavni lik èovjek koji se može transformirati u lava èiji æe napad biti jaèi. Prvi dio æe pokazati zašto koristimo ovaj obrazac. Zamislimo klasu \lstinline{Player} koja predstavlja našeg glavnog lika koji ima moguænost transformiranja u lava u èijem obliku ima jaèi napad i brže kretanje. Jedan osnovni naèin rješavanja ovog problema bi bilo koristiti enumeracije:
+	Za primjer uzimamo igru u kojoj je glavni lik èovjek koji se može transformirati u lava èiji æe napad biti jaèi. Prvi dio æe pokazati zašto koristimo ovaj obrazac. Zamislimo klasu \lstinline{Player} koja predstavlja našeg glavnog lika koji ima moguænost transformiranja. Jedan osnovni naèin rješavanja ovog problema bi bilo koristiti enumeracije:
 	\begin{lstlisting}
 	enum class States
 	{

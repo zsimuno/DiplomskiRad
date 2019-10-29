@@ -1,10 +1,6 @@
 #ifndef STATESTACK_HPP
 #define STATESTACK_HPP
 
-#include <State.hpp>
-#include <GameStates.hpp>
-#include <ResourceIdentifiers.hpp>
-
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/Time.hpp>
 
@@ -12,7 +8,7 @@
 #include <utility>
 #include <functional>
 #include <map>
-
+#include <State.hpp>
 
 class StateStack : private sf::NonCopyable
 {
@@ -23,7 +19,6 @@ public:
 		Pop,
 		Clear,
 	};
-
 
 public:
 	explicit			StateStack(State::Context context);
@@ -41,11 +36,9 @@ public:
 
 	bool				isEmpty() const;
 
-
 private:
 	State::Ptr			createState(GameStates::ID stateID);
 	void				applyPendingChanges();
-
 
 private:
 	struct PendingChange
@@ -56,7 +49,6 @@ private:
 		GameStates::ID		stateID;
 	};
 
-
 private:
 	std::vector<State::Ptr>								mStack;
 	std::vector<PendingChange>							mPendingList;
@@ -64,7 +56,6 @@ private:
 	State::Context										mContext;
 	std::map<GameStates::ID, std::function<State::Ptr()>>	mFactories;
 };
-
 
 template <typename T>
 void StateStack::registerState(GameStates::ID stateID)
