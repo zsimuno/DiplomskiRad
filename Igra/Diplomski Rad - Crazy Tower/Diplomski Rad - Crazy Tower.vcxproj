@@ -111,6 +111,8 @@
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="Source\MainMenuState.cpp" />
+    <ClCompile Include="Source\Menu.cpp" />
+    <ClCompile Include="Source\MenuOption.cpp" />
     <ClCompile Include="Source\PauseState.cpp" />
     <ClCompile Include="Source\Platform.cpp" />
     <ClCompile Include="Source\Platforms.cpp" />
@@ -123,7 +125,7 @@
     <ClCompile Include="Source\StateStack.cpp" />
     <ClCompile Include="Source\TowerWalls.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
-    <ClCompile Include="Source\World.cpp" />
+    <ClCompile Include="Source\Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Game.hpp" />
@@ -131,6 +133,8 @@
     <ClInclude Include="Include\GameState.hpp" />
     <ClInclude Include="Include\GameStates.hpp" />
     <ClInclude Include="Include\MainMenuState.hpp" />
+    <ClInclude Include="Include\Menu.hpp" />
+    <ClInclude Include="Include\MenuOption.hpp" />
     <ClInclude Include="Include\PauseState.hpp" />
     <ClInclude Include="Include\Platform.hpp" />
     <ClInclude Include="Include\Platforms.hpp" />
@@ -145,7 +149,7 @@
     <ClInclude Include="Include\StateStack.hpp" />
     <ClInclude Include="Include\TowerWalls.hpp" />
     <ClInclude Include="Include\Utility.hpp" />
-    <ClInclude Include="Include\World.hpp" />
+    <ClInclude Include="Include\Tower.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\ResourceHolder.inl" />

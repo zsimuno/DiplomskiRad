@@ -6,8 +6,7 @@
 #include <Platform.hpp>
 
 class Player;
-class Platforms :
-	public SceneNode
+class Platforms : public SceneNode
 {
 public:
 	Platforms();

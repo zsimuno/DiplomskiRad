@@ -3,10 +3,9 @@
 
 
 Platform::Platform(int floorNumber, sf::Vector2i position)
-	: platformRect(position, sf::Vector2i(1000, 30)),
+	: platformRect(position, sf::Vector2i(1000, platformHeight)),
 	rect()
 {
-	int heightLower = 30;
 	if (floorNumber % 50 != 0)
 	{
 		platformRect.left = 100;
@@ -31,7 +30,9 @@ Platform::Platform(int floorNumber, sf::Vector2i position)
 
 	rect.setSize(sf::Vector2f((float)platformRect.width, (float)platformRect.height));
 	rect.setPosition(sf::Vector2f((float)platformRect.left, (float)platformRect.top));
-
+	rect.setOutlineThickness(5);
+	rect.setOutlineColor(sf::Color::Cyan);
+	
 }
 
 sf::IntRect Platform::getBounds()
@@ -63,6 +64,11 @@ bool Platform::isOnPlatform(Player& player, float dtAsSeconds)
 	}
 
 	return false;
+}
+
+int Platform::getHeight()
+{
+	return platformRect.top;
 }
 
 void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const

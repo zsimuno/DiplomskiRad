@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "Menu.hpp"
 
 class MainMenuState : public State
 {
@@ -15,18 +16,8 @@ public:
 	virtual bool		update(sf::Time dt) override;
 	virtual bool		handleEvent(const sf::Event& event) override;
 
-	void				updateOptionText();
-
 private:
-	enum OptionNames
-	{
-		Play,
-		Exit,
-	};
-
-private:
-	std::vector<sf::Text>	mOptions;
-	std::size_t				mOptionIndex;
+	Menu					mainMenu;
 };
 
 #endif // MAINMENUSTATE_HPP

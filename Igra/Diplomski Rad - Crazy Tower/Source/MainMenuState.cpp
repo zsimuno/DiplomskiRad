@@ -6,37 +6,35 @@
 
 MainMenuState::MainMenuState(StateStack& stack, Context context)
 	:State(stack, context)
-, mOptions()
-, mOptionIndex(0)
+	, mainMenu(sf::Text("Main Menu", context.fonts->get(Fonts::ID::Main)),  context.window->getView().getSize().x, context.window->getView().getSize().y)
 {
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 
-	
-	sf::Text playOption;
-	playOption.setFont(font);
-	playOption.setString("Play");
-	Utility::centerOrigin(playOption);
-	playOption.setPosition(context.window->getView().getSize() / 2.f);
-	mOptions.push_back(playOption);
+	mainMenu.setPosition(0, 0);
 
-	sf::Text exitOption;
-	exitOption.setFont(font);
-	exitOption.setString("Exit");
-	Utility::centerOrigin(exitOption);
-	exitOption.setPosition(playOption.getPosition() + sf::Vector2f(0.f, 30.f));
-	mOptions.push_back(exitOption);
+	sf::Text playText("Play", font);
+	mainMenu.addOption(playText, [this]()
+		{
+			requestStackPop();
+			requestStackPush(GameStates::ID::Game);
+		});
 
-	updateOptionText();
+	sf::Text exitText("Exit", font);
+	mainMenu.addOption(exitText, [this]()
+		{
+			requestStackPop();
+		});
+
 }
 
 void MainMenuState::draw()
 {
-	sf::RenderWindow& window = *getContext().window;
+	sf::RectangleShape rect(sf::Vector2f((float)getContext().window->getSize().x, (float)getContext().window->getSize().y));
+	rect.setPosition(0, 0);
+	rect.setFillColor(sf::Color::Blue);
+	getContext().window->draw(rect);
 
-	window.setView(window.getDefaultView());
-
-	for(const sf::Text& text: mOptions)
-		window.draw(text);
+	getContext().window->draw(mainMenu);	
 }
 
 bool MainMenuState::update(sf::Time)
@@ -46,60 +44,9 @@ bool MainMenuState::update(sf::Time)
 
 bool MainMenuState::handleEvent(const sf::Event& event)
 {
-	// The demonstration menu logic
-	if (event.type != sf::Event::KeyPressed)
-		return false;
-
-	if (event.key.code == sf::Keyboard::Return)
-	{
-		if (mOptionIndex == Play)
-		{
-			requestStackPop();
-			requestStackPush(GameStates::ID::Game);
-		}
-		else if (mOptionIndex == Exit)
-		{
-			// The exit option was chosen, by removing itself, the stack will be empty, and the game will know it is time to close.
-			requestStackPop();
-		}
-	}
-
-	else if (event.key.code == sf::Keyboard::Up)
-	{
-		// Decrement and wrap-around
-		if (mOptionIndex > 0)
-			mOptionIndex--;
-		else
-			mOptionIndex = mOptions.size() - 1;
-
-		updateOptionText();
-	}
-
-	else if (event.key.code == sf::Keyboard::Down)
-	{
-		// Increment and wrap-around
-		if (mOptionIndex < mOptions.size() - 1)
-			mOptionIndex++;
-		else
-			mOptionIndex = 0;
-
-		updateOptionText();
-	}
+	mainMenu.handleEvent(event);
 
 	return true;
-}
-
-void MainMenuState::updateOptionText()
-{
-	if (mOptions.empty())
-		return;
-
-	// White all texts
-	for(sf::Text& text: mOptions)
-		text.setColor(sf::Color::White);
-
-	// Red the selected text
-	mOptions[mOptionIndex].setColor(sf::Color::Red);
 }
 
 

@@ -8,22 +8,22 @@
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
-	: mWindow(sf::VideoMode(1024, 768), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
-	, mWorld(mWindow)
-	, mTextures()
-	, mFont()
-	, mStateStack(State::Context(mWindow, mTextures, mFont))
+	: window(sf::VideoMode(1024, 768), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
+	, tower(window)
+	, textures()
+	, fonts()
+	, stateStack(State::Context(window, textures, fonts))
 	, mStatisticsText()
 	, mStatisticsUpdateTime()
 	, mStatisticsNumFrames(0)
 {
-	mFont.load(Fonts::ID::Main, "Media/Sansation.ttf");
-	mStatisticsText.setFont(mFont.get(Fonts::ID::Main));
+	fonts.load(Fonts::ID::Main, "Media/Sansation.ttf");
+	mStatisticsText.setFont(fonts.get(Fonts::ID::Main));
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
 
 	registerStates();
-	mStateStack.pushState(GameStates::ID::Menu);
+	stateStack.pushState(GameStates::ID::Menu);
 }
 	
 
@@ -33,7 +33,7 @@ void Game::run()
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
-	while (mWindow.isOpen())
+	while (window.isOpen())
 	{
 		sf::Time dt = clock.restart();
 		timeSinceLastUpdate += dt;
@@ -45,8 +45,8 @@ void Game::run()
 			update(TimePerFrame);
 
 			// Check inside this loop, because stack might be empty before update() call
-			if (mStateStack.isEmpty())
-				mWindow.close();
+			if (stateStack.isEmpty())
+				window.close();
 		}
 
 		updateStatistics(dt);
@@ -57,30 +57,30 @@ void Game::run()
 void Game::processInput()
 {
 	sf::Event event;
-	while (mWindow.pollEvent(event))
+	while (window.pollEvent(event))
 	{
-		mStateStack.handleEvent(event);
+		stateStack.handleEvent(event);
 
 		if (event.type == sf::Event::Closed)
-			mWindow.close();
+			window.close();
 	}
 }
 
 void Game::update(sf::Time dt)
 {
-	mStateStack.update(dt);
+	stateStack.update(dt);
 }
 
 void Game::render()
 {
-	mWindow.clear();
+	window.clear();
 
-	mStateStack.draw();
+	stateStack.draw();
 
-	mWindow.setView(mWindow.getDefaultView());
-	mWindow.draw(mStatisticsText);
+	window.setView(window.getDefaultView());
+	window.draw(mStatisticsText);
 
-	mWindow.display();
+	window.display();
 }
 
 void Game::updateStatistics(sf::Time elapsedTime)
@@ -101,7 +101,7 @@ void Game::updateStatistics(sf::Time elapsedTime)
 
 void Game::registerStates()
 {
-	mStateStack.registerState<MainMenuState>(GameStates::ID::Menu);
-	mStateStack.registerState<GameState>(GameStates::ID::Game);
-	mStateStack.registerState<PauseState>(GameStates::ID::Pause);
+	stateStack.registerState<MainMenuState>(GameStates::ID::Menu);
+	stateStack.registerState<GameState>(GameStates::ID::Game);
+	stateStack.registerState<PauseState>(GameStates::ID::Pause);
 }

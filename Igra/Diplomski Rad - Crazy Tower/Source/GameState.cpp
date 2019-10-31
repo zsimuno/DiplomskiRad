@@ -2,18 +2,18 @@
 
 GameState::GameState(StateStack& stack, Context context)
 	:State(stack, context)
-	, mWorld(*context.window)
+	, tower(*context.window)
 {
 }
 
 void GameState::draw()
 {
-	mWorld.draw();
+	tower.draw();
 }
 
 bool GameState::update(sf::Time dt)
 {
-	mWorld.update(dt);
+	tower.update(dt);
 
 	return true;
 }

@@ -1,7 +1,7 @@
 #include <TowerWalls.hpp>
 #include <SFML\Graphics\RenderTarget.hpp>
 
-TowerWalls::TowerWalls(float wallWidth, float wallHeight, World& world, Player& player)
+TowerWalls::TowerWalls(float wallWidth, float wallHeight, Tower& world, Player& player)
 	:world(world),
 	player(player),
 	leftWall(sf::Vector2f(wallWidth, wallHeight)),

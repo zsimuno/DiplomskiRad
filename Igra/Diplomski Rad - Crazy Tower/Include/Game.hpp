@@ -5,7 +5,7 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <Player.hpp>
 #include <ResourceHolder.hpp>
-#include <World.hpp>
+#include <Tower.hpp>
 #include <PlayerData.hpp>
 #include <StateStack.hpp>
 
@@ -24,11 +24,11 @@ private:
 	void					registerStates();
 
 private:
-	sf::RenderWindow		mWindow;
-	World					mWorld;
-	TextureHolder			mTextures;
-	FontHolder				mFont;
-	StateStack				mStateStack;
+	sf::RenderWindow		window;
+	Tower					tower;
+	TextureHolder			textures;
+	FontHolder				fonts;
+	StateStack				stateStack;
 
 	static const sf::Time	TimePerFrame;
 

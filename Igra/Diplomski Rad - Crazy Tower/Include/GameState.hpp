@@ -2,7 +2,7 @@
 #define GAMESTATE_HPP
 
 #include<State.hpp>
-#include <World.hpp>
+#include <Tower.hpp>
 #include <StateStack.hpp>
 
 class GameState :
@@ -15,7 +15,7 @@ public:
 	virtual bool update(sf::Time dt) override;
 	virtual bool handleEvent(const sf::Event& event) override;
 private:
-	World				mWorld;
+	Tower				tower;
 };
 
 #endif // GAMESTATE_HPP

@@ -21,10 +21,10 @@ namespace sf
 	class RenderWindow;
 }
 
-class World : private sf::NonCopyable
+class Tower : private sf::NonCopyable
 {
 public:
-	explicit							World(sf::RenderWindow& window);
+	explicit							Tower(sf::RenderWindow& window);
 	void								update(sf::Time dt);
 	void								draw();
 	float								ScrollSpeed();
@@ -48,18 +48,18 @@ private:
 
 private:
 	sf::RenderWindow& mWindow;
-	sf::View							mWorldView;
-	TextureHolder						mTextures;
+	sf::View							worldView;
+	TextureHolder						textures;
 
-	SceneNode							mSceneGraph;
-	std::array<SceneNode*, LayerCount>	mSceneLayers;
+	SceneNode							sceneGraph;
+	std::array<SceneNode*, LayerCount>	sceneLayers;
 
-	sf::FloatRect						mWorldBounds;
-	sf::Vector2f						mSpawnPosition;
-	float								mScrollSpeed;
-	Player*								mPlayer;
-	TowerWalls*							mWalls;
-	float								mWorldWallWidth;
+	sf::FloatRect						worldBounds;
+	sf::Vector2f						spawnPosition;
+	float								scrollSpeed;
+	Player*								player;
+	TowerWalls*							walls;
+	float								towerWallWidth;
 	sf::Sprite mBackground;
 };
 

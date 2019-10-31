@@ -1,2 +1,12 @@
-﻿  PauseState.cpp
+﻿  MainMenuState.cpp
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,148): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,148): warning C4244:         with
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,148): warning C4244:         [
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,148): warning C4244:             T=float
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,148): warning C4244:         ]
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,109): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,109): warning C4244:         with
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,109): warning C4244:         [
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,109): warning C4244:             T=float
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\MainMenuState.cpp(9,109): warning C4244:         ]
   Diplomski Rad - Crazy Tower.vcxproj -> D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Debug\Diplomski Rad - Crazy Tower.exe

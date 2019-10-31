@@ -15,5 +15,11 @@ void Utility::centerOrigin(sf::Sprite& sprite)
 void Utility::centerOrigin(sf::Text& text)
 {
 	sf::FloatRect bounds = text.getLocalBounds();
-	text.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
+	text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+}
+
+void Utility::centerOrigin(sf::RectangleShape& shape)
+{
+	sf::FloatRect bounds = shape.getLocalBounds();
+	shape.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 }
