@@ -6,30 +6,38 @@
 #include <iostream>
 
 
-MenuOption::MenuOption(sf::Text text, OnClickFunction onClick)
+MenuOption::MenuOption(sf::Text text, sf::Vector2f position, OnClickFunction onClick)
 	: optionText(text)
 	, onClickAction(onClick)
-	, optionRect(sf::Vector2f(200, 50))
+	, optionRect(sf::Vector2f(200, 40))
+	, primaryColor(69, 39, 160)
+	, secondaryColor(179, 157, 219)
+	, outlineColor(179, 136, 255)
 {
-	optionRect.setOutlineThickness(4);
-	optionRect.setFillColor(sf::Color::Cyan);
-	optionRect.setOutlineColor(sf::Color::Black);
+	this->setPosition(position);
+	optionRect.setOutlineThickness(5);
+	optionRect.setFillColor(primaryColor);
+	optionRect.setOutlineColor(outlineColor);
+	optionRect.setPosition(position);
 
 	Utility::centerOrigin(optionText);
-	optionText.setPosition(100, 25);
+	optionText.setPosition(position + sf::Vector2f(100, 20));
+	optionText.setFillColor(outlineColor);
+
 }
 
 void MenuOption::select()
 {
 	optionRect.setOutlineColor(sf::Color::White);
+	optionRect.setFillColor(secondaryColor);
 	optionText.setFillColor(sf::Color::White);
-	std::cout << getPosition().x << ", " << getPosition().y << std::endl;
 }
 
 void MenuOption::deselect()
 {
-	optionRect.setOutlineColor(sf::Color::Black);
-	optionText.setFillColor(sf::Color::Black);
+	optionRect.setOutlineColor(outlineColor);
+	optionRect.setFillColor(primaryColor);
+	optionText.setFillColor(outlineColor);
 }
 
 void MenuOption::click()

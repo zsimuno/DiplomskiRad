@@ -7,22 +7,21 @@
 
 
 
-Menu::Menu(sf::Text menuTitle, int menuWidth, int menuHeight)
+Menu::Menu(sf::Text menuTitle, float menuWidth, float menuHeight)
 	: title(menuTitle)
 	, width(menuWidth)
 	, height(menuHeight)
 	, optionYPosition(menuHeight / 2)
 	, selectedOptionIndex(0)
 {
-	title.setPosition(200, 100);
+	title.setPosition(width / 3, 120);
 }
 
 void Menu::addOption(sf::Text optionText, MenuOption::OnClickFunction onClick)
 {
-	MenuOption option(optionText, onClick);
-	optionYPosition += 20.f;
-	option.setPosition(width / 2, optionYPosition);
-	options.push_back(option);
+	MenuOption* option = new MenuOption(optionText, sf::Vector2f(width / 3, optionYPosition), onClick);
+	optionYPosition += 55.f;
+	options.push_back(*option);
 
 	if (options.size() == 1)
 	{
@@ -37,10 +36,6 @@ void Menu::next()
 	selectedOptionIndex = (selectedOptionIndex + 1) % options.size();
 
 	options[selectedOptionIndex].select();
-
-	std::cout << getPosition().x << ", " << getPosition().y << std::endl;
-	std::cout << width << ", " << height << std::endl;
-
 }
 
 void Menu::previous()
@@ -69,7 +64,7 @@ void Menu::handleEvent(const sf::Event & event)
 	case sf::Event::MouseMoved:
 		for (size_t i = 0; i < options.size(); ++i)
 		{
-			if (options[i].contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+			if (options[i].contains(sf::Vector2f((float) event.mouseMove.x, (float) event.mouseMove.y)))
 			{
 				options[selectedOptionIndex].deselect();
 				selectedOptionIndex = i;
@@ -81,7 +76,7 @@ void Menu::handleEvent(const sf::Event & event)
 
 	case sf::Event::MouseButtonPressed:
 		// Mouse can only be pressed on the selected option
-		if (options[selectedOptionIndex].contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+		if (options[selectedOptionIndex].contains(sf::Vector2f((float) event.mouseButton.x, (float) event.mouseButton.y)))
 		{
 			options[selectedOptionIndex].click();
 		}

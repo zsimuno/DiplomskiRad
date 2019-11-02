@@ -7,20 +7,27 @@
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\RenderStates.hpp>
 #include <SFML\Graphics\RenderTarget.hpp>
+#include <SFML\Graphics\Text.hpp>
 
 class Platform : public sf::Drawable
 {
 public:
-	static const int	platformHeight = 50;
-	Platform(int floorNumber, sf::Vector2i position = sf::Vector2i(0, 0));
+	static const int	platformHeight = 40;
+	static const int	minPlatformWidth = 200;
 
-	sf::IntRect			getBounds();
-	bool				isOnPlatform( Player& player, float dtAsSeconds);
+	Platform(int floorNumber, sf::FloatRect towerBounds, sf::Font& font, int previousPlatform = 0);
+
+	sf::FloatRect		getBounds();
+	bool				isOnPlatform(Player& player, float dtAsSeconds);
 	int					getHeight();
+	int					getPlatformNumber();
 private:
 
-	sf::IntRect			platformRect;
+	sf::FloatRect		platformRect;
 	sf::RectangleShape	rect;
+	sf::RectangleShape	numberRect;
+	sf::Text			floorNumberText;
+	int					platformNumber;
 
 	virtual void		draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };

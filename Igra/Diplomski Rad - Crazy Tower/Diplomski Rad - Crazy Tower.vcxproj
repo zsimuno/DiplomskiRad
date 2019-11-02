@@ -120,7 +120,7 @@
     <ClCompile Include="Source\PlayerAnimation.cpp" />
     <ClCompile Include="Source\PlayerData.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
-    <ClCompile Include="Source\SpriteNode.cpp" />
+    <ClCompile Include="Source\RectangleNode.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateStack.cpp" />
     <ClCompile Include="Source\TowerWalls.cpp" />
@@ -144,7 +144,7 @@
     <ClInclude Include="Include\ResourceHolder.hpp" />
     <ClInclude Include="Include\ResourceIdentifiers.hpp" />
     <ClInclude Include="Include\SceneNode.hpp" />
-    <ClInclude Include="Include\SpriteNode.hpp" />
+    <ClInclude Include="Include\RectangleNode.hpp" />
     <ClInclude Include="Include\State.hpp" />
     <ClInclude Include="Include\StateStack.hpp" />
     <ClInclude Include="Include\TowerWalls.hpp" />

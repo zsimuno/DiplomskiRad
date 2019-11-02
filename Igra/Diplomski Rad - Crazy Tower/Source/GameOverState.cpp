@@ -10,22 +10,30 @@
 
 GameOverState::GameOverState(StateStack& stack, Context context)
 	: State(stack, context)
-	, gameOverText()
-	, elapsedTime(sf::Time::Zero)
+	, gameOverMenu(sf::Text("Game Over", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
 {
-	sf::Font& font = context.fonts->get(Fonts::ID::Main);
-	sf::Vector2f windowSize(context.window->getSize());
-
-	gameOverText.setString("Game over! \n Press any key to continue!");
-
-	gameOverText.setCharacterSize(70);
-	Utility::centerOrigin(gameOverText);
-	gameOverText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
-
 	sf::RenderWindow& window = *getContext().window;
-	background = sf::RectangleShape(window.getView().getSize() / 5.0f);
+	background = sf::RectangleShape(window.getView().getSize() * 6.0f / 8.0f);
+	background.setPosition(window.getView().getSize() / 8.0f);
 	background.setFillColor(sf::Color(0, 0, 0, 150));
-	background.setSize(window.getView().getSize() * 4.0f / 5.0f);
+
+	sf::Font& font = context.fonts->get(Fonts::ID::Main);
+
+	gameOverMenu.setPosition(0, 0);
+
+	sf::Text restart("Try again", font);
+	gameOverMenu.addOption(restart, [this]()
+		{
+			requestStackPop();
+		});
+
+	sf::Text menu("Main menu", font);
+	gameOverMenu.addOption(menu, [this]()
+		{
+			requestStateClear();
+			requestStackPush(GameStates::ID::Menu);
+		});
+
 }
 
 void GameOverState::draw()
@@ -34,7 +42,7 @@ void GameOverState::draw()
 	window.setView(window.getDefaultView());
 
 	window.draw(background);
-	window.draw(gameOverText);
+	window.draw(gameOverMenu);
 }
 
 bool GameOverState::update(sf::Time dt)
@@ -44,10 +52,6 @@ bool GameOverState::update(sf::Time dt)
 
 bool GameOverState::handleEvent(const sf::Event& event)
 {
-	if (event.type == sf::Event::KeyPressed) 
-	{
-		requestStateClear();
-		requestStackPush(GameStates::ID::Menu);
-	}
+	gameOverMenu.handleEvent(event);
 	return false;
 }

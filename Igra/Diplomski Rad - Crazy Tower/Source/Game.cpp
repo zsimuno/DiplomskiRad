@@ -4,28 +4,26 @@
 #include <MainMenuState.hpp>
 #include <PauseState.hpp>
 #include <GameState.hpp>
+#include <GameOverState.hpp>
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
-	: window(sf::VideoMode(1024, 768), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
-	, tower(window)
+	: window(sf::VideoMode(1280, 800), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
 	, textures()
 	, fonts()
 	, stateStack(State::Context(window, textures, fonts))
-	, mStatisticsText()
-	, mStatisticsUpdateTime()
-	, mStatisticsNumFrames(0)
 {
 	fonts.load(Fonts::ID::Main, "Media/Sansation.ttf");
-	mStatisticsText.setFont(fonts.get(Fonts::ID::Main));
-	mStatisticsText.setPosition(5.f, 5.f);
-	mStatisticsText.setCharacterSize(10);
+
+	textures.load(Textures::ID::Character, "Media/Textures/character.png");
+	textures.load(Textures::ID::Tower, "Media/Textures/background.png");
 
 	registerStates();
+
 	stateStack.pushState(GameStates::ID::Menu);
 }
-	
+
 
 
 void Game::run()
@@ -49,7 +47,6 @@ void Game::run()
 				window.close();
 		}
 
-		updateStatistics(dt);
 		render();
 	}
 }
@@ -78,30 +75,15 @@ void Game::render()
 	stateStack.draw();
 
 	window.setView(window.getDefaultView());
-	window.draw(mStatisticsText);
 
 	window.display();
 }
 
-void Game::updateStatistics(sf::Time elapsedTime)
-{
-	mStatisticsUpdateTime += elapsedTime;
-	mStatisticsNumFrames += 1;
-
-	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
-	{
-		mStatisticsText.setString(
-			"Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
-			"Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us");
-
-		mStatisticsUpdateTime -= sf::seconds(1.0f);
-		mStatisticsNumFrames = 0;
-	}
-}
 
 void Game::registerStates()
 {
 	stateStack.registerState<MainMenuState>(GameStates::ID::Menu);
 	stateStack.registerState<GameState>(GameStates::ID::Game);
 	stateStack.registerState<PauseState>(GameStates::ID::Pause);
+	stateStack.registerState<GameOverState>(GameStates::ID::GameOver);
 }

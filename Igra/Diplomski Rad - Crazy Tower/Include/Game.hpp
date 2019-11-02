@@ -20,23 +20,15 @@ private:
 	void					update(sf::Time dt);
 	void					render();
 
-	void					updateStatistics(sf::Time elapsedTime);
 	void					registerStates();
 
 private:
 	sf::RenderWindow		window;
-	Tower					tower;
 	TextureHolder			textures;
 	FontHolder				fonts;
 	StateStack				stateStack;
 
 	static const sf::Time	TimePerFrame;
-
-	
-
-	sf::Text				mStatisticsText;
-	sf::Time				mStatisticsUpdateTime;
-	int						mStatisticsNumFrames;
 
 };
 

@@ -6,9 +6,16 @@
 
 MainMenuState::MainMenuState(StateStack& stack, Context context)
 	:State(stack, context)
-	, mainMenu(sf::Text("Main Menu", context.fonts->get(Fonts::ID::Main)),  context.window->getView().getSize().x, context.window->getView().getSize().y)
+	, mainMenu(sf::Text("Crazy Tower", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
+	, background()
 {
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
+
+	sf::Texture& texture = context.textures->get(Textures::ID::Tower);
+	sf::IntRect textureRect(0, 0, context.window->getView().getSize().x, context.window->getView().getSize().y);
+	texture.setRepeated(true);
+	background.setTexture(texture);
+	background.setTextureRect(textureRect);
 
 	mainMenu.setPosition(0, 0);
 
@@ -29,12 +36,10 @@ MainMenuState::MainMenuState(StateStack& stack, Context context)
 
 void MainMenuState::draw()
 {
-	sf::RectangleShape rect(sf::Vector2f((float)getContext().window->getSize().x, (float)getContext().window->getSize().y));
-	rect.setPosition(0, 0);
-	rect.setFillColor(sf::Color::Blue);
-	getContext().window->draw(rect);
+	getContext().window->draw(background);
 
-	getContext().window->draw(mainMenu);	
+	getContext().window->setView(getContext().window->getDefaultView());
+	getContext().window->draw(mainMenu);
 }
 
 bool MainMenuState::update(sf::Time)

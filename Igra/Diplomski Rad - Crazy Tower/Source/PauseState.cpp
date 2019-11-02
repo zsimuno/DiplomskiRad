@@ -9,23 +9,31 @@
 
 PauseState::PauseState(StateStack& stack, Context context)
 	:State(stack, context)
-	, pausedText()
+	, pauseMenu(sf::Text("Paused", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
 {
-	sf::Font& font = context.fonts->get(Fonts::ID::Main);
-	sf::Vector2f windowSize(context.window->getSize());
-
-	pausedText.setFont(font);
-	pausedText.setString("Game Paused \n Press 'escape' to return to game and 'm' to go to main menu");
-	pausedText.setCharacterSize(20);
-	Utility::centerOrigin(pausedText);
-	pausedText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
-
 	sf::RenderWindow& window = *getContext().window;
-	background = sf::RectangleShape(window.getView().getSize() * 3.0f / 5.0f);
-	background.setPosition(window.getView().getSize() / 5.0f);
+	background = sf::RectangleShape(window.getView().getSize() * 6.0f / 8.0f);
+	background.setPosition(window.getView().getSize() / 8.0f);
 	background.setFillColor(sf::Color(0, 0, 0, 150));
-}
 
+	sf::Font& font = context.fonts->get(Fonts::ID::Main);
+
+	pauseMenu.setPosition(0, 0);
+
+	sf::Text resume("Resume", font);
+	pauseMenu.addOption(resume, [this]()
+		{
+			requestStackPop();
+		});
+
+	sf::Text menu("Main menu", font);
+	pauseMenu.addOption(menu, [this]()
+		{
+			requestStateClear();
+			requestStackPush(GameStates::ID::Menu);
+		});
+
+}
 
 void PauseState::draw()
 {
@@ -33,7 +41,8 @@ void PauseState::draw()
 	window.setView(window.getDefaultView());	
 
 	window.draw(background);
-	window.draw(pausedText);
+	window.draw(pauseMenu);
+
 }
 
 bool PauseState::update(sf::Time)
@@ -43,18 +52,7 @@ bool PauseState::update(sf::Time)
 
 bool PauseState::handleEvent(const sf::Event& event)
 {
-	if (event.type == sf::Event::KeyPressed)
-	{
-		if (event.key.code == sf::Keyboard::Escape) 
-		{
-			requestStackPop();
-		}
-		else if (event.key.code == sf::Keyboard::M)
-		{
-			requestStateClear();
-			requestStackPush(GameStates::ID::Menu);
-		}
-	}
+	pauseMenu.handleEvent(event);
 	return false;
 }
 

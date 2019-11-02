@@ -5,13 +5,12 @@
 #include <SceneNode.hpp>
 #include <ResourceIdentifiers.hpp>
 #include <PlayerData.hpp>
-#include <Player.hpp>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML\Graphics\Sprite.hpp>
 
 #include <map>
-
+class Player;
 class PlayerAnimation
 {
 

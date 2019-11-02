@@ -1,39 +1,68 @@
 #include <Tower.hpp>
 #include <PlayerData.hpp>
-#include <iostream>
 #include <TowerWalls.hpp>
+#include <State.hpp>
 
-Tower::Tower(sf::RenderWindow& window)
-	: mWindow(window)
+#include <iostream>
+
+Tower::Tower(sf::RenderWindow& window, State::Context& gameContext)
+	: window(window)
+	, context(gameContext)
 	, worldView(window.getDefaultView())
-	, textures()
 	, sceneGraph()
 	, sceneLayers()
-	, worldBounds(0.f, 0.f, worldView.getSize().x, worldView.getSize().y)
-	, spawnPosition(worldView.getSize().x / 2.f,  worldView.getSize().y - 140.f)
-	, scrollSpeed(-10.f)
+	, towerWallWidth(200.f)
+	, scrollSpeed(0.f)
 	, player(nullptr)
-	, towerWallWidth(100.f)
+	, gameOver(false)
 {
-	loadTextures();
+	insideTowerBounds = sf::FloatRect(towerWallWidth, 0.f, worldView.getSize().x - 2 * towerWallWidth, worldView.getSize().y);
 	buildScene(); 
 }
 
 void Tower::update(sf::Time dt)
 {
-	worldView.move(0.f, ScrollSpeed() * dt.asSeconds());
-	walls->move(0.f, ScrollSpeed() * dt.asSeconds());
+	sf::Vector2f moveDist(0.f, ScrollSpeed() * dt.asSeconds());
+	worldView.move(moveDist);
+	walls->move(moveDist);
+	insideTowerBounds.top += moveDist.y;
+	rectangle->move(moveDist);
 
 	sf::Vector2f position = player->getPosition();
 	sf::FloatRect bounds = player->getBounds();
-	sf::Vector2f velocity = player->getVelocity();
 
 	// If player touches walls, flip him and multiply the velocity
-	if (position.x - bounds.width/2 <= worldBounds.left + towerWallWidth ||
-		position.x + bounds.width/2 >= worldBounds.left + worldBounds.width - towerWallWidth)
+	if (position.x - bounds.width/2 <= insideTowerBounds.left ||
+		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
 	{
+		sf::Vector2f velocity = player->getVelocity();
 		velocity.x = -2*velocity.x;
 		player->setVelocity(velocity);
+	}
+
+	// If player out of bounds then game over
+	if (position.y - bounds.height / 2 >= insideTowerBounds.top + insideTowerBounds.height)
+	{
+		gameOver = true;
+	}
+
+	// Move the screen with the player. Player must always be on screen
+	sf::Vector2f velocity = player->getVelocity();
+	if (position.y < insideTowerBounds.top + insideTowerBounds.height / 4 && velocity.y < 0)
+	{
+		// TODO: Maybe better movement depending on the player
+		sf::Vector2f moveDist(0.f, velocity.y * dt.asSeconds() * 0.95f);
+		worldView.move(moveDist);
+		walls->move(moveDist);
+		insideTowerBounds.top += moveDist.y;
+		rectangle->move(moveDist);
+	}
+
+
+	// Game start
+	if (scrollSpeed == 0.f && player->getCurrentPlatform() != nullptr && player->getCurrentPlatform()->getPlatformNumber() > 3)
+	{
+		incrementScrollSpeed();
 	}
 
 	sceneGraph.update(dt);
@@ -41,8 +70,8 @@ void Tower::update(sf::Time dt)
 
 void Tower::draw()
 {
-	mWindow.setView(worldView);
-	mWindow.draw(sceneGraph);
+	window.setView(worldView);
+	window.draw(sceneGraph);
 }
 
 float Tower::ScrollSpeed()
@@ -52,7 +81,7 @@ float Tower::ScrollSpeed()
 
 void Tower::incrementScrollSpeed()
 {
-	scrollSpeed++;
+	scrollSpeed -= 20.f;
 }
 
 void Tower::move(sf::Vector2f v)
@@ -61,11 +90,11 @@ void Tower::move(sf::Vector2f v)
 }
 
 
-void Tower::loadTextures()
+bool Tower::GameOver() const
 {
-	textures.load(Textures::ID::Character, "Media/Textures/character.png");
-	textures.load(Textures::ID::Tower, "Media/Textures/background.png");
+	return gameOver;
 }
+
 
 void Tower::buildScene()
 {
@@ -78,30 +107,41 @@ void Tower::buildScene()
 		sceneGraph.attachChild(std::move(layer));
 	}
 
-	// Prepare the tiled background
-	sf::Texture& texture = textures.get(Textures::ID::Tower);
-	sf::IntRect textureRect(worldBounds);
-	texture.setRepeated(true);
 
-	// Add the background sprite to the scene
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect, worldView));
-	backgroundSprite->setPosition(worldBounds.left, worldBounds.top);
-	sceneLayers[Background]->attachChild(std::move(backgroundSprite));
+	// Add the background 
+	std::unique_ptr<RectangleNode> rectangleNode(new RectangleNode(insideTowerBounds.left, insideTowerBounds.top, insideTowerBounds.width, insideTowerBounds.height));
+	rectangle = rectangleNode.get();
+	sceneLayers[Background]->attachChild(std::move(rectangleNode));
 
 	// Create platforms
-	std::unique_ptr<Platforms> platforms(new Platforms());
-	Platforms* mPlatforms = platforms.get();
-	sceneLayers[Floors]->attachChild(std::move(platforms));
+	std::unique_ptr<Platforms> towerPlatforms(new Platforms(insideTowerBounds, context.fonts->get(Fonts::ID::Main)));
+	platforms = towerPlatforms.get();
+	sceneLayers[Floors]->attachChild(std::move(towerPlatforms));
 
 	// Add player
-	std::unique_ptr<Player> gamePlayer(new Player(textures, *mPlatforms));
+	std::unique_ptr<Player> gamePlayer(new Player(*context.textures, *platforms, insideTowerBounds));
 	player = gamePlayer.get();
+	spawnPosition = sf::Vector2f(worldView.getSize().x / 2.f, worldView.getSize().y - Platform::platformHeight - player->getBounds().height / 2);
+
 	player->setPosition(spawnPosition);
 	sceneLayers[Front]->attachChild(std::move(gamePlayer));
 
 	// Add tower walls
-	std::unique_ptr<TowerWalls> towerWalls(new TowerWalls(towerWallWidth, worldView.getSize().y, *this, *player));
+	std::unique_ptr<TowerWalls> towerWalls(new TowerWalls(towerWallWidth, worldView, *this, *player));
 	walls = towerWalls.get();
 	sceneLayers[Walls]->attachChild(std::move(towerWalls));
 
+}
+
+void Tower::initialize()
+{
+	worldView = window.getDefaultView();
+	insideTowerBounds = sf::FloatRect(towerWallWidth, 0.f, worldView.getSize().x - 2* towerWallWidth, worldView.getSize().y);
+	scrollSpeed = 0.f;
+	player->setPosition(spawnPosition);
+	player->initialize();
+	walls->setPosition(0.f, 0.f);
+	rectangle->setPosition(0.f, 0.f);
+	platforms->initialize();
+	gameOver = false;
 }

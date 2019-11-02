@@ -17,7 +17,8 @@ public:
 	virtual bool		handleEvent(const sf::Event& event) override;
 
 private:
-	Menu					mainMenu;
+	Menu				mainMenu;
+	sf::Sprite			background;
 };
 
 #endif // MAINMENUSTATE_HPP

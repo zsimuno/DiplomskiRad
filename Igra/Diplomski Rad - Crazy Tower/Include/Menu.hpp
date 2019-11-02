@@ -9,7 +9,7 @@
 class Menu : public sf::Drawable, public sf::Transformable
 {
 public:
-	Menu(sf::Text menuTitle, int menuWidth, int menuHeight);
+	Menu(sf::Text menuTitle, float menuWidth, float menuHeight);
 
 	void						addOption(sf::Text optionText, MenuOption::OnClickFunction onClick);
 	virtual void				draw(sf::RenderTarget& target, sf::RenderStates states) const override;
@@ -22,8 +22,8 @@ private:
 	std::vector<MenuOption>		options;
 	sf::Text					title;
 	float						optionYPosition;
-	int							width;
-	int							height;
+	float						width;
+	float						height;
 	int							selectedOptionIndex;
 
 };

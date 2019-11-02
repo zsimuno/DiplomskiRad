@@ -2,7 +2,7 @@
 
 GameState::GameState(StateStack& stack, Context context)
 	:State(stack, context)
-	, tower(*context.window)
+	, tower(*context.window, context)
 {
 }
 
@@ -14,6 +14,12 @@ void GameState::draw()
 bool GameState::update(sf::Time dt)
 {
 	tower.update(dt);
+	
+	if (tower.GameOver())
+	{
+		tower.initialize();
+		requestStackPush(GameStates::ID::GameOver);
+	}
 
 	return true;
 }

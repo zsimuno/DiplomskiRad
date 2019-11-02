@@ -4,6 +4,7 @@
 #include<State.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <Menu.hpp>
 
 class GameOverState :
 	public State
@@ -16,9 +17,8 @@ public:
 	virtual bool handleEvent(const sf::Event& event) override;
 
 private:
-	sf::Text			gameOverText;
-	sf::Time			elapsedTime;
 	sf::RectangleShape	background;
+	Menu				gameOverMenu;
 
 };
 

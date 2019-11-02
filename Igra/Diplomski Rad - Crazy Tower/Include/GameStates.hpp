@@ -10,7 +10,7 @@ namespace GameStates
 		Title,
 		Menu,
 		Game,
-		Loading,
+		GameOver,
 		Pause
 	};
 }

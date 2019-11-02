@@ -4,17 +4,20 @@
 #include <ResourceHolder.hpp>
 #include <ResourceIdentifiers.hpp>
 #include <SceneNode.hpp>
-#include <SpriteNode.hpp>
+#include <RectangleNode.hpp>
 #include <Player.hpp>
 #include <Platforms.hpp>
+#include <TowerWalls.hpp>
+#include <State.hpp>
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML\System\Time.hpp>
 
 #include <array>
-#include <SFML\System\Time.hpp>
-#include "TowerWalls.hpp"
+
+
 
 namespace sf
 {
@@ -24,19 +27,22 @@ namespace sf
 class Tower : private sf::NonCopyable
 {
 public:
-	explicit							Tower(sf::RenderWindow& window);
+	explicit							Tower(sf::RenderWindow& window, State::Context& gameContext);
 	void								update(sf::Time dt);
 	void								draw();
 	float								ScrollSpeed();
 	void								incrementScrollSpeed();
 	void								move(sf::Vector2f v);
+	bool								GameOver() const;
+	void								initialize();
+
 private:
-	void								loadTextures();
 	void								buildScene();
+	
 
 
 private:
-	enum Layer
+	enum Layers
 	{
 		Background,
 		Floors,
@@ -47,20 +53,25 @@ private:
 
 
 private:
-	sf::RenderWindow& mWindow;
+	sf::RenderWindow&					window;
 	sf::View							worldView;
-	TextureHolder						textures;
+	State::Context&						context;
 
 	SceneNode							sceneGraph;
 	std::array<SceneNode*, LayerCount>	sceneLayers;
 
-	sf::FloatRect						worldBounds;
+	sf::FloatRect						insideTowerBounds;
 	sf::Vector2f						spawnPosition;
-	float								scrollSpeed;
+	sf::Sprite							background;
+	
 	Player*								player;
 	TowerWalls*							walls;
+	Platforms*							platforms;
+	RectangleNode*						rectangle;
+
 	float								towerWallWidth;
-	sf::Sprite mBackground;
+	float								scrollSpeed;
+	bool								gameOver;
 };
 
 #endif // WORLD_HPP
