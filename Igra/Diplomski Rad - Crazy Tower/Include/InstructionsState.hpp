@@ -22,6 +22,7 @@ private:
 	sf::Sprite			comboInstructions;
 	sf::Sprite			speedInstructions;
 	sf::Sprite			background;
+	sf::Sprite			playerSprite;
 };
 
 #endif // INSTRUCTIONSSTATE_HPP
