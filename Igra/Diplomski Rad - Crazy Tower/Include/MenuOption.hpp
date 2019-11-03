@@ -11,6 +11,9 @@ class MenuOption : public sf::Drawable , public sf::Transformable
 public:
 	using OnClickFunction = std::function<void()>;
 
+	static const int		menuOptionHeight = 60;
+	static const int		menuOptionWidth = 300;
+
 	MenuOption(sf::Text text, sf::Vector2f position, OnClickFunction onClick = []() {});
 
 	void					select();
@@ -25,6 +28,7 @@ private:
 	sf::Color				primaryColor;
 	sf::Color				secondaryColor;
 	sf::Color				outlineColor;
+	sf::Color				secondaryOutlineColor;
 
 	
 };

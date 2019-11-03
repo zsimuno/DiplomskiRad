@@ -2,6 +2,7 @@
 #include <ResourceHolder.hpp>
 #include <Utility.hpp>
 #include <Platforms.hpp>
+
 #include <iostream>
 
 
@@ -12,14 +13,15 @@ Player::Player(const TextureHolder& textures, Platforms& towerPlatforms, sf::Flo
 	, mirroredSprite(false)
 	, animation(data, sprite, *this)
 	, platforms(towerPlatforms)
-	, currentPlatform(nullptr)
-	, isInCombo(false)
+	, currentPlatformBounds(0.f, 0.f, 0.f, 0.f)
+	, inCombo(false)
 	, currentCombo(0)
+	, previousPlatformFloor(Platforms::startingPlatform)
 	, maxCombo(0)
 	, isOnPlatform(true)
 	, currentBounds(bounds)
 {
-	sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle1]);
+	sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
 	sprite.setScale(sf::Vector2f(1.5, 1.5));
 	Utility::centerOrigin(sprite);
 }
@@ -27,12 +29,13 @@ Player::Player(const TextureHolder& textures, Platforms& towerPlatforms, sf::Flo
 void Player::initialize()
 {
 	playerVelocity = sf::Vector2f(0, 0);
-	currentPlatform = nullptr;
-	isInCombo = false;
+	currentPlatformBounds = sf::FloatRect(0.f, 0.f, 0.f, 0.f);
+	inCombo = false;
 	isOnPlatform = true;
 	animation.setIdle();
 	currentCombo = 0;
 	maxCombo = 0;
+	previousPlatformFloor = Platforms::startingPlatform;
 }
 
 void Player::handleEvent()
@@ -43,7 +46,7 @@ void Player::handleRealtimeInput()
 {
 	if (isOnPlatform && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		playerVelocity.y -= data.jumpSpeed + abs(playerVelocity.x);
+		playerVelocity.y -= data.jumpSpeed + 2 * abs(playerVelocity.x);
 		isOnPlatform = false;
 	}
 
@@ -75,12 +78,25 @@ sf::FloatRect Player::getBounds() const
 
 void Player::setOnPlatform(Platform* platform)
 {
-	currentPlatform = platform;
+	// Combos happen if player jumps more than one platform. Otherwise the combo resets.
+	int plat = platform->getPlatformNumber();
+	if (previousPlatformFloor < plat - 1)
+	{
+		inCombo = true;
+		currentCombo += plat - previousPlatformFloor;
+	}
+	else
+	{
+		endCombo();
+	}
+
+	currentPlatformBounds = platform->getBounds();
+	previousPlatformFloor = plat;
 	isOnPlatform = true;
 	playerVelocity.y = 0.0f;
 	animation.setIdle();
 
-	this->setPosition(this->getPosition().x, currentPlatform->getBounds().top - getBounds().height - getBounds().top);
+	this->setPosition(this->getPosition().x, platform->getBounds().top - getBounds().height - getBounds().top);
 }
 
 bool Player::isStandingOnPlatform() const
@@ -93,14 +109,40 @@ Platforms& Player::getPlatforms()
 	return platforms;
 }
 
-Platform* Player::getCurrentPlatform()
+sf::FloatRect Player::getCurrentPlatformBounds()
 {
-	return currentPlatform;
+	return currentPlatformBounds;
 }
+
+int Player::getPlatformNumber()
+{
+	return previousPlatformFloor;
+}
+
+int Player::getCombo()
+{
+	return currentCombo;
+}
+
+bool Player::isInCombo()
+{
+	return inCombo;
+}
+
+void Player::endCombo()
+{
+	inCombo = false;
+	if (currentCombo > maxCombo)
+	{
+		maxCombo = currentCombo;
+	}
+	currentCombo = 0;
+}
+
 
 void Player::updateCurrent(sf::Time dt)
 {
-	playerVelocity.x *= 0.9f;
+	playerVelocity.x *= 0.85f;
 	float dtAsSeconds = dt.asSeconds();
 
 	this->handleRealtimeInput();
@@ -110,13 +152,14 @@ void Player::updateCurrent(sf::Time dt)
 		playerVelocity.y += data.fallSpeed;
 		platforms.isOnPlatform(*this, dtAsSeconds);
 	}
-	else if (currentPlatform != nullptr)
+	else if (currentPlatformBounds.width != 0.f)
 	{
+		// TODO: fix bug that player sometimes fall trough the platform
 		sf::FloatRect playerRect(sf::Vector2f(getPosition().x + getBounds().left, getPosition().y + getBounds().top),
 			sf::Vector2f(getBounds().width, getBounds().height));
 		// Is player falling of the platform
-		if (!(playerRect.left + playerRect.width > currentPlatform->getBounds().left&&
-			playerRect.left < currentPlatform->getBounds().left + currentPlatform->getBounds().width))
+		if (!(playerRect.left + playerRect.width > currentPlatformBounds.left&&
+			playerRect.left < currentPlatformBounds.left + currentPlatformBounds.width))
 		{
 			isOnPlatform = false;
 			endCombo();
@@ -141,12 +184,3 @@ void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) cons
 	target.draw(sprite, states);
 }
 
-void Player::endCombo()
-{
-	isInCombo = false;
-	if (currentCombo > maxCombo)
-	{
-		maxCombo = currentCombo;
-	}
-	currentCombo = 0;
-}

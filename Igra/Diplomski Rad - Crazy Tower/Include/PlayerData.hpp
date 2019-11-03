@@ -19,7 +19,7 @@ struct PlayerInfo
 	float									moveSpeed;
 	float									jumpSpeed;
 	float									fallSpeed;
-	std::map<Textures::ID, sf::IntRect>		playerTexturesMap;
+	std::map<PlayerSprite::ID, sf::IntRect>		playerTexturesMap;
 };
 
 

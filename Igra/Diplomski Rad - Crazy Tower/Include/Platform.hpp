@@ -8,14 +8,16 @@
 #include <SFML\Graphics\RenderStates.hpp>
 #include <SFML\Graphics\RenderTarget.hpp>
 #include <SFML\Graphics\Text.hpp>
+#include "State.hpp"
+
 
 class Platform : public sf::Drawable
 {
 public:
-	static const int	platformHeight = 40;
-	static const int	minPlatformWidth = 200;
+	static const int	platformHeight = 50;
+	float				minPlatformWidth = 200;
 
-	Platform(int floorNumber, sf::FloatRect towerBounds, sf::Font& font, int previousPlatform = 0);
+	Platform(int floorNumber, sf::FloatRect towerBounds, State::Context gameContext, int previousPlatform = 0);
 
 	sf::FloatRect		getBounds();
 	bool				isOnPlatform(Player& player, float dtAsSeconds);
@@ -24,7 +26,7 @@ public:
 private:
 
 	sf::FloatRect		platformRect;
-	sf::RectangleShape	rect;
+	sf::Sprite			platformSprite;
 	sf::RectangleShape	numberRect;
 	sf::Text			floorNumberText;
 	int					platformNumber;

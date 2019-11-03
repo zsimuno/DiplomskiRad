@@ -11,7 +11,8 @@ namespace GameStates
 		Menu,
 		Game,
 		GameOver,
-		Pause
+		Pause,
+		Instructions,
 	};
 }
 

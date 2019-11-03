@@ -11,7 +11,6 @@
 
 #include <map>
 
-
 class Platforms;
 class Platform;
 class PlayerAnimation;
@@ -35,31 +34,34 @@ public:
 	void					    setOnPlatform(Platform* platform);
 	bool					    isStandingOnPlatform() const;
 	Platforms&					getPlatforms();
-	Platform*					getCurrentPlatform();
+	sf::FloatRect				getCurrentPlatformBounds();
+	int							getPlatformNumber();
 	
+	int							getCombo();
+	bool						isInCombo();
+	void						endCombo();
 
 private:
 
 	virtual void			    updateCurrent(sf::Time dt) override;
 	virtual void			    drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
-	
-	void						endCombo();
 
 	sf::Sprite				    sprite;
 	sf::Vector2f			    playerVelocity;
-	Platforms&					platforms;
-	Platform*					currentPlatform;
-	sf::FloatRect&				currentBounds;
-
 	PlayerInfo				    data;
 	PlayerAnimation             animation;
+	Platforms&					platforms;
 
-	bool					    mirroredSprite;
+	sf::FloatRect				currentPlatformBounds;
+	sf::FloatRect&				currentBounds;
 	bool					    isOnPlatform;
 
-	bool						isInCombo;
+	bool						inCombo;
 	int							currentCombo;
+	int							previousPlatformFloor;
 	int							maxCombo;
+
+	bool					    mirroredSprite;
 };
 
 #endif // PLAYER_HPP

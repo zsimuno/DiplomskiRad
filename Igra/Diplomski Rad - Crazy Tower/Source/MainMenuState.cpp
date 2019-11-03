@@ -6,40 +6,44 @@
 
 MainMenuState::MainMenuState(StateStack& stack, Context context)
 	:State(stack, context)
-	, mainMenu(sf::Text("Crazy Tower", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
+	, mainMenu(sf::Text("Crazy Tower", context.fonts->get(Fonts::ID::Main), 100), context.window->getView().getSize().x, context.window->getView().getSize().y)
 	, background()
 {
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 
+	// Set background texture
 	sf::Texture& texture = context.textures->get(Textures::ID::Tower);
-	sf::IntRect textureRect(0, 0, context.window->getView().getSize().x, context.window->getView().getSize().y);
+	sf::IntRect textureRect(0, 0, (int)context.window->getView().getSize().x, (int)context.window->getView().getSize().y);
 	texture.setRepeated(true);
 	background.setTexture(texture);
 	background.setTextureRect(textureRect);
 
-	mainMenu.setPosition(0, 0);
-
+	// Create menu buttons
 	sf::Text playText("Play", font);
 	mainMenu.addOption(playText, [this]()
 		{
-			requestStackPop();
-			requestStackPush(GameStates::ID::Game);
+			stackPop();
+			stackPush(GameStates::ID::Game);
+		});
+
+	sf::Text instructionsText("Instructions", font);
+	mainMenu.addOption(instructionsText, [this]()
+		{
+			stackPush(GameStates::ID::Instructions);
 		});
 
 	sf::Text exitText("Exit", font);
 	mainMenu.addOption(exitText, [this]()
 		{
-			requestStackPop();
+			stackPop();
 		});
 
 }
 
 void MainMenuState::draw()
 {
-	getContext().window->draw(background);
-
-	getContext().window->setView(getContext().window->getDefaultView());
-	getContext().window->draw(mainMenu);
+	context.window->draw(background);
+	context.window->draw(mainMenu);
 }
 
 bool MainMenuState::update(sf::Time)

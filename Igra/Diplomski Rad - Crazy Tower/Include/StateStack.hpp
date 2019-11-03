@@ -50,19 +50,19 @@ private:
 	};
 
 private:
-	std::vector<State::Ptr>								mStack;
-	std::vector<PendingChange>							mPendingList;
+	std::vector<State::Ptr>									stack;
+	std::vector<PendingChange>								pending;
 
-	State::Context										mContext;
-	std::map<GameStates::ID, std::function<State::Ptr()>>	mFactories;
+	State::Context											context;
+	std::map<GameStates::ID, std::function<State::Ptr()>>	states;
 };
 
 template <typename T>
 void StateStack::registerState(GameStates::ID stateID)
 {
-	mFactories[stateID] = [this]()
+	states[stateID] = [this]()
 	{
-		return State::Ptr(new T(*this, mContext));
+		return State::Ptr(new T(*this, context));
 	};
 }
 

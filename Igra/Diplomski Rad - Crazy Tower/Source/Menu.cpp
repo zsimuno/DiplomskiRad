@@ -15,14 +15,18 @@ Menu::Menu(sf::Text menuTitle, float menuWidth, float menuHeight)
 	, selectedOptionIndex(0)
 {
 	title.setPosition(width / 3, 120);
+	title.setOutlineColor(sf::Color::White);
+	title.setOutlineThickness(3);
+	title.setCharacterSize(150);
+	title.setFillColor(sf::Color(0x01579BFF));
+	title.rotate(10);
 }
 
 void Menu::addOption(sf::Text optionText, MenuOption::OnClickFunction onClick)
 {
-	MenuOption* option = new MenuOption(optionText, sf::Vector2f(width / 3, optionYPosition), onClick);
-	optionYPosition += 55.f;
-	options.push_back(*option);
-
+	options.push_back(MenuOption(optionText, sf::Vector2f(width / 3, optionYPosition), onClick));
+	optionYPosition += MenuOption::menuOptionHeight + 15.f;
+	
 	if (options.size() == 1)
 	{
 		options[selectedOptionIndex].select();
@@ -83,7 +87,7 @@ void Menu::handleEvent(const sf::Event & event)
 		break;
 
 	case sf::Event::KeyPressed:
-		if (event.key.code == sf::Keyboard::Return)
+		if (event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::Space)
 		{
 			options[selectedOptionIndex].click();
 		}

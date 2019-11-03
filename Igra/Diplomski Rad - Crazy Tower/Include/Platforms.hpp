@@ -5,13 +5,13 @@
 #include <Player.hpp>
 #include <Platform.hpp>
 
-class Player;
 class Platforms : public SceneNode
 {
 public:
-	static const int		platformDistance = Platform::platformHeight - 300;
+	static const int		platformDistance = Platform::platformHeight - 250;
+	static int				startingPlatform;
 
-	Platforms(sf::FloatRect& bounds, sf::Font& platformFont);
+	Platforms(sf::FloatRect& bounds, State::Context gameContext);
 
 	bool					isOnPlatform(Player& player, float dtAsSeconds);
 	virtual void			updateCurrent(sf::Time dt) override;
@@ -19,12 +19,11 @@ public:
 	void					initialize();
 
 private:
-	const static int		maxNumberOfPlatforms = 7;
-
 	std::vector<Platform>	platforms;
 
 	sf::FloatRect&			currentBounds;
-	sf::Font&				font;
+
+	State::Context			context;
 
 	void					addNewPlatform();
 };

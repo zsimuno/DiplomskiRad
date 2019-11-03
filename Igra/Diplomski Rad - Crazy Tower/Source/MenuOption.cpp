@@ -9,10 +9,11 @@
 MenuOption::MenuOption(sf::Text text, sf::Vector2f position, OnClickFunction onClick)
 	: optionText(text)
 	, onClickAction(onClick)
-	, optionRect(sf::Vector2f(200, 40))
-	, primaryColor(69, 39, 160)
-	, secondaryColor(179, 157, 219)
-	, outlineColor(179, 136, 255)
+	, optionRect(sf::Vector2f(menuOptionWidth, menuOptionHeight))
+	, primaryColor(0x01579BFF)
+	, secondaryColor(0x2196F3FF)
+	, outlineColor(sf::Color::White)
+	, secondaryOutlineColor(0xBBDEFBFF)
 {
 	this->setPosition(position);
 	optionRect.setOutlineThickness(5);
@@ -20,24 +21,26 @@ MenuOption::MenuOption(sf::Text text, sf::Vector2f position, OnClickFunction onC
 	optionRect.setOutlineColor(outlineColor);
 	optionRect.setPosition(position);
 
+	optionText.setCharacterSize(2 * menuOptionHeight / 3);
 	Utility::centerOrigin(optionText);
-	optionText.setPosition(position + sf::Vector2f(100, 20));
+	optionText.setPosition(position + sf::Vector2f(menuOptionWidth / 2, menuOptionHeight / 2));
 	optionText.setFillColor(outlineColor);
+	optionText.setStyle(sf::Text::Style::Bold);
 
 }
 
 void MenuOption::select()
 {
-	optionRect.setOutlineColor(sf::Color::White);
+	optionRect.setOutlineColor(outlineColor);
 	optionRect.setFillColor(secondaryColor);
-	optionText.setFillColor(sf::Color::White);
+	optionText.setFillColor(outlineColor);
 }
 
 void MenuOption::deselect()
 {
-	optionRect.setOutlineColor(outlineColor);
+	optionRect.setOutlineColor(secondaryOutlineColor);
 	optionRect.setFillColor(primaryColor);
-	optionText.setFillColor(outlineColor);
+	optionText.setFillColor(secondaryOutlineColor);
 }
 
 void MenuOption::click()

@@ -1,11 +1,10 @@
 #include <Platforms.hpp>
-#include <iostream>
 
+int Platforms::startingPlatform = 0;
 
-
-Platforms::Platforms(sf::FloatRect& bounds, sf::Font& platformFont)
+Platforms::Platforms(sf::FloatRect& bounds, State::Context gameContext)
 	: currentBounds(bounds)
-	, font(platformFont)
+	, context(gameContext)
 {
 	initialize();
 }
@@ -55,7 +54,7 @@ void Platforms::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) c
 void Platforms::initialize()
 {
 	platforms.clear();
-	platforms.push_back(Platform(0, currentBounds, font));
+	platforms.push_back(Platform(Platforms::startingPlatform, currentBounds, context));
 	while (true)
 	{
 		if (platforms.back().getHeight() - Platform::platformHeight - 100 < currentBounds.top)
@@ -69,5 +68,5 @@ void Platforms::initialize()
 void Platforms::addNewPlatform()
 {
 	auto p = platforms.back();
-	platforms.push_back(Platform(p.getPlatformNumber() + 1, currentBounds, font, p.getHeight()));
+	platforms.push_back(Platform(p.getPlatformNumber() + 1, currentBounds, context, p.getHeight()));
 }

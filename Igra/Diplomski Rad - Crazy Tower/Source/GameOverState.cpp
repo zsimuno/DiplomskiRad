@@ -12,7 +12,7 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 	: State(stack, context)
 	, gameOverMenu(sf::Text("Game Over", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
 {
-	sf::RenderWindow& window = *getContext().window;
+	sf::RenderWindow& window = *context.window;
 	background = sf::RectangleShape(window.getView().getSize() * 6.0f / 8.0f);
 	background.setPosition(window.getView().getSize() / 8.0f);
 	background.setFillColor(sf::Color(0, 0, 0, 150));
@@ -24,21 +24,21 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 	sf::Text restart("Try again", font);
 	gameOverMenu.addOption(restart, [this]()
 		{
-			requestStackPop();
+			stackPop();
 		});
 
 	sf::Text menu("Main menu", font);
 	gameOverMenu.addOption(menu, [this]()
 		{
-			requestStateClear();
-			requestStackPush(GameStates::ID::Menu);
+			stackClear();
+			stackPush(GameStates::ID::Menu);
 		});
 
 }
 
 void GameOverState::draw()
 {
-	sf::RenderWindow& window = *getContext().window;
+	sf::RenderWindow& window = *context.window;
 	window.setView(window.getDefaultView());
 
 	window.draw(background);

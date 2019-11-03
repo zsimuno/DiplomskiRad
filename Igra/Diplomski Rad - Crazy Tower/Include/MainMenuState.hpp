@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include "Menu.hpp"
+#include <Menu.hpp>
 
 class MainMenuState : public State
 {

@@ -21,6 +21,7 @@ private:
 	void					render();
 
 	void					registerStates();
+	void					loadResources();
 
 private:
 	sf::RenderWindow		window;

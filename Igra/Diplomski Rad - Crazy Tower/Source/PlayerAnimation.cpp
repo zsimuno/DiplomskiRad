@@ -20,21 +20,21 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 	{
 		if (!player.isStandingOnPlatform())
 		{
-			sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Jump]);
+			sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Jump]);
 		}
 		else
 		{
 			if (timeSec < frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle1]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
 			}
 			else if (timeSec < 2 * frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle2]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle2]);
 			}
 			else if (timeSec < 3 * frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle3]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle3]);
 			}
 			else
 			{
@@ -49,15 +49,15 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 		{
 			if (playerVelocity.y < -1)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Jump1]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Jump1]);
 			}
 			else if (playerVelocity.y < 1)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Jump2]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Jump2]);
 			}
 			else
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Jump3]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Jump3]);
 			}
 
 
@@ -66,19 +66,19 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 		{
 			if (timeSec < frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Walk1]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Walk1]);
 			}
 			else if (timeSec < 2 * frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Walk2]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Walk2]);
 			}
 			else if (timeSec < 3 * frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Walk3]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Walk3]);
 			}
 			else if (timeSec < 4 * frameStep)
 			{
-				sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Walk4]);
+				sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Walk4]);
 			}
 			else
 			{
@@ -92,11 +92,11 @@ void PlayerAnimation::setIdle()
 {
 	if (abs(player.getVelocity().x) < 1)
 	{
-		sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Idle1]);
+		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
 	}
 	else
 	{
-		sprite.setTextureRect(data.playerTexturesMap[Textures::ID::Walk1]);
+		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Walk1]);
 	}
 }
 

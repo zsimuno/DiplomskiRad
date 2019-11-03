@@ -5,6 +5,7 @@
 #include <PauseState.hpp>
 #include <GameState.hpp>
 #include <GameOverState.hpp>
+#include <InstructionsState.hpp>
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
@@ -14,11 +15,7 @@ Game::Game()
 	, fonts()
 	, stateStack(State::Context(window, textures, fonts))
 {
-	fonts.load(Fonts::ID::Main, "Media/Sansation.ttf");
-
-	textures.load(Textures::ID::Character, "Media/Textures/character.png");
-	textures.load(Textures::ID::Tower, "Media/Textures/background.png");
-
+	loadResources();
 	registerStates();
 
 	stateStack.pushState(GameStates::ID::Menu);
@@ -42,7 +39,7 @@ void Game::run()
 			processInput();
 			update(TimePerFrame);
 
-			// Check inside this loop, because stack might be empty before update() call
+			// Check if stack is empty on every update
 			if (stateStack.isEmpty())
 				window.close();
 		}
@@ -75,7 +72,6 @@ void Game::render()
 	stateStack.draw();
 
 	window.setView(window.getDefaultView());
-
 	window.display();
 }
 
@@ -86,4 +82,24 @@ void Game::registerStates()
 	stateStack.registerState<GameState>(GameStates::ID::Game);
 	stateStack.registerState<PauseState>(GameStates::ID::Pause);
 	stateStack.registerState<GameOverState>(GameStates::ID::GameOver);
+	stateStack.registerState<InstructionsState>(GameStates::ID::Instructions);
+}
+
+void Game::loadResources()
+{
+	fonts.load(Fonts::ID::Main, "Media/Thug.ttf");
+	fonts.load(Fonts::ID::Secondary, "Media/Orange_Juice.ttf");
+
+	textures.load(Textures::ID::Character, "Media/Textures/character.png");
+	textures.load(Textures::ID::Tower, "Media/Textures/background.png");
+	textures.load(Textures::ID::Walls, "Media/Textures/walls.png");
+	textures.load(Textures::ID::Floor1, "Media/Textures/floor1.png");
+	textures.load(Textures::ID::Floor2, "Media/Textures/floor2.png");
+	textures.load(Textures::ID::Floor3, "Media/Textures/floor3.png");
+	textures.load(Textures::ID::Floor4, "Media/Textures/floor4.png");
+	textures.load(Textures::ID::Floor5, "Media/Textures/floor5.png");
+	textures.load(Textures::ID::Floor6, "Media/Textures/floor6.png");
+	textures.load(Textures::ID::KeyboardInstructions, "Media/Textures/keyboard_instructions.png");
+	textures.load(Textures::ID::ComboInstructions, "Media/Textures/combo_instructions.png");
+	textures.load(Textures::ID::SpeedInstructions, "Media/Textures/speed_instructions.png");
 }

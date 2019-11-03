@@ -3,16 +3,16 @@
 
 
 StateStack::StateStack(State::Context context)
-	: mStack()
-	, mPendingList()
-	, mContext(context)
-	, mFactories()
+	: stack()
+	, pending()
+	, context(context)
+	, states()
 {
 }
 
 void StateStack::update(sf::Time dt)
 {
-	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+	for (auto itr = stack.rbegin(); itr != stack.rend(); ++itr)
 	{
 		if (!(*itr)->update(dt))
 			break;
@@ -23,13 +23,13 @@ void StateStack::update(sf::Time dt)
 
 void StateStack::draw()
 {
-	for(State::Ptr & state: mStack)
+	for(State::Ptr & state: stack)
 		state->draw();
 }
 
 void StateStack::handleEvent(const sf::Event& event)
 {
-	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+	for (auto itr = stack.rbegin(); itr != stack.rend(); ++itr)
 	{
 		if (!(*itr)->handleEvent(event))
 			break;
@@ -40,53 +40,53 @@ void StateStack::handleEvent(const sf::Event& event)
 
 void StateStack::pushState(GameStates::ID stateID)
 {
-	mPendingList.push_back(PendingChange(Action::Push, stateID));
+	pending.push_back(PendingChange(Action::Push, stateID));
 }
 
 void StateStack::popState()
 {
-	mPendingList.push_back(PendingChange(Action::Pop));
+	pending.push_back(PendingChange(Action::Pop));
 }
 
 void StateStack::clearStates()
 {
-	mPendingList.push_back(PendingChange(Action::Clear));
+	pending.push_back(PendingChange(Action::Clear));
 }
 
 bool StateStack::isEmpty() const
 {
-	return mStack.empty();
+	return stack.empty();
 }
 
 State::Ptr StateStack::createState(GameStates::ID stateID)
 {
-	auto found = mFactories.find(stateID);
-	assert(found != mFactories.end());
+	auto found = states.find(stateID);
+	assert(found != states.end());
 
 	return found->second();
 }
 
 void StateStack::applyPendingChanges()
 {
-	for(PendingChange change: mPendingList)
+	for(PendingChange change: pending)
 	{
 		switch (change.action)
 		{
 		case Action::Push:
-			mStack.push_back(createState(change.stateID));
+			stack.push_back(createState(change.stateID));
 			break;
 
 		case Action::Pop:
-			mStack.pop_back();
+			stack.pop_back();
 			break;
 
 		case Action::Clear:
-			mStack.clear();
+			stack.clear();
 			break;
 		}
 	}
 
-	mPendingList.clear();
+	pending.clear();
 }
 
 StateStack::PendingChange::PendingChange(Action action, GameStates::ID stateID)

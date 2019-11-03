@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-Tower::Tower(sf::RenderWindow& window, State::Context& gameContext)
+Tower::Tower(sf::RenderWindow& window, State::Context gameContext)
 	: window(window)
 	, context(gameContext)
 	, worldView(window.getDefaultView())
@@ -36,7 +36,7 @@ void Tower::update(sf::Time dt)
 		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
 	{
 		sf::Vector2f velocity = player->getVelocity();
-		velocity.x = -2*velocity.x;
+		velocity.x = -1.7f*velocity.x;
 		player->setVelocity(velocity);
 	}
 
@@ -60,9 +60,10 @@ void Tower::update(sf::Time dt)
 
 
 	// Game start
-	if (scrollSpeed == 0.f && player->getCurrentPlatform() != nullptr && player->getCurrentPlatform()->getPlatformNumber() > 3)
+	if (scrollSpeed == 0.f && player->getPlatformNumber() > 3)
 	{
 		incrementScrollSpeed();
+		walls->setGameSpeedTimer(true);
 	}
 
 	sceneGraph.update(dt);
@@ -81,7 +82,7 @@ float Tower::ScrollSpeed()
 
 void Tower::incrementScrollSpeed()
 {
-	scrollSpeed -= 20.f;
+	scrollSpeed -= 50.f;
 }
 
 void Tower::move(sf::Vector2f v)
@@ -114,7 +115,7 @@ void Tower::buildScene()
 	sceneLayers[Background]->attachChild(std::move(rectangleNode));
 
 	// Create platforms
-	std::unique_ptr<Platforms> towerPlatforms(new Platforms(insideTowerBounds, context.fonts->get(Fonts::ID::Main)));
+	std::unique_ptr<Platforms> towerPlatforms(new Platforms(insideTowerBounds, context));
 	platforms = towerPlatforms.get();
 	sceneLayers[Floors]->attachChild(std::move(towerPlatforms));
 
@@ -122,12 +123,11 @@ void Tower::buildScene()
 	std::unique_ptr<Player> gamePlayer(new Player(*context.textures, *platforms, insideTowerBounds));
 	player = gamePlayer.get();
 	spawnPosition = sf::Vector2f(worldView.getSize().x / 2.f, worldView.getSize().y - Platform::platformHeight - player->getBounds().height / 2);
-
 	player->setPosition(spawnPosition);
 	sceneLayers[Front]->attachChild(std::move(gamePlayer));
 
 	// Add tower walls
-	std::unique_ptr<TowerWalls> towerWalls(new TowerWalls(towerWallWidth, worldView, *this, *player));
+	std::unique_ptr<TowerWalls> towerWalls(new TowerWalls(towerWallWidth, *this, *player, context));
 	walls = towerWalls.get();
 	sceneLayers[Walls]->attachChild(std::move(towerWalls));
 
@@ -141,6 +141,7 @@ void Tower::initialize()
 	player->setPosition(spawnPosition);
 	player->initialize();
 	walls->setPosition(0.f, 0.f);
+	walls->setGameSpeedTimer(false);
 	rectangle->setPosition(0.f, 0.f);
 	platforms->initialize();
 	gameOver = false;

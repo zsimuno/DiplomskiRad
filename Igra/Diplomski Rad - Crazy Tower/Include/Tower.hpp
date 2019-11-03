@@ -17,8 +17,6 @@
 
 #include <array>
 
-
-
 namespace sf
 {
 	class RenderWindow;
@@ -27,7 +25,7 @@ namespace sf
 class Tower : private sf::NonCopyable
 {
 public:
-	explicit							Tower(sf::RenderWindow& window, State::Context& gameContext);
+	explicit							Tower(sf::RenderWindow& window, State::Context gameContext);
 	void								update(sf::Time dt);
 	void								draw();
 	float								ScrollSpeed();
@@ -55,7 +53,7 @@ private:
 private:
 	sf::RenderWindow&					window;
 	sf::View							worldView;
-	State::Context&						context;
+	State::Context						context;
 
 	SceneNode							sceneGraph;
 	std::array<SceneNode*, LayerCount>	sceneLayers;

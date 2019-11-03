@@ -18,7 +18,7 @@ bool GameState::update(sf::Time dt)
 	if (tower.GameOver())
 	{
 		tower.initialize();
-		requestStackPush(GameStates::ID::GameOver);
+		stackPush(GameStates::ID::GameOver);
 	}
 
 	return true;
@@ -27,12 +27,13 @@ bool GameState::update(sf::Time dt)
 bool GameState::handleEvent(const sf::Event& event)
 {
 
-	// Escape pressed, trigger the pause screen
+	
 	if (event.type == sf::Event::KeyPressed )
 	{
+		// Escape or "P" pressed, trigger the pause screen
 		if (event.key.code == sf::Keyboard::Escape || event.key.code == sf::Keyboard::P)
 		{
-			requestStackPush(GameStates::ID::Pause);
+			stackPush(GameStates::ID::Pause);
 		}
 		
 	}

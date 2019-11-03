@@ -10,7 +10,7 @@ int main()
 	}
 	catch (std::exception & e)
 	{
-		std::cout << "\nError in the game: \n" << e.what() << std::endl;
+		std::cout << "\nError: \n" << e.what() << std::endl;
 	}
 	
 }

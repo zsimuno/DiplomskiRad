@@ -1,11 +1,13 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-#include <SFML\System\Time.hpp>
-#include <SFML\Window\Event.hpp>
 #include <GameStates.hpp>
 #include <ResourceIdentifiers.hpp>
 #include <Player.hpp>
+
+#include <SFML\System\Time.hpp>
+#include <SFML\Window\Event.hpp>
+
 
 namespace sf
 {
@@ -35,15 +37,15 @@ public:
 	virtual bool		handleEvent(const sf::Event& event) = 0;
 
 protected:
-	void				requestStackPush(GameStates::ID stateID);
-	void				requestStackPop();
-	void				requestStateClear();
+	void				stackPush(GameStates::ID stateID);
+	void				stackPop();
+	void				stackClear();
 
-	Context				getContext() const;
+	Context				context;
 	
 private:
-	StateStack*			mStack;
-	Context				mContext;
+	StateStack*			stack;
+	
 };
 
 #endif // STATE_HPP

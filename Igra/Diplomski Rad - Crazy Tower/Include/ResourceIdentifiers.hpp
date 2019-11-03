@@ -17,8 +17,24 @@ namespace Textures
 	enum class ID
 	{
 		Tower,
-		MainMenuScreen,
 		Character,
+		Walls,
+		Floor1,
+		Floor2,
+		Floor3,
+		Floor4,
+		Floor5,
+		Floor6,
+		KeyboardInstructions,
+		SpeedInstructions,
+		ComboInstructions,
+	};
+}
+
+namespace PlayerSprite
+{
+	enum class ID
+	{
 		Idle1,
 		Walk1,
 		Walk2,
@@ -42,6 +58,7 @@ namespace Fonts
 	enum class  ID
 	{
 		Main,
+		Secondary,
 	};
 }
 

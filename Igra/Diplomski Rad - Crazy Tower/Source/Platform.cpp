@@ -1,42 +1,49 @@
 #include <Platform.hpp>
-#include <iostream>
-
 #include <Utility.hpp>
+#include <ResourceHolder.hpp>
+
 #include <SFML/Graphics/Font.hpp>
+#include <Platforms.hpp>
 
-
-Platform::Platform(int floorNumber, sf::FloatRect towerBounds, sf::Font& font, int previousPlatform)
+Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context context, int previousPlatform)
 	: platformRect()
 	, platformNumber(floorNumber)
-	, rect()
-	, floorNumberText(std::to_string(floorNumber), font)
+	, floorNumberText(std::to_string(floorNumber), context.fonts->get(Fonts::ID::Main))
+	, platformSprite()
 {
-	platformRect.top = previousPlatform - Platform::platformHeight - 100;
+	platformRect.top = (float) previousPlatform - Platform::platformHeight - 100;
 	platformRect.height = platformHeight;
-	
+
+	Textures::ID selectedTextureID;
+
 	if (floorNumber < 100)
 	{
-		rect.setFillColor(sf::Color::Blue);
-		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width*0.5);
+		selectedTextureID = Textures::ID::Floor1;
+		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.3);
 	}
 	else if (floorNumber < 200)
 	{
-		rect.setFillColor(sf::Color::Red);
-		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.4);
+		selectedTextureID = Textures::ID::Floor2;
+		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.2);
 	}
 	else if (floorNumber < 300)
 	{
-		rect.setFillColor(sf::Color::Green);
-		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.3);
+		selectedTextureID = Textures::ID::Floor3;
+		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.1);
 	}
 	else if (floorNumber < 400)
 	{
-		rect.setFillColor(sf::Color::Yellow);
-		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.2);
+		selectedTextureID = Textures::ID::Floor4;
+		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.1);
+	}
+	else if (floorNumber < 500)
+	{
+		selectedTextureID = Textures::ID::Floor5;
+		platformRect.width = minPlatformWidth + rand() % (int)(towerBounds.width * 0.1);
 	}
 	else
 	{
-		rect.setFillColor(sf::Color::Black);
+		selectedTextureID = Textures::ID::Floor6;
 		platformRect.width = minPlatformWidth;
 	}
 
@@ -47,27 +54,34 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, sf::Font& font, i
 		platformRect.left = towerBounds.left;
 		platformRect.width = towerBounds.width;
 
-		if (platformNumber == 0)
+		if (platformNumber == Platforms::startingPlatform)
 		{
 			platformRect.top = towerBounds.top + towerBounds.height - Platform::platformHeight;
 		}
 
 	}
 
-	rect.setSize(sf::Vector2f(platformRect.width, platformRect.height));
-	rect.setPosition(sf::Vector2f(platformRect.left, platformRect.top));
-	rect.setOutlineThickness(-5);
-	rect.setOutlineColor(sf::Color::Cyan);
+	sf::Texture& texture = context.textures->get(selectedTextureID);
+	sf::IntRect textureRect(platformRect);
+	texture.setRepeated(true);
+	platformSprite.setPosition(sf::Vector2f(platformRect.left, platformRect.top));
+	platformSprite.setTexture(texture);
+	platformSprite.setTextureRect(textureRect);
 
-	floorNumberText.setCharacterSize(14);
-	floorNumberText.setFillColor(sf::Color::Black);
+	// Only display floor on floors that are divisible by 10
+	if (platformNumber % 10 != 0)
+	{
+		return;
+	}
+	floorNumberText.setCharacterSize(20);
+	floorNumberText.setFillColor(sf::Color::White);
 	Utility::centerOrigin(floorNumberText);
-	floorNumberText.setPosition(platformRect.left + platformRect.width / 2, platformRect.top + platformRect.height - 15);
+	floorNumberText.setPosition(platformRect.left + platformRect.width / 2, platformRect.top + platformRect.height - 10);
 
 	numberRect.setSize(sf::Vector2f(50, 30));
 	Utility::centerOrigin(numberRect);
-	numberRect.setPosition(platformRect.left + platformRect.width / 2, platformRect.top + platformRect.height - 15);
-	numberRect.setFillColor(sf::Color::White);
+	numberRect.setPosition(platformRect.left + platformRect.width / 2, platformRect.top + platformRect.height - 10);
+	numberRect.setFillColor(sf::Color(0x795548FF));
 	numberRect.setOutlineThickness(-1);
 	numberRect.setOutlineColor(sf::Color::Black);
 }
@@ -105,7 +119,7 @@ bool Platform::isOnPlatform(Player& player, float dtAsSeconds)
 
 int Platform::getHeight()
 {
-	return platformRect.top;
+	return (int)platformRect.top;
 }
 
 int Platform::getPlatformNumber()
@@ -115,7 +129,12 @@ int Platform::getPlatformNumber()
 
 void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(rect, states);
-	target.draw(numberRect, states);
-	target.draw(floorNumberText, states);
+	target.draw(platformSprite, states);
+
+	if (platformNumber % 10 == 0)
+	{
+		target.draw(numberRect, states);
+		target.draw(floorNumberText, states);
+	}
+
 }
