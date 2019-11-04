@@ -2,16 +2,17 @@
 #define PLATFORM_HPP
 
 #include <Player.hpp>
+#include <State.hpp>
 
 #include <SFML\Graphics\Rect.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\RenderStates.hpp>
 #include <SFML\Graphics\RenderTarget.hpp>
 #include <SFML\Graphics\Text.hpp>
-#include "State.hpp"
 
 
-class Platform : public sf::Drawable
+
+class Platform : public SceneNode
 {
 public:
 	static const int	platformHeight = 50;
@@ -31,7 +32,7 @@ private:
 	sf::Text			floorNumberText;
 	int					platformNumber;
 
-	virtual void		draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	virtual void		drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 
 #endif // PLATFORM_HPP

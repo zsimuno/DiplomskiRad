@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include <Platforms.hpp>
+#include <iostream>
 
 Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context context, int previousPlatform)
 	: platformRect()
@@ -14,6 +15,7 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 	platformRect.top = (float) previousPlatform - Platform::platformHeight - 100;
 	platformRect.height = platformHeight;
 
+	// Set the platform texture depending on the floor
 	Textures::ID selectedTextureID;
 
 	if (floorNumber < 100)
@@ -47,11 +49,11 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 		platformRect.width = minPlatformWidth;
 	}
 
-	platformRect.left = towerBounds.left + rand() % (int)(towerBounds.width - platformRect.width);
+	platformRect.left =(int)( rand() % (int)(towerBounds.width - platformRect.width));
 
 	if (floorNumber % 50 == 0)
 	{
-		platformRect.left = towerBounds.left;
+		platformRect.left = 0.f;
 		platformRect.width = towerBounds.width;
 
 		if (platformNumber == Platforms::startingPlatform)
@@ -61,10 +63,13 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 
 	}
 
+	this->setPosition(platformRect.left, platformRect.top);
+
+	// Draw the texture of the platform
 	sf::Texture& texture = context.textures->get(selectedTextureID);
 	sf::IntRect textureRect(platformRect);
 	texture.setRepeated(true);
-	platformSprite.setPosition(sf::Vector2f(platformRect.left, platformRect.top));
+	platformSprite.setPosition(sf::Vector2f(0.f, 0.f));
 	platformSprite.setTexture(texture);
 	platformSprite.setTextureRect(textureRect);
 
@@ -73,14 +78,15 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 	{
 		return;
 	}
+
 	floorNumberText.setCharacterSize(20);
 	floorNumberText.setFillColor(sf::Color::White);
 	Utility::centerOrigin(floorNumberText);
-	floorNumberText.setPosition(platformRect.left + platformRect.width / 2, platformRect.top + platformRect.height - 10);
+	floorNumberText.setPosition(platformRect.width / 2,  platformRect.height - 10);
 
 	numberRect.setSize(sf::Vector2f(50, 30));
 	Utility::centerOrigin(numberRect);
-	numberRect.setPosition(platformRect.left + platformRect.width / 2, platformRect.top + platformRect.height - 10);
+	numberRect.setPosition(platformRect.width / 2, platformRect.height - 10);
 	numberRect.setFillColor(sf::Color(0x795548FF));
 	numberRect.setOutlineThickness(-1);
 	numberRect.setOutlineColor(sf::Color::Black);
@@ -94,12 +100,13 @@ sf::FloatRect Platform::getBounds()
 bool Platform::isOnPlatform(Player& player, float dtAsSeconds)
 {
 	sf::FloatRect playerRect(sf::Vector2f(player.getPosition().x + player.getBounds().left, player.getPosition().y + player.getBounds().top),
-		sf::Vector2f(player.getBounds().width, player.getBounds().height));
+							 sf::Vector2f(player.getBounds().width, player.getBounds().height));
 
+	sf::Vector2f platPos = getWorldPosition();
 
 	// Is player in the same x position as the platform
-	if (!(playerRect.left + playerRect.width > platformRect.left&&
-		playerRect.left < platformRect.left + platformRect.width))
+	if (!(playerRect.left + playerRect.width > platPos.x&&
+		playerRect.left < platPos.x + platformRect.width))
 	{
 		return false;
 	}
@@ -107,8 +114,8 @@ bool Platform::isOnPlatform(Player& player, float dtAsSeconds)
 	sf::Vector2f velocity = player.getVelocity();
 
 	// Is player this frame above and the next will be below the platform
-	if (playerRect.top + playerRect.height < platformRect.top &&
-		playerRect.top + playerRect.height + (velocity.y) * dtAsSeconds >= platformRect.top)
+	if (playerRect.top + playerRect.height < platPos.y &&
+		playerRect.top + playerRect.height + (velocity.y) * dtAsSeconds >= platPos.y)
 	{
 		player.setOnPlatform(this);
 		return true;
@@ -127,7 +134,7 @@ int Platform::getPlatformNumber()
 	return platformNumber;
 }
 
-void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Platform::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(platformSprite, states);
 

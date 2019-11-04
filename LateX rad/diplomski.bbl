@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
   \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
   \providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
   % \MRhref is called by the amsart/book/proc definition of \MR.
@@ -21,6 +21,24 @@
   \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
 
 \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+\bibitem {wiki}
+\btxtitlefont {\btxifchangecase {Wikipedia - the free encyclopedia}{Wikipedia -
+  The Free Encyclopedia}}, {\latintext \btxurlfont{https://en.wikipedia.org/}}.
+
+\bibitem {MoreiraSFML}
+\btxnamefont {H.\btxfnamespacelong V.\btxfnamespacelong Hansson
+  \btxlastnamefont {A.~Moreira}} \btxandlong {} \btxnamefont
+  {J.~\btxlastnamefont {Haller}}, \btxtitlefont {\btxifchangecase {Sfml game
+  developement}{SFML Game Developement}}, \btxpublisherfont {Pact Publishing},
+  2013, {\latintext
+  \btxurlfont{https://www.packtpub.com/game-development/sfml-game-development}}.
+
+\bibitem {BarbierBlueprints}
+\btxnamefont {M.~\btxlastnamefont {Barbier}}, \btxtitlefont {\btxifchangecase
+  {Sfml blueprints}{SFML Blueprints}}, \btxpublisherfont {Pact Publishing},
+  2015, {\latintext
+  \btxurlfont{https://www.packtpub.com/game-development/sfml-blueprints}}.
+
 \bibitem {GangOfFourPatterns}
 \btxnamefont {Ralph\btxfnamespacelong Johnson \btxlastnamefont {Erich~Gamma},
   Richard~Helm} \btxandlong {} \btxnamefont {John \btxlastnamefont
@@ -34,16 +52,34 @@
   {\btxifchangecase {Web stranica sfml-a}{Web stranica SFML-a}}, {\latintext
   \btxurlfont{https://www.sfml-dev.org/}}.
 
+\bibitem {GregoryArch}
+\btxnamefont {J.~\btxlastnamefont {Gregory}}, \btxtitlefont {\btxifchangecase
+  {Game engine architecture}{Game Engine Architecture}}, \btxpublisherfont
+  {Wellesley, Massachusetts}, 2009, {\latintext
+  \btxurlfont{https://www.amazon.com/Engine-Architecture-Third-Jason-Gregory/dp/1138035459}}.
+
 \bibitem {HortonBeginning}
 \btxnamefont {J.~\btxlastnamefont {Horton}}, \btxtitlefont {\btxifchangecase
   {Beginning c++ game programming}{Beginning C++ Game Programming}},
   \btxpublisherfont {Pact Publishing}, 2016, {\latintext
   \btxurlfont{https://www.packtpub.com/game-development/beginning-c-game-programming}}.
 
+\bibitem {MilchevEssentials}
+\btxnamefont {M.\btxfnamespacelong G. \btxlastnamefont {Milchev}},
+  \btxtitlefont {\btxifchangecase {Sfml essentials}{SFML Essentials}},
+  \btxpublisherfont {Pact Publishing}, 2015, {\latintext
+  \btxurlfont{https://www.packtpub.com/game-development/sfml-essentials}}.
+
 \bibitem {NystromPatterns}
 \btxnamefont {R.~\btxlastnamefont {Nystrom}}, \btxtitlefont {\btxifchangecase
   {Game programming patterns}{Game Programming Patterns}}, \btxpublisherfont
   {Genever Benning}, 2014, {\latintext
   \btxurlfont{https://gameprogrammingpatterns.com/}}.
+
+\bibitem {PupiusSFMLExample}
+\btxnamefont {R.~\btxlastnamefont {Pupius}}, \btxtitlefont {\btxifchangecase
+  {Sfml game developement by example}{SFML Game Developement By Example}},
+  \btxpublisherfont {Pact Publishing}, 2015, {\latintext
+  \btxurlfont{https://www.packtpub.com/game-development/sfml-game-development-example}}.
 
 \end{thebibliography}

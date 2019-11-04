@@ -8,7 +8,7 @@
 RectangleNode::RectangleNode(float x, float y, float width, float height)
 	: rect(sf::Vector2f(width, height))
 {
-	rect.setPosition(x, y);
+	this->setPosition(x, y);
 	rect.setFillColor(sf::Color(0xB3E5FCFF));
 }
 

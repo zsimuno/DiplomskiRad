@@ -1,8 +1,19 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: diplomski.aux
 The style file: babamspl.bst
 Database file #1: diplomski.bib
+"}" immediately follows a field name---line 14 of file diplomski.bib
+ :  language
+ :          }
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in wiki
+Warning--empty language in wiki
+Warning--empty language in MoreiraSFML
+Warning--empty language in BarbierBlueprints
 Warning--empty language in GangOfFourPatterns
 Warning--empty language in sfmlweb
+Warning--empty language in GregoryArch
 Warning--empty language in HortonBeginning
+Warning--empty language in MilchevEssentials
 Warning--empty language in NystromPatterns
-(There were 4 warnings)
+Warning--empty language in PupiusSFMLExample
+(There was 1 error message)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.8.26)  23 OCT 2019 00:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.8.26)  4 NOV 2019 18:21
 entering extended mode
 **./diplomski.tex
 (diplomski.tex
@@ -1028,124 +1028,106 @@ LaTeX Font Info:    Try loading font information for OT1+txtt on input line 123
 d"
 File: ot1txtt.fd 2000/12/15 v3.1
 ) [6]
-Overfull \hbox (3.44206pt too wide) in paragraph at lines 136--137
-\OT1/txr/m/n/12 Pogledat []cemo je-dan os-no-van pri-mjer pro-grama pi-sa-nog u
- SFML-u i u ko-men-ta-rima ukratko
- []
-
-<slike/start-app.png, id=144, 216.81pt x 238.8925pt>
+<slike/start-app.png, id=149, 216.81pt x 238.8925pt>
 File: slike/start-app.png Graphic file (type png)
 <use slike/start-app.png>
 Package pdftex.def Info: slike/start-app.png  used on input line 175.
 (pdftex.def)             Requested size: 216.80946pt x 238.8919pt.
-[7] [8 <./slike/start-app.png (PNG copy)>]
+ [7] [8 <./slike/start-app.png (PNG copy)>]
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
 (hyperref)                removing `\dj' on input line 183.
 
 [9]
-Overfull \hbox (134.5416pt too wide) in paragraph at lines 243--244
+Overfull \hbox (134.5416pt too wide) in paragraph at lines 245--246
 \OT1/txr/m/n/12 doga[]daja u stvar-nom vre-menu. Ako []citamo iz pro-zora, po-z
 i-vamo [][][][][][][][][][][][][][][][][]
  []
 
 [10]
-Overfull \hbox (19.76187pt too wide) in paragraph at lines 263--265
+Overfull \hbox (19.76187pt too wide) in paragraph at lines 265--267
 \OT1/txr/m/n/12 da []cemo obradu doga[]daja po[]ceti pro-vje-rom nji-hova tipa.
  Doga[]daji su tipa [][][][][],
  []
 
 [11]
-Overfull \hbox (6.72255pt too wide) in paragraph at lines 299--300
+Overfull \hbox (6.72255pt too wide) in paragraph at lines 301--302
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
 [12] [13] [14]
-Overfull \hbox (45.06657pt too wide) in paragraph at lines 344--345
+Overfull \hbox (45.06657pt too wide) in paragraph at lines 346--347
 []\OT1/txr/m/n/12 Svaki oblik naslje[]duje klasu [][][] i tako nadja[]cava funk
 -cije []clanice [][][][][][],
  []
 
 
-Overfull \hbox (92.97324pt too wide) in paragraph at lines 363--364
-\OT1/txr/m/n/12 pove koje []zelimo, [][][][][][][][][][][] i [][][][][][][][][]
-[][].
+Overfull \hbox (44.90126pt too wide) in paragraph at lines 365--366
+[]\OT1/txr/m/n/12 zelimo, [][][][][][][][][][][] i [][][][][][][][][][][].
  []
 
 [15]
-Overfull \hbox (23.32275pt too wide) in paragraph at lines 365--366
+Overfull \hbox (23.32275pt too wide) in paragraph at lines 367--368
 []\OT1/txr/m/n/12 Sada []zelimo na zas-lonu pri-ka-zati na[]se oblike, pa []cem
 o ko-ris-titi va-ri-ja-blu tipa [][][]
  []
 
-<slike/shape_first.png, id=350, 152.06813pt x 174.6525pt>
+<slike/shape_first.png, id=355, 152.06813pt x 174.6525pt>
 File: slike/shape_first.png Graphic file (type png)
 <use slike/shape_first.png>
-Package pdftex.def Info: slike/shape_first.png  used on input line 380.
+Package pdftex.def Info: slike/shape_first.png  used on input line 382.
 (pdftex.def)             Requested size: 152.06775pt x 174.65207pt.
 [16 <./slike/shape_first.png>]
-<slike/coordinate.png, id=369, 298.11375pt x 257.46187pt>
+<slike/coordinate.png, id=374, 298.11375pt x 257.46187pt>
 File: slike/coordinate.png Graphic file (type png)
 <use slike/coordinate.png>
-Package pdftex.def Info: slike/coordinate.png  used on input line 390.
+Package pdftex.def Info: slike/coordinate.png  used on input line 392.
 (pdftex.def)             Requested size: 298.11302pt x 257.46123pt.
 
-Overfull \hbox (46.77344pt too wide) in paragraph at lines 395--396
+Overfull \hbox (46.77344pt too wide) in paragraph at lines 397--398
 [][][][][][] \OT1/txr/m/n/12 ko-ris-timo za ro-ta-ciju oblika, a [][][][][][]
  []
 
 [17 <./slike/coordinate.png>]
-<slike/shape_transform.png, id=381, 152.06813pt x 174.6525pt>
+<slike/shape_transform.png, id=386, 152.06813pt x 174.6525pt>
 File: slike/shape_transform.png Graphic file (type png)
 <use slike/shape_transform.png>
-Package pdftex.def Info: slike/shape_transform.png  used on input line 409.
+Package pdftex.def Info: slike/shape_transform.png  used on input line 411.
 (pdftex.def)             Requested size: 152.06775pt x 174.65207pt.
 
-Overfull \hbox (1.91461pt too wide) in paragraph at lines 415--416
+Overfull \hbox (1.91461pt too wide) in paragraph at lines 417--418
 []\OT1/txr/m/n/12 Jo[]s jedna funk-cija koja je, uz tran-sfor-ma-cije, bitna je
  [][][][][][].
  []
 
 [18 <./slike/shape_transform.png>]
-Overfull \hbox (6.83798pt too wide) in paragraph at lines 420--421
+Overfull \hbox (6.83798pt too wide) in paragraph at lines 422--423
 \OT1/txr/m/n/12 Za u[]citavanje i pri-ka-zi-va-nje slika u SFML-u pri-marno su 
 zadu[]zene 3 klase. To su [][][][][]
  []
 
 
-Overfull \hbox (0.11783pt too wide) in paragraph at lines 423--424
+Overfull \hbox (0.11783pt too wide) in paragraph at lines 425--426
 \OT1/txr/m/n/12 Za u[]citavanje slika u SFML-u ko-ris-timo klase [][][][][] i [
 ][][][][]. Raz-lika izme[]du
  []
 
-
-Overfull \hbox (68.01349pt too wide) in paragraph at lines 442--443
-\OT1/txr/m/n/12 okre-nuti ver-ti-kalno sa [][][][][][] ili ho-ri-zon-talno sa [
-][][][][][].
- []
-
-
-Overfull \hbox (23.20259pt too wide) in paragraph at lines 444--445
-[]\OT1/txr/m/n/12 Klasa [][][] nam nudi sli[]cne funk-cije kao i [][][]. Obe mo
-gu po-zi-vati [][][][]
- []
-
 [19]
-<slike/autumn-forest.jpg, id=409, 154.176pt x 102.6234pt>
+<slike/autumn-forest.jpg, id=415, 154.176pt x 102.6234pt>
 File: slike/autumn-forest.jpg Graphic file (type jpg)
 <use slike/autumn-forest.jpg>
-Package pdftex.def Info: slike/autumn-forest.jpg  used on input line 463.
+Package pdftex.def Info: slike/autumn-forest.jpg  used on input line 465.
 (pdftex.def)             Requested size: 154.1756pt x 102.62314pt.
  [20 <./slike/autumn-forest.jpg>]
-<slike/autum-forest-circle.png, id=433, 227.34938pt x 249.93375pt>
+<slike/autum-forest-circle.png, id=439, 227.34938pt x 249.93375pt>
 File: slike/autum-forest-circle.png Graphic file (type png)
 <use slike/autum-forest-circle.png>
-Package pdftex.def Info: slike/autum-forest-circle.png  used on input line 491.
+Package pdftex.def Info: slike/autum-forest-circle.png  used on input line 493.
 
 (pdftex.def)             Requested size: 227.34882pt x 249.93314pt.
  [21 <./slike/autum-forest-circle.png>]
 [22]
-Overfull \hbox (12.61888pt too wide) in paragraph at lines 524--525
+Overfull \hbox (12.61888pt too wide) in paragraph at lines 526--527
 []\OT1/txr/m/n/12 Prikazat []cemo ov-dje je-dan os-no-van pri-mjer da bi-smo vi
 -djeli kako []cesto u praksi pomi[]cemo
  []
@@ -1155,41 +1137,41 @@ Underfull \vbox (badness 1874) has occurred while \output is active []
 
  [23]
 [24]
-Overfull \hbox (15.26178pt too wide) in paragraph at lines 576--577
+Overfull \hbox (15.26178pt too wide) in paragraph at lines 578--579
 [][][][][] \OT1/txr/m/n/12 i [][][][][]. Raz-lika izme[]du te dvije klase os-no
 vna je, ali vrlo bitna. [][][][][]
  []
 
 
-Overfull \hbox (18.44167pt too wide) in paragraph at lines 582--583
-\OT1/txr/m/n/12 Klasa [][][][][] se ko-risti kao omota[]c oko pri-mjerka klase 
+Overfull \hbox (18.44167pt too wide) in paragraph at lines 584--585
+\OT1/txr/m/n/12 Klasa [][][][][] ko-risti se kao omota[]c oko pri-mjerka klase 
 [][][][][]. [][][]
  []
 
 
-Overfull \hbox (104.38246pt too wide) in paragraph at lines 584--585
-[]\OT1/txr/m/n/12 Prvo pomo[]cu [][][] u[]citamo sa di-ska da-to-teku preko fuk
--n-cija oblika [][][][][][].
+Overfull \hbox (24.48662pt too wide) in paragraph at lines 586--587
+[]\OT1/txr/m/n/12 Prvo pomo[]cu [][][] u[]citamo da-to-teku na di-sku preko fun
+k-cija oblika [][][][].
  []
 
 [25] [26]
-<slike/Client-server-model.png, id=541, 414.04688pt x 488.57532pt>
+<slike/Client-server-model.png, id=547, 414.04688pt x 488.57532pt>
 File: slike/Client-server-model.png Graphic file (type png)
 <use slike/Client-server-model.png>
-Package pdftex.def Info: slike/Client-server-model.png  used on input line 619.
+Package pdftex.def Info: slike/Client-server-model.png  used on input line 622.
 
 (pdftex.def)             Requested size: 414.04585pt x 488.57413pt.
 
-Overfull \hbox (18.35771pt too wide) in paragraph at lines 630--631
-[][][][][] \OT1/txr/m/n/12 koji pri-hva[]ca vezu (ser-ver). Ako je veza us-pje[
-]sna onda [][][][][]
+Overfull \hbox (1.02974pt too wide) in paragraph at lines 633--634
+[][][][][]\OT1/txr/m/n/12 , koja pri-hva[]ca vezu (ser-ver). Ako je veza us-pje
+[]sna, [][][][][]
  []
 
 
 Class memoir Warning: The material used in the headers is too large
 (15.00601pt) for the given head height (14.5pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 631.
+(in both cases you will find help in the memoir manual). on input line 634.
 
 
 Overfull \vbox (0.50601pt too high) has occurred while \output is active []
@@ -1203,9 +1185,9 @@ Overfull \vbox (0.50601pt too high) has occurred while \output is active []
 
 
 [29]
-Overfull \hbox (33.28271pt too wide) in paragraph at lines 689--690
-[]\OT1/txr/m/n/12 Slanje po-da-taka preko UDP-a je sli[]cno kao i preko TCP-a a
-li samo ko-ris-timo [][][][][].
+Overfull \hbox (22.14673pt too wide) in paragraph at lines 692--693
+[]\OT1/txr/m/n/12 Slanje po-da-taka preko UDP-a sli[]cno je kao i preko TCP-a, 
+samo ko-ris-timo [][][][][].
  []
 
 [30]
@@ -1222,11 +1204,69 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 1082) has occurred while \output is active []
 
  [36]
-[37] [38] [39] [40] [41] [42] [43] [44] [45] [46] (diplomski.bbl [47
+[37] [38] [39] [40] [41] [42] [43] [44] [45] [46]
+<slike/crazy_tower.png, id=966, 965.10562pt x 626.34pt>
+File: slike/crazy_tower.png Graphic file (type png)
+<use slike/crazy_tower.png>
+Package pdftex.def Info: slike/crazy_tower.png  used on input line 1104.
+(pdftex.def)             Requested size: 432.48218pt x 280.67485pt.
+<slike/tower_combo.png, id=968, 965.10562pt x 626.34pt>
+File: slike/tower_combo.png Graphic file (type png)
+<use slike/tower_combo.png>
+Package pdftex.def Info: slike/tower_combo.png  used on input line 1114.
+(pdftex.def)             Requested size: 432.48192pt x 280.67485pt.
 
-] [48
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47
 
 ]
+[48 <./slike/crazy_tower.png>]
+Underfull \vbox (badness 6094) has occurred while \output is active []
+
+ [49 <./slike/tower_combo.png>] [50]
+<slike/pause_screen.png, id=1033, 965.10562pt x 626.34pt>
+File: slike/pause_screen.png Graphic file (type png)
+<use slike/pause_screen.png>
+Package pdftex.def Info: slike/pause_screen.png  used on input line 1180.
+(pdftex.def)             Requested size: 432.48192pt x 280.67485pt.
+
+Overfull \hbox (35.39774pt too wide) in paragraph at lines 1185--1186
+[][][] \OT1/txr/m/n/12 koja pred-stav-lja je-dan iz-bor. Ona si-mu-lira gumb pr
+eko klase [][][][][].
+ []
+
+
+Underfull \vbox (badness 1117) has occurred while \output is active []
+
+ [51 <./slike/pause_screen.png>]
+Overfull \hbox (35.52284pt too wide) in paragraph at lines 1202--1203
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[52]
+Overfull \hbox (0.82289pt too wide) in paragraph at lines 1239--1240
+[]\OT1/txr/m/n/12 Ovakav pris-tup nam omogu[]cuje da imamo do-bru or-ga-ni-za-c
+iju koda []sto se ti[]ce a[]zuriranja
+ []
+
+[53]
+Overfull \hbox (28.32277pt too wide) in paragraph at lines 1250--1251
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[54]
+Overfull \hbox (6.44164pt too wide) in paragraph at lines 1280--1281
+\OT1/txr/m/n/12 od-nosu na ro-di-te-lje onda se nude funk-cije [][][][] i [][][
+][]
+ []
+
+<slike/graph_nodes.png, id=1119, 587.19376pt x 316.18124pt>
+File: slike/graph_nodes.png Graphic file (type png)
+<use slike/graph_nodes.png>
+Package pdftex.def Info: slike/graph_nodes.png  used on input line 1285.
+(pdftex.def)             Requested size: 432.4827pt x 232.87527pt.
+[55 <./slike/graph_nodes.png>] (diplomski.bbl [56]
 babelbib: Using the BibTeX style's default font for `name'.
 babelbib: Using the BibTeX style's default font for `lastname'.
 babelbib: Using the BibTeX style's default font for `title'.
@@ -1238,20 +1278,58 @@ babelbib: Using the BibTeX style's default font for `ISBN'.
 babelbib: Using the BibTeX style's default font for `ISSN'.
 babelbib: Using the BibTeX style's default font for `url'.
 babelbib: Using the BibTeX style's default font for `numeral'.
-) [49] [50
 
-] [51] [52
+Underfull \hbox (badness 3250) in paragraph at lines 29--35
+[]\OT1/txr/m/n/12 H. V. Han-sson A. Mo-re-ira i J. Hal-ler, \OT1/txr/m/it/12 SF
+ML Game De-ve-lo-pe-ment\OT1/txr/m/n/12 , Pact
+ []
 
-] [53] [54
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--35
+\OT1/txr/m/n/12 Pu-bli-shing, 2013, []$\OT1/txtt/m/n/12 https : / / www . packt
+pub . com / game-[]development /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--60
+[]\OT1/txr/m/n/12 J. Gre-gory, \OT1/txr/m/it/12 Game En-gine Ar-c-hi-tec-ture\O
+T1/txr/m/n/12 , Wel-les-ley, Ma-ssac-hu-setts, 2009,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--60
+[]$\OT1/txtt/m/n/12 https : / / www . amazon . com / Engine-[]Architecture-[]Th
+ird-[]Jason-[]Gregory /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--84
+[]\OT1/txr/m/n/12 R. Pu-pius, \OT1/txr/m/it/12 SFML Game De-ve-lo-pe-ment By Ex
+am-ple\OT1/txr/m/n/12 , Pact Pu-bli-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--84
+\OT1/txr/m/n/12 shing, 2015, []$\OT1/txtt/m/n/12 https : / / www . packtpub . c
+om / game-[]development /
+ []
+
+) [57
+
+] [58
+
+] [59] [60
+
+] [61] [62
 
 ]
-Overfull \hbox (31.97487pt too wide) in paragraph at lines 1129--1131
+Overfull \hbox (31.97487pt too wide) in paragraph at lines 1323--1325
 []\OT1/txr/m/n/12 Nakon toga u Za-grebu upi-suje pred-di-plom-ski stu-dij-ski p
 ro-gram Ma-te-ma-tika na Prirodoslovno-
  []
 
 
-Overfull \hbox (18.80205pt too wide) in paragraph at lines 1129--1131
+Overfull \hbox (18.80205pt too wide) in paragraph at lines 1323--1325
 \OT1/txr/m/n/12 matemati[]ckom fa-kul-tetu. Na-kon zavr[]savanja pred-di-plom-s
 kog upi-suje dim-plom-ski Ra[]cunarstvo
  []
@@ -1260,30 +1338,30 @@ kog upi-suje dim-plom-ski Ra[]cunarstvo
 Class memoir Warning: The material used in the headers is too large
 (15.00601pt) for the given head height (14.5pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 1132.
+(in both cases you will find help in the memoir manual). on input line 1326.
 
-[55]
+[63]
 \tf@toc=\write5
 \openout5 = `diplomski.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1132.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1132.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1326.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1326.
  (diplomski.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1132.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1132.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1326.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1326.
 
 Package rerunfilecheck Info: File `diplomski.out' has not changed.
-(rerunfilecheck)             Checksum: E89C390A07FEBBF0681EA5CF1282A949;949.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1132.
+(rerunfilecheck)             Checksum: 94478CA8E24FD93F987168160897083E;1023.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1326.
  ) 
 Here is how much of TeX's memory you used:
- 14616 strings out of 492895
- 206840 string characters out of 3123268
- 533458 words of memory out of 3000000
- 17593 multiletter control sequences out of 15000+200000
- 43986 words of font info for 102 fonts, out of 3000000 for 9000
+ 14906 strings out of 492895
+ 211062 string characters out of 3123268
+ 534458 words of memory out of 3000000
+ 17748 multiletter control sequences out of 15000+200000
+ 47872 words of font info for 108 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,912b,1800s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,15n,58p,1228b,1800s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
 c}<C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/txfonts
 /rtxb.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
@@ -1294,13 +1372,14 @@ X 2.9/fonts/type1/public/txfonts/txtt.pfb><C:/Users/Nikola/AppData/Local/Progra
 ms/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/Nikola/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/Nikola/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Nikola
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/N
-ikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Us
-ers/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-
-Output written on diplomski.pdf (58 pages, 612198 bytes).
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/
+Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/U
+sers/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
+<C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on diplomski.pdf (66 pages, 824256 bytes).
 PDF statistics:
- 1197 PDF objects out of 1200 (max. 8388607)
- 722 named destinations out of 1000 (max. 500000)
- 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1399 PDF objects out of 1440 (max. 8388607)
+ 848 named destinations out of 1000 (max. 500000)
+ 200 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -59,8 +59,8 @@ void Tower::update(sf::Time dt)
 	}
 
 
-	// Game start
-	if (scrollSpeed == 0.f && player->getPlatformNumber() > 3)
+	// Start the game when player jumps more than 3 platforms
+	if (scrollSpeed == 0.f && player->getPlatformNumber() > Platforms::startingPlatform + 3)
 	{
 		incrementScrollSpeed();
 		walls->setGameSpeedTimer(true);
@@ -100,7 +100,7 @@ bool Tower::GameOver() const
 void Tower::buildScene()
 {
 	// Initialize the different layers
-	for (std::size_t i = 0; i < LayerCount; ++i)
+	for (int i = 0; i < LayerCount; ++i)
 	{
 		SceneNode::Ptr layer(new SceneNode());
 		sceneLayers[i] = layer.get();
@@ -117,6 +117,7 @@ void Tower::buildScene()
 	// Create platforms
 	std::unique_ptr<Platforms> towerPlatforms(new Platforms(insideTowerBounds, context));
 	platforms = towerPlatforms.get();
+	platforms->setPosition(insideTowerBounds.left, insideTowerBounds.top);
 	sceneLayers[Floors]->attachChild(std::move(towerPlatforms));
 
 	// Add player
@@ -142,7 +143,7 @@ void Tower::initialize()
 	player->initialize();
 	walls->setPosition(0.f, 0.f);
 	walls->setGameSpeedTimer(false);
-	rectangle->setPosition(0.f, 0.f);
+	rectangle->setPosition(insideTowerBounds.left, insideTowerBounds.top);
 	platforms->initialize();
 	gameOver = false;
 }

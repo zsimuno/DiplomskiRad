@@ -106,6 +106,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\ComboCounter.cpp" />
+    <ClCompile Include="Source\FloorSpeedTimer.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameOverState.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
@@ -129,6 +131,8 @@
     <ClCompile Include="Source\Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\ComboCounter.hpp" />
+    <ClInclude Include="Include\FloorSpeedTimer.hpp" />
     <ClInclude Include="Include\Game.hpp" />
     <ClInclude Include="Include\GameOverState.hpp" />
     <ClInclude Include="Include\GameState.hpp" />

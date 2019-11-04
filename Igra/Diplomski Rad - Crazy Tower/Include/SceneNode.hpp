@@ -18,7 +18,6 @@ public:
 	typedef std::unique_ptr<SceneNode> Ptr;
 	typedef std::pair<SceneNode*, SceneNode*> Pair;
 
-
 public:
 	SceneNode();
 	void					attachChild(Ptr child);
@@ -29,7 +28,6 @@ public:
 	sf::Vector2f			getWorldPosition() const;
 	sf::Transform			getWorldTransform() const;
 
-
 private:
 	virtual void			updateCurrent(sf::Time dt);
 	void					updateChildren(sf::Time dt);
@@ -38,10 +36,11 @@ private:
 	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 	void					drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	SceneNode* parent;
 
-private:
-	std::vector<Ptr>		mChildren;
-	SceneNode* mParent;
+protected:
+	std::vector<Ptr>		children;
+
 };
 
 

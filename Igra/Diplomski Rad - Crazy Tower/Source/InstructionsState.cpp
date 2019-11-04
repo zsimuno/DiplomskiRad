@@ -9,7 +9,6 @@ InstructionsState::InstructionsState(StateStack& stack, Context context)
 	, keyboardInstructions(context.textures->get(Textures::ID::KeyboardInstructions))
 	, comboInstructions(context.textures->get(Textures::ID::ComboInstructions))
 	, speedInstructions(context.textures->get(Textures::ID::SpeedInstructions))
-	, playerSprite(context.textures->get(Textures::ID::Character))
 {
 	// Set background texture
 	sf::Texture& texture = context.textures->get(Textures::ID::Tower);

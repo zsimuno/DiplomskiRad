@@ -19,6 +19,7 @@ public:
 private:
 	Menu				mainMenu;
 	sf::Sprite			background;
+	sf::Sprite			playerSprite;
 };
 
 #endif // MAINMENUSTATE_HPP

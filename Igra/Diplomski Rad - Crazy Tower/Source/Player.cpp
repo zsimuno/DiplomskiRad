@@ -90,13 +90,18 @@ void Player::setOnPlatform(Platform* platform)
 		endCombo();
 	}
 
-	currentPlatformBounds = platform->getBounds();
+	// Set the player on the platform
+	sf::FloatRect platBounds = platform->getBounds();
+	sf::Vector2f platPos = platform->getWorldPosition();
+	currentPlatformBounds = platBounds;
+	currentPlatformBounds.left = platPos.x;
+	currentPlatformBounds.top = platPos.y;
 	previousPlatformFloor = plat;
 	isOnPlatform = true;
 	playerVelocity.y = 0.0f;
 	animation.setIdle();
 
-	this->setPosition(this->getPosition().x, platform->getBounds().top - getBounds().height - getBounds().top);
+	this->setPosition(this->getPosition().x, platPos.y - getBounds().height - getBounds().top);
 }
 
 bool Player::isStandingOnPlatform() const
@@ -154,7 +159,6 @@ void Player::updateCurrent(sf::Time dt)
 	}
 	else if (currentPlatformBounds.width != 0.f)
 	{
-		// TODO: fix bug that player sometimes fall trough the platform
 		sf::FloatRect playerRect(sf::Vector2f(getPosition().x + getBounds().left, getPosition().y + getBounds().top),
 			sf::Vector2f(getBounds().width, getBounds().height));
 		// Is player falling of the platform

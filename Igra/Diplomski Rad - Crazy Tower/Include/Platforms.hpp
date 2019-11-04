@@ -19,8 +19,6 @@ public:
 	void					initialize();
 
 private:
-	std::vector<Platform>	platforms;
-
 	sf::FloatRect&			currentBounds;
 
 	State::Context			context;
