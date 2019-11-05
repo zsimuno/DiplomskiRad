@@ -14,7 +14,8 @@ Game::Game()
 	: window(sf::VideoMode(1280, 800), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
 	, textures()
 	, fonts()
-	, stateStack(State::Context(window, textures, fonts))
+	, currentCharacter(Textures::ID::Mike)
+	, stateStack(State::Context(window, textures, fonts, currentCharacter))
 {
 	loadResources();
 	registerStates();
@@ -92,7 +93,11 @@ void Game::loadResources()
 	fonts.load(Fonts::ID::Main, "Media/Thug.ttf");
 	fonts.load(Fonts::ID::Secondary, "Media/Orange_Juice.ttf");
 
-	textures.load(Textures::ID::Character, "Media/Textures/character.png");
+	textures.load(Textures::ID::Mike, "Media/Textures/mike.png");
+	textures.load(Textures::ID::Bunny, "Media/Textures/bunny.png");
+	textures.load(Textures::ID::Invisible, "Media/Textures/invisible.png");
+	textures.load(Textures::ID::RedMarine, "Media/Textures/red_marine.png");
+	textures.load(Textures::ID::BlueMarine, "Media/Textures/blue_marine.png");
 	textures.load(Textures::ID::Tower, "Media/Textures/background.png");
 	textures.load(Textures::ID::Walls, "Media/Textures/walls.png");
 	textures.load(Textures::ID::Floor1, "Media/Textures/floor1.png");

@@ -8,7 +8,7 @@ MainMenuState::MainMenuState(StateStack& stack, Context context)
 	:State(stack, context)
 	, mainMenu(sf::Text("Crazy Tower", context.fonts->get(Fonts::ID::Main), 100), context.window->getView().getSize().x, context.window->getView().getSize().y)
 	, background()
-	, playerSprite(context.textures->get(Textures::ID::Character))
+	, playerSprite(context.textures->get(*context.currentCharacterID))
 {
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 

@@ -28,6 +28,7 @@ private:
 	TextureHolder			textures;
 	FontHolder				fonts;
 	StateStack				stateStack;
+	Textures::ID			currentCharacter;
 
 	static const sf::Time	TimePerFrame;
 

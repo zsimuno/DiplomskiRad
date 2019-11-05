@@ -9,21 +9,40 @@
 class MenuOption : public sf::Drawable , public sf::Transformable
 {
 public:
-	using OnClickFunction = std::function<void()>;
+	using MenuOptionFunction = std::function<void()>;
+	using MenuSelectFunction = std::function<void(MenuOption*)>;
 
 	static const int		menuOptionHeight = 60;
-	static const int		menuOptionWidth = 300;
+	static const int		menuOptionWidth = 400;
 
-	MenuOption(sf::Text text, sf::Vector2f position, OnClickFunction onClick = []() {});
+							MenuOption(sf::Text text, MenuOptionFunction onClick = []() {});
+							MenuOption(sf::Text text, MenuSelectFunction onLeft, MenuSelectFunction onRight);
 
 	void					select();
 	void					deselect();
 	void					click();
+
+	void					setLeftRight(MenuSelectFunction onLeft, MenuSelectFunction onRight);
+
+	void					pressLeft();
+	void					pressRight();
+
+	void					setString(std::string text);
+
+	bool					contains(sf::Vector2f point, sf::Vector2f menuPosition);
+
 	virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	bool					contains(sf::Vector2f point);
+
 private:
-	OnClickFunction			onClickAction;
+	MenuOptionFunction		onClickAction;
+	MenuSelectFunction		onLeftAction;
+	MenuSelectFunction		onRightAction;
+
+	bool					onLeftRightSet;
+
 	sf::Text				optionText;
+	sf::Text				arrowLeft;
+	sf::Text				arrowRight;
 	sf::RectangleShape		optionRect;
 	sf::Color				primaryColor;
 	sf::Color				secondaryColor;

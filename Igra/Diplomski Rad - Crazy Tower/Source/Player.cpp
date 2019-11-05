@@ -6,8 +6,8 @@
 #include <iostream>
 
 
-Player::Player(const TextureHolder& textures, Platforms& towerPlatforms, sf::FloatRect& bounds)
-	: sprite(textures.get(Textures::ID::Character))
+Player::Player(State::Context context, Platforms& towerPlatforms, sf::FloatRect& bounds)
+	: sprite(context.textures->get(*context.currentCharacterID))
 	, data(initializePlayerData())
 	, playerVelocity(0, 0)
 	, mirroredSprite(false)

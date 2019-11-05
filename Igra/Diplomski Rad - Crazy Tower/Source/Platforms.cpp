@@ -2,7 +2,7 @@
 
 #include <memory>
 
-int Platforms::startingPlatform = 400;
+int Platforms::startingPlatform = 0;
 
 Platforms::Platforms(sf::FloatRect& bounds, State::Context gameContext)
 	: currentBounds(bounds)

@@ -3,7 +3,6 @@
 
 #include <GameStates.hpp>
 #include <ResourceIdentifiers.hpp>
-#include <Player.hpp>
 
 #include <SFML\System\Time.hpp>
 #include <SFML\Window\Event.hpp>
@@ -23,11 +22,12 @@ public:
 
 	struct Context
 	{
-		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts);
+		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Textures::ID& character);
 
 		sf::RenderWindow* window;
 		TextureHolder* textures;
 		FontHolder* fonts;
+		Textures::ID* currentCharacterID;
 	};
 
 public:

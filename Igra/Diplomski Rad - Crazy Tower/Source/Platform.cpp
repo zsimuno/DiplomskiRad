@@ -1,9 +1,10 @@
 #include <Platform.hpp>
 #include <Utility.hpp>
 #include <ResourceHolder.hpp>
+#include <Platforms.hpp>
 
 #include <SFML/Graphics/Font.hpp>
-#include <Platforms.hpp>
+
 #include <iostream>
 
 Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context context, int previousPlatform)
@@ -49,7 +50,7 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 		platformRect.width = minPlatformWidth;
 	}
 
-	platformRect.left =(int)( rand() % (int)(towerBounds.width - platformRect.width));
+	platformRect.left = (float)( rand() % (int)(towerBounds.width - platformRect.width));
 
 	if (floorNumber % 50 == 0)
 	{

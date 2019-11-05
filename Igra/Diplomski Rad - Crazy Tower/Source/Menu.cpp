@@ -21,9 +21,33 @@ Menu::Menu(sf::Text menuTitle, float menuWidth, float menuHeight)
 	title.rotate(10);
 }
 
-void Menu::addOption(sf::Text optionText, MenuOption::OnClickFunction onClick)
+void Menu::addOption(sf::Text optionText, MenuOption::MenuOptionFunction onClick)
 {
-	options.push_back(MenuOption(optionText, sf::Vector2f(0.f, optionYPosition), onClick));
+	addOption(MenuOption(optionText, onClick));
+}
+
+void Menu::addSelectableOption(sf::Text optionText, MenuOption::MenuSelectFunction onLeft, MenuOption::MenuSelectFunction onRight)
+{
+	addSelectableOption(MenuOption(optionText, onLeft, onRight));
+}
+
+void Menu::addOption(MenuOption option)
+{
+	option.setPosition(0.f, optionYPosition);
+	options.push_back(option);
+	optionYPosition += MenuOption::menuOptionHeight + 15.f;
+
+	if (options.size() == 1)
+	{
+		options[selectedOptionIndex].select();
+	}
+}
+
+
+void Menu::addSelectableOption(MenuOption option)
+{
+	option.setPosition(0.f, optionYPosition);
+	options.push_back(option);
 	optionYPosition += MenuOption::menuOptionHeight + 15.f;
 
 	if (options.size() == 1)
@@ -70,7 +94,7 @@ void Menu::handleEvent(const sf::Event& event)
 	case sf::Event::MouseMoved:
 		for (size_t i = 0; i < options.size(); ++i)
 		{
-			if (options[i].contains(sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y)))
+			if (options[i].contains(sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y), this->getPosition()))
 			{
 				options[selectedOptionIndex].deselect();
 				selectedOptionIndex = i;
@@ -82,25 +106,38 @@ void Menu::handleEvent(const sf::Event& event)
 
 	case sf::Event::MouseButtonPressed:
 		// Mouse can only be pressed on the selected option
-		if (options[selectedOptionIndex].contains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y)))
+		if (options[selectedOptionIndex].contains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y), this->getPosition()))
 		{
 			options[selectedOptionIndex].click();
 		}
 		break;
 
 	case sf::Event::KeyPressed:
-		if (event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::Space)
+
+		switch (event.key.code)
 		{
+		case sf::Keyboard::Return:
+		case sf::Keyboard::Space:
 			options[selectedOptionIndex].click();
-		}
-		else if (event.key.code == sf::Keyboard::Up)
-		{
+			break;
+
+		case sf::Keyboard::Up:
 			previous();
-		}
-		else if (event.key.code == sf::Keyboard::Down)
-		{
+			break;
+
+		case sf::Keyboard::Down:
 			next();
+			break;
+
+		case sf::Keyboard::Left:
+			options[selectedOptionIndex].pressLeft();
+			break;
+
+		case sf::Keyboard::Right:
+			options[selectedOptionIndex].pressRight();
+			break;
 		}
+
 		break;
 	}
 

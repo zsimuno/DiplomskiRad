@@ -5,6 +5,7 @@
 #include <ResourceIdentifiers.hpp>
 #include <PlayerData.hpp>
 #include <PlayerAnimation.hpp>
+#include <State.hpp>
 
 #include <SFML\Graphics\Sprite.hpp>
 #include <SFML/Window/Event.hpp>
@@ -19,7 +20,7 @@ class Player :
 	public SceneNode
 {
 public:
-	Player(const TextureHolder& textures, Platforms& towerPlatform, sf::FloatRect& bounds);
+	Player(State::Context context, Platforms& towerPlatform, sf::FloatRect& bounds);
 
 	void						initialize();
 

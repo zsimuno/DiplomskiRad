@@ -121,7 +121,7 @@ void Tower::buildScene()
 	sceneLayers[Floors]->attachChild(std::move(towerPlatforms));
 
 	// Add player
-	std::unique_ptr<Player> gamePlayer(new Player(*context.textures, *platforms, insideTowerBounds));
+	std::unique_ptr<Player> gamePlayer(new Player(context, *platforms, insideTowerBounds));
 	player = gamePlayer.get();
 	spawnPosition = sf::Vector2f(worldView.getSize().x / 2.f, worldView.getSize().y - Platform::platformHeight - player->getBounds().height / 2);
 	player->setPosition(spawnPosition);

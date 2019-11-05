@@ -1,26 +1,4 @@
-﻿  Leaderboards.cpp
-  ComboCounter.cpp
-  FloorSpeedTimer.cpp
-  Game.cpp
-  GameOverState.cpp
-  GameState.cpp
-  InstructionsState.cpp
-  Main.cpp
-  MainMenuState.cpp
-  Menu.cpp
-  PauseState.cpp
-  Platform.cpp
-  Platforms.cpp
-  Player.cpp
+﻿  Game.cpp
   SettingsState.cpp
-  State.cpp
-  StateStack.cpp
-  TowerWalls.cpp
-  Tower.cpp
   Generating Code...
-D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Platform.cpp(52,35): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Platform.cpp(52,35): warning C4244:         with
-D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Platform.cpp(52,35): warning C4244:         [
-D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Platform.cpp(52,35): warning C4244:             T=float
-D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Platform.cpp(52,35): warning C4244:         ]
   Diplomski Rad - Crazy Tower.vcxproj -> D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Debug\Diplomski Rad - Crazy Tower.exe

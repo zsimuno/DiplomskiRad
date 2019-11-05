@@ -12,7 +12,10 @@ public:
 
 	Menu(sf::Text menuTitle, float menuWidth, float menuHeight);
 
-	void						addOption(sf::Text optionText, MenuOption::OnClickFunction onClick);
+	void						addOption(sf::Text optionText, MenuOption::MenuOptionFunction onClick);
+	void						addSelectableOption(sf::Text optionText, MenuOption::MenuSelectFunction onLeft, MenuOption::MenuSelectFunction onRight);
+	void						addOption(MenuOption option);
+	void						addSelectableOption(MenuOption option);
 	virtual void				draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	void						handleEvent(const sf::Event & event);
 

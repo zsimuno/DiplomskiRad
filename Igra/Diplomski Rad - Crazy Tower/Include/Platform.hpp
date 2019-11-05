@@ -2,7 +2,7 @@
 #define PLATFORM_HPP
 
 #include <Player.hpp>
-#include <State.hpp>
+
 
 #include <SFML\Graphics\Rect.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>

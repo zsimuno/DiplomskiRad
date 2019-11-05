@@ -17,7 +17,11 @@ namespace Textures
 	enum class ID
 	{
 		Tower,
-		Character,
+		Mike,
+		Bunny,
+		Invisible,
+		RedMarine,
+		BlueMarine,
 		Walls,
 		Floor1,
 		Floor2,
