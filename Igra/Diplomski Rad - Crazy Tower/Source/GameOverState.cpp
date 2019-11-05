@@ -19,7 +19,7 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 
-	gameOverMenu.setPosition(0, 0);
+	gameOverMenu.setPosition(context.window->getView().getSize().x / 3, 120.f);
 
 	sf::Text restart("Try again", font);
 	gameOverMenu.addOption(restart, [this]()

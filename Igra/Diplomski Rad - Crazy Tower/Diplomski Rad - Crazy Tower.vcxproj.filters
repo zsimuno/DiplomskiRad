@@ -84,6 +84,12 @@
     <ClCompile Include="Source\FloorSpeedTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Leaderboards.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SettingsState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Game.hpp">
@@ -159,6 +165,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\ComboCounter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Leaderboards.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SettingsState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

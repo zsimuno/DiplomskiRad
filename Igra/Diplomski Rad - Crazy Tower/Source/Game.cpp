@@ -6,6 +6,7 @@
 #include <GameState.hpp>
 #include <GameOverState.hpp>
 #include <InstructionsState.hpp>
+#include <SettingsState.hpp>
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
@@ -82,7 +83,8 @@ void Game::registerStates()
 	stateStack.registerState<GameState>(GameStates::ID::Game);
 	stateStack.registerState<PauseState>(GameStates::ID::Pause);
 	stateStack.registerState<GameOverState>(GameStates::ID::GameOver);
-	stateStack.registerState<InstructionsState>(GameStates::ID::Instructions);
+	stateStack.registerState<InstructionsState>(GameStates::ID::Instructions); 
+	stateStack.registerState<SettingsState>(GameStates::ID::Settings);
 }
 
 void Game::loadResources()

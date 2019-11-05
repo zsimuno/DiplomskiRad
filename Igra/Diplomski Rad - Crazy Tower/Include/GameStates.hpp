@@ -13,6 +13,7 @@ namespace GameStates
 		GameOver,
 		Pause,
 		Instructions,
+		Settings,
 	};
 }
 

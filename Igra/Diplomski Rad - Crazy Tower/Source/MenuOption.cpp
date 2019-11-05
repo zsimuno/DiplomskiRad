@@ -15,15 +15,14 @@ MenuOption::MenuOption(sf::Text text, sf::Vector2f position, OnClickFunction onC
 	, outlineColor(sf::Color::White)
 	, secondaryOutlineColor(0xBBDEFBFF)
 {
-	this->setPosition(position);
+	this->setPosition(0.f, position.y);
 	optionRect.setOutlineThickness(5);
 	optionRect.setFillColor(primaryColor);
 	optionRect.setOutlineColor(outlineColor);
-	optionRect.setPosition(position);
 
 	optionText.setCharacterSize(2 * menuOptionHeight / 3);
 	Utility::centerOrigin(optionText);
-	optionText.setPosition(position + sf::Vector2f(menuOptionWidth / 2, menuOptionHeight / 2));
+	optionText.setPosition(menuOptionWidth / 2, menuOptionHeight / 2);
 	optionText.setFillColor(outlineColor);
 	optionText.setStyle(sf::Text::Style::Bold);
 
@@ -50,6 +49,8 @@ void MenuOption::click()
 
 void MenuOption::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states.transform *= getTransform();
+
 	target.draw(optionRect, states);
 	target.draw(optionText, states);
 }

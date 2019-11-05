@@ -20,8 +20,10 @@ MainMenuState::MainMenuState(StateStack& stack, Context context)
 	background.setTextureRect(textureRect);
 
 	playerSprite.setTextureRect(sf::IntRect(2, 4, 29, 52));
-	playerSprite.setPosition(context.window->getView().getSize().x / 5, context.window->getView().getSize().y / 2);
+	playerSprite.setPosition(context.window->getView().getSize().x / 12, context.window->getView().getSize().y / 3);
 	playerSprite.setScale(3.f, 3.f);
+
+	mainMenu.setPosition(context.window->getView().getSize().x / 5, 10.f);
 
 	// Create menu buttons
 	sf::Text playText("Play", font);
@@ -40,7 +42,7 @@ MainMenuState::MainMenuState(StateStack& stack, Context context)
 	sf::Text settingsText("Settings", font);
 	mainMenu.addOption(settingsText, [this]()
 		{
-			// Implement "Settings" option
+			stackPush(GameStates::ID::Settings);
 		});
 
 	sf::Text exitText("Exit", font);

@@ -106,6 +106,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Include\Leaderboards.cpp" />
     <ClCompile Include="Source\ComboCounter.cpp" />
     <ClCompile Include="Source\FloorSpeedTimer.cpp" />
     <ClCompile Include="Source\Game.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="Source\PlayerData.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\RectangleNode.cpp" />
+    <ClCompile Include="Source\SettingsState.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateStack.cpp" />
     <ClCompile Include="Source\TowerWalls.cpp" />
@@ -138,6 +140,7 @@
     <ClInclude Include="Include\GameState.hpp" />
     <ClInclude Include="Include\GameStates.hpp" />
     <ClInclude Include="Include\InstructionsState.hpp" />
+    <ClInclude Include="Include\Leaderboards.hpp" />
     <ClInclude Include="Include\MainMenuState.hpp" />
     <ClInclude Include="Include\Menu.hpp" />
     <ClInclude Include="Include\MenuOption.hpp" />
@@ -151,6 +154,7 @@
     <ClInclude Include="Include\ResourceIdentifiers.hpp" />
     <ClInclude Include="Include\SceneNode.hpp" />
     <ClInclude Include="Include\RectangleNode.hpp" />
+    <ClInclude Include="Include\SettingsState.hpp" />
     <ClInclude Include="Include\State.hpp" />
     <ClInclude Include="Include\StateStack.hpp" />
     <ClInclude Include="Include\TowerWalls.hpp" />

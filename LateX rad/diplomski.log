@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.8.26)  4 NOV 2019 18:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.8.26)  4 NOV 2019 23:42
 entering extended mode
 **./diplomski.tex
 (diplomski.tex
@@ -1028,7 +1028,7 @@ LaTeX Font Info:    Try loading font information for OT1+txtt on input line 123
 d"
 File: ot1txtt.fd 2000/12/15 v3.1
 ) [6]
-<slike/start-app.png, id=149, 216.81pt x 238.8925pt>
+<slike/start-app.png, id=150, 216.81pt x 238.8925pt>
 File: slike/start-app.png Graphic file (type png)
 <use slike/start-app.png>
 Package pdftex.def Info: slike/start-app.png  used on input line 175.
@@ -1072,7 +1072,7 @@ Overfull \hbox (23.32275pt too wide) in paragraph at lines 367--368
 o ko-ris-titi va-ri-ja-blu tipa [][][]
  []
 
-<slike/shape_first.png, id=355, 152.06813pt x 174.6525pt>
+<slike/shape_first.png, id=356, 152.06813pt x 174.6525pt>
 File: slike/shape_first.png Graphic file (type png)
 <use slike/shape_first.png>
 Package pdftex.def Info: slike/shape_first.png  used on input line 382.
@@ -1231,42 +1231,34 @@ File: slike/pause_screen.png Graphic file (type png)
 Package pdftex.def Info: slike/pause_screen.png  used on input line 1180.
 (pdftex.def)             Requested size: 432.48192pt x 280.67485pt.
 
-Overfull \hbox (35.39774pt too wide) in paragraph at lines 1185--1186
-[][][] \OT1/txr/m/n/12 koja pred-stav-lja je-dan iz-bor. Ona si-mu-lira gumb pr
-eko klase [][][][][].
+Overfull \hbox (38.54175pt too wide) in paragraph at lines 1185--1186
+[][][]\OT1/txr/m/n/12 , koja pred-stav-lja je-dan iz-bor. Ona si-mu-lira gumb p
+reko klase [][][][][].
  []
 
-
-Underfull \vbox (badness 1117) has occurred while \output is active []
-
- [51 <./slike/pause_screen.png>]
+[51 <./slike/pause_screen.png>]
 Overfull \hbox (35.52284pt too wide) in paragraph at lines 1202--1203
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
-[52]
-Overfull \hbox (0.82289pt too wide) in paragraph at lines 1239--1240
-[]\OT1/txr/m/n/12 Ovakav pris-tup nam omogu[]cuje da imamo do-bru or-ga-ni-za-c
-iju koda []sto se ti[]ce a[]zuriranja
- []
-
-[53]
+[52] [53]
 Overfull \hbox (28.32277pt too wide) in paragraph at lines 1250--1251
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[54]
-Overfull \hbox (6.44164pt too wide) in paragraph at lines 1280--1281
-\OT1/txr/m/n/12 od-nosu na ro-di-te-lje onda se nude funk-cije [][][][] i [][][
-][]
+
+Overfull \hbox (13.19765pt too wide) in paragraph at lines 1280--1281
+\OT1/txr/m/n/12 raju u od-nosu na ro-di-te-lje, nude se funk-cije [][][][] i []
+[][][]
  []
 
+[54]
 <slike/graph_nodes.png, id=1119, 587.19376pt x 316.18124pt>
 File: slike/graph_nodes.png Graphic file (type png)
 <use slike/graph_nodes.png>
 Package pdftex.def Info: slike/graph_nodes.png  used on input line 1285.
 (pdftex.def)             Requested size: 432.4827pt x 232.87527pt.
-[55 <./slike/graph_nodes.png>] (diplomski.bbl [56]
+ (diplomski.bbl [55 <./slike/graph_nodes.png>] [56]
 babelbib: Using the BibTeX style's default font for `name'.
 babelbib: Using the BibTeX style's default font for `lastname'.
 babelbib: Using the BibTeX style's default font for `title'.
@@ -1361,7 +1353,7 @@ Here is how much of TeX's memory you used:
  17748 multiletter control sequences out of 15000+200000
  47872 words of font info for 108 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,1228b,1800s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,15n,58p,1232b,1800s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
 c}<C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/txfonts
 /rtxb.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
@@ -1377,7 +1369,7 @@ Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/U
 sers/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
 <C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8
 a.pfb>
-Output written on diplomski.pdf (66 pages, 824256 bytes).
+Output written on diplomski.pdf (66 pages, 824370 bytes).
 PDF statistics:
  1399 PDF objects out of 1440 (max. 8388607)
  848 named destinations out of 1000 (max. 500000)

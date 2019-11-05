@@ -9,6 +9,7 @@
 class Menu : public sf::Drawable, public sf::Transformable
 {
 public:
+
 	Menu(sf::Text menuTitle, float menuWidth, float menuHeight);
 
 	void						addOption(sf::Text optionText, MenuOption::OnClickFunction onClick);

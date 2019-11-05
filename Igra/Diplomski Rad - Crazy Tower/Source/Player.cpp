@@ -90,7 +90,7 @@ void Player::setOnPlatform(Platform* platform)
 		endCombo();
 	}
 
-	// Set the player on the platform
+	// Set the player on the platform and save current platform data
 	sf::FloatRect platBounds = platform->getBounds();
 	sf::Vector2f platPos = platform->getWorldPosition();
 	currentPlatformBounds = platBounds;

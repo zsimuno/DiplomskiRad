@@ -18,7 +18,7 @@ PauseState::PauseState(StateStack& stack, Context context)
 
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 
-	pauseMenu.setPosition(0, 0);
+	pauseMenu.setPosition(context.window->getView().getSize().x / 3, 120.f);
 
 	sf::Text resume("Resume", font);
 	pauseMenu.addOption(resume, [this]()

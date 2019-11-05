@@ -92,7 +92,7 @@
 	\chapter{Kratki uvod u C++}
 	C++ je programski jezik s podrškom za objektno orijentirano programiranje. Razvio ga je Bjarne Stroustrup 80-ih godina prošloga stoljeæa. Napisao ga je kao proširenje programskom jeziku C, pa je originalno bio nazvan "C s klasama". Jezik se razvijao s vremenom i još uvijek se razvija. Zadnji standard koji smo dobili je C++17, a C++20 sljedeæi je koji se oèekuje. C++ nam omoguæava upravljanje memorijom na niskim razinama i zato ga koristimo ako su nam bitne performanse i ogranièeni smo resursima. 
 	
-	Meðu ostalim, danas se koristi èesto u velikim zahtjevnim sustavima, aplikacijama kojima su performanse bitne, i desktop-aplikacijama. Èesto je korišten za programiranje igara i neki poznatiji game enginei (aplikacije koje se koriste za razvoj igara i koje rade na višim razinama razvoja za razliku od SFML-a), poput Unreal i Source enginea, pisani su u njemu. C++ nam je bitan u ovome radu jer je SFML primarno C++ biblioteka za razvoj igara.
+	Meðu ostalim, danas se koristi èesto u velikim zahtjevnim sustavima, aplikacijama kojima su performanse bitne, i desktop-aplikacijama. Èesto je korišten za programiranje igara i neki poznatiji \textit{game enginei} (aplikacije koje se koriste za razvoj igara i koje rade na višim razinama razvoja za razliku od SFML-a), poput Unreal i Source enginea, pisani su u njemu. C++ nam je bitan u ovome radu jer je SFML primarno C++ biblioteka za razvoj igara.
 	
 	C++ danas je sveprisutan i razvojem jezika postat æe još bolji i pristupaèniji, pa je vjerojatna njegova duga upotreba i u buduænosti. Ipak, jedna od najveæih kritika jeziku njegova je kompleksnost i èinjenica da je uèenje toga jezika teže od veæine drugih. Kada je pak u pitanju upravljanje memorijom, onda dobivamo bolje performanse, ali treba paziti pri takvom programiranju jer se mogu pojaviti neke greške koje je teško riješiti (npr. može se dogoditi curenje memorije ili memory leak). Zbog toga dosta programera radije piše kod u malo jednostavnijim jezicima ako performanse nisu toliko bitne. 
 	
@@ -230,7 +230,7 @@
 	}
 	\end{lstlisting}
 	
-	Sada imamo prozor koji æe ostati otvoren sve dok ga korisnik ne zatvori, a u njemu æe se crtati zeleni krug. Jedan bitan dio koji smo ovdje uveli je glavna petlja igre. Njezin je zadatak držati prozor otvorenim kako bi korisnik mogao igrati igru dok god on želi. Svaka glavna petlja igre ima tri stadija:
+	Sada imamo prozor koji æe ostati otvoren sve dok ga korisnik ne zatvori, a u njemu æe se crtati zeleni krug. Jedan bitan dio koji smo ovdje uveli, glavna je petlja igre. Njezin je zadatak držati prozor otvorenim kako bi korisnik mogao igrati igru dok god on želi. Svaka glavna petlja igre ima tri stadija:
 	\begin{enumerate}
 		\item Èitanje unosa - gledamo što je korisnik unio preko ureðaja za unos i prozora
 		\item Ažuriranje slike - na osnovu korisnikova unosa ažuriramo stanje objekata na zaslonu
@@ -242,7 +242,7 @@
 	
 	\subsection{Dogaðaji (Events)}
 	
-	Èitanje dogaðaja koje stvara korisnik jedna je od najbitnijih znaèajki vezanih s programiranjem igara. Igre su po samoj definiciji interaktivne, pa je èitanje korisnikovih unosa kljuèno. Dogaðaje možemo èitati preko \lstinline{sf::Window} instance ili èitajuæi stanje samih dogaðaja u stvarnom vremenu. Ako èitamo iz prozora, pozivamo \lstinline{bool Window::pollEvent(sf::Event\& event)} koja vraæa true dok god ima novih dogaðaja koje treba èitati i popunjava varijablu \lstinline{event} s podatcima samog dogaðaja. Bitno je znati da može postojati više od jednog dogaðaja (npr. možemo stisnuti i miš i tipkovnicu u isto vrijeme) i onda moramo paziti da uhvatimo sve dogaðaje. Zbog toga æe kod izgledati ovako:
+	Èitanje dogaðaja koje stvara korisnik jedna je od najbitnijih znaèajki vezanih s programiranjem igara. Igre su po samoj definiciji interaktivne, pa je èitanje korisnikovih unosa kljuèno. Dogaðaje možemo èitati preko \lstinline{sf::Window} instance ili èitajuæi stanje samih dogaðaja u stvarnom vremenu. Ako èitamo iz prozora, pozivamo \lstinline{bool Window::pollEvent(sf::Event\& event)} koja vraæa \textit{true} dok god ima novih dogaðaja koje treba èitati i popunjava varijablu \lstinline{event} s podatcima samog dogaðaja. Bitno je znati da može postojati više od jednog dogaðaja (npr. možemo stisnuti i miš i tipkovnicu u isto vrijeme) i onda moramo paziti da uhvatimo sve dogaðaje. Zbog toga æe kod izgledati ovako:
 	\begin{lstlisting}
 	// Game loop
 	while (window.isOpen())
@@ -296,7 +296,7 @@
 	
 	U ovom primjeru provjeravamo pritiskuje li korisnik tipku za pucanje koja je u ovom sluèaju space. Na ovakav slièan naèin možemo pomicati naše likove po zaslonu, pucati iz oružja ili izvesti neku drugu radnju koju zahtijeva naša igra.
 	
-	Drugi naèin èitanja dogaðaja je u stvarnom vremenu. SFML nam omoguæava provjeru stanja entiteta u svakom trenutku. Ti entiteti su miš, tipkovnica ili joystick. Ovdje ne obraðujemo dogaðaje kako se pojavljuju, nego samo provjeravamo za svaki dogaðaj je li se dogodio u trenutnom ciklusu. Ovaj pristup drukèiji je od obrade dogaðaja koju smo do sada koristili, ali je odlièan za primjere poput prošlog u kojem želimo obraðivati kretnje lika. Tako bi analizu toga pritiskuje li korisnik tipku za pucanje iz prošlog primjera sveli na sljedeæe:
+	Drugi naèin èitanja dogaðaja je u stvarnom vremenu. SFML nam omoguæava provjeru stanja entiteta u svakom trenutku. Ti entiteti su miš, tipkovnica ili \textit{joystick}. Ovdje ne obraðujemo dogaðaje kako se pojavljuju, nego samo provjeravamo za svaki dogaðaj je li se dogodio u trenutnom ciklusu. Ovaj pristup drukèiji je od obrade dogaðaja koju smo do sada koristili, ali je odlièan za primjere poput prošlog u kojem želimo obraðivati kretnje lika. Tako bi analizu toga pritiskuje li korisnik tipku za pucanje iz prošlog primjera sveli na sljedeæe:
 	\begin{lstlisting}
 	shooting = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
 	\end{lstlisting}
@@ -362,7 +362,7 @@
 	pentagonShape.setPoint(4, sf::Vector2f(150, 110));
 	rectangleShape.setFillColor(sf::Color::Yellow);
 	\end{lstlisting}
-	Jedna bitna klasa koja se ovdje pojavljuje je \lstinline{Vector2f}. Ona predstavlja 2D vektor koji sadržava dvije \lstinline{float} vrijednosti. Postoje razlièite verzije vektora u SFML-u. Tu je \lstinline{Vector2i} koji sadrži dva cijela (\textit{integer}) broja i \lstinline{Vector3i} koji sadrži tri. Postoje i druge verzije koje sadrže razlièite vrijednosti i vektor koji nam omoguæava pohranu tipova koje želimo, \lstinline{Vector2\textless class\textgreater} i \lstinline{Vector3\textless class\textgreater}. Vektore æemo èesto koristiti u crtanju za oznaèavanje dimenzija, smjerova, pozicija i slièno. 
+	Jedna bitna klasa koja se ovdje pojavljuje je \lstinline{Vector2f}. Ona predstavlja 2D vektor koji sadržava dvije \lstinline{float} vrijednosti. Postoje razlièite verzije vektora u SFML-u. Tu je \lstinline{Vector2i}, koji sadrži dva cijela (\textit{integer}) broja, i \lstinline{Vector3i}, koji sadrži tri. Postoje i druge verzije koje sadrže razlièite vrijednosti i vektor koji nam omoguæava pohranu tipova koje želimo, \lstinline{Vector2\textless class\textgreater} i \lstinline{Vector3\textless class\textgreater}. Vektore æemo èesto koristiti u crtanju za oznaèavanje dimenzija, smjerova, pozicija i slièno. 
 	
 	Sada želimo na zaslonu prikazati naše oblike, pa æemo koristiti varijablu tipa \lstinline{RenderWindow} koju smo naveli na poèetku ovog poglavlja:
 	\begin{lstlisting}
@@ -386,7 +386,7 @@
 	
 	Jedan detalj koji se vidi u ovome primjeru je bitnost redoslijeda crtanja oblika. Vidimo da je crtanje prije pozvano na pravokutniku nego na krugu, zato je pravokutnik na slici ispod kruga.
 	\subsection{Transformacije}
-	Samo crtanje likova nije nam dovoljno za pravu igru, takoðer nam trebaju i neke transformacije. Želimo likove okretati, pomicati, poveæavati i smanjivati. Prije transformiranja potrebno je razumiti kako funkcionira koordinatni sustav u igrama. Njegova orjentacija je drugaèija od standadrdne na koju smo navikli. Gornji lijevi kut prozora predstavlja toèku (0, 0). Os y raste prema dolje dok os x raste prema desno. Kako to izgleda, možemo vidjeti u priloženom crtežu: 
+	Samo crtanje likova nije nam dovoljno za pravu igru, takoðer nam trebaju i neke transformacije. Želimo likove okretati, pomicati, poveæavati i smanjivati. Prije transformiranja potrebno je razumiti kako funkcionira koordinatni sustav u igrama. Njegova orijentacija je drugaèija od standadrdne na koju smo navikli. Gornji lijevi kut prozora predstavlja toèku (0, 0). Os y raste prema dolje dok os x raste prema desno. Kako to izgleda, možemo vidjeti u priloženom crtežu: 
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/coordinate.png}
@@ -822,7 +822,7 @@
 	
 	Vidimo da \lstinline{update} funkcija prima vrijeme koje je prošlo. U toj æemo funkciji pomaknuti igru ovisno o prošlom vremenu. Za udaljenost koju æe lik prijeæi, to bi bila brzina lika pomnožena s vremenom trajanja petlje. To znaèi da bi se tijekom duljeg vremena lik više pomicao. Time postižemo jednako pomicanje igre na raèunalima razlièite snage.
 	
-	Ovakav pristup donosi sa sobom probleme zbog toga što raèunala zaokružuju pri operacijama s tipom \lstinline{double}. Zamislimo da jedan korsnik u jednoj sekundi proðe petlju 10 puta, a drugi je proðe 60 puta. Korisnik koji proðe glavnu petlju više puta, obavit æe više operacija i podložniji je veæem broju grešaka. U tom trenutku možemo imati dva dogaðaja koja izgledaju drukèije iako su izvedena na isti naèin. Zato nam je teško predvidjeti što se može dogoditi na razlièitim raèunalima jer manje greške u raèunanju mogu dovesti do veæih problema pri izraèunu pravila fizike u igri. Zbog te nestabilnosti nije pametno koristiti ovo rješenje.
+	Ovakav pristup donosi sa sobom probleme zbog toga što raèunala zaokružuju pri operacijama s tipom \lstinline{double}. Zamislimo da jedan korsnik u jednoj sekundi proðe petlju 10 puta, a drugi je proðe 60 puta. Korisnik koji proðe glavnu petlju više puta obavit æe više operacija i podložniji je veæem broju grešaka. U tom trenutku možemo imati dva dogaðaja koja izgledaju drukèije iako su izvedena na isti naèin. Zato nam je teško predvidjeti što se može dogoditi na razlièitim raèunalima jer manje greške u raèunanju mogu dovesti do veæih problema pri izraèunu pravila fizike u igri. Zbog te nestabilnosti nije pametno koristiti ovo rješenje.
 	
 	\subsubsection{Više koraka u jednom}
 	Vidjeli smo da nam je problem što ili preèesto mijenjamo igru ili prerijetko. Taj problem možemo riješiti tako da uvijek crtamo posljednju sliku (što nije zahtjevna operacija), ali da ažuriranje slike obavimo ili više puta u jednoj petlji ili nijednom. To nam omoguæava fiksan broj ažuriranja koji mi odaberemo. Na sporijim raèunalima ažuriranje æe biti èešæe, a na bržima rjeðe, no ukupan broj bit æe jednak, unatoè tome što æe brže raèunalo i brže crtati trenutno stanje. Ovdje æemo pratiti koliko je vremena prošlo od zadnje slièice, a ažuriranja æemo provoditi ovisno o tome. Kod izgleda ovako:
@@ -1005,7 +1005,7 @@
 	Takve klase bit æe razna stanja i kod treba imati moguænost njihova mijenjanja. Objekt æe izgledati kao da je mijenjao klasu, ali zapravo je samo došlo do promjene njegova stanja. To æe nam smanjiti velike dijelove koda u kojima provjeravamo puno uvjeta kod objekata prije neke radnje odvajanjem tih radnji u zasebne klase.
 	
 	\subsection{\primjer}
-	Kao primjer uzmimo igru u kojoj je glavni lik èovjek koji se može transformirati u lava èiji æe napad biti jaèi. Prvi dio pokazat æe zašto koristimo ovaj obrazac. Zamislimo klasu \lstinline{Player} koja predstavlja našeg glavnog lika koji ima moguænost transformiranja. Jedan osnovan naèin rješavanja ovog problema bilo bi korištenje enumeracije:
+	Kao primjer uzmimo igru u kojoj je glavni lik èovjek koji se može transformirati u lava èiji æe napad biti jaèi. Prvi dio pokazat æe zašto koristimo ovaj obrazac. Zamislimo klasu \lstinline{Player} koja predstavlja naš glavni lik koji ima moguænost transformiranja. Jedan osnovan naèin rješavanja ovog problema bilo bi korištenje enumeracije:
 	\begin{lstlisting}
 	enum class States
 	{
@@ -1090,15 +1090,15 @@
 	\end{lstlisting}
 	Oèito je ovaj kod puno pregledniji i lakši za održavanje. Omoguæava nam jednostavno dodavanje novih stanja. 
 	
-	U zadnjem se primjeru samo èitaju unosi korisnika, ali je dobra ideja ovako pozivati još i \lstinline{update()} i \lstinline{draw()} funkcije jer æemo ovisno o trenutnom stanju pomicati i crtati glavnoga lika. 
+	U zadnjem se primjeru samo èitaju unosi korisnika, ali je dobra ideja ovako pozivati još i \lstinline{update()} i \lstinline{draw()} funkcije jer æemo ovisno o trenutnom stanju pomicati i crtati glavni lik. 
 	
 	\subsection{\zaklj}
-	Glavna primjena ovoga obrasca je bolja organizacija koda. Bez njega neke funkcije mogu biti ogromne i neodržive. Ako je funkcija dovoljno velika i ima mnogo \lstinline{if/else} ili prevelik \lstinline{switch}, treba nam \lstinline{State} oblikovni obrazac. Toènije, potreban je ako neki objekt mijenja ponašanje ovisno o stanju. Njime jednostavno mijenjamo stanje glavnoga lika i dodajemo nove dijelove po potrebi. 
+	Glavna primjena ovoga obrasca bolja je organizacija koda. Bez njega neke funkcije mogu biti ogromne i neodržive. Ako je funkcija dovoljno velika i ima mnogo \lstinline{if/else} ili prevelik \lstinline{switch}, treba nam \lstinline{State} oblikovni obrazac. Toènije, potreban je ako neki objekt mijenja ponašanje ovisno o stanju. Njime jednostavno mijenjamo stanje glavnoga lika i dodajemo nove dijelove po potrebi. 
 	
 	
 	\chapter{Implementacija igre u SFML-u}
 
-	Ovo poglavlje æe demonstrirati jednu implemetaciju igre u SFML-u. Biti æe pokazana struktura implementacije i neke dobre prakse pri programiranju igara. Igra u pitanju se zove "Crazy Tower". To je 2D platformer u kojem glavni lik skaèe po tornju. Cilj igre je doseæi što viši kat u igri i postiæi što veæi \textit{combo}. U poèetku igraè stoji na poèetnoj platformi i pomicanjem pritiskom na tipke desno i lijevo i skakanjem na tipku \textit{space} pokreæemo našeg lika.
+	Ovo poglavlje demonstrirat æe jednu implemetaciju igre u SFML-u. Bit æe prikazana struktura implementacije i neki dobri obièaji pri programiranju igara. Igra u pitanju zove se \textit{Crazy Tower}. To je 2D platformer u kojem glavni lik skaèe po tornju. Cilj je igre doseæi što viši kat i postiæi što veæi \textit{combo}. U poèetku igraè stoji na poèetnoj platformi i pomicanjem pritiskom na tipke desno i lijevo i skakanjem na tipku \textit{space} pokreæemo naš lik.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{slike/crazy_tower.png}
@@ -1108,7 +1108,7 @@
 	
 	
 	\section{Crazy Tower - pravila}
-	Kada se lik poène kretati onda se i sama igra nakon par katova poèinje pokretati. Zaslon se kreæe prema gore dok igraè mora ostati iznad dna zaslona. Ako igraè padne ispod dna onda je trenutna igra gotova. Tada se naš najveæi \textit{combo} i najviši kat usporeðuju sa drugim igraèima i stavljaju na ljestvicu. Najviši kat postižemo tako da sa likom skaèemo na sve više katove. Taj rekord nije toliko težak za postiæi koliko je težak visok \textit{combo}. On se postiže tako što igraè preskoèi više od jednog kata u jednom skoku. Tada igraè uðe u \textit{combo} stanje u kojem se svaki put kada preskoèi više od jednog kata brojka preskoèenih katova pribraja samom \textit{combo} broju. Takoðer, imamo vremenski brojaè od 3 sekunde zbog koji se ponovno postavlja svaki put kada poveæamo \textit{combo}. Ako to vrijeme istekne ili ako igraè ne preskoèi više od jednog kata onda se \textit{combo} postavlja na nulu. Iduæa slika pokazuje gdje piše trenutni \textit{combo} \ref{crazyTowerCombo}. Odmah iznad njega je vremenski brojaè za \textit{combo} i iznad njega je sat za poveæanje brzine. On poveæava brzinu kretanja zaslona svakih 30 sekundi i tako èini igru težom što više vremena proðe.
+	Kada se lik poène kretati, i sama se igra nakon par katova poèinje pokretati. Zaslon se kreæe prema gore, a igraè mora ostati iznad dna zaslona. Ako igraè padne ispod dna, trenutna je igra gotova. Tada se naš najveæi \textit{combo} i najviši kat usporeðuju s rezultatima drugih igraèa i postavljaju na ljestvicu. Najviši kat postižemo tako da likom skaèemo na sve više katove. Taj rekord nije toliko teško postiæi koliko je teško ostvariti velik \textit{combo}. On se postiže tako što igraè preskoèi više od jednog kata u jednom skoku. Tada igraè uðe u \textit{combo} stanje u kojem se svaki put kada preskoèi više od jednog kata, brojka preskoèenih katova pribraja samom \textit{combo} broju. Postoji i vremenski brojaè od tri sekunde koji se ponovno postavlja svaki put kada poveæamo \textit{combo}. Ako to vrijeme istekne ili ako igraè ne preskoèi više od jednoga kata, \textit{combo} se postavlja na nulu. Iduæa slika prikazuje gdje piše trenutni \textit{combo} \ref{crazyTowerCombo}. Odmah iznad njega vremenski je brojaè za \textit{combo}, a povrh njega je sat za poveæanje brzine. On poveæava brzinu kretanja zaslona svakih trideset sekundi i tako èini igru težom nakon odreðena vremena.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,keepaspectratio]{slike/tower_combo.png}
@@ -1118,11 +1118,11 @@
 	
 	\section{Implementacija}
 	
-	Igra je implementirana korištenjem više standardnih praksi i oblikovnih obrazaca za igre. Oni služe tome da igra ima kod koji je organiziran, èitljiv i lako se može unaprijediti. Korišteni su obrasci poput \textit{State} i \textit{Game Loop} te neke standardne prakse poput klasa \lstinline|Game| i \lstinline|Player|.
+	Igra je implementirana korištenjem više standardnih metoda i oblikovnih obrazaca za igre. Oni služe tome da igra ima kod koji je organiziran, èitljiv i lako se može unaprijediti. Korišteni su obrasci poput \textit{State} i \textit{Game Loop} te neke standardne metode poput klasa \lstinline|Game| i \lstinline|Player|.
 	
 	\subsection{Game}
 	
-	Aplikacije pisane u jeziku C++ poèinju svoje izvršavanje iz \lstinline|main()| funkcije. U igrama je cilj da je što manje logike i programa u glavnoj funkciji. Zbog toga se kao èesta praksa uvede nova klasa \lstinline|Game| koja obavlja svu glavnu logiku igre. Ona je centralna klasa u kojoj cijela igra poèinje svoje izvršavanje. Klasa \lstinline|Game| ima sljedeæu strukturu:
+	Aplikacije pisane u jeziku C++ poèinju svoje izvršavanje iz \lstinline|main()| funkcije. U igrama se teži postiæi što manje logike i programa u glavnoj funkciji. Zbog toga se èesto uvede nova klasa \lstinline|Game| koja obavlja svu glavnu logiku igre. Ona je centralna klasa u kojoj cijela igra poèinje svoje izvršavanje. \lstinline|Game| ima sljedeæu strukturu:
 	\begin{lstlisting}
 	class    Game
 	{
@@ -1137,11 +1137,11 @@
 	
 	};
 	\end{lstlisting}
-	Ovo je standardna struktura glavne igrine klase. Igra poèinje pozivom funkcije \lstinline|run()| u kojoj se pozivaju ostale igrine funkcije. Ovdje se koristi prvi obrazac u igri, \textsl{Game loop}. Iz glavne petlje poèinje sva centralna logika igre i obrazac koristimo kao što je veæ opisan u jednom od prethodnih poglavlja. Naravno, svu logiku igre neæemo prepustiti ni samoj klasi \lstinline|Game| nego æemo je rasporediti u više klasa koje æe imati specifiène funkcije. U ovom sluèaju u njoj glavna petlja ogranièava igru na 60 slièica po sekundi.
+	Ovo je standardna struktura glavne igrine klase. Igra poèinje pozivom \lstinline|run()| u kojoj se pozivaju ostale funkcije igre. Ovdje se koristi prvi obrazac u igri: \textsl{Game loop}. Iz glavne petlje poèinje sva centralna logika igre i obrazac koristimo kao što je veæ opisano u jednom od prethodnih poglavlja. Naravno, svu logiku igre neæemo prepustiti ni samoj klasi \lstinline|Game|, nego æemo je rasporediti u više klasa koje æe imati specifiène funkcije. U ovom sluèaju u njoj glavna petlja ogranièava igru na 60 slièica po sekundi.
 	
 	\subsection{Stanja}
 	
-	Kao i veæina igara ova neæe poèeti tako da igraèa odmah ubaci u igru. Prvo æemo imati glavni zaslon sa nekim opcijama iz kojeg možemo uæi u igru. Za vrijeme igre želimo da postoji moguænost pauziranja igre da igraè može zaustaviti pa nastaviti igru (ili se vratiti na poèetni zaslon). Oèito je sada da su ovo odreðena stanja u kojima se igra može nalaziti pa æemo zbog toga iskoristiti \textsl{State} oblikovni obrazac. Imati æemo više razlièitih stanja u kojima se igra može nalaziti te æemo ih stavljati na stog svih stanja po potrebi. Svako stanje nasljeðuje klasu \lstinline|State| koja ima sljedeæu glavnu strukturu:
+	Kao i veæina igara ova neæe poèeti na naèin da igraèa odmah ubaci u igru. Prvo se pojavi glavni zaslon s odreðenim opcijama iz kojega možemo uæi u igru. Za vrijeme igre želimo da postoji moguænost pauziranja igre kako bi igraè mogao zaustaviti pa nastaviti igru (ili se vratiti na poèetni zaslon). Sada je oèito da su sve ovo odreðena stanja u kojima se igra može nalaziti, pa æemo zbog toga iskoristiti \textsl{State} oblikovni obrazac. Imat æemo više razlièitih stanja u kojima se igra može nalaziti te æemo ih stavljati na stog svih stanja po potrebi. Svako stanje nasljeðuje klasu \lstinline|State| koja ima sljedeæu glavnu strukturu:
 	\begin{lstlisting}
 	class State
 	{
@@ -1172,9 +1172,9 @@
 	
 	};
 	\end{lstlisting}
-	Sva stanje æe imati funkcije bitne za glavne radnje u igri (crtanje, ažuriranje i dogaðaji). Bitno je primijetiti da ažuriranje i obrada dogaðaja imaju povratni tip \lstinline|bool|. Ovisno o tome što te funkcije vraæaju biti æe odreðeno hoæe li se stanja na stogu ispod njih ažurirati ili ne i obraðivati dogaðaje ili ne. 
+	Sva stanja imat æe funkcije bitne za glavne radnje u igri (crtanje, ažuriranje i dogaðaje). Bitno je primijetiti da ažuriranje i obrada dogaðaja imaju povratni tip \lstinline|bool|. Ovisno o tome što te funkcije vraæaju, bit æe odreðeno hoæe li se stanja na stogu ispod njih ažurirati ili ne, kao i hoæe li obraðivati dogaðaje ili ne. 
 	
-	Dakle, ideja je ta da stanja stavljamo na stog i onda se ona ažuriraju ovisno o stanjima iznad. Korist ovog pristupa je oèita na primjeru pauziranog stanja. U toj situaciji ne želimo da se igra resetira nego da je u istome stanju koje je bilo prije pauziranja. To znaèi da želimo da se igra iscrtava ali ne i ažurira. To æemo postiæi tako da æe funkcije \lstinline|update| i \lstinline|handleEvent| vratiti vrijednost \lstinline|false| i time naznaèiti stogu da se stanja ispod trenutnog na stogu ne ažuriraju. Kada se igra pauzira onda zapravo gura pauzirano stanje na stog i dolazi do toga da je stanje igre ispod njega. Kada smo gotovi sa pauzom onda samo mièemo element sa vrha stoga i time se nastavlja trenutna igra. Ako se stog isprazni onda znamo da je igra gotova i zatvaramo prozor. Pauzirani zaslon izgleda ovako:
+	Dakle, ideja je ta da stanja stavljamo na stog i onda se ona ažuriraju ovisno o stanjima iznad. Korist ovoga pristupa oèita je na primjeru pauziranoga stanja. U toj situaciji ne želimo da se igra resetira, nego da je u istome stanju koje je bilo prije pauziranja. To znaèi da želimo da se igra iscrtava, ali ne i ažurira. To æemo postiæi tako da funkcije \lstinline|update| i \lstinline|handleEvent| vrate vrijednost \lstinline|false| i time naznaèe stogu da se stanja ispod trenutnog ne ažuriraju. Kada se igra pauzira, ona zapravo gura pauzirano stanje na stog i dolazi do toga da je stanje igre ispod toga pauziranog stanja. Kada smo gotovi s pauzom, samo mièemo element s vrha stoga i time se nastavlja trenutna igra. Ako se stog isprazni, znamo da je igra gotova i zatvaramo prozor. Pauzirani zaslon izgleda ovako:
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,keepaspectratio]{slike/pause_screen.png}
@@ -1182,13 +1182,13 @@
 		\label{pauseScreen}
 	\end{figure}
 	
-	Sva stanja koja nude neke moguænosti odabira æe sadržavati u sebi jedan izbornik. On æe biti implementiran preko dvije klase, a to su \lstinline|Menu| koja predstavlja jedan izbornik i \lstinline|MenuOption| koja predstavlja jedan izbor. Ona simulira gumb preko klase \lstinline|sf::RectangleShape|. Ovim pristupom je lakše ubaciti izbornike u više razlièitih stanja.
+	Sva æe stanja koja nude neke moguænosti odabira sadržavati u sebi jedan izbornik. On æe biti implementiran preko dvije klase, a to su \lstinline|Menu|, koja predstavlja jedan izbornik, i \lstinline|MenuOption|, koja predstavlja jedan izbor. Ona simulira gumb preko klase \lstinline|sf::RectangleShape|. Ovim je pristupom lakše ubaciti izbornike u više razlièitih stanja.
 	
-	Da bi se razna stanja mogla prikazivati u istom prozoru i da bi mogla meðusobno komunicirati potrebno nam je neka klasa koja bi sadržavala sve bitne informacije. To nam nudi \lstinline|State::Context| koji æe u sebi sadržavati sve objekte koje razna stanja trebaju i dijele. On nam je potreban tako da neke podatke ne uèitamo više puta èime štedimo i procesorsko vrijeme i memoriju. To nam je posebno poželjno kada su u pitanju slike i zvukovi. Njih æemo takoðer spremati na poseban naèin. 
+	Kako bi se razna stanja mogla prikazivati u istome prozoru i kako bi mogla meðusobno komunicirati, potrebna nam je neka klasa koja bi sadržavala sve bitne informacije. To nam nudi \lstinline|State::Context| koji æe u sebi sadržavati sve objekte koje razna stanja trebaju i dijele. On nam je potreban da neke podatke ne uèitavamo više puta, èime štedimo i procesorsko vrijeme i memoriju. To nam je posebno poželjno kada su u pitanju slike i zvukovi. Njih æemo takoðer spremati na poseban naèin. 
 	
 	\subsection{Resursi}
 	
-	Resurse nije praktièno i pregledno držati u zasebnim varijablama. Rastom njihovog broja (što se èesto dogodi u igrama) možemo imati velik broj varijabli i to lako dovodi do nekih bugova. Ono što želimo je neki organizator resursa preko kojih ih možemo uèitati resurse i kasnije im jednostavno pristupiti. Njega bi onda slali stanjima preko konteksta i time osigurali da dodavanje resursa ne zahtjeva velike promjene u kodu. Nakon što uèitamo neki resurs onda æemo mu pridružiti neku identifikaciju (ID) u obliku enumeracije. Primjerak takve klase bi izgledao ovako:
+	Resurse nije praktièno i pregledno držati u zasebnim varijablama. Rastom njihovoga broja (što se èesto dogodi u igrama) možemo imati velik broj varijabli, a to lako dovodi do nekih \textit{bugova}. Ono što želimo, neki je organizator resursa preko kojeg možemo uèitati resurse i kasnije im jednostavno pristupiti. Njega bismo onda slali stanjima preko konteksta i time osigurali da dodavanje resursa ne zahtijeva velike promjene u kodu. Nakon što uèitamo neki resurs, pridružit æemo mu neku identifikaciju (ID) u obliku enumeracije. Primjer takve klase izgledao bi ovako:
 	\begin{lstlisting}
 	template <typename Resource, typename Identifier>
 	class ResourceHolder
@@ -1202,7 +1202,7 @@
 		std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
 	};
 	\end{lstlisting}
-	Koristimo \textsl{template} da bi ova klasa bila što opæenitija. Želimo da preko nje možemo pristupiti i teksturama i zvukovima i svim ostalim moguæim resursima. Tako imamo samo jednu klasu za sve resurse. 
+	Koristimo \textsl{template} kako bi ova klasa bila što opæenitija. Želimo preko nje moguænost pristupa i teksturama, i zvukovima, i svim ostalim moguæim resursima. Tako imamo samo jednu klasu za sve resurse. 
 	
 	Uz ovo moramo imati neku identifikaciju koju æemo predstaviti enumeracijama:
 	\begin{lstlisting}
@@ -1226,17 +1226,17 @@
 		};
 	}
 	\end{lstlisting}
-	Svakoj identifikaciji pripada toèno jedan resurs. Tako je lakše pristupiti potrebnom resursu i kod je manje sklon greškama. U poèetku izvoðenja aplikacije unutar klase \lstinline|Game| uèitaju se svi resursi i onda njima pristupamo preko njihovog ID-a. Kako njih šaljemo unutar konteksta onda æe svako stanje imati pristup.
+	Svakoj identifikaciji pripada toèno jedan resurs. Tako je lakše pristupiti potrebnom resursu i kod je manje sklon greškama. U poèetku izvoðenja aplikacije unutar klase \lstinline|Game| uèitaju se svi resursi i onda njima pristupamo preko njihovoga ID-a. Kako njih šaljemo unutar konteksta, svako æe stanje imati pristup.
 	
-	Ove sve centralne klase nam omoguæuju da imamo dobro organiziran kod koji nije meðusobno ovisan ali održava dobru komunikaciju. Ovakav kostur postavlja dobre temelje za preglednu i lako održivu aplikaciju. 
+	Sve ove centralne klase omoguæavaju nam dobro organiziran kod koji nije meðusobno ovisan, ali koji održava dobru komunikaciju. Ovakav kostur postavlja dobre temelje za preglednu i lako održivu aplikaciju. 
 	
 	\subsection{Graf igre}
 	
-	Najvažniji dio svake igre je onaj u kojoj ju igramo, ostalo su sve dijelovi koji služe da bi on bio bolji. Taj je dio dosta kompliciran za crtanje pa se zato koristi neki malo poželjniji pristup. Kada bi svo crtanje obavljali u jednoj klasi onda to zahtjevalo veliki broj varijabli koje moramo pripremiti i održavati sve na jednom mjestu. Pri svakom dodavanju novog dijela ili mijenjanju starog naš kod je otvoren za greške i sve manje pregledan. Zbog toga æemo crtanje i ažuriranje prebaciti u ævorove grafa naše aplikacije. Taj graf æe biti podijeljen u slojeve i svaki sloj igre imati svoj korijen i djecu koja æe predstavljati dijelove tog sloja. 
+	Najvažniji dio svake igre onaj je u kojem je igramo, ostalo su sve dijelovi koji služe kako bi on bio bolji. Taj je dio dosta kompliciran za crtanje, pa se koristi neki malo poželjniji pristup. Kada bi sve crtanje obavljali u jednoj klasi, to bi zahtijevalo velik broj varijabli koje moramo sve pripremiti i održavati na jednom mjestu. Pri svakom dodavanju novog dijela ili mijenjanju starog naš bi kod bio otvoren greškama i sve manje pregledan. Zbog toga æemo crtanje i ažuriranje prebaciti u èvorove grafa naše aplikacije. Taj æe graf biti podijeljen u slojeve i svaki sloj igre imat æe svoj korijen i djecu koja æe predstavljati dijelove toga sloja. 
 	
-	Prvo je igra podijeljena u slojeve i to su pozadina, platforme, igraè i zidovi tornja. Svaki od tih slojeva predstavlja korijen grafa tog sloja. Svaki od njih æe imati barem jedno dijete i nekada æe ta djeca imati još djece. U sluèaju sloja sa platformama prvo dijete æe biti klasa \lstinline|Platforms| koja æe pokazivati na više djece tipa \lstinline|Platform| i svaki æe taj èvor predstavljati jednu platformu. Svaka od njih æe se crtati u odnosu na poziciju roditelja, tj. objekta tipa \lstinline|Platforms|. Što znaèi da ako postavimo sve platforme na poziciju (50, 60) i onda stavimo jednu platformu na poziciju (3, 6) onda æe njena pozicija u prozoru biti (53, 66). Dakle dijete radi transformacije relativno na roditelja. 
+	Igra je prvo podijeljena u slojeve: pozadinu, platforme, igraèa i zidove tornja. Za svaki sloj grafa njegov korijen predstavljen je èvorom i oznaèen imenom toga sloja. Svaki od njih imat æe barem jedno dijete i nekada æe ta djeca imati još djece. U sluèaju sloja s platformama prvo dijete bit æe klasa \lstinline|Platforms| koja æe pokazivati na više djece tipa \lstinline|Platform|, a svaki æe taj èvor predstavljati jednu platformu. Svaka od njih crtat æe se u odnosu na poziciju roditelja, tj. objekta tipa \lstinline|Platforms|. To znaèi da ako postavimo sve platforme na poziciju (50, 60) i onda stavimo jednu platformu na poziciju (3, 6), njena æe pozicija u prozoru biti (53, 66). Dakle, dijete radi transformacije relativno o roditelju. 
 	
-	Ovakav pristup nam omoguæuje da imamo dobru organizaciju koda što se tièe ažuriranja i crtanja te nam omoguæuje da pozicioniramo elemente igre u odnosu na druge. To nam je posebno poželjno ako recimo imamo lika koji se može klonirati i njegov klon ga prati u svakom koraku. Ovakvim pristupom je to jednostavno napraviti samo tako da stavimo da je u grafu klon dijete od lika. Tako æe on lako pratiti poziciju originala.
+	Ovakav pristup omoguæava nam dobru organizaciju koda što se tièe ažuriranja i crtanja te nam omoguæava pozicioniranje elemenata igre u odnosu na druge. To nam je posebno poželjno kad, na primjer, imamo lik koji se može klonirati i njegov ga klon prati u svakom koraku. Ovakvim je pristupom to jednostavno napraviti, samo u grafu klona postavimo kao dijete lika. Tako æe on lako pratiti poziciju originala.
 	
 	Sve poèinje od klase \lstinline|SceneNode| koju æe svaki od èvorova naslijediti. 
 	
@@ -1275,11 +1275,11 @@
 	
 	\end{lstlisting}
 	
-	Nasljeðivanje \lstinline|Transformable| omoguæuje da nad samim èvorovima radimo transformacije (tj. primjercima klasa koje nasljeðuju \lstinline|SceneNode|), \lstinline|Drawable| omoguæuje da zovemo \lstinline|window.draw(node)| i tako crtamo èvorove.
+	Nasljeðivanje \lstinline|Transformable| omoguæava da nad èvorovima radimo transformacije, a \lstinline|Drawable| omoguæava da zovemo \lstinline|window.draw(node)| i tako crtamo èvorove.
 	
-	U njoj možemo dodavati i odmicati djecu èvorova. Pošto se èvorovi transformiraju u odnosu na roditelje onda se nude funkcije \lstinline|getWorldPosition()| i \lstinline|getWorldTransform()| koje nam nude globalne pozicije i transformacije. One služe kada trebamo provjeriti za dva elementa u igri imaju li dodira (stoji li igraè na platformi i sl.). Funkcije \lstinline|update()| i \lstinline|draw()| zapravo pozivaju prvo crtanje i ažuriranje na trenutnom èvoru pa onda na njegovoj djeci, uz to da \lstinline|draw()| prvo primijeni sve transformacije roditelja pa onda crta trenutni èvor. 
+	U njoj možemo dodavati i izbacivati djecu èvorova. Buduæi da se èvorovi transformiraju u odnosu na roditelje, nude se funkcije \lstinline|getWorldPosition()| i \lstinline|getWorldTransform()| koje nam pružaju globalne pozicije i transformacije. One služe kada trebamo provjeriti imaju li dva elementa u igri dodira (stoji li igraè na platformi i sl.). Funkcije \lstinline|update()| i \lstinline|draw()| zapravo pozivaju prvo crtanje i ažuriranje na trenutnom èvoru, a zatim na njegovoj djeci, uz napomenu da \lstinline|draw()| prvo primijeni sve transformacije roditelja pa onda crta trenutni èvor. 
 	
-	Prije svega ovoga postoji klasa \lstinline|Tower| koja prikazuje svijet koristeæi moguænosti klase \lstinline|sf::View|. Ona æe stvoriti korijen grafa koji æe za djecu imati èvorove koji predstavljaju slojeve. Zbog toga æe graf igre izgledati ovako:
+	Prije svega ovoga postoji klasa \lstinline|Tower| koja prikazuje svijet koristeæi moguænosti klase \lstinline|sf::View|. Ona æe stvoriti korijen grafa koji æe za djecu imati èvorove koji pak predstavljaju slojeve. Zbog toga æe graf igre izgledati ovako:
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{slike/graph_nodes.png}
@@ -1287,11 +1287,11 @@
 		\label{graphNodes}
 	\end{figure}
 
-	U toj glavnoj klasi se sve svi poèetni èvorovi pozicioniraju po zaslonu i omoguæuje im se meðusobna komunikacija.
+	U toj glavnoj klasi svi se poèetni èvorovi pozicioniraju po zaslonu i omoguæava im se meðusobna komunikacija.
 	
-	Klasa \lstinline|Platforms| služi da inicijaliziranje i ažuriranje svih platformi. Ona organizira platforme i služi kao most za komuniciranje izmeðu platformi i drugih klasa. \lstinline|Platform| predstavlja jednu platformu. \lstinline|RectangleNode| je pozadina igre. \lstinline|TowerWalls| su zidovi desno i lijevo od glavnog dijela igre. Oni na sebi imaju sat koji mjeri kada treba ubrzati kretanje igre, sat koji mjeri trajanje \textit{comboa} i brojaè za \textit{combo}. 
+	Klasa \lstinline|Platforms| služi za inicijaliziranje i ažuriranje svih platformi. Ona organizira platforme i služi kao most za komuniciranje meðu platformama i drugim klasama. \lstinline|Platform| predstavlja jednu platformu. \lstinline|RectangleNode| je pozadina igre. \lstinline|TowerWalls| su zidovi desno i lijevo od glavnoga dijela igre. Oni na sebi imaju sat koji mjeri kada treba ubrzati kretanje igre, sat koji mjeri trajanje \textit{comboa} i brojaè za \textit{combo}. 
 	
-	Na kraju \lstinline|Player| klasa predstavlja igraèa. U njoj se analiziraju unosi korisnika koji ga pokreæu i sadržava svu logiku vezanu uz pokrete i ažuriranje pozicije. Ona je centralna klasa u ovom grafu sa kojom svaka druga na neki naèin komuniciraju. Preko nje upravljamo našim igraèem sve dok ne padne ispod zaslona i dobijemo \textit{Game over} zaslon. Na njemu upisujemo naš rezultat ako smo srušili neke rekorde. Cilj je, kao što smo veæ rekli, postiæi što bolji rekord.
+	Na kraju, \lstinline|Player| klasa predstavlja igraèa. U njoj se analiziraju unosi korisnika koji ga pokreæu. Sadržava svu logiku vezanu uz pokrete i ažuriranje pozicije. Ona je centralna klasa u ovom grafu s kojom svaka druga na neki naèin komunicira. Preko nje upravljamo našim igraèem sve dok ne padne ispod zaslona i ne pojavi se \textit{Game over} zaslon. Na njemu pak upisujemo naš rezultat ako smo srušili neke rekorde. Cilj je, kao što smo veæ rekli, postiæi što bolji rekord.
 	
 	\nocite{MoreiraSFML, PupiusSFMLExample, MilchevEssentials, BarbierBlueprints, GregoryArch, wiki}
 	
@@ -1308,11 +1308,11 @@
 	% I na koncu idu sazeci na hrvatskom i engleskom
 	
 	\begin{sazetak}
-		U ovom radu vidjeli smo kako funkcionira SFML. To je C++ biblioteka koja omoguæuje programiranje dvodimenzionalnih igara. Ona nudi razne moguænosti za razvoj igara i one su ponuðene preko 5 glavnih modula SFML-a, a to su sustav, prozor, grafika, zvuk i mreža. Sa njima možemo crtati po zaslonu, upravljati likom i ostalim dijelovima programa, puštati zvukove i igrati preko mreže. Sve te moguænosti dovode to toga da možemo programirati kvalitetne i komplicirane igre. Da bi taj kod bio pregledan i održiv koristimo oblikovne obrasce. Oni su isprobane metode organiziranja koda koje dovode do toga da je kvalitetnije napisan. Bez njih bi kodove sa velikim brojem linija bilo teško èitati i održavati. Oni daju razinu apstrakcije kodu tako da nije sve u samo jednoj klasi. Na kraju smo vidjeli kako implementirati jednu igru u SFML-u. Pri tome svo koristili njegove module i oblikovne obrasce. Na tome primjeru se vide moguænosti SFML-a i zašto su korisni obrasci. Takoðer su korištene neke standardne prakse pri programiranju igara koje olakšavaju organizaciju i dodavanje novih dijelova igre.
+		U ovom radu vidjeli smo kako funkcionira SFML. To je C++ biblioteka koja omoguæava programiranje dvodimenzionalnih igara. Ona nudi razne moguænosti u razvoju igara koje su ponuðene preko 5 glavnih modula SFML-a, a to su sustav, prozor, grafika, zvuk i mreža. S njima možemo crtati po zaslonu, upravljati likom i ostalim dijelovima programa, puštati zvukove i igrati preko mreže. Sve te moguænosti dovode do toga da možemo programirati kvalitetne i komplicirane igre. Kako bi taj kod bio pregledan i održiv, koristimo oblikovne obrasce. Oni su isprobane metode organiziranja koda koje dovode do toga da je kvalitetnije napisan. Bez njih bi kodove s velikim brojem linija bilo teško èitati i održavati. Oni daju razinu apstrakcije kodu kako ne bi sve bilo u samo jednoj klasi. Na kraju smo vidjeli kako implementirati jednu igru u SFML-u. Pri tome smo koristili njegove module i oblikovne obrasce. Na tome primjeru vide se moguænosti SFML-a i zašto su korisni obrasci. Takoðer su korištene neke standardne prakse pri programiranju igara koje olakšavaju organizaciju i dodavanje novih dijelova igre.
 	\end{sazetak}
 	
 	\begin{summary}
-		In this paper, we have seen the capabilities of SFML. It is a C++ library that allows us to program two-dimensional video games. It offers different possibilities when developing games and they are offered through 5 main modules of SFML, these are system, window, graphics, sound and network. We can use them to draw on the screen, manipulate the character and other parts of the game, play sounds and play over a network. All those possibilities give us the option to develop high quality complex games. To make that code readable and sustainable, we use design patterns. They are tried and tested methods of organizing code that leads to it being written better. Without them, codes that have many lines would be difficult to read and maintain. They provide a level of abstraction to the code so that not all of it is in just one class. Finally, we saw how to implement a game in SFML. While doing so, we used its modules and design patterns. That example showed the capabilities of SFML and usefulness of design patterns. Some standarg game programming practices have also been used which facilitate the organization and addition of new parts to the game.
+		In this paper, we have seen the capabilities of SFML. It is a C++ library that allows us to program two-dimensional video games. It offers different possibilities when developing games and they are offered through 5 main modules of SFML, these are system, window, graphics, sound and network. We can use them to draw on the screen, manipulate the character and other parts of the game, play sounds and play over a network. All those possibilities give us the option to develop high quality complex games. To make that code readable and sustainable, we use design patterns. They are tried and tested methods of organizing code that leads to it being written better. Without them, codes that have many lines would be difficult to read and maintain. They provide a level of abstraction to the code so that not all of it is in just one class. Finally, we saw how to implement a game in SFML. While doing so, we used its modules and design patterns. That example showed the capabilities of SFML and usefulness of design patterns. Some standard game programming practices have also been used which facilitate the organization and addition of new parts to the game.
 	\end{summary}
 	
 	% te zivotopis
