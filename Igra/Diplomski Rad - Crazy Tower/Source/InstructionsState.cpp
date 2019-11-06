@@ -26,6 +26,7 @@ InstructionsState::InstructionsState(StateStack& stack, Context context)
 	speedInstructions.setScale(scale, scale);
 }
 
+
 void InstructionsState::draw()
 {
 	context.window->draw(background);
@@ -45,6 +46,7 @@ bool InstructionsState::handleEvent(const sf::Event& event)
 	if (event.type == sf::Event::KeyPressed || event.type == sf::Event::MouseButtonPressed)
 	{
 		stackPop();
+		context.soundPlayer->play(Sounds::ID::MenuSelect);
 	}
 
 	return false;

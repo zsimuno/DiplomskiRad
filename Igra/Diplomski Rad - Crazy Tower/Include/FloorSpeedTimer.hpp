@@ -24,6 +24,7 @@ public:
 private:
 	Tower&					tower;
 	Player&					player;
+	State::Context&				context;
 
 	bool					timerStarted;
 

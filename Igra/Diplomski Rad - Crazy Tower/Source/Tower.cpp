@@ -3,7 +3,9 @@
 #include <TowerWalls.hpp>
 #include <State.hpp>
 
-#include <iostream>
+#include <SFML/Graphics/RenderWindow.hpp>
+
+
 
 Tower::Tower(sf::RenderWindow& window, State::Context gameContext)
 	: window(window)
@@ -11,11 +13,20 @@ Tower::Tower(sf::RenderWindow& window, State::Context gameContext)
 	, worldView(window.getDefaultView())
 	, sceneGraph()
 	, sceneLayers()
-	, towerWallWidth(200.f)
+	, towerWallWidth(worldView.getSize().x / 6)
 	, scrollSpeed(0.f)
 	, player(nullptr)
 	, gameOver(false)
+	, comboText("", context.fonts->get(Fonts::ID::Secondary))
+	, comboClock()
 {
+	comboText.setFillColor(sf::Color::White);
+	comboText.setOutlineColor(sf::Color::Black);
+	comboText.setOutlineThickness(2);
+	comboText.setCharacterSize(100);
+
+	context.soundPlayer->play(Sounds::ID::Hi);
+
 	insideTowerBounds = sf::FloatRect(towerWallWidth, 0.f, worldView.getSize().x - 2 * towerWallWidth, worldView.getSize().y);
 	buildScene(); 
 }
@@ -36,7 +47,7 @@ void Tower::update(sf::Time dt)
 		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
 	{
 		sf::Vector2f velocity = player->getVelocity();
-		velocity.x = -1.7f*velocity.x;
+		velocity.x = -1.3f*velocity.x;
 		player->setVelocity(velocity);
 	}
 
@@ -44,6 +55,7 @@ void Tower::update(sf::Time dt)
 	if (position.y - bounds.height / 2 >= insideTowerBounds.top + insideTowerBounds.height)
 	{
 		gameOver = true;
+		context.soundPlayer->play(Sounds::ID::Falling);
 	}
 
 	// Move the screen with the player. Player must always be on screen
@@ -73,6 +85,12 @@ void Tower::draw()
 {
 	window.setView(worldView);
 	window.draw(sceneGraph);
+
+	if (comboClock.getElapsedTime().asSeconds() < 3)
+	{
+		comboText.setPosition(worldView.getSize().x / 2, worldView.getSize().y / 2);
+		window.draw(comboText);
+	}
 }
 
 float Tower::ScrollSpeed()
@@ -121,7 +139,7 @@ void Tower::buildScene()
 	sceneLayers[Floors]->attachChild(std::move(towerPlatforms));
 
 	// Add player
-	std::unique_ptr<Player> gamePlayer(new Player(context, *platforms, insideTowerBounds));
+	std::unique_ptr<Player> gamePlayer(new Player(context, *platforms, insideTowerBounds, *this));
 	player = gamePlayer.get();
 	spawnPosition = sf::Vector2f(worldView.getSize().x / 2.f, worldView.getSize().y - Platform::platformHeight - player->getBounds().height / 2);
 	player->setPosition(spawnPosition);
@@ -146,4 +164,63 @@ void Tower::initialize()
 	rectangle->setPosition(insideTowerBounds.left, insideTowerBounds.top);
 	platforms->initialize();
 	gameOver = false;
+}
+
+void Tower::drawComboText(float floors)
+{
+	if (floors < 4)
+	{
+		return;
+	}
+	comboClock.restart();
+	if (floors > 4 && floors < 7) 
+	{
+		comboText.setString("Good!");
+		context.soundPlayer->play(Sounds::ID::Good);
+	}
+	else if (floors < 15)
+	{
+		comboText.setString("Sweet!");
+		context.soundPlayer->play(Sounds::ID::Sweet);
+	}
+	else if (floors < 25)
+	{
+		comboText.setString("Great!");
+		context.soundPlayer->play(Sounds::ID::Great);
+	}
+	else if (floors < 35)
+	{
+		comboText.setString("Super!");
+		context.soundPlayer->play(Sounds::ID::Super);
+	}
+	else if (floors < 50)
+	{
+		comboText.setString("Wow!");
+		context.soundPlayer->play(Sounds::ID::Wow);
+	}
+	else if (floors < 70)
+	{
+		comboText.setString("Amazing!");
+		context.soundPlayer->play(Sounds::ID::Amazing);
+	}
+	else if (floors < 100)
+	{
+		comboText.setString("Extreme!");
+		context.soundPlayer->play(Sounds::ID::Extreme);
+	}
+	else if (floors < 140)
+	{
+		comboText.setString("Fantastic!");
+		context.soundPlayer->play(Sounds::ID::Fantastic);
+	}
+	else if (floors < 200)
+	{
+		comboText.setString("Splendid!");
+		context.soundPlayer->play(Sounds::ID::Splendid);
+	}
+	else 
+	{
+		comboText.setString("No Way!");
+		context.soundPlayer->play(Sounds::ID::NoWay);
+	}
 }

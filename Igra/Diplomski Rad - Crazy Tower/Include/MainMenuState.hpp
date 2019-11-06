@@ -2,10 +2,10 @@
 #define MAINMENUSTATE_HPP
 
 #include <State.hpp>
+#include <Menu.hpp>
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <Menu.hpp>
 
 class MainMenuState : public State
 {
@@ -20,6 +20,8 @@ private:
 	Menu				mainMenu;
 	sf::Sprite			background;
 	sf::Sprite			playerSprite;
+
+	sf::Text			leaderboardsText;
 };
 
 #endif // MAINMENUSTATE_HPP

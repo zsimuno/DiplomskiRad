@@ -1,12 +1,17 @@
 #include <State.hpp>
 #include <StateStack.hpp>
+#include <ResourceIdentifiers.hpp>
+#include <ResourceHolder.hpp>
 
 
-State::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Textures::ID& character)
+State::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& gfonts, Textures::ID& character, Leaderboards& boards, SoundPlayer& sPlayer, ThemePlayer& tPlayer)
 	:window(&window)
 	, textures(&textures)
-	, fonts(&fonts)
+	, fonts(&gfonts)
 	, currentCharacterID(&character)
+	, leaderboards(&boards)
+	, soundPlayer(&sPlayer)
+	, themePlayer(&tPlayer)
 {
 }
 

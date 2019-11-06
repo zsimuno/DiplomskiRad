@@ -2,11 +2,13 @@
 #include <ResourceHolder.hpp>
 #include <Utility.hpp>
 #include <Platforms.hpp>
-
+#include <Tower.hpp>
 #include <iostream>
 
 
-Player::Player(State::Context context, Platforms& towerPlatforms, sf::FloatRect& bounds)
+
+
+Player::Player(State::Context& context, Platforms& towerPlatforms, sf::FloatRect& bounds, Tower& tower)
 	: sprite(context.textures->get(*context.currentCharacterID))
 	, data(initializePlayerData())
 	, playerVelocity(0, 0)
@@ -20,6 +22,8 @@ Player::Player(State::Context context, Platforms& towerPlatforms, sf::FloatRect&
 	, maxCombo(0)
 	, isOnPlatform(true)
 	, currentBounds(bounds)
+	, tower(tower)
+	, context(context)
 {
 	sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
 	sprite.setScale(sf::Vector2f(1.5, 1.5));
@@ -46,8 +50,21 @@ void Player::handleRealtimeInput()
 {
 	if (isOnPlatform && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		playerVelocity.y -= data.jumpSpeed + 2 * abs(playerVelocity.x);
+		playerVelocity.y -= data.jumpSpeed + 1.1f * abs(playerVelocity.x);
+		std::cout << std::to_string(playerVelocity.y) << std::endl;
 		isOnPlatform = false;
+		if (playerVelocity.y > -1000.f)
+		{
+			context.soundPlayer->play(Sounds::ID::Jump1);
+		} 
+		else if (playerVelocity.y > -1500.f)
+		{
+			context.soundPlayer->play(Sounds::ID::Jump2);
+		} 
+		else
+		{
+			context.soundPlayer->play(Sounds::ID::Jump3);
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -141,14 +158,17 @@ void Player::endCombo()
 	{
 		maxCombo = currentCombo;
 	}
+	tower.drawComboText(currentCombo);
 	currentCombo = 0;
 }
 
 
 void Player::updateCurrent(sf::Time dt)
 {
-	playerVelocity.x *= 0.85f;
+	
 	float dtAsSeconds = dt.asSeconds();
+
+	playerVelocity.x *= 55.f * dtAsSeconds;
 
 	this->handleRealtimeInput();
 

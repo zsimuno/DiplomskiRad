@@ -52,7 +52,14 @@ void ComboCounter::updateCurrent(sf::Time dt)
 	float timerDiff = (comboTimer.getElapsedTime().asSeconds() * (comboBarHeight / 3));
 	comboBarFront.setPosition(5.f, 5.f + timerDiff);
 	comboBarFront.setSize(sf::Vector2f(comboBarWidth, comboBarHeight - timerDiff));
-	comboText.setString("   " + std::to_string(player.getCombo()) + "\nFloors");
+	if (player.getCombo() == 0)
+	{
+		comboText.setString("");
+	}
+	else
+	{
+		comboText.setString("   " + std::to_string(player.getCombo()) + "\nFloors");
+	}
 
 }
 

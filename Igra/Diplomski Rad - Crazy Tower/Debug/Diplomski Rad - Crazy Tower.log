@@ -1,4 +1,16 @@
-﻿  Game.cpp
+﻿  ComboCounter.cpp
+  FloorSpeedTimer.cpp
+  Game.cpp
+  GameOverState.cpp
+  GameState.cpp
+  Platform.cpp
+  Platforms.cpp
+  Player.cpp
+  PlayerAnimation.cpp
   SettingsState.cpp
+  Tower.cpp
+  TowerWalls.cpp
+  Main.cpp
   Generating Code...
+D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Source\Player.cpp(161,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Diplomski Rad - Crazy Tower.vcxproj -> D:\Faks\Diplomski rad\DiplomskiRad\Igra\Diplomski Rad - Crazy Tower\Debug\Diplomski Rad - Crazy Tower.exe

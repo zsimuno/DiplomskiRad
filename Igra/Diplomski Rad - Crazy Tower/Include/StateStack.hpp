@@ -1,6 +1,8 @@
 #ifndef STATESTACK_HPP
 #define STATESTACK_HPP
 
+#include <State.hpp>
+
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/Time.hpp>
 
@@ -8,7 +10,6 @@
 #include <utility>
 #include <functional>
 #include <map>
-#include <State.hpp>
 
 class StateStack : private sf::NonCopyable
 {

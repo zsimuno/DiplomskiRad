@@ -7,12 +7,12 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <Platforms.hpp>
 #include <map>
-#include <iostream>
+
 
 
 SettingsState::SettingsState(StateStack& stack, Context context)
 	:State(stack, context)
-	, settingsMenu(sf::Text("Settings", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
+	, settingsMenu(sf::Text("Settings", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y, *context.soundPlayer)
 {
 	// Set background texture
 	sf::Texture& texture = context.textures->get(Textures::ID::Tower);
@@ -49,48 +49,41 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 	charactersMap.insert(std::make_pair(Textures::ID::RedMarine, std::string("Red Man")));
 	charactersMap.insert(std::make_pair(Textures::ID::BlueMarine, std::string("BLue Man")));
 
-	std::vector<Textures::ID> texturesv;
-
-	texturesv.push_back(Textures::ID::Mike);
-	texturesv.push_back(Textures::ID::Bunny);
-	texturesv.push_back(Textures::ID::Invisible);
-	texturesv.push_back(Textures::ID::RedMarine);
-	texturesv.push_back(Textures::ID::BlueMarine);
-
 	sf::Text character("CH: " + charactersMap[*context.currentCharacterID], font);
 	MenuOption characterOption(character);
 	
 	characterOption.setLeftRight(
-			[charactersMap, context, texturesv]( MenuOption* option)
+			[charactersMap, context]( MenuOption* option)
 		{
-			for (std::size_t i = 0; i < texturesv.size(); ++i)
+			for (auto ch = charactersMap.begin(); ch != charactersMap.end(); ++ch)
 			{
-				if (texturesv[i] == *context.currentCharacterID)
+				if (ch->first == *context.currentCharacterID)
 				{
-					if (i == 0)
+					++ch;
+					if (ch == charactersMap.end())
 					{
-						i = texturesv.size() - 1;
+						ch = charactersMap.begin();
 					}
-					else
-					{
-						--i;
-					}
-					
-					*context.currentCharacterID = texturesv[i];
+
+					*context.currentCharacterID = ch->first;
 					break;
 				}
 			}
 			option->setString("CH: " + charactersMap.at(*context.currentCharacterID));
 
-		}, [charactersMap, context, texturesv](MenuOption* option)
+		}, [charactersMap, context](MenuOption* option)
 		{
-
-			for (std::size_t i = 0; i < texturesv.size(); ++i)
+			for (auto ch = charactersMap.begin(); ch != charactersMap.end(); ++ch)
 			{
-				if (texturesv[i] == *context.currentCharacterID)
+				if (ch->first == *context.currentCharacterID)
 				{
-					i = (i + 1) % texturesv.size();
-					*context.currentCharacterID = texturesv[i];
+					++ch;
+					if (ch == charactersMap.end())
+					{
+						ch = charactersMap.begin();
+					}
+
+					*context.currentCharacterID = ch->first;
 					break;
 				}
 			}
@@ -98,6 +91,58 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 		});
 
 	settingsMenu.addSelectableOption(characterOption);
+
+	/*std::vector<sf::Vector2u> resolutionVector;
+
+	resolutionVector.push_back(sf::Vector2u(1024, 576));
+	resolutionVector.push_back(sf::Vector2u(1280, 720));
+	resolutionVector.push_back(sf::Vector2u(1400, 800));
+	resolutionVector.push_back(sf::Vector2u(1600, 900));
+	resolutionVector.push_back(sf::Vector2u(1920, 1080));
+
+
+	sf::Text resolutionText(std::to_string(context.window->getSize().x) + "x" + std::to_string(context.window->getSize().y), font);
+	MenuOption resolutionOption(resolutionText);
+
+	resolutionOption.setLeftRight(
+		[resolutionVector, context](MenuOption* option)
+		{
+			for (std::size_t i = 0; i < resolutionVector.size(); ++i)
+			{
+				if (resolutionVector[i].x == context.window->getSize().x)
+				{
+					if (i == 0)
+					{
+						i = resolutionVector.size() - 1;
+					}
+					else
+					{
+						--i;
+					}
+
+					context.window->setSize(resolutionVector[i]);
+					break;
+				}
+			}
+
+			option->setString(std::to_string(context.window->getSize().x) + "x" + std::to_string(context.window->getSize().y));
+
+		}, [resolutionVector, context](MenuOption* option)
+		{
+
+			for (std::size_t i = 0; i < resolutionVector.size(); ++i)
+			{
+				if (resolutionVector[i].x == context.window->getSize().x)
+				{
+					i = (i + 1) % resolutionVector.size();
+					context.window->setSize(resolutionVector[i]);
+					break;
+				}
+			}
+			option->setString(std::to_string(context.window->getSize().x) + "x" + std::to_string(context.window->getSize().y));
+		});
+
+	settingsMenu.addSelectableOption(resolutionOption);*/
 
 
 	sf::Text floor("Floor: " + std::to_string(Platforms::startingPlatform), font);

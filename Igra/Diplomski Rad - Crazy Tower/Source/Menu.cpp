@@ -1,16 +1,18 @@
 #include <Menu.hpp>
 #include <Utility.hpp>
 
-#include <SFML\Graphics\RenderWindow.hpp>
-#include <SFML\Graphics\RenderTexture.hpp>
-#include <iostream>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 
 
 
-Menu::Menu(sf::Text menuTitle, float menuWidth, float menuHeight)
+
+Menu::Menu(sf::Text menuTitle, float menuWidth, float menuHeight, SoundPlayer& player)
 	: title(menuTitle)
+	, titleShadow(menuTitle)
 	, width(menuWidth)
 	, height(menuHeight)
+	, player(player)
 	, optionYPosition(menuHeight / 3)
 	, selectedOptionIndex(0)
 {
@@ -19,6 +21,11 @@ Menu::Menu(sf::Text menuTitle, float menuWidth, float menuHeight)
 	title.setCharacterSize(150);
 	title.setFillColor(sf::Color(0x01579BFF));
 	title.rotate(10);
+
+	titleShadow.setFillColor(sf::Color(0, 0, 0, 150));
+	titleShadow.setCharacterSize(150);
+	titleShadow.rotate(10);
+	titleShadow.setPosition(title.getPosition() + sf::Vector2f(10.f, 10.f));
 }
 
 void Menu::addOption(sf::Text optionText, MenuOption::MenuOptionFunction onClick)
@@ -84,6 +91,7 @@ void Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(option, states);
 	}
 	
+	target.draw(titleShadow, states);
 	target.draw(title, states);
 }
 
@@ -99,6 +107,7 @@ void Menu::handleEvent(const sf::Event& event)
 				options[selectedOptionIndex].deselect();
 				selectedOptionIndex = i;
 				options[selectedOptionIndex].select();
+				player.play(Sounds::ID::MenuMove);
 				return;
 			}
 		}
@@ -119,22 +128,27 @@ void Menu::handleEvent(const sf::Event& event)
 		case sf::Keyboard::Return:
 		case sf::Keyboard::Space:
 			options[selectedOptionIndex].click();
+			player.play(Sounds::ID::MenuSelect);
 			break;
 
 		case sf::Keyboard::Up:
 			previous();
+			player.play(Sounds::ID::MenuMove);
 			break;
 
 		case sf::Keyboard::Down:
 			next();
+			player.play(Sounds::ID::MenuMove);
 			break;
 
 		case sf::Keyboard::Left:
 			options[selectedOptionIndex].pressLeft();
+			player.play(Sounds::ID::MenuSelect);
 			break;
 
 		case sf::Keyboard::Right:
 			options[selectedOptionIndex].pressRight();
+			player.play(Sounds::ID::MenuSelect);
 			break;
 		}
 

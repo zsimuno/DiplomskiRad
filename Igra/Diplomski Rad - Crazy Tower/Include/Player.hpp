@@ -7,7 +7,7 @@
 #include <PlayerAnimation.hpp>
 #include <State.hpp>
 
-#include <SFML\Graphics\Sprite.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include <map>
@@ -15,12 +15,13 @@
 class Platforms;
 class Platform;
 class PlayerAnimation;
+class Tower;
 
 class Player :
 	public SceneNode
 {
 public:
-	Player(State::Context context, Platforms& towerPlatform, sf::FloatRect& bounds);
+	Player(State::Context& context, Platforms& towerPlatform, sf::FloatRect& bounds, Tower& tower);
 
 	void						initialize();
 
@@ -52,6 +53,8 @@ private:
 	PlayerInfo				    data;
 	PlayerAnimation             animation;
 	Platforms&					platforms;
+	Tower&						tower;
+	State::Context&				context;
 
 	sf::FloatRect				currentPlatformBounds;
 	sf::FloatRect&				currentBounds;

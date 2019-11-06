@@ -1,7 +1,6 @@
 #ifndef RESOURCEIDENTIFIERS_HPP
 #define RESOURCEIDENTIFIERS_HPP
 
-#include <SFML\Graphics\Font.hpp>
 
 // Forward declaration of SFML classes
 namespace sf
@@ -66,7 +65,7 @@ namespace Fonts
 	};
 }
 
-namespace SoundEffect
+namespace Sounds
 {
 	enum class ID
 	{
@@ -78,21 +77,26 @@ namespace SoundEffect
 		Amazing,
 		Extreme,
 		Fantastic,
+		Splendid,
 		NoWay,
 		HurryUp,
-		Yo,
-		JumpOnce,
-		JumpMultiple,
-		JumpALot,
+		Hi,
+		Jump1,
+		Jump2,
+		Jump3,
+		Falling,
 		Ledge,
-		MenuOption,
+		Alright,
+		MenuMove,
 		MenuSelect,
-		Power,
-		TryAgain
+		TryAgain,
+		Applause,
+		Pause,
 	};
+
 }
 
-namespace Music
+namespace Themes
 {
 	enum class ID
 	{
@@ -102,11 +106,12 @@ namespace Music
 }
 
 
+
 template <typename Resource, typename Identifier>
 class ResourceHolder;
 
 typedef ResourceHolder<sf::Texture, Textures::ID>			TextureHolder;
 typedef ResourceHolder<sf::Font, Fonts::ID>					FontHolder;
-typedef ResourceHolder<sf::SoundBuffer, SoundEffect::ID>	SoundBufferHolder;
+typedef ResourceHolder<sf::SoundBuffer, Sounds::ID>			SoundHolder;
 
 #endif // RESOURCEIDENTIFIERS_HPP

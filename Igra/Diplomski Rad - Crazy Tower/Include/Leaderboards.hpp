@@ -9,9 +9,7 @@
 
 #include <string>
 
-
-
-class Leaderboards : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
+class Leaderboards : private sf::NonCopyable
 {
 public:
 	struct Score
@@ -23,18 +21,20 @@ public:
 		int combo;
 	};
 
-						Leaderboards(sf::Font leaderboardsFont);
-	void				draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+						Leaderboards();
+						~Leaderboards();
+
 	bool				checkScore(int floor, int combo);
 	void				addNewScore(Score score);
-
+	std::string			getBoardsText();
 private:
 	void				updateText();
 
 	std::vector<Score>	floorRecords;
 	std::vector<Score>	comboRecords;
 
-	sf::Text			leaderboardsText;
+	std::string			comboStr;
+	std::string			floorStr;
 };
 
 

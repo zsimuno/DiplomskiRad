@@ -1,7 +1,7 @@
 #include <RectangleNode.hpp>
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML\Graphics\Sprite.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 
 

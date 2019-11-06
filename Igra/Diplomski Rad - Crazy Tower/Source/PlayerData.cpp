@@ -5,9 +5,9 @@ PlayerInfo initializePlayerData()
 {
 	PlayerInfo data;
 
-	data.jumpSpeed = 1150.f;
+	data.jumpSpeed = 1050.f;
 	data.moveSpeed = 100.f;
-	data.fallSpeed = 60.0f;
+	data.fallSpeed = 50.0f;
 	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Idle1, sf::IntRect(2, 4, 28, 52)));
 	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Idle2, sf::IntRect(306, 4, 30, 52)));
 	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Idle3, sf::IntRect(339, 4, 30, 52)));

@@ -13,7 +13,7 @@
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML\System\Time.hpp>
+#include <SFML/System/Time.hpp>
 
 #include <array>
 
@@ -33,6 +33,8 @@ public:
 	void								move(sf::Vector2f v);
 	bool								GameOver() const;
 	void								initialize();
+
+	void								drawComboText(float floors);
 
 private:
 	void								buildScene();
@@ -61,6 +63,8 @@ private:
 	sf::FloatRect						insideTowerBounds;
 	sf::Vector2f						spawnPosition;
 	sf::Sprite							background;
+	sf::Text							comboText;
+	sf::Clock							comboClock;
 	
 	Player*								player;
 	TowerWalls*							walls;

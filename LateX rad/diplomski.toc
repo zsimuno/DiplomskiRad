@@ -7,7 +7,7 @@
 \contentsline {section}{\numberline {2.2}Osnovni primjer}{7}{section.2.2}% 
 \contentsline {section}{\numberline {2.3}Prozor i Doga\IeC {\dj }aji}{9}{section.2.3}% 
 \contentsline {subsection}{Doga\IeC {\dj }aji (Events)}{11}{section*.3}% 
-\contentsline {section}{\numberline {2.4}Crtanje}{14}{section.2.4}% 
+\contentsline {section}{\numberline {2.4}Iscrtavanje}{14}{section.2.4}% 
 \contentsline {subsection}{Oblici i transformacije}{15}{section*.4}% 
 \contentsline {subsection}{Transformacije}{17}{section*.5}% 
 \contentsline {subsection}{Teksture i \textit {spriteovi}}{19}{section*.6}% 
@@ -22,7 +22,7 @@
 \contentsline {subsection}{TCP}{27}{section*.13}% 
 \contentsline {subsection}{UDP}{30}{section*.14}% 
 \contentsline {chapter}{\chapternumberline {3}Oblikovni obrasci u igrama}{33}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Game loop}{33}{section.3.1}% 
+\contentsline {section}{\numberline {3.1}\textit {Game loop}}{33}{section.3.1}% 
 \contentsline {subsection}{Motivacija}{33}{section*.15}% 
 \contentsline {subsection}{Primjer}{35}{section*.16}% 
 \contentsline {subsubsection}{Upravljanje glavnom petljom}{35}{section*.17}% 

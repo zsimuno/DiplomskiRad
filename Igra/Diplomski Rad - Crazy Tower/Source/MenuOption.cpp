@@ -3,13 +3,14 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
-#include <iostream>
+
 
 
 MenuOption::MenuOption(sf::Text text, MenuOptionFunction onClick)
 	: optionText(text)
 	, onClickAction(onClick)
 	, optionRect(sf::Vector2f(menuOptionWidth, menuOptionHeight))
+	, shadowRect(sf::Vector2f(menuOptionWidth, menuOptionHeight))
 	, primaryColor(0x01579BFF)
 	, secondaryColor(0x2196F3FF)
 	, outlineColor(sf::Color::White)
@@ -28,6 +29,9 @@ MenuOption::MenuOption(sf::Text text, MenuOptionFunction onClick)
 	optionText.setPosition(menuOptionWidth / 2, menuOptionHeight / 2);
 	optionText.setFillColor(secondaryOutlineColor);
 	optionText.setStyle(sf::Text::Style::Bold);
+
+	shadowRect.setFillColor(sf::Color(0, 0, 0, 150));
+	shadowRect.setPosition(optionRect.getPosition() + sf::Vector2f(10.f, 10.f));
 
 }
 
@@ -104,6 +108,7 @@ void MenuOption::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 
+	target.draw(shadowRect, states);
 	target.draw(optionRect, states);
 	target.draw(optionText, states);
 

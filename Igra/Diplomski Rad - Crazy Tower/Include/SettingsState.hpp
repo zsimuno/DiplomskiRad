@@ -2,10 +2,10 @@
 #define SETTINGSSTATE_HPP
 
 #include <State.hpp>
+#include <Menu.hpp>
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <Menu.hpp>
 
 class SettingsState : public State
 {

@@ -10,20 +10,29 @@
 
 GameOverState::GameOverState(StateStack& stack, Context context)
 	: State(stack, context)
-	, gameOverMenu(sf::Text("Game Over", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y)
+	, gameOverMenu(sf::Text("Game Over", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y, *context.soundPlayer)
+	, leaderboardsText(context.leaderboards->getBoardsText(), context.fonts->get(Fonts::ID::Main))
 {
+	context.themePlayer->stop();
+
 	sf::RenderWindow& window = *context.window;
-	background = sf::RectangleShape(window.getView().getSize() * 6.0f / 8.0f);
-	background.setPosition(window.getView().getSize() / 8.0f);
+	background = sf::RectangleShape(window.getView().getSize());
 	background.setFillColor(sf::Color(0, 0, 0, 150));
 
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 
-	gameOverMenu.setPosition(context.window->getView().getSize().x / 3, 120.f);
+	gameOverMenu.setPosition(context.window->getView().getSize().x / 5, 50.f);
+
+	leaderboardsText.setFillColor(sf::Color::White);
+	leaderboardsText.setOutlineColor(sf::Color::Black);
+	leaderboardsText.setOutlineThickness(2);
+	leaderboardsText.setPosition(context.window->getView().getSize().x * 2 / 3, context.window->getView().getSize().y * 2 / 5);
 
 	sf::Text restart("Try again", font);
-	gameOverMenu.addOption(restart, [this]()
+	gameOverMenu.addOption(restart, [context, this]()
 		{
+			context.themePlayer->play(Themes::ID::InGameTheme);
+			context.soundPlayer->play(Sounds::ID::Hi);
 			stackPop();
 		});
 
@@ -36,6 +45,7 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 
 }
 
+
 void GameOverState::draw()
 {
 	sf::RenderWindow& window = *context.window;
@@ -43,6 +53,7 @@ void GameOverState::draw()
 
 	window.draw(background);
 	window.draw(gameOverMenu);
+	window.draw(leaderboardsText);
 }
 
 bool GameOverState::update(sf::Time dt)

@@ -2,11 +2,13 @@
 #define STATE_HPP
 
 #include <GameStates.hpp>
+#include <Leaderboards.hpp>
 #include <ResourceIdentifiers.hpp>
 
-#include <SFML\System\Time.hpp>
-#include <SFML\Window\Event.hpp>
-
+#include <SFML/System/Time.hpp>
+#include <SFML/Window/Event.hpp>
+#include <ThemePlayer.hpp>
+#include <SoundPlayer.hpp>
 
 namespace sf
 {
@@ -22,16 +24,19 @@ public:
 
 	struct Context
 	{
-		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Textures::ID& character);
+		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Textures::ID& character, Leaderboards& boards, SoundPlayer& sPlayer, ThemePlayer& tPlayer);
 
 		sf::RenderWindow* window;
 		TextureHolder* textures;
 		FontHolder* fonts;
 		Textures::ID* currentCharacterID;
+		Leaderboards* leaderboards;
+		SoundPlayer* soundPlayer;
+		ThemePlayer* themePlayer;
 	};
 
 public:
-	State(StateStack& stack, Context context);
+						State(StateStack& stack, Context context);
 	virtual void		draw() = 0;
 	virtual bool		update(sf::Time dt) = 0;
 	virtual bool		handleEvent(const sf::Event& event) = 0;

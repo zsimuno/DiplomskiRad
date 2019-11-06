@@ -7,7 +7,7 @@
 #include <PlayerData.hpp>
 
 #include <SFML/Window/Event.hpp>
-#include <SFML\Graphics\Sprite.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 #include <map>
 class Player;

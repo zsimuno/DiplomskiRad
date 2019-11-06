@@ -129,6 +129,7 @@
     <ClCompile Include="Source\SoundPlayer.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateStack.cpp" />
+    <ClCompile Include="Source\ThemePlayer.cpp" />
     <ClCompile Include="Source\TowerWalls.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Tower.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Include\MainMenuState.hpp" />
     <ClInclude Include="Include\Menu.hpp" />
     <ClInclude Include="Include\MenuOption.hpp" />
+    <ClInclude Include="Include\ThemePlayer.hpp" />
     <ClInclude Include="Include\PauseState.hpp" />
     <ClInclude Include="Include\Platform.hpp" />
     <ClInclude Include="Include\Platforms.hpp" />

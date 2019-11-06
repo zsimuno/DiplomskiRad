@@ -3,9 +3,10 @@
 
 #include <State.hpp>
 #include <StateStack.hpp>
+#include <Menu.hpp>
+
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <Menu.hpp>
 
 class PauseState :
 	public State

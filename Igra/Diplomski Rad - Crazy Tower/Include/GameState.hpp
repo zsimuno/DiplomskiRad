@@ -1,7 +1,7 @@
 #ifndef GAMESTATE_HPP
 #define GAMESTATE_HPP
 
-#include<State.hpp>
+#include <State.hpp>
 #include <Tower.hpp>
 #include <StateStack.hpp>
 

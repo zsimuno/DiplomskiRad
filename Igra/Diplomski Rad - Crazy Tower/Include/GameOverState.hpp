@@ -1,10 +1,12 @@
 #ifndef GAMEOVERSTATE_HPP
 #define GAMEOVERSTATE_HPP
 
-#include<State.hpp>
+#include <State.hpp>
+#include <Menu.hpp>
+
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <Menu.hpp>
+
 
 class GameOverState :
 	public State
@@ -19,6 +21,8 @@ public:
 private:
 	sf::RectangleShape	background;
 	Menu				gameOverMenu;
+
+	sf::Text			leaderboardsText;
 
 };
 

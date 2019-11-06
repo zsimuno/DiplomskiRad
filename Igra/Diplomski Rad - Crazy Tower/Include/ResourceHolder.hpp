@@ -4,7 +4,8 @@
 #include <map>
 #include <string>
 #include <memory>
-#include <SFML\Graphics.hpp>
+#include <cassert>
+#include <stdexcept>
 
 template <typename Resource, typename Identifier>
 class ResourceHolder
@@ -18,5 +19,7 @@ private:
 	std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
 };
 
+
 #include "ResourceHolder.inl"
+
 #endif // RESOURCEHOLDER_HPP

@@ -1,6 +1,4 @@
 #include <Game.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include <MainMenuState.hpp>
 #include <PauseState.hpp>
 #include <GameState.hpp>
@@ -11,15 +9,17 @@
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
-	: window(sf::VideoMode(1280, 800), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
+	: window(sf::VideoMode(1400, 800), "Crazy Tower", sf::Style::Close | sf::Style::Titlebar)
 	, textures()
 	, fonts()
 	, currentCharacter(Textures::ID::Mike)
-	, stateStack(State::Context(window, textures, fonts, currentCharacter))
+	, leaderboards()
+	, themePlayer()
+	, soundPlayer()
+	, stateStack(State::Context(window, textures, fonts, currentCharacter, leaderboards, soundPlayer, themePlayer))
 {
 	loadResources();
 	registerStates();
-
 	stateStack.pushState(GameStates::ID::Menu);
 }
 
@@ -109,4 +109,5 @@ void Game::loadResources()
 	textures.load(Textures::ID::KeyboardInstructions, "Media/Textures/keyboard_instructions.png");
 	textures.load(Textures::ID::ComboInstructions, "Media/Textures/combo_instructions.png");
 	textures.load(Textures::ID::SpeedInstructions, "Media/Textures/speed_instructions.png");
+
 }

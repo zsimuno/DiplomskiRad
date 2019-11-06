@@ -5,13 +5,14 @@
 
 #include <SFML/Graphics/Font.hpp>
 
-#include <iostream>
+
 
 Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context context, int previousPlatform)
 	: platformRect()
 	, platformNumber(floorNumber)
 	, floorNumberText(std::to_string(floorNumber), context.fonts->get(Fonts::ID::Main))
 	, platformSprite()
+	, minPlatformWidth(towerBounds.width / 5)
 {
 	platformRect.top = (float) previousPlatform - Platform::platformHeight - 100;
 	platformRect.height = platformHeight;
@@ -88,7 +89,7 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 	numberRect.setSize(sf::Vector2f(50, 30));
 	Utility::centerOrigin(numberRect);
 	numberRect.setPosition(platformRect.width / 2, platformRect.height - 10);
-	numberRect.setFillColor(sf::Color(0x795548FF));
+	numberRect.setFillColor(sf::Color(0x502A03FF));
 	numberRect.setOutlineThickness(-1);
 	numberRect.setOutlineColor(sf::Color::Black);
 }

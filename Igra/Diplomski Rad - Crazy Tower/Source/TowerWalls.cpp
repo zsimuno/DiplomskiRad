@@ -2,7 +2,9 @@
 #include <Tower.hpp>
 #include <Utility.hpp>
 
-#include <SFML\Graphics\RenderTarget.hpp>
+
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 TowerWalls::TowerWalls(float wallWidth, Tower& gameTower, Player& player, State::Context context)
 	: leftWall()

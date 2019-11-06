@@ -7,6 +7,7 @@ FloorSpeedTimer::FloorSpeedTimer(State::Context gameContext, Tower& gameTower, P
 	, timerText("30", gameContext.fonts->get(Fonts::ID::Main))
 	, gameSpeedTimer()
 	, timerStarted(false)
+	, context(gameContext)
 {
 	timerText.setCharacterSize(80);
 	timerText.setOutlineColor(sf::Color::Black);
@@ -28,6 +29,7 @@ void FloorSpeedTimer::updateCurrent(sf::Time dt)
 	{
 		gameSpeedTimer.restart();
 		tower.incrementScrollSpeed();
+		context.soundPlayer->play(Sounds::ID::HurryUp);
 	}
 
 	timerText.setString(std::to_string((int)(30 - timerTime)));

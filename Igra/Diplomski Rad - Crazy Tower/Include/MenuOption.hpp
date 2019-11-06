@@ -44,6 +44,7 @@ private:
 	sf::Text				arrowLeft;
 	sf::Text				arrowRight;
 	sf::RectangleShape		optionRect;
+	sf::RectangleShape		shadowRect;
 	sf::Color				primaryColor;
 	sf::Color				secondaryColor;
 	sf::Color				outlineColor;
