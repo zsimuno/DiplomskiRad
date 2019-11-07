@@ -30,6 +30,7 @@ public:
 	void					setString(std::string text);
 
 	bool					contains(sf::Vector2f point, sf::Vector2f menuPosition);
+	bool					leftContains(sf::Vector2f point, sf::Vector2f menuPosition);
 
 	virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

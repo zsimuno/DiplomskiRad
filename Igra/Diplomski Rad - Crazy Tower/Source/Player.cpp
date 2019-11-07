@@ -24,6 +24,7 @@ Player::Player(State::Context& context, Platforms& towerPlatforms, sf::FloatRect
 	, currentBounds(bounds)
 	, tower(tower)
 	, context(context)
+	, highestPlatform(Platforms::startingPlatform)
 {
 	sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
 	sprite.setScale(sf::Vector2f(1.5, 1.5));
@@ -40,6 +41,7 @@ void Player::initialize()
 	currentCombo = 0;
 	maxCombo = 0;
 	previousPlatformFloor = Platforms::startingPlatform;
+	highestPlatform = Platforms::startingPlatform;
 }
 
 void Player::handleEvent()
@@ -51,7 +53,6 @@ void Player::handleRealtimeInput()
 	if (isOnPlatform && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		playerVelocity.y -= data.jumpSpeed + 1.1f * abs(playerVelocity.x);
-		std::cout << std::to_string(playerVelocity.y) << std::endl;
 		isOnPlatform = false;
 		if (playerVelocity.y > -1000.f)
 		{
@@ -107,6 +108,11 @@ void Player::setOnPlatform(Platform* platform)
 		endCombo();
 	}
 
+	if (plat > highestPlatform)
+	{
+		highestPlatform = plat;
+	}
+
 	// Set the player on the platform and save current platform data
 	sf::FloatRect platBounds = platform->getBounds();
 	sf::Vector2f platPos = platform->getWorldPosition();
@@ -141,9 +147,19 @@ int Player::getPlatformNumber()
 	return previousPlatformFloor;
 }
 
+int Player::getHighestPlatform()
+{
+	return highestPlatform;
+}
+
 int Player::getCombo()
 {
 	return currentCombo;
+}
+
+int Player::getHighestCombo()
+{
+	return maxCombo;
 }
 
 bool Player::isInCombo()
@@ -158,14 +174,13 @@ void Player::endCombo()
 	{
 		maxCombo = currentCombo;
 	}
-	tower.drawComboText(currentCombo);
+	tower.drawComboText((float)currentCombo);
 	currentCombo = 0;
 }
 
 
 void Player::updateCurrent(sf::Time dt)
 {
-	
 	float dtAsSeconds = dt.asSeconds();
 
 	playerVelocity.x *= 55.f * dtAsSeconds;

@@ -26,6 +26,9 @@ public:
 
 	bool				checkScore(int floor, int combo);
 	void				addNewScore(Score score);
+	void				addNewScore(std::string name);
+
+	bool				hasNewHighScore();
 	std::string			getBoardsText();
 private:
 	void				updateText();
@@ -35,6 +38,9 @@ private:
 
 	std::string			comboStr;
 	std::string			floorStr;
+
+	int					savedFloor;
+	int					savedCombo;
 };
 
 

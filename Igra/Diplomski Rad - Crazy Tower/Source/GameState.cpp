@@ -19,8 +19,19 @@ bool GameState::update(sf::Time dt)
 	
 	if (tower.GameOver())
 	{
+		context.themePlayer->stop();
+
 		tower.initialize();
-		stackPush(GameStates::ID::GameOver);
+		if (context.leaderboards->hasNewHighScore())
+		{
+			context.soundPlayer->play(Sounds::ID::Applause);
+			stackPush(GameStates::ID::EnterName);
+		}
+		else
+		{
+			stackPush(GameStates::ID::GameOver);
+		}
+		
 	}
 
 	return true;

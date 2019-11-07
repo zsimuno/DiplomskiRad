@@ -72,6 +72,7 @@ void MainMenuState::draw()
 
 bool MainMenuState::update(sf::Time)
 {
+	context.soundPlayer->removeStoppedSounds();
 	return true;
 }
 

@@ -25,18 +25,35 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 
 	settingsMenu.setPosition(context.window->getView().getSize().x / 3, 120.f);
 
-	sf::Text volume("Volume", font);
+	sf::Text volume("Volume:" + std::to_string((int)context.soundPlayer->getVolume()) + "%", font);
 
 	MenuOption volumeOption(volume);
 
 	volumeOption.setLeftRight(
-		[](MenuOption* option)
+		[context](MenuOption* option)
 		{
+			float volume = context.soundPlayer->getVolume();
+			if (volume > 0)
+			{
+				volume -= 10;
+			}
 
+			context.soundPlayer->setVolume(volume);
+			context.themePlayer->setVolume(volume);
 
-		}, [](MenuOption* option)
+			option->setString("Volume:" + std::to_string((int)volume) + "%");
+		}, [context](MenuOption* option)
 		{
+			float volume = context.soundPlayer->getVolume();
+			if (volume < 100)
+			{
+				volume += 10;
+			}
 
+			context.soundPlayer->setVolume(volume);
+			context.themePlayer->setVolume(volume);
+
+			option->setString("Volume:" + std::to_string((int)volume) + "%");
 		});
 
 	settingsMenu.addSelectableOption(volumeOption);

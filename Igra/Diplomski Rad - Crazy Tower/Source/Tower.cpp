@@ -4,6 +4,7 @@
 #include <State.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <iostream>
 
 
 
@@ -24,6 +25,7 @@ Tower::Tower(sf::RenderWindow& window, State::Context gameContext)
 	comboText.setOutlineColor(sf::Color::Black);
 	comboText.setOutlineThickness(2);
 	comboText.setCharacterSize(100);
+	comboText.setPosition(worldView.getSize().x / 2, worldView.getSize().y / 2);
 
 	context.soundPlayer->play(Sounds::ID::Hi);
 
@@ -38,6 +40,7 @@ void Tower::update(sf::Time dt)
 	walls->move(moveDist);
 	insideTowerBounds.top += moveDist.y;
 	rectangle->move(moveDist);
+	comboText.move(moveDist);
 
 	sf::Vector2f position = player->getPosition();
 	sf::FloatRect bounds = player->getBounds();
@@ -56,6 +59,8 @@ void Tower::update(sf::Time dt)
 	{
 		gameOver = true;
 		context.soundPlayer->play(Sounds::ID::Falling);
+
+		context.leaderboards->checkScore(player->getHighestPlatform(), player->getHighestCombo());
 	}
 
 	// Move the screen with the player. Player must always be on screen
@@ -68,6 +73,7 @@ void Tower::update(sf::Time dt)
 		walls->move(moveDist);
 		insideTowerBounds.top += moveDist.y;
 		rectangle->move(moveDist);
+		comboText.move(moveDist);
 	}
 
 
@@ -79,6 +85,8 @@ void Tower::update(sf::Time dt)
 	}
 
 	sceneGraph.update(dt);
+
+	context.soundPlayer->removeStoppedSounds();
 }
 
 void Tower::draw()
@@ -86,9 +94,8 @@ void Tower::draw()
 	window.setView(worldView);
 	window.draw(sceneGraph);
 
-	if (comboClock.getElapsedTime().asSeconds() < 3)
+	if (comboClock.getElapsedTime().asSeconds() < 2.f)
 	{
-		comboText.setPosition(worldView.getSize().x / 2, worldView.getSize().y / 2);
 		window.draw(comboText);
 	}
 }
@@ -163,6 +170,7 @@ void Tower::initialize()
 	walls->setGameSpeedTimer(false);
 	rectangle->setPosition(insideTowerBounds.left, insideTowerBounds.top);
 	platforms->initialize();
+	comboText.setPosition(worldView.getSize().x / 2, worldView.getSize().y / 2);
 	gameOver = false;
 }
 

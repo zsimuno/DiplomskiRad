@@ -4,7 +4,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
-
+// TODO: Mozda mis da registrira lijevo desno
 
 MenuOption::MenuOption(sf::Text text, MenuOptionFunction onClick)
 	: optionText(text)
@@ -123,4 +123,9 @@ void MenuOption::draw(sf::RenderTarget& target, sf::RenderStates states) const
 bool MenuOption::contains(sf::Vector2f point, sf::Vector2f menuPosition)
 {
 	return sf::FloatRect((menuPosition + this->getPosition() + optionRect.getPosition()), optionRect.getSize()).contains(point);
+}
+
+bool MenuOption::leftContains(sf::Vector2f point, sf::Vector2f menuPosition)
+{
+	return sf::FloatRect((menuPosition + this->getPosition() + optionRect.getPosition()), sf::Vector2f(optionRect.getSize().x / 2, optionRect.getSize().y)).contains(point);
 }

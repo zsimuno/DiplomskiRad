@@ -84,6 +84,8 @@ bool Leaderboards::checkScore(int floor, int combo)
 	{
 		if (floor > score.floor)
 		{
+			savedCombo = combo;
+			savedFloor = floor;
 			return true;
 		}
 	}
@@ -92,6 +94,8 @@ bool Leaderboards::checkScore(int floor, int combo)
 	{
 		if (floor > score.combo)
 		{
+			savedCombo = combo;
+			savedFloor = floor;
 			return true;
 		}
 	}
@@ -122,7 +126,21 @@ void Leaderboards::addNewScore(Score score)
 		}
 	}
 	
+	savedCombo = 0;
+	savedFloor = 0;
+
 	updateText();
+}
+
+void Leaderboards::addNewScore(std::string name)
+{
+	assert(savedCombo > 0 && savedFloor > 0);
+	addNewScore(Score(name, savedFloor, savedCombo));
+}
+
+bool Leaderboards::hasNewHighScore()
+{
+	return savedCombo > 0 && savedFloor > 0;
 }
 
 std::string Leaderboards::getBoardsText()

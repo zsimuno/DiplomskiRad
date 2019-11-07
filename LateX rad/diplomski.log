@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.8.26)  7 NOV 2019 00:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.8.26)  7 NOV 2019 03:17
 entering extended mode
 **./diplomski.tex
 (diplomski.tex
@@ -1028,7 +1028,7 @@ LaTeX Font Info:    Try loading font information for OT1+txtt on input line 123
 d"
 File: ot1txtt.fd 2000/12/15 v3.1
 ) [6]
-<slike/start-app.png, id=150, 216.81pt x 238.8925pt>
+<slike/start-app.png, id=151, 216.81pt x 238.8925pt>
 File: slike/start-app.png Graphic file (type png)
 <use slike/start-app.png>
 Package pdftex.def Info: slike/start-app.png  used on input line 175.
@@ -1061,13 +1061,13 @@ Overfull \hbox (10.96275pt too wide) in paragraph at lines 367--368
 o ko-ris-titi objekt tipa [][][]
  []
 
-<slike/shape_first.png, id=357, 152.06813pt x 174.6525pt>
+<slike/shape_first.png, id=358, 152.06813pt x 174.6525pt>
 File: slike/shape_first.png Graphic file (type png)
 <use slike/shape_first.png>
 Package pdftex.def Info: slike/shape_first.png  used on input line 382.
 (pdftex.def)             Requested size: 152.06775pt x 174.65207pt.
 [16 <./slike/shape_first.png>]
-<slike/coordinate.png, id=375, 298.11375pt x 257.46187pt>
+<slike/coordinate.png, id=376, 298.11375pt x 257.46187pt>
 File: slike/coordinate.png Graphic file (type png)
 <use slike/coordinate.png>
 Package pdftex.def Info: slike/coordinate.png  used on input line 392.
@@ -1078,7 +1078,7 @@ Overfull \hbox (46.77344pt too wide) in paragraph at lines 397--398
  []
 
 [17 <./slike/coordinate.png>]
-<slike/shape_transform.png, id=387, 152.06813pt x 174.6525pt>
+<slike/shape_transform.png, id=388, 152.06813pt x 174.6525pt>
 File: slike/shape_transform.png Graphic file (type png)
 <use slike/shape_transform.png>
 Package pdftex.def Info: slike/shape_transform.png  used on input line 411.
@@ -1090,9 +1090,9 @@ Overfull \hbox (1.91461pt too wide) in paragraph at lines 417--418
  []
 
 [18 <./slike/shape_transform.png>]
-Overfull \hbox (6.83798pt too wide) in paragraph at lines 422--423
+Overfull \hbox (11.50598pt too wide) in paragraph at lines 422--423
 \OT1/txr/m/n/12 Za u[]citavanje i pri-ka-zi-va-nje slika u SFML-u pri-marno su 
-zadu[]zene 3 klase. To su [][][][][]
+zadu[]zene tri klase. To su [][][][][]
  []
 
 
@@ -1195,12 +1195,12 @@ Underfull \vbox (badness 1082) has occurred while \output is active []
 
  [36]
 [37] [38] [39] [40] [41] [42] [43] [44] [45] [46]
-<slike/crazy_tower.png, id=970, 965.10562pt x 626.34pt>
+<slike/crazy_tower.png, id=971, 965.10562pt x 626.34pt>
 File: slike/crazy_tower.png Graphic file (type png)
 <use slike/crazy_tower.png>
 Package pdftex.def Info: slike/crazy_tower.png  used on input line 1107.
 (pdftex.def)             Requested size: 432.48218pt x 280.67485pt.
-<slike/tower_combo.png, id=972, 965.10562pt x 626.34pt>
+<slike/tower_combo.png, id=973, 965.10562pt x 626.34pt>
 File: slike/tower_combo.png Graphic file (type png)
 <use slike/tower_combo.png>
 Package pdftex.def Info: slike/tower_combo.png  used on input line 1117.
@@ -1215,7 +1215,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 6094) has occurred while \output is active []
 
  [49 <./slike/tower_combo.png>] [50]
-<slike/pause_screen.png, id=1037, 965.10562pt x 626.34pt>
+<slike/pause_screen.png, id=1038, 965.10562pt x 626.34pt>
 File: slike/pause_screen.png Graphic file (type png)
 <use slike/pause_screen.png>
 Package pdftex.def Info: slike/pause_screen.png  used on input line 1183.
@@ -1243,7 +1243,7 @@ Overfull \hbox (13.19765pt too wide) in paragraph at lines 1283--1284
  []
 
 [54]
-<slike/graph_nodes.png, id=1123, 587.19376pt x 316.18124pt>
+<slike/graph_nodes.png, id=1124, 587.19376pt x 316.18124pt>
 File: slike/graph_nodes.png Graphic file (type png)
 <use slike/graph_nodes.png>
 Package pdftex.def Info: slike/graph_nodes.png  used on input line 1288.
@@ -1333,35 +1333,36 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1329.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1329.
 
 Package rerunfilecheck Info: File `diplomski.out' has not changed.
-(rerunfilecheck)             Checksum: DA8311D6498E6C120317F2DB0101A491;1027.
+(rerunfilecheck)             Checksum: 0BA6784279717168C41164D0C4F874BB;1030.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1329.
  ) 
 Here is how much of TeX's memory you used:
- 14902 strings out of 492895
- 211018 string characters out of 3123268
+ 14906 strings out of 492895
+ 211062 string characters out of 3123268
  533458 words of memory out of 3000000
- 17739 multiletter control sequences out of 15000+200000
+ 17743 multiletter control sequences out of 15000+200000
  49815 words of font info for 111 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,1232b,1800s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,15n,58p,1233b,1800s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
 c}<C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/txfonts
 /rtxb.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
-/txfonts/rtxi.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type
-1/public/txfonts/rtxr.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/public/txfonts/txsy.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/txfonts/txtt.pfb><C:/Users/Nikola/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/Nikola/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/Nikola/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Nikola
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/
-Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/U
-sers/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-<C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8
-a.pfb>
-Output written on diplomski.pdf (66 pages, 825830 bytes).
+/txfonts/rtxbi.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/txfonts/rtxi.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/txfonts/rtxr.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/txfonts/txsy.pfb><C:/Users/Nikola/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/txfonts/txtt.pfb><C:/Users/Nikola/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/Nikola/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/Ni
+kola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Use
+rs/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><
+C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
+pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
+mr8a.pfb><C:/Users/Nikola/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/tim
+es/utmri8a.pfb>
+Output written on diplomski.pdf (66 pages, 827248 bytes).
 PDF statistics:
- 1403 PDF objects out of 1440 (max. 8388607)
+ 1407 PDF objects out of 1440 (max. 8388607)
  851 named destinations out of 1000 (max. 500000)
  200 words of extra memory for PDF output out of 10000 (max. 10000000)
 

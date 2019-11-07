@@ -13,7 +13,6 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 	, gameOverMenu(sf::Text("Game Over", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y, *context.soundPlayer)
 	, leaderboardsText(context.leaderboards->getBoardsText(), context.fonts->get(Fonts::ID::Main))
 {
-	context.themePlayer->stop();
 
 	sf::RenderWindow& window = *context.window;
 	background = sf::RectangleShape(window.getView().getSize());

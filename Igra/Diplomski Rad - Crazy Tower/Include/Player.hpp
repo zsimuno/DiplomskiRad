@@ -38,8 +38,10 @@ public:
 	Platforms&					getPlatforms();
 	sf::FloatRect				getCurrentPlatformBounds();
 	int							getPlatformNumber();
+	int							getHighestPlatform();
 	
 	int							getCombo();
+	int							getHighestCombo();
 	bool						isInCombo();
 	void						endCombo();
 
@@ -63,6 +65,7 @@ private:
 	bool						inCombo;
 	int							currentCombo;
 	int							previousPlatformFloor;
+	int							highestPlatform;
 	int							maxCombo;
 
 	bool					    mirroredSprite;

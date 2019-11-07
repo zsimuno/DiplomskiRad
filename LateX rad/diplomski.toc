@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {2.1}Moduli SFML-a}{5}{section.2.1}% 
 \contentsline {section}{\numberline {2.2}Osnovni primjer}{7}{section.2.2}% 
 \contentsline {section}{\numberline {2.3}Prozor i Doga\IeC {\dj }aji}{9}{section.2.3}% 
-\contentsline {subsection}{Doga\IeC {\dj }aji (Events)}{11}{section*.3}% 
+\contentsline {subsection}{Doga\IeC {\dj }aji (\textit {Events})}{11}{section*.3}% 
 \contentsline {section}{\numberline {2.4}Iscrtavanje}{14}{section.2.4}% 
 \contentsline {subsection}{Oblici i transformacije}{15}{section*.4}% 
 \contentsline {subsection}{Transformacije}{17}{section*.5}% 
@@ -29,7 +29,7 @@
 \contentsline {subsubsection}{Pomicanje ovisno o vremenu}{36}{section*.18}% 
 \contentsline {subsubsection}{Vi\v se koraka u jednom}{37}{section*.19}% 
 \contentsline {subsection}{Zaklju\v cak}{38}{section*.20}% 
-\contentsline {section}{\numberline {3.2}Double Buffer}{38}{section.3.2}% 
+\contentsline {section}{\numberline {3.2}\textit {Double Buffer}}{38}{section.3.2}% 
 \contentsline {subsection}{Motivacija}{38}{section*.21}% 
 \contentsline {subsection}{Primjer}{39}{section*.22}% 
 \contentsline {subsection}{Zaklju\v cak}{42}{section*.23}% 
@@ -38,9 +38,9 @@
 \contentsline {subsection}{Primjer}{43}{section*.25}% 
 \contentsline {subsection}{Zaklju\v cak}{46}{section*.26}% 
 \contentsline {chapter}{\chapternumberline {4}Implementacija igre u SFML-u}{47}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Crazy Tower - pravila}{47}{section.4.1}% 
+\contentsline {section}{\numberline {4.1}Crazy Tower -- pravila}{47}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Implementacija}{48}{section.4.2}% 
-\contentsline {subsection}{Game}{48}{section*.27}% 
+\contentsline {subsection}{\textit {Game}}{48}{section*.27}% 
 \contentsline {subsection}{Stanja}{50}{section*.28}% 
 \contentsline {subsection}{Resursi}{52}{section*.29}% 
 \contentsline {subsection}{Graf igre}{53}{section*.30}% 

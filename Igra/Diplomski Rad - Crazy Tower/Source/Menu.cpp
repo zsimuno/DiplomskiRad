@@ -107,7 +107,6 @@ void Menu::handleEvent(const sf::Event& event)
 				options[selectedOptionIndex].deselect();
 				selectedOptionIndex = i;
 				options[selectedOptionIndex].select();
-				player.play(Sounds::ID::MenuMove);
 				return;
 			}
 		}
@@ -117,7 +116,17 @@ void Menu::handleEvent(const sf::Event& event)
 		// Mouse can only be pressed on the selected option
 		if (options[selectedOptionIndex].contains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y), this->getPosition()))
 		{
+			player.play(Sounds::ID::MenuSelect);
 			options[selectedOptionIndex].click();
+
+			if (options[selectedOptionIndex].leftContains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y), this->getPosition()))
+			{
+				options[selectedOptionIndex].pressLeft();
+			}
+			else
+			{
+				options[selectedOptionIndex].pressRight();
+			}
 		}
 		break;
 

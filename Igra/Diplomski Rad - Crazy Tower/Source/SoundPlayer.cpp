@@ -12,7 +12,7 @@ SoundPlayer::SoundPlayer()
 
 void SoundPlayer::play(Sounds::ID soundID)
 {
-
+	// TODO: game crashing on this push_back
 	sounds.push_back(sf::Sound());
 	sf::Sound& sound = sounds.back();
 

@@ -14,6 +14,7 @@ namespace GameStates
 		Pause,
 		Instructions,
 		Settings,
+		EnterName
 	};
 }
 
