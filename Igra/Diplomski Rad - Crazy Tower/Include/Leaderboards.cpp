@@ -6,9 +6,12 @@
 #include <sstream>
 
 #include <cassert>
+#include <iostream>
 
 
 Leaderboards::Leaderboards()
+	: savedCombo(0)
+	, savedFloor(0)
 {
 	std::string line;
 	std::ifstream infile;
@@ -80,8 +83,10 @@ Leaderboards::~Leaderboards()
 
 bool Leaderboards::checkScore(int floor, int combo)
 {
+
 	for (auto score : floorRecords)
 	{
+
 		if (floor > score.floor)
 		{
 			savedCombo = combo;
@@ -92,7 +97,7 @@ bool Leaderboards::checkScore(int floor, int combo)
 
 	for (auto score : comboRecords)
 	{
-		if (floor > score.combo)
+		if (combo > score.combo)
 		{
 			savedCombo = combo;
 			savedFloor = floor;
@@ -105,7 +110,7 @@ bool Leaderboards::checkScore(int floor, int combo)
 
 void Leaderboards::addNewScore(Score score)
 {
-	
+
 	for (auto s = comboRecords.begin(); s != comboRecords.end(); ++s)
 	{
 		if (score.combo > s->combo)
@@ -115,7 +120,7 @@ void Leaderboards::addNewScore(Score score)
 			break;
 		}
 	}
-	
+
 	for (auto s = floorRecords.begin(); s != floorRecords.end(); ++s)
 	{
 		if (score.floor > s->floor)
@@ -125,7 +130,7 @@ void Leaderboards::addNewScore(Score score)
 			break;
 		}
 	}
-	
+
 	savedCombo = 0;
 	savedFloor = 0;
 
@@ -134,13 +139,13 @@ void Leaderboards::addNewScore(Score score)
 
 void Leaderboards::addNewScore(std::string name)
 {
-	assert(savedCombo > 0 && savedFloor > 0);
+	assert(savedCombo > 0 || savedFloor > 0);
 	addNewScore(Score(name, savedFloor, savedCombo));
 }
 
 bool Leaderboards::hasNewHighScore()
 {
-	return savedCombo > 0 && savedFloor > 0;
+	return savedCombo > 0 || savedFloor > 0;
 }
 
 std::string Leaderboards::getBoardsText()

@@ -8,7 +8,7 @@
 
 % Stil je optimiziran za kreiranje pdf dokumenta (npr. pomocu pdflatex-a, XeLaTeX-a)
 
-\documentclass[a4paper,twoside,12pt]{memoir} % jednostrano: promijeniti twoside u oneside
+\documentclass[a4paper,oneside,12pt]{memoir} % jednostrano: promijeniti twoside u oneside
 
 % Paket inputenc omogucava direktno unosenje hrvatskih dijakritickih znakova 
 % opcija utf8 za unicode (unix, linux, mac)
@@ -65,7 +65,7 @@
 \title{Programiranje video igara u biblioteci SFML}
 \author{Zvonimir Šimunoviæ}
 \advisor{Prof. dr. sc. Mladen Jurak}  % obavezno s titulom (prof. dr. sc ili doc. dr. sc.)
-\date{Rujan, 2019.}  % oblika mjesec, godina
+\date{studeni 2019.}  % oblika mjesec, godina
 
 
 \begin{document}
@@ -78,6 +78,7 @@
 	
 	% Diplomski rad treba poceti s uvodnim poglavljem  
 	\begin{intro}
+		
 		U današnjem svijetu neobièno je sresti neku osobu koja se nije susrela barem s jednom videoigrom. Igre više nisu samo na raèunalima i konzolama, prisutne su i na našim mobilnim ureðajima. Uz razne moguæe podjele jedna od postojeæih podjela je na igre koje su u dvije (2D) i igre koje su u tri dimenzije (3D). 2D igre znaèajno su dominirale tržištem do 90-ih godina dok nismo razvili dovoljno dobru tehnologiju kako bismo mogli efikasno pokretati 3D igre.
 		
 		Premda su najveæe i najpoznatije igre današnjice najèešæe 3D, 2D je još uvijek prisutan i èesto ga susreæemo, pogotovo u svijetu nezavisnih (\textit{indie}) igara. Svijet 2D-a prepun je moguænosti, pa se takve igre neæe tako skoro prestati programirati. Pojavom modernijih, objektno orijentiranih jezika došle su i biblioteke koje omoguæavaju pisanje koda za igre. Ti jezici i biblioteke dopuštaju brzo, efikasno i pregledno pisanje koda. 
@@ -90,6 +91,7 @@
 	\end{intro}
 	
 	\chapter{Kratki uvod u C++}
+	
 	C++ je programski jezik s podrškom za objektno orijentirano programiranje. Razvio ga je Bjarne Stroustrup 80-ih godina prošloga stoljeæa. Napisao ga je kao proširenje programskom jeziku C, pa je originalno bio nazvan "C s klasama". Jezik se razvijao s vremenom i još uvijek se razvija. Zadnji standard koji smo dobili je C++17, a C++20 sljedeæi je koji se oèekuje. C++ nam omoguæava upravljanje memorijom na niskim razinama i zato ga koristimo ako su nam bitne performanse i ogranièeni smo resursima. 
 	
 	Meðu ostalim, danas se koristi èesto u velikim zahtjevnim sustavima, aplikacijama kojima su performanse bitne, i \textit{desktop}-aplikacijama. Èesto je korišten za programiranje igara i neki poznatiji \textit{game enginei} (aplikacije koje se koriste za razvoj igara i koje rade na višim razinama razvoja za razliku od SFML-a), poput \textit{Unreala} i \textit{Source enginea}, pisani su u njemu. C++ nam je bitan u ovome radu jer je SFML primarno C++ biblioteka za razvoj igara.
@@ -242,7 +244,7 @@
 	
 	\subsection{Dogaðaji (\textit{Events})}
 	
-	Èitanje dogaðaja koje stvara korisnik jedna je od najbitnijih znaèajki vezanih s programiranjem igara. Igre su po samoj definiciji interaktivne, pa je èitanje korisnikovih unosa kljuèno. Dogaðaje možemo èitati preko \lstinline|sf::Window| instance ili èitajuæi stanje samih dogaðaja u stvarnom vremenu. Ako èitamo iz prozora, pozivamo \lstinline|bool pollEvent()| koja vraæa \textit{true} dok god ima novih dogaðaja koje treba èitati i popunjava varijablu \lstinline{event} s podatcima samog dogaðaja. Bitno je znati da može postojati više od jednog dogaðaja (npr. možemo stisnuti i miš i tipkovnicu u isto vrijeme) i onda moramo paziti da uhvatimo sve dogaðaje. Zbog toga æe kod izgledati ovako:
+	Èitanje dogaðaja koje stvara korisnik jedna je od najbitnijih znaèajki vezanih s programiranjem igara. Igre su po samoj definiciji interaktivne, pa je èitanje korisnikovih unosa kljuèno. Dogaðaje možemo èitati preko \lstinline|sf::Window| instance ili èitajuæi stanje samih dogaðaja u stvarnom vremenu. Ako èitamo iz prozora, pozivamo \lstinline|bool pollEvent(event)| koja vraæa \textit{true} dok god ima novih dogaðaja koje treba èitati i popunjava varijablu \lstinline{event} s podatcima samog dogaðaja. Bitno je znati da može postojati više od jednog dogaðaja (npr. možemo stisnuti i miš i tipkovnicu u isto vrijeme) i onda moramo paziti da uhvatimo sve dogaðaje. Zbog toga æe kod izgledati ovako:
 	\begin{lstlisting}
 	// Game loop
 	while (window.isOpen())
@@ -308,7 +310,7 @@
 	\section{Iscrtavanje}
 	U poèetku svijeta igara nije bilo mnogo moguænosti pri njihovom programiranju. Sve igre morale su biti jednostavne jer sami hardver nije imao moguænosti za velike svjetove i kompliciranu grafiku. Ako je igra bila zahtjevnija, onda se èesto radilo o igri s jednostavnijom grafikom i mnogo teksta. Neke su avanture èak znale biti u potpunosti tekstualne. Danas svaka igra ima grafièko suèelje i prikazuje nešto na zaslonu, od samog lika igraèa do informacija kao što je kolièina metaka i sl. Praktièki je nemoguæe zamisliti modernu igru bez grafike i zato æe i ovdje biti korištena. SFML nam nudi moguænosti prikazivanja oblika i tekstura na zaslonu. Možemo crtati neke oblike, poput krugova i kvadrata, ili uèitavati i crtati naše slike pohranjene na tvrdom disku. 
 	
-	Prikazano je kako otvoriti prozor i èitati korisnikove unose, sada je potrebno to dalje obraditi. Taj unos možemo iskoristiti tako da prikažemo neki lik na zaslonu i njime upravljamo. Te likove i slike crtamo u prozoru koji smo otvarali u dosadašnjim primjerima, ali sada koristimo primjer klase \lstinline{sf::RenderWindow} klase, a ne \lstinline{sf::Window}. Možemo ponovno uzeti naš poèetni primjer kako bismo demonstrirali ovu funkcionalnost:
+	Prikazano je kako otvoriti prozor i èitati korisnikove unose, sada je potrebno to dalje obraditi. Taj unos možemo iskoristiti tako da prikažemo neki lik na zaslonu i njime upravljamo. Te likove i slike crtamo u prozoru koji smo otvarali u dosadašnjim primjerima, ali sada koristimo primjer klase \lstinline{sf::RenderWindow}, a ne \lstinline{sf::Window}. Možemo ponovno uzeti naš poèetni primjer kako bismo demonstrirali ovu funkcionalnost:
 	\begin{lstlisting}
 	#include <SFML/Graphics.hpp>
 	
@@ -337,13 +339,13 @@
 		return 0;
 	}
 	\end{lstlisting}
-	Kao što vidimo u ovom primjeru, u svakom ciklusu prvo se briše sve u prozoru. Nakon toga æe se naš oblik nacrtati i na kraju prikazati. Ovaj dio svake glavne petlje igre pisan je u \textit{Double Buffer} oblikovnom obrascu. Jednu sliku prikazujemo dok drugu pripremamo za prikazivanje. To nam omoguæava da se igra bez problema iscrtava na zaslonu, ali o tome više u drugom poglavlju.
+	Kao što vidimo u ovom primjeru, u svakom ciklusu prvo se briše sve u prozoru. Nakon toga æe se naš oblik nacrtati i na kraju prikazati. Ovaj dio svake glavne petlje igre pisan je u \textit{Double Buffer} oblikovnom obrascu. Jednu sliku prikazujemo dok drugu pripremamo za prikazivanje. To nam omoguæava da se igra bez problema iscrtava na zaslonu, ali o tome više u jednom od iduæih poglavlja.
 	
 	\subsection{Oblici i transformacije}
 	
 	Kada je u pitanju crtanje oblika, SFML nam nudi poznate oblike, poput kruga i pravokutnika, no možemo i sami napraviti vlastiti oblik. Te oblike stvaramo klasama \lstinline{CircleShape} , \lstinline{RectangleShape} i \lstinline{ConvexShape}. \lstinline{CircleShape} nam omoguæava crtanje kruga tako da mu zadamo polumjer, a pomoæu \lstinline{RectangleShape} crtamo pravokutnike sa zadanom širinom i visinom. \lstinline{ConvexShape} je oblik koji ima proizvoljni broj vrhova koji mi zadamo. Kao što je navedeno, broj vrhova je proizvoljan, ali pod uvjetom da èini vrhove oblika koji se može nacrtati. 
 	
-	Svaki oblik nasljeðuje klasu \lstinline{Shape} i tako nadjaèava funkcije èlanice \lstinline{Shape::setFillColor()}, \lstinline{Shape::setOutlineColor()} i \lstinline{Shape::setOutlineThickness()}. Ove nam funkcije omoguæavaju da postavljamo izgled oblika onako kako nam odgovara. Pokazat æemo njihovu upotrebu u sljedeæem primjeru:
+	Svaki oblik nasljeðuje klasu \lstinline{Shape} i tako nadjaèava funkcije èlanice \lstinline{setFillColor()}, \lstinline{setOutlineColor()} i \lstinline{setOutlineThickness()}. Ove nam funkcije omoguæavaju da postavljamo izgled oblika onako kako nam odgovara. Pokazat æemo njihovu upotrebu u sljedeæem primjeru:
 	\begin{lstlisting}
 	sf::CircleShape circleShape(30);
 	circleShape.setFillColor(sf::Color::Green);
@@ -376,17 +378,17 @@
 	window.display();
 	\end{lstlisting}
 	
-	U primjeru koristimo funkciju \lstinline{RenderWindow::draw()} kojom crtamo u prozoru. U nastavku je prikazan rezultat pokretanja koda:
+	U primjeru koristimo funkciju \lstinline{RenderWindow::draw()} kojom crtamo u prozoru. Na slici \ref{shapePrimjer1} prikazan je rezultat pokretanja koda.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/shape_first.png}
-		\caption{Shape primjer 1}
+		\caption{Shape primjer}
 		\label{shapePrimjer1}
 	\end{figure}
 	
 	Jedan detalj koji se vidi u ovome primjeru je bitnost redoslijeda crtanja oblika. Vidimo da je crtanje prije pozvano na pravokutniku nego na krugu, zato je pravokutnik na slici ispod kruga.
 	\subsection{Transformacije}
-	Samo crtanje likova nije nam dovoljno za pravu igru, takoðer nam trebaju i neke transformacije. Želimo likove okretati, pomicati, poveæavati i smanjivati. Prije transformiranja potrebno je razumjeti kako funkcionira koordinatni sustav u igrama. Njegova je orijentacija drukèija od standardne na koju smo navikli. Gornji lijevi kut prozora predstavlja toèku (0, 0). Os y raste prema dolje, a os x raste prema desno. Kako to izgleda, možemo vidjeti u priloženome crtežu: 
+	Samo crtanje likova nije nam dovoljno za pravu igru, takoðer nam trebaju i neke transformacije. Želimo likove okretati, pomicati, poveæavati i smanjivati. Prije transformiranja potrebno je razumjeti kako funkcionira koordinatni sustav u igrama. Njegova je orijentacija drukèija od standardne na koju smo navikli. Gornji lijevi kut prozora predstavlja toèku (0, 0). Os y raste prema dolje, a os x raste prema desno. Kako to izgleda, možemo vidjeti na slici \ref{coordinateSystem}.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/coordinate.png}
@@ -394,7 +396,7 @@
 		\label{coordinateSystem}
 	\end{figure}
 	
-	Sada znamo kako æe se ponašati naše transformacije, pa ih možemo poèeti koristiti. Do sada smo koristili klasu \lstinline{Shape} za sve naše oblike i da bismo ih crtali, ali ona nudi i još više moguænosti. Ona nasljeðuje \lstinline{sf::Transformable} koja nam nudi neke funkcije za transformiranje. \lstinline{Transformable::setPosition()} postavlja oblik na željenu poziciju, \lstinline{Transformable::setRotation()} koristimo za rotaciju oblika, a \lstinline{Transformable::setScale()} skalira. U nastavku je primjer upotrebe ovih funkcija:
+	Sada znamo kako æe se ponašati naše transformacije, pa ih možemo poèeti koristiti. Do sada smo koristili klasu \lstinline{Shape} za sve naše oblike i da bismo ih crtali, ali ona nudi i još više moguænosti. Ona nasljeðuje \lstinline{sf::Transformable} koja nam nudi neke funkcije za transformiranje. \lstinline{setPosition()} postavlja oblik na željenu poziciju, \lstinline{setRotation()} koristimo za rotaciju oblika, a \lstinline{setScale()} skalira. U nastavku je primjer upotrebe ovih funkcija:
 	\begin{lstlisting}
 	sf::RectangleShape rectangleShape(sf::Vector2f(100, 150));
 	rectangleShape.setFillColor(sf::Color::Black);
@@ -406,10 +408,10 @@
 	circleShape.setPosition(sf::Vector2f(50,50));
 	circleShape.setScale(sf::Vector2f(2,1));
 	\end{lstlisting}
-	Pokretanjem programa dobivamo sljedeæi rezultat:
+	Pokretanjem programa dobivamo rezultat kao na slici \ref{shapePrimjerTransform}.
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/shape_transform.png}
-		\caption{Shape primjer transform}
+		\caption{Transformacija oblika}
 		\label{shapePrimjerTransform}
 	\end{figure}
 	Vidimo da smo krug i pravokutnik pomaknuli. Krug smo skalirali tako da bude dvostruko širi nego poèetno, a pravokutnik smo rotirali za 20 stupnjeva. Vidimo da nam transformacije daju velik broj moguænosti u radu s oblicima. Uz funkciju \lstinline{setPosition}, koja pomièe oblik na neku apsolutnu poziciju, možemo koristiti \lstinline{Transformable::move()} tako da joj predamo vektor koji govori koliko želimo da se oblik pomakne od trenutne pozicije.
@@ -459,11 +461,11 @@
 	
 	\subsubsection{Teksture i oblici}
 	
-	Veæ smo spomenuli da postoji moguænost uèitavanja tekstura preko oblika. Naše teksture možemo postaviti na oblike poput pravokutnika i tako ih prikazivati na zaslonu. Oblicima možemo limitirati kolièinu slike koja æe se prikazati. Kao primjer æemo ovu sliku šume nacrtati u krugu:
+	Veæ smo spomenuli da postoji moguænost uèitavanja tekstura preko oblika. Naše teksture možemo postaviti na oblike poput pravokutnika i tako ih prikazivati na zaslonu. Oblicima možemo limitirati kolièinu slike koja æe se prikazati. Kao primjer uzet æemo prikaz šume koju vidimo na slici \ref{autumnForest}.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/autumn-forest.jpg}
-		\caption{Autumn forest}
+		\caption{Šuma}
 		\label{autumnForest}
 	\end{figure}
 
@@ -487,11 +489,11 @@
 	}
 	\end{lstlisting}
 	
-	Izvršavanjem ovoga koda dolazimo do sljedeæeg rezultata:
+	Izvršavanjem ovoga koda dolazimo do rezultata na slici \ref{autumnForestCircle}.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/autum-forest-circle.png}
-		\caption{Autumn forest circle}
+		\caption{Šuma u krugu}
 		\label{autumnForestCircle}
 	\end{figure}
 
@@ -507,7 +509,7 @@
 	\begin{lstlisting}
 		sf::Texture texture;
 		
-		// Load the texture
+		// Uèitaj teksturu.
 	
 		// Shape
 		sf::RectangleShape rect(sf::Vector2f(200, 100));
@@ -565,7 +567,7 @@
 	
 	}
 	\end{lstlisting}
-	Problem koji se javlja u ovome primjeru je taj da æe na bržim raèunalima biti više rotacije i pokreta u sekundi nego na sporijima. To su problemi koje treba rješavati u glavnoj petlji igre. O tome više u drugom poglavlju. Jedno od moguæih rješenja tog problema u SFML-u je korištenje funkcije \lstinline{Window::setFramerateLimit()}. Ako postavimo limit, funkcija \lstinline{Window::display()} usporit æe crtanje po potrebi. Kao što æemo vidjeti poslije, to nije najbolje rješenje, pogotovo kada su u pitanju lošija raèunala koja teško pokreæu našu igru.
+	Problem koji se javlja u ovome primjeru je taj da æe na bržim raèunalima biti više rotacije i pokreta u sekundi nego na sporijima. To su problemi koje treba rješavati u glavnoj petlji igre. O tome više u jednom od iduæih poglavlja. Jedno od moguæih rješenja tog problema u SFML-u je korištenje funkcije \lstinline{Window::setFramerateLimit()}. Ako postavimo limit, funkcija \lstinline{Window::display()} usporit æe crtanje po potrebi. Kao što æemo vidjeti poslije, to nije najbolje rješenje, pogotovo kada su u pitanju lošija raèunala koja teško pokreæu našu igru.
 	
 	Sada znamo crtati neke osnovne oblike i pokretati ih. Možemo u svojoj igri konstruirati pravila fizike i odreðivati što korisnik može ili ne može napraviti. To su centralni dijelovi velike veæine igara i moramo se potruditi da rade dobro.
 	
@@ -627,7 +629,7 @@
 		\label{clientServerModel}
 	\end{figure}
 	
-	Kada je u pitanju transport, postoje dva protokola: TCP i UDP. Razlike su u pouzdanosti i performansama. Oni rješavaju probleme prebacivanja informacija s jednog raèunala na drugo. U svakom od primjera slat æemo neke jednostavne podatke, ali se u pravilu šalju paketi podataka. U SFML-u je njihova podrška preko klase \lstinline{sf::Packet} i u nju možemo pohraniti više informacija razlièita tipa i slati ih preko interneta. Nadalje, u svakome od njih drukèije se programira, pa æemo ih pogledati zasebno.
+	Kada je u pitanju transport, postoje dva protokola: TCP i UDP. Razlike su u pouzdanosti i performansama. Oni rješavaju probleme prebacivanja informacija s jednog raèunala na drugo. U svakom od primjera slat æemo neke jednostavne podatke, ali se u pravilu šalju paketi podataka. U SFML-u je njihova podrška preko klase \lstinline{sf::Packet} i u nju možemo pohraniti više informacija razlièita tipa i slati ih preko interneta. Nadalje, u svakome od protokola drukèije se programira, pa æemo ih pogledati zasebno.
 	
 	
 	\subsection{TCP}
@@ -1001,7 +1003,7 @@
 	\textit{Double buffer} nam omoguæava da prikazujemo naše igre fluidno i u cijelosti. Pod cijenu memorije i brzine dobivamo igru koju je lakše crtati te ne trebamo paziti kakav je zaslon na koji se iscrtava igra. Možemo manje razmišljati o hardveru, a više se fokusirati na svoj kod.
 	
 	
-	\section{State}
+	\section{\textit{State}}
 	\subsection{\motivacija}
 	Ovaj oblikovni obrazac koristimo kako bismo predstavljali stanja u kojima može biti naša igra ili objekti u našoj igri. Igra može imati više razlièitih situacija u kojima se drukèije ponaša. Na primjer, najèešæe æe postojati glavni izbornik iz kojega možemo ili ugasiti igru ili prijeæi u stanje igranja. Ono što korisniku prikazujemo možemo pamtiti jednom varijablom, ali to stvara probleme kada želimo proširiti kod tako da dodamo u izborniku opciju kojom korisnik može mijenjati postavke ili pogledati upute kako igrati igru. Dodana su dva nova stanja koja opet pratimo tom jednom varijablom. U tom sluèaju može doæi do toga da je glavni dio koda jedna velika \lstinline{switch} naredba koja ima puno sluèajeva. Odmah je oèito zašto je to loše i nepoželjno. Uvijek želimo da je naš kod što pregledniji i pogodniji za razvijanje, zato je bolje odvajanje u zasebne klase.
 	
@@ -1101,21 +1103,21 @@
 	
 	\chapter{Implementacija igre u SFML-u}
 
-	Ovo poglavlje demonstrirat æe jednu implemetaciju igre u SFML-u. Bit æe prikazana struktura implementacije i neki dobri obièaji pri programiranju igara. Igra u pitanju zove se \textit{Crazy Tower}. To je 2D platformer u kojem glavni lik skaèe po tornju. Cilj je igre doseæi što viši kat i postiæi što veæi \textit{combo}. U poèetku igraè stoji na poèetnoj platformi i pomicanjem pritiskom na tipke desno i lijevo i skakanjem na tipku \textit{space} pokreæemo naš lik.
+	Ovo poglavlje demonstrirat æe jednu implemetaciju igre u SFML-u. Bit æe prikazana struktura implementacije i neki dobri obièaji pri programiranju igara. Igra u pitanju zove se \textit{Crazy Tower}. To je 2D platformer u kojem glavni lik skaèe po tornju. Cilj je igre doseæi što viši kat i postiæi što veæi \textit{combo}. U poèetku igraè stoji na poèetnoj platformi i pomicanjem pritiskom na tipke desno i lijevo i skakanjem na tipku \textit{space} pokreæemo naš lik. Zaslon izgleda kao na slici \ref{crazyTower}.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{slike/crazy_tower.png}
-		\caption{Crazy tower}
+		\caption{Crazy Tower}
 		\label{crazyTower}
 	\end{figure}
 	
 	
 	\section{Crazy Tower -- pravila}
-	Kada se lik poène kretati, i sama se igra nakon par katova poèinje pokretati. Zaslon se kreæe prema gore, a igraè mora ostati iznad dna zaslona. Ako igraè padne ispod dna, trenutna je igra gotova. Tada se naš najveæi \textit{combo} i najviši kat usporeðuju s rezultatima drugih igraèa i postavljaju na ljestvicu. Najviši kat postižemo tako da likom skaèemo na sve više katove. Taj rekord nije toliko teško postiæi koliko je teško ostvariti velik \textit{combo}. On se postiže tako što igraè preskoèi više od jednog kata u jednom skoku. Tada igraè uðe u \textit{combo} stanje u kojem se svaki put kada preskoèi više od jednoga kata, brojka preskoèenih katova pribraja samom \textit{combo} broju. Postoji i vremenski brojaè od tri sekunde koji se ponovno postavlja svaki put kada poveæamo \textit{combo}. Ako to vrijeme istekne ili ako igraè ne preskoèi više od jednoga kata, \textit{combo} se postavlja na nulu. Iduæa slika prikazuje gdje piše trenutni \textit{combo} \ref{crazyTowerCombo}. Odmah iznad njega vremenski je brojaè za \textit{combo}, a povrh njega je sat za poveæanje brzine. On poveæava brzinu kretanja zaslona svakih trideset sekundi i tako èini igru težom nakon odreðena vremena.
+	Kada se lik poène kretati, i sama se igra nakon par katova poèinje pokretati. Zaslon se kreæe prema gore, a igraè mora ostati iznad dna zaslona. Ako igraè padne ispod dna, trenutna je igra gotova. Tada se naš najveæi \textit{combo} i najviši kat usporeðuju s rezultatima drugih igraèa i postavljaju na ljestvicu. Najviši kat postižemo tako da likom skaèemo na sve više katove. Taj rekord nije toliko teško postiæi koliko je teško ostvariti velik \textit{combo}. On se postiže tako što igraè preskoèi više od jednog kata u jednom skoku. Tada igraè uðe u \textit{combo} stanje u kojem se svaki put kada preskoèi više od jednoga kata, brojka preskoèenih katova pribraja samom \textit{combo} broju. Postoji i vremenski brojaè od tri sekunde koji se ponovno postavlja svaki put kada poveæamo \textit{combo}. Ako to vrijeme istekne ili ako igraè ne preskoèi više od jednoga kata, \textit{combo} se postavlja na nulu. Slika  \ref{crazyTowerCombo} prikazuje gdje se nalazi trenutni \textit{combo}. Odmah iznad njega vremenski je brojaè za \textit{combo}, a povrh njega je sat za poveæanje brzine. On poveæava brzinu kretanja zaslona svakih trideset sekundi i tako èini igru težom nakon odreðena vremena.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,keepaspectratio]{slike/tower_combo.png}
-		\caption{Crazy tower combo}
+		\caption{Crazy Tower combo}
 		\label{crazyTowerCombo}
 	\end{figure}
 	
@@ -1177,7 +1179,7 @@
 	\end{lstlisting}
 	Sva stanja imat æe funkcije bitne za glavne radnje u igri (crtanje, ažuriranje i dogaðaje). Bitno je primijetiti da ažuriranje i obrada dogaðaja imaju povratni tip \lstinline|bool|. Ovisno o tome što te funkcije vraæaju, bit æe odreðeno hoæe li se stanja na stogu ispod njih ažurirati ili ne, kao i hoæe li obraðivati dogaðaje ili ne. 
 	
-	Dakle, ideja je ta da stanja stavljamo na stog i onda se ona ažuriraju ovisno o stanjima iznad. Korist ovoga pristupa oèita je na primjeru pauziranoga stanja. U toj situaciji ne želimo da se igra resetira, nego da je u istome stanju koje je bilo prije pauziranja. To znaèi da želimo da se igra iscrtava, ali ne i ažurira. To æemo postiæi tako da funkcije \lstinline|update| i \lstinline|handleEvent| vrate vrijednost \lstinline|false| i time naznaèe stogu da se stanja ispod trenutnog ne ažuriraju. Kada se igra pauzira, ona zapravo gura pauzirano stanje na stog i dolazi do toga da je stanje igre ispod toga pauziranog stanja. Kada smo gotovi s pauzom, samo mièemo element s vrha stoga i time se nastavlja trenutna igra. Ako se stog isprazni, znamo da je igra gotova i zatvaramo prozor. Pauzirani zaslon izgleda ovako:
+	Dakle, ideja je ta da stanja stavljamo na stog i onda se ona ažuriraju ovisno o stanjima iznad. Korist ovoga pristupa oèita je na primjeru pauziranoga stanja. U toj situaciji ne želimo da se igra resetira, nego da je u istome stanju koje je bilo prije pauziranja. To znaèi da želimo da se igra iscrtava, ali ne i ažurira. To æemo postiæi tako da funkcije \lstinline|update| i \lstinline|handleEvent| vrate vrijednost \lstinline|false| i time naznaèe stogu da se stanja ispod trenutnog ne ažuriraju. Kada se igra pauzira, ona zapravo gura pauzirano stanje na stog i dolazi do toga da je stanje igre ispod toga pauziranog stanja. Kada smo gotovi s pauzom, samo mièemo element s vrha stoga i time se nastavlja trenutna igra. Ako se stog isprazni, znamo da je igra gotova i zatvaramo prozor. Pauzirani zaslon izgleda kao na slici \ref{pauseScreen}.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,keepaspectratio]{slike/pause_screen.png}
@@ -1202,7 +1204,8 @@
 		const Resource& get(Identifier id) const;
 	
 	private:
-		std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
+		std::map<Identifier, std::unique_ptr<Resource>> 
+					mResourceMap;
 	};
 	\end{lstlisting}
 	Koristimo \textit{template} kako bi ova klasa bila što opæenitija. Želimo preko nje moguænost pristupa i teksturama, i zvukovima, i svim ostalim moguæim resursima. Tako imamo samo jednu klasu za sve resurse. 
@@ -1282,7 +1285,7 @@
 	
 	U njoj možemo dodavati i izbacivati djecu èvorova. Buduæi da se èvorovi transformiraju u odnosu na roditelje, nude se funkcije \lstinline|getWorldPosition()| i \lstinline|getWorldTransform()| koje nam pružaju globalne pozicije i transformacije. One služe kada trebamo provjeriti imaju li dva elementa u igri dodira (stoji li igraè na platformi i sl.). Funkcije \lstinline|update()| i \lstinline|draw()| zapravo pozivaju crtanje i ažuriranje prvo na trenutnom èvoru, a zatim na njegovoj djeci, uz napomenu da \lstinline|draw()| prvo primijeni sve transformacije roditelja pa onda crta trenutni èvor. 
 	
-	Prije svega ovoga postoji klasa \lstinline|Tower| koja prikazuje svijet koristeæi moguænosti klase \lstinline|sf::View|. Ona æe stvoriti korijen grafa koji æe za djecu imati èvorove koji pak predstavljaju slojeve. Zbog toga æe graf igre izgledati ovako:
+	Prije svega ovoga postoji klasa \lstinline|Tower| koja prikazuje svijet koristeæi moguænosti klase \lstinline|sf::View|. Ona æe stvoriti korijen grafa koji æe za djecu imati èvorove koji pak predstavljaju slojeve. Zbog toga æe graf igre izgledati kao na dijagramu \ref{graphNodes}.
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{slike/graph_nodes.png}
@@ -1301,6 +1304,7 @@
 	% Na kraju diplomkog rada stavlja se  bibliografija
 	% Najprije definiramo nacin prikazivanja bibliografije, u ovom slucaju verzija amsplain stila
 	\bibliographystyle{babamspl} % babamspl ili babplain
+	
 	
 	% U datoteku diplomski.bib se stavljaju bibliografske reference
 	% Bibliografske reference u bib formatu se mogu dobiti iz MathSciNet baze, Google Scholara, ArXiva, ...

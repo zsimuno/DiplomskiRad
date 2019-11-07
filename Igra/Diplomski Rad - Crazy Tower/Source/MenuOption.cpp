@@ -4,7 +4,6 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
-// TODO: Mozda mis da registrira lijevo desno
 
 MenuOption::MenuOption(sf::Text text, MenuOptionFunction onClick)
 	: optionText(text)

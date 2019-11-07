@@ -25,14 +25,6 @@
 \btxtitlefont {\btxifchangecase {Wikipedia - the free encyclopedia}{Wikipedia -
   The Free Encyclopedia}}, {\latintext \btxurlfont{https://en.wikipedia.org/}}.
 
-\bibitem {MoreiraSFML}
-\btxnamefont {H.\btxfnamespacelong V.\btxfnamespacelong Hansson
-  \btxlastnamefont {A.~Moreira}} \btxandlong {} \btxnamefont
-  {J.~\btxlastnamefont {Haller}}, \btxtitlefont {\btxifchangecase {Sfml game
-  developement}{SFML Game Developement}}, \btxpublisherfont {Pact Publishing},
-  2013, {\latintext
-  \btxurlfont{https://www.packtpub.com/game-development/sfml-game-development}}.
-
 \bibitem {BarbierBlueprints}
 \btxnamefont {M.~\btxlastnamefont {Barbier}}, \btxtitlefont {\btxifchangecase
   {Sfml blueprints}{SFML Blueprints}}, \btxpublisherfont {Pact Publishing},
@@ -40,8 +32,9 @@
   \btxurlfont{https://www.packtpub.com/game-development/sfml-blueprints}}.
 
 \bibitem {GangOfFourPatterns}
-\btxnamefont {Ralph\btxfnamespacelong Johnson \btxlastnamefont {Erich~Gamma},
-  Richard~Helm} \btxandlong {} \btxnamefont {John \btxlastnamefont
+\btxnamefont {Erich \btxlastnamefont {Gamma}}, \btxnamefont {Richard
+  \btxlastnamefont {Helm}}, \btxnamefont {Ralph \btxlastnamefont
+  {Johnson}}\btxandcomma {} \btxandlong {} \btxnamefont {John \btxlastnamefont
   {Vlissides}}, \btxtitlefont {\btxifchangecase {Elements of reusable
   object-oriented software}{Elements of Reusable Object-Oriented Software}},
   \btxpublisherfont {Addison-Wesley}, 1994, {\latintext
@@ -69,6 +62,14 @@
   \btxtitlefont {\btxifchangecase {Sfml essentials}{SFML Essentials}},
   \btxpublisherfont {Pact Publishing}, 2015, {\latintext
   \btxurlfont{https://www.packtpub.com/game-development/sfml-essentials}}.
+
+\bibitem {MoreiraSFML}
+\btxnamefont {A.~\btxlastnamefont {Moreira}}, \btxnamefont
+  {H.\btxfnamespacelong V. \btxlastnamefont {Hansson}}\btxandcomma {}
+  \btxandlong {} \btxnamefont {J.~\btxlastnamefont {Haller}}, \btxtitlefont
+  {\btxifchangecase {Sfml game developement}{SFML Game Developement}},
+  \btxpublisherfont {Pact Publishing}, 2013, {\latintext
+  \btxurlfont{https://www.packtpub.com/game-development/sfml-game-development}}.
 
 \bibitem {NystromPatterns}
 \btxnamefont {R.~\btxlastnamefont {Nystrom}}, \btxtitlefont {\btxifchangecase

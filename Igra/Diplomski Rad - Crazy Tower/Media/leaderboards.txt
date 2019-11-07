@@ -8,5 +8,5 @@ Highest floor
 1 509 4 asd
 2 507 10 sfa
 3 504 4 ads
-4 500 300 GGG
-5 500 5 asd
+4 504 4 aaa
+5 500 0 aaa
