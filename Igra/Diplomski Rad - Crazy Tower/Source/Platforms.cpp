@@ -26,7 +26,7 @@ bool Platforms::isOnPlatform(Player& player, float dtAsSeconds)
 
 void Platforms::updateCurrent(sf::Time dt)
 {
-	for (auto p = children.begin(); p != children.end(); p++)
+	for (auto p = children.begin(); p != children.end();)
 	{
 		auto plat = dynamic_cast<Platform*>(p->get());
 		if (plat->getBounds().top > currentBounds.top + currentBounds.height)

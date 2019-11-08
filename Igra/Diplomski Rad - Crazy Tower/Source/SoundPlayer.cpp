@@ -2,9 +2,11 @@
 
 #include <ResourceHolder.hpp>
 #include <ResourceIdentifiers.hpp>
+#include <iostream>
 
 SoundPlayer::SoundPlayer()
 	: soundHolder()
+	, sounds()
 	, volume(100.f)
 {
 	loadSounds();
@@ -12,7 +14,6 @@ SoundPlayer::SoundPlayer()
 
 void SoundPlayer::play(Sounds::ID soundID)
 {
-	// TODO: game crashing on this push_back
 	sounds.push_back(sf::Sound());
 	sf::Sound& sound = sounds.back();
 
@@ -24,10 +25,21 @@ void SoundPlayer::play(Sounds::ID soundID)
 
 void SoundPlayer::removeStoppedSounds()
 {
-	sounds.remove_if([](const sf::Sound& sound)
+	for (auto a = sounds.begin(); a != sounds.end();)
+	{
+		if (a->getStatus() == sf::SoundSource::Stopped)
 		{
-			return sound.getStatus() == sf::Sound::Stopped;
-		});
+			a = sounds.erase(a);
+		}
+		else
+		{
+			++a;
+		}
+	}
+	//sounds.remove_if([](const sf::Sound& snd)
+	//	{
+	//		return snd.getStatus() == sf::Sound::Stopped;
+	//	});
 }
 
 void SoundPlayer::setVolume(float vol)

@@ -220,6 +220,13 @@ void Player::updateCurrent(sf::Time dt)
 
 void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	//sf::RectangleShape shape(sf::Vector2f(getBounds().width, getBounds().height));
+
+	//shape.setPosition(sf::Vector2f(getBounds().left, getBounds().top));
+	//shape.setFillColor(sf::Color::White);
+
+	//target.draw(shape, states);
+
 	target.draw(sprite, states);
 }
 

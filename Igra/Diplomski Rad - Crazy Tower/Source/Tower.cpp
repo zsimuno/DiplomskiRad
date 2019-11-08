@@ -50,7 +50,7 @@ void Tower::update(sf::Time dt)
 		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
 	{
 		sf::Vector2f velocity = player->getVelocity();
-		velocity.x = -1.3f*velocity.x;
+		velocity.x = -1.0f*velocity.x;
 		player->setVelocity(velocity);
 	}
 

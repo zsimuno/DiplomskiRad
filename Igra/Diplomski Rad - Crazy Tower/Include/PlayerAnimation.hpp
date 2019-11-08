@@ -27,6 +27,8 @@ private:
 	sf::Time				time;
 	float					frameStep = 0.2f;
 
+	bool					rotatingSprite;
+	int						rotateDirection;
 };
 
 #endif // PLAYERANIMATION_HPP

@@ -1,12 +1,14 @@
 #include <PlayerAnimation.hpp>
 #include <Player.hpp>
+#include <Utility.hpp>
 
 
 
 PlayerAnimation::PlayerAnimation(PlayerInfo& playerData, sf::Sprite& playerSprite, Player& pl)
-	: data(playerData),
-	sprite(playerSprite),
-	player(pl)
+	: data(playerData)
+	, sprite(playerSprite)
+	, player(pl)
+	, rotatingSprite(false)
 {
 }
 
@@ -15,6 +17,35 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 	time += dt;
 	float timeSec = time.asSeconds(); 
 	sf::Vector2f playerVelocity = player.getVelocity();
+
+	if (playerVelocity.y < -1500.f && !rotatingSprite)
+	{
+		rotatingSprite = true;
+		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Rotate]);
+		Utility::centerOrigin(sprite);
+		if (playerVelocity.x < 0)
+		{
+			rotateDirection = -1;
+		}
+		else
+		{
+			rotateDirection = 1;
+		}
+	}
+
+	if (rotatingSprite)
+	{
+		if (timeSec < frameStep)
+		{
+			sprite.rotate(rotateDirection * 10.f);
+		}
+		else
+		{
+			time = sf::Time::Zero;
+		}
+
+		return;
+	}
 
 	if (abs(playerVelocity.x) < 2)
 	{
@@ -90,6 +121,8 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 
 void PlayerAnimation::setIdle()
 {
+	sprite.setRotation(0);
+	rotatingSprite = false;
 	if (abs(player.getVelocity().x) < 1)
 	{
 		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
@@ -98,6 +131,7 @@ void PlayerAnimation::setIdle()
 	{
 		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Walk1]);
 	}
+	Utility::centerOrigin(sprite);
 }
 
 

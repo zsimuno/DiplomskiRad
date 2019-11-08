@@ -3,7 +3,7 @@ Highest combo
 2 205 111 bbb
 3 208 104 bbb
 4 119 95 bbb
-5 88 61 Dan
+5 78 78 dsa
 Highest floor
 1 509 4 asd
 2 507 10 sfa

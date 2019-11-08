@@ -62,7 +62,7 @@
 % uz paket fancyhdr mogu se lako kreirati fancy zaglavlja i podnozja
 
 % Podaci koje treba unijeti
-\title{Programiranje video igara u biblioteci SFML}
+\title{Programiranje videoigara u biblioteci SFML}
 \author{Zvonimir Šimunoviæ}
 \advisor{Prof. dr. sc. Mladen Jurak}  % obavezno s titulom (prof. dr. sc ili doc. dr. sc.)
 \date{studeni 2019.}  % oblika mjesec, godina
@@ -79,15 +79,15 @@
 	% Diplomski rad treba poceti s uvodnim poglavljem  
 	\begin{intro}
 		
-		U današnjem svijetu neobièno je sresti neku osobu koja se nije susrela barem s jednom videoigrom. Igre više nisu samo na raèunalima i konzolama, prisutne su i na našim mobilnim ureðajima. Uz razne moguæe podjele jedna od postojeæih podjela je na igre koje su u dvije (2D) i igre koje su u tri dimenzije (3D). 2D igre znaèajno su dominirale tržištem do 90-ih godina dok nismo razvili dovoljno dobru tehnologiju kako bismo mogli efikasno pokretati 3D igre.
-		
-		Premda su najveæe i najpoznatije igre današnjice najèešæe 3D, 2D je još uvijek prisutan i èesto ga susreæemo, pogotovo u svijetu nezavisnih (\textit{indie}) igara. Svijet 2D-a prepun je moguænosti, pa se takve igre neæe tako skoro prestati programirati. Pojavom modernijih, objektno orijentiranih jezika došle su i biblioteke koje omoguæavaju pisanje koda za igre. Ti jezici i biblioteke dopuštaju brzo, efikasno i pregledno pisanje koda. 
-		
-		Jedna od takvih biblioteka za jezik C++ i 2D igre je \textit{Simple and Fast Multimedia Library} ili SFML. Ona donosi moæne alate za programiranje igara koji omoguæavaju jednostavno i brzo programiranje.
-		
-		Sama biblioteka nije dovoljna za pisanje kvalitetnoga koda za igre, veæ je bitna i organizacija koda. Objektno orijentirani jezici omoguæavaju nam organizaciju koda tako da je taj kod spreman za održavanje i nadogradnju. Još su jedna pomoæ u tome oblikovni obrasci. To su isprobani naèini organizacije koda koji rješavaju neke standardne probleme s kojima se susreæu programeri. 
-		
-		Ovaj diplomski rad prikazuje biblioteku SFML, neke njezine osnovne dijelove i moguænosti. Specifièno se osvræe i na neke oblikovne obrasce koji su posebno efikasni u svijetu programiranja igara te ih prikazuje s problemima koje oni rješavaju. Vidjet æemo kako nam ti obrasci omoguæavaju pisanje kvalitetnog i efikasnog koda za videoigre.
+	U današnjem svijetu neobièno je sresti neku osobu koja se nije susrela barem s jednom videoigrom. Igre više nisu samo na raèunalima i konzolama, prisutne su i na našim mobilnim ureðajima. Uz razne moguæe podjele jedna od postojeæih podjela je na igre koje su u dvije (2D) i igre koje su u tri dimenzije (3D). 2D igre znaèajno su dominirale tržištem do 90-ih godina dok nismo razvili dovoljno dobru tehnologiju kako bismo mogli efikasno pokretati 3D igre.
+	
+	Premda su najveæe i najpoznatije igre današnjice najèešæe 3D, 2D je još uvijek prisutan i èesto ga susreæemo, pogotovo u svijetu nezavisnih (\textit{indie}) igara. Svijet 2D-a prepun je moguænosti, pa se takve igre neæe tako skoro prestati programirati. Pojavom modernijih, objektno orijentiranih jezika došle su i biblioteke koje omoguæavaju pisanje koda za igre. Ti jezici i biblioteke dopuštaju brzo, efikasno i pregledno pisanje koda. 
+	
+	Jedna od takvih biblioteka za jezik C++ i 2D igre je \textit{Simple and Fast Multimedia Library} ili SFML. Ona donosi moæne alate za programiranje igara koji omoguæavaju jednostavno i brzo programiranje.
+	
+	Sama biblioteka nije dovoljna za pisanje kvalitetnoga koda za igre, veæ je bitna i organizacija koda. Objektno orijentirani jezici omoguæavaju nam organizaciju koda tako da je taj kod spreman za održavanje i nadogradnju. Još su jedna pomoæ u tome oblikovni obrasci. To su isprobani naèini organizacije koda koji rješavaju neke standardne probleme s kojima se susreæu programeri. 
+	
+	Ovaj rad prikazuje biblioteku SFML, neke njezine osnovne dijelove i moguænosti. Specifièno se osvræe i na neke oblikovne obrasce koji su posebno efikasni u svijetu programiranja igara te ih prikazuje s problemima koje oni rješavaju. Vidjet æemo kako nam ti obrasci omoguæavaju pisanje kvalitetnog i efikasnog koda za videoigre.
 	\end{intro}
 	
 	\chapter{Kratki uvod u C++}
@@ -182,7 +182,7 @@
 	Vidimo da je otvoren prozor i da je u njemu nacrtan krug zelene boje. Prvo se inicijalizira taj zeleni krug i onda se u glavnoj petlji iscrtava u prozoru sve dok korisnik na neki naèin ne zatvori prozor.
 	
 	\newpage
-	\section{Prozor i Dogaðaji}
+	\section{Prozor i dogaðaji}
 	
 	Kao što se vidi u našem osnovnom primjeru, kako bismo pokrenuli igru i nešto crtali, trebamo otvoriti neki prozor. U tom prozoru odvijaju se svi glavni dogaðaji naše igre i po njemu možemo crtati ono što nam treba. Za otvaranje i upravljanje prozorom koristimo \lstinline{sf::Window} klasu. Jedan osnovan primjer izgledao bi ovako:
 	\begin{lstlisting}
@@ -382,7 +382,7 @@
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics{slike/shape_first.png}
-		\caption{Shape primjer}
+		\caption{\textit{Shape} primjer}
 		\label{shapePrimjer1}
 	\end{figure}
 	
@@ -625,7 +625,7 @@
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,keepaspectratio]{slike/Client-server-model.png}
-		\caption{Client server model}
+		\caption{Klijent-server model}
 		\label{clientServerModel}
 	\end{figure}
 	
@@ -1117,7 +1117,7 @@
 	
 	\begin{figure}[h!t]
 		\centering \includegraphics[width=\textwidth,keepaspectratio]{slike/tower_combo.png}
-		\caption{Crazy Tower combo}
+		\caption{Crazy Tower \textit{combo}}
 		\label{crazyTowerCombo}
 	\end{figure}
 	

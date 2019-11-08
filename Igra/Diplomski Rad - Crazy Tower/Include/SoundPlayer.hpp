@@ -25,7 +25,7 @@ private:
 
 	SoundHolder				soundHolder;
 	sf::Sound				sound;
-	std::list<sf::Sound>	sounds;
+	std::vector<sf::Sound>	sounds;
 	float					volume;
 };
 
