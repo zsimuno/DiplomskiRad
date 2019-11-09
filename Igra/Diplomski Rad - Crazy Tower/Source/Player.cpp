@@ -70,36 +70,6 @@ void Player::handleRealtimeInput()
 		playerVelocity.x = playerVelocity.x * data.moveAcceleration;
 	}
 
-
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	//{
-	//	playerVelocity.x += (-data.maxMoveSpeed * data.moveAcceleration);
-	//}
-	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	//{
-	//	playerVelocity.x += (data.maxMoveSpeed * data.moveAcceleration);
-	//}
-	//else
-	//{
-	//	if (playerVelocity.x < 0)
-	//	{
-	//		playerVelocity.x = playerVelocity.x + (data.moveDeceleration * data.maxMoveSpeed);
-	//			if (playerVelocity.x > 0)
-	//			{
-	//				playerVelocity.x = 0;
-	//			}
-	//				
-	//	}
-	//	else if (playerVelocity.x > 0)
-	//	{
-	//		playerVelocity.x = playerVelocity.x + (data.moveDeceleration * data.maxMoveSpeed);
-	//			if (playerVelocity.x < 0)
-	//			{
-	//				playerVelocity.x = 0;
-	//			}
-	//	}
-	//}
-
 	// Limit movement
 	if (playerVelocity.x > data.maxMoveSpeed)
 	{

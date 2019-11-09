@@ -39,13 +39,14 @@ void Tower::update(sf::Time dt)
 	sf::Vector2f position = player->getPosition();
 	sf::FloatRect bounds = player->getBounds();
 
+	sf::Vector2f v = player->getVelocity();
+
 	// If player touches walls, flip him and multiply the velocity
-	if (position.x - bounds.width/2 <= insideTowerBounds.left ||
-		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
+	if ((position.x - bounds.width/2 <= insideTowerBounds.left && v.x < 0) ||
+		(position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width && v.x > 0))
 	{
-		sf::Vector2f velocity = player->getVelocity();
-		velocity.x = -2.f*velocity.x;
-		player->setVelocity(velocity);
+		v.x = -1.5f* v.x;
+		player->setVelocity(v);
 	}
 
 	// If player out of bounds then game over
