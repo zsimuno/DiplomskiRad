@@ -3,10 +3,10 @@ Highest combo
 2 183 72 azz
 3 313 60 abc
 4 200 35 bbb
-5 345 30 voz
+5 6 6 zzz
 Highest floor
 1 700 75 bbb
 2 345 30 aaa
 3 313 60 abc
-4 200 35 ivo
-5 190 10 zvo
+4 234 0 bun
+5 214 0 ***

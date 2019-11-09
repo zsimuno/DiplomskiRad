@@ -55,7 +55,7 @@ void Tower::update(sf::Time dt)
 		gameOver = true;
 		context.soundPlayer->play(Sounds::ID::Falling);
 
-		context.leaderboards->checkScore(player->getHighestPlatform(), player->getHighestCombo());
+		context.leaderboards->checkScore(player->getHighestPlatform() - Platforms::startingPlatform, player->getHighestCombo());
 	}
 
 	// Move the screen with the player. Player must always be on screen
