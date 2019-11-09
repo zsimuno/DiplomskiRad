@@ -107,6 +107,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Include\Leaderboards.cpp" />
+    <ClCompile Include="Source\ColorHolder.cpp" />
     <ClCompile Include="Source\ComboCounter.cpp" />
     <ClCompile Include="Source\EnterNameState.cpp" />
     <ClCompile Include="Source\FloorSpeedTimer.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Source\Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\ColorHolder.hpp" />
     <ClInclude Include="Include\ComboCounter.hpp" />
     <ClInclude Include="Include\EnterNameState.hpp" />
     <ClInclude Include="Include\FloorSpeedTimer.hpp" />

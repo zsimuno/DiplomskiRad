@@ -1,4 +1,5 @@
 #include <SceneNode.hpp>
+
 #include <cassert>
 
 SceneNode::SceneNode()
@@ -7,18 +8,18 @@ SceneNode::SceneNode()
 {
 }
 
-void SceneNode::attachChild(Ptr child)
+void SceneNode::attachChild(NodePointer child)
 {
 	child->parent = this;
 	children.push_back(std::move(child));
 }
 
-SceneNode::Ptr SceneNode::detachChild(const SceneNode& node)
+SceneNode::NodePointer SceneNode::detachChild(const SceneNode& node)
 {
-	auto found = std::find_if(children.begin(), children.end(), [&](Ptr& p) { return p.get() == &node; });
+	auto found = std::find_if(children.begin(), children.end(), [&](NodePointer& p) { return p.get() == &node; });
 	assert(found != children.end());
 
-	Ptr result = std::move(*found);
+	NodePointer result = std::move(*found);
 	result->parent = nullptr;
 	children.erase(found);
 	return result;
@@ -50,16 +51,14 @@ void SceneNode::updateCurrent(sf::Time dt)
 
 void SceneNode::updateChildren(sf::Time dt)
 {
-	for(Ptr & child: children)
+	for(NodePointer & child: children)
 		child->update(dt);
 }
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	// Apply transform of current node
 	states.transform *= getTransform();
 
-	// Draw node and children with changed transform
 	drawCurrent(target, states);
 	drawChildren(target, states);
 }
@@ -70,6 +69,6 @@ void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) c
 
 void SceneNode::drawChildren(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	for (const Ptr& child : children)
+	for (const NodePointer& child : children)
 		child->draw(target, states);
 }

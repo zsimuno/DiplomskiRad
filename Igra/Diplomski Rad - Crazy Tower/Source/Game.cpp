@@ -17,9 +17,11 @@ Game::Game()
 	, leaderboards()
 	, themePlayer()
 	, soundPlayer()
-	, stateStack(State::Context(window, textures, fonts, currentCharacter, leaderboards, soundPlayer, themePlayer))
+	, colorHolder()
+	, stateStack(State::Context(window, textures, fonts, currentCharacter, leaderboards, soundPlayer, themePlayer, colorHolder))
 {
 	loadResources();
+	insertColors();
 	registerStates();
 	stateStack.pushState(GameStates::ID::Menu);
 }
@@ -112,4 +114,12 @@ void Game::loadResources()
 	textures.load(Textures::ID::ComboInstructions, "Media/Textures/combo_instructions.png");
 	textures.load(Textures::ID::SpeedInstructions, "Media/Textures/speed_instructions.png");
 
+}
+
+void Game::insertColors()
+{
+	colorHolder.set(Colors::ID::Blue, sf::Color(0x01579BFF));
+	colorHolder.set(Colors::ID::Yellow, sf::Color(0xFFC107FF));
+	colorHolder.set(Colors::ID::FrontBarColor, sf::Color(0x81D4FAFF));
+	colorHolder.set(Colors::ID::BackBarColor, sf::Color(0x009688FF));
 }

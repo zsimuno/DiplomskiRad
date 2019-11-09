@@ -14,7 +14,7 @@ class Tower;
 class ComboCounter : public SceneNode
 {
 public:
-	ComboCounter(State::Context gameContext, Tower& gameTower, Player& pl);
+							ComboCounter(State::Context gameContext, Tower& gameTower, Player& pl);
 
 	virtual void			updateCurrent(sf::Time dt) override;
 	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;

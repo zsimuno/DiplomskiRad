@@ -5,10 +5,10 @@
 
 
 
-RectangleNode::RectangleNode(float x, float y, float width, float height)
-	: rect(sf::Vector2f(width, height))
+RectangleNode::RectangleNode(sf::FloatRect bounds)
+	: rect(sf::Vector2f(bounds.width, bounds.height))
 {
-	this->setPosition(x, y);
+	this->setPosition(bounds.left, bounds.top);
 	rect.setFillColor(sf::Color(0xB3E5FCFF));
 }
 

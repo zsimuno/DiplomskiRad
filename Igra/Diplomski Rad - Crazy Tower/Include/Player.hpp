@@ -17,26 +17,24 @@ class Platform;
 class PlayerAnimation;
 class Tower;
 
-class Player :
-	public SceneNode
+class Player : public SceneNode
 {
 public:
-	Player(State::Context& context, Platforms& towerPlatform, sf::FloatRect& bounds, Tower& tower);
+								Player(State::Context& context, Platforms& towerPlatform, Tower& tower);
 
 	void						initialize();
 
-	void					    handleEvent();
 	void					    handleRealtimeInput();
 
 	void					    setVelocity(sf::Vector2f v);
-	void					    addVelocity(sf::Vector2f v);
 	sf::Vector2f			    getVelocity() const;
 
 	sf::FloatRect			    getBounds() const;
+
 	void					    setOnPlatform(Platform* platform);
 	bool					    isStandingOnPlatform() const;
 	Platforms&					getPlatforms();
-	sf::FloatRect				getCurrentPlatformBounds();
+	 sf::FloatRect				getCurrentPlatformBounds() const;
 	int							getPlatformNumber();
 	int							getHighestPlatform();
 	
@@ -44,6 +42,8 @@ public:
 	int							getHighestCombo();
 	bool						isInCombo();
 	void						endCombo();
+
+	bool						playerisOnEdge();
 
 private:
 
@@ -59,7 +59,6 @@ private:
 	State::Context&				context;
 
 	sf::FloatRect				currentPlatformBounds;
-	sf::FloatRect&				currentBounds;
 	bool					    isOnPlatform;
 
 	bool						inCombo;
@@ -69,6 +68,7 @@ private:
 	int							maxCombo;
 
 	bool					    mirroredSprite;
+	bool						isOnEdge;
 };
 
 #endif // PLAYER_HPP

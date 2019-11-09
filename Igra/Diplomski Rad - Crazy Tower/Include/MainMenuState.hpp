@@ -10,7 +10,7 @@
 class MainMenuState : public State
 {
 public:
-	MainMenuState(StateStack& stack, Context context);
+						MainMenuState(StateStack& stack, Context context);
 
 	virtual void		draw() override;
 	virtual bool		update(sf::Time dt) override;

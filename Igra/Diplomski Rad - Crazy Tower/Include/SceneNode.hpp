@@ -15,31 +15,31 @@
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
-	typedef std::unique_ptr<SceneNode> Ptr;
-	typedef std::pair<SceneNode*, SceneNode*> Pair;
+	typedef std::unique_ptr<SceneNode> NodePointer;
 
 public:
-	SceneNode();
-	void					attachChild(Ptr child);
-	Ptr						detachChild(const SceneNode& node);
+								SceneNode();
 
-	void					update(sf::Time dt);
+	void						attachChild(NodePointer child);
+	NodePointer					detachChild(const SceneNode& node);
 
-	sf::Vector2f			getWorldPosition() const;
-	sf::Transform			getWorldTransform() const;
+	void						update(sf::Time dt);
+
+	sf::Vector2f				getWorldPosition() const;
+	sf::Transform				getWorldTransform() const;
 
 private:
-	virtual void			updateCurrent(sf::Time dt);
-	void					updateChildren(sf::Time dt);
+	virtual void				updateCurrent(sf::Time dt);
+	void						updateChildren(sf::Time dt);
 
-	virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const final;
-	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
-	void					drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void				draw(sf::RenderTarget& target, sf::RenderStates states) const final;
+	virtual void				drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	void						drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	SceneNode* parent;
 
 protected:
-	std::vector<Ptr>		children;
+	std::vector<NodePointer>	children;
 
 };
 

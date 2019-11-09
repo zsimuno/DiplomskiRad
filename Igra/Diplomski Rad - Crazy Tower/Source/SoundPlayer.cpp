@@ -1,7 +1,7 @@
 #include <SoundPlayer.hpp>
-
 #include <ResourceHolder.hpp>
 #include <ResourceIdentifiers.hpp>
+
 #include <iostream>
 
 SoundPlayer::SoundPlayer()
@@ -14,7 +14,7 @@ SoundPlayer::SoundPlayer()
 
 void SoundPlayer::play(Sounds::ID soundID)
 {
-	sounds.push_back(sf::Sound());
+	sounds.emplace_back(sf::Sound());
 	sf::Sound& sound = sounds.back();
 
 	sound.setBuffer(soundHolder.get(soundID));
@@ -25,21 +25,10 @@ void SoundPlayer::play(Sounds::ID soundID)
 
 void SoundPlayer::removeStoppedSounds()
 {
-	for (auto a = sounds.begin(); a != sounds.end();)
-	{
-		if (a->getStatus() == sf::SoundSource::Stopped)
+	sounds.remove_if([](const sf::Sound& snd)
 		{
-			a = sounds.erase(a);
-		}
-		else
-		{
-			++a;
-		}
-	}
-	//sounds.remove_if([](const sf::Sound& snd)
-	//	{
-	//		return snd.getStatus() == sf::Sound::Stopped;
-	//	});
+			return snd.getStatus() == sf::Sound::Stopped;
+		});
 }
 
 void SoundPlayer::setVolume(float vol)

@@ -4,9 +4,8 @@
 #include <State.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
+
 #include <iostream>
-
-
 
 Tower::Tower(sf::RenderWindow& window, State::Context gameContext)
 	: window(window)
@@ -35,12 +34,7 @@ Tower::Tower(sf::RenderWindow& window, State::Context gameContext)
 
 void Tower::update(sf::Time dt)
 {
-	sf::Vector2f moveDist(0.f, ScrollSpeed() * dt.asSeconds());
-	worldView.move(moveDist);
-	walls->move(moveDist);
-	insideTowerBounds.top += moveDist.y;
-	rectangle->move(moveDist);
-	comboText.move(moveDist);
+	moveWorld(sf::Vector2f(0.f, ScrollSpeed() * dt.asSeconds()));
 
 	sf::Vector2f position = player->getPosition();
 	sf::FloatRect bounds = player->getBounds();
@@ -50,7 +44,7 @@ void Tower::update(sf::Time dt)
 		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
 	{
 		sf::Vector2f velocity = player->getVelocity();
-		velocity.x = -1.0f*velocity.x;
+		velocity.x = -1.5f*velocity.x;
 		player->setVelocity(velocity);
 	}
 
@@ -67,13 +61,7 @@ void Tower::update(sf::Time dt)
 	sf::Vector2f velocity = player->getVelocity();
 	if (position.y < insideTowerBounds.top + insideTowerBounds.height / 4 && velocity.y < 0)
 	{
-		// TODO: Maybe better movement depending on the player
-		sf::Vector2f moveDist(0.f, velocity.y * dt.asSeconds() * 0.95f);
-		worldView.move(moveDist);
-		walls->move(moveDist);
-		insideTowerBounds.top += moveDist.y;
-		rectangle->move(moveDist);
-		comboText.move(moveDist);
+		moveWorld(sf::Vector2f(0.f, velocity.y * dt.asSeconds() * Utility::mapValue(position.y, insideTowerBounds.height / 4, insideTowerBounds.top, 0, 1)));
 	}
 
 
@@ -88,6 +76,19 @@ void Tower::update(sf::Time dt)
 
 	context.soundPlayer->removeStoppedSounds();
 }
+
+void Tower::moveWorld(sf::Vector2f moveDistance)
+{
+	worldView.move(moveDistance);
+	walls->move(moveDistance);
+	insideTowerBounds.top += moveDistance.y;
+	rectangle->move(moveDistance);
+	comboText.move(moveDistance);
+
+
+}
+
+
 
 void Tower::draw()
 {
@@ -107,7 +108,7 @@ float Tower::ScrollSpeed()
 
 void Tower::incrementScrollSpeed()
 {
-	scrollSpeed -= 50.f;
+	scrollSpeed += Tower::ScrollSpeedIncrement;
 }
 
 void Tower::move(sf::Vector2f v)
@@ -124,18 +125,17 @@ bool Tower::GameOver() const
 
 void Tower::buildScene()
 {
-	// Initialize the different layers
+	// Initialize layers
 	for (int i = 0; i < LayerCount; ++i)
 	{
-		SceneNode::Ptr layer(new SceneNode());
+		SceneNode::NodePointer layer(new SceneNode());
 		sceneLayers[i] = layer.get();
-
 		sceneGraph.attachChild(std::move(layer));
 	}
 
 
 	// Add the background 
-	std::unique_ptr<RectangleNode> rectangleNode(new RectangleNode(insideTowerBounds.left, insideTowerBounds.top, insideTowerBounds.width, insideTowerBounds.height));
+	std::unique_ptr<RectangleNode> rectangleNode(new RectangleNode(insideTowerBounds));
 	rectangle = rectangleNode.get();
 	sceneLayers[Background]->attachChild(std::move(rectangleNode));
 
@@ -146,7 +146,7 @@ void Tower::buildScene()
 	sceneLayers[Floors]->attachChild(std::move(towerPlatforms));
 
 	// Add player
-	std::unique_ptr<Player> gamePlayer(new Player(context, *platforms, insideTowerBounds, *this));
+	std::unique_ptr<Player> gamePlayer(new Player(context, *platforms, *this));
 	player = gamePlayer.get();
 	spawnPosition = sf::Vector2f(worldView.getSize().x / 2.f, worldView.getSize().y - Platform::platformHeight - player->getBounds().height / 2);
 	player->setPosition(spawnPosition);

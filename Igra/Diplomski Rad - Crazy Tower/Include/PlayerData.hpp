@@ -9,10 +9,7 @@
 
 #include <vector>
 #include <functional>
-#include <ResourceIdentifiers.hpp>
 #include <map>
-
-
 
 struct PlayerInfo
 {

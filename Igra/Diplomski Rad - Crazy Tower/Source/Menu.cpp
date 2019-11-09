@@ -99,6 +99,7 @@ void Menu::handleEvent(const sf::Event& event)
 {
 	switch (event.type)
 	{
+		// Check if the mouse is hovering over an option
 	case sf::Event::MouseMoved:
 		for (size_t i = 0; i < options.size(); ++i)
 		{
@@ -119,6 +120,7 @@ void Menu::handleEvent(const sf::Event& event)
 			player.play(Sounds::ID::MenuSelect);
 			options[selectedOptionIndex].click();
 
+			// Press left or right arrow if possible
 			if (options[selectedOptionIndex].leftContains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y), this->getPosition()))
 			{
 				options[selectedOptionIndex].pressLeft();

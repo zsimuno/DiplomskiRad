@@ -21,8 +21,8 @@ PlayerInfo initializePlayerData()
 	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Jump3, sf::IntRect(238, 4, 29, 52)));
 	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Shock, sf::IntRect(372, 4, 29, 52)));
 	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Rotate,sf::IntRect(406, 4, 43, 60)));
-	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Edge1, sf::IntRect(497, 4, 37, 51)));
-	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Edge2, sf::IntRect(455, 4, 36, 51)));
+	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Edge1, sf::IntRect(497, 4, 37, 50)));
+	data.playerTexturesMap.insert(std::make_pair(PlayerSprite::ID::Edge2, sf::IntRect(455, 4, 36, 50)));
 	
 	return data;
 }

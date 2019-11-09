@@ -5,8 +5,8 @@ Highest combo
 4 119 95 bbb
 5 78 78 dsa
 Highest floor
-1 509 4 asd
-2 507 10 sfa
-3 504 4 ads
-4 504 4 aaa
-5 500 0 aaa
+1 547 14 jaa
+2 534 15 Zvi
+3 514 0 abc
+4 512 7 nnn
+5 503 0 asd

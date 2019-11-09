@@ -11,19 +11,18 @@ public:
 	static const int		platformDistance = Platform::platformHeight - 250;
 	static int				startingPlatform;
 
-	Platforms(sf::FloatRect& bounds, State::Context gameContext);
+							Platforms(sf::FloatRect& bounds, State::Context gameContext);
 
-	bool					isOnPlatform(Player& player, float dtAsSeconds);
+	bool					isPlayerOnPlatform(Player& player, float dtAsSeconds);
 	virtual void			updateCurrent(sf::Time dt) override;
-	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 	void					initialize();
 
 private:
+	void					addNewPlatform();
+
 	sf::FloatRect&			currentBounds;
 
 	State::Context			context;
-
-	void					addNewPlatform();
 };
 
 #endif // PLATFORMS_HPP

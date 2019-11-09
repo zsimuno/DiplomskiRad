@@ -2,17 +2,17 @@
 #include <Utility.hpp>
 #include <State.hpp>
 #include <ResourceHolder.hpp>
+#include <Platforms.hpp>
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <Platforms.hpp>
+
 #include <map>
-
-
 
 SettingsState::SettingsState(StateStack& stack, Context context)
 	:State(stack, context)
 	, settingsMenu(sf::Text("Settings", context.fonts->get(Fonts::ID::Main)), context.window->getView().getSize().x, context.window->getView().getSize().y, *context.soundPlayer)
+	, selectedCharacter(context.textures->get(*context.currentCharacterID))
 {
 	// Set background texture
 	sf::Texture& texture = context.textures->get(Textures::ID::Tower);
@@ -20,6 +20,10 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 	texture.setRepeated(true);
 	background.setTexture(texture);
 	background.setTextureRect(textureRect);
+
+	selectedCharacter.setPosition(sf::Vector2f(context.window->getView().getSize().x / 4, context.window->getView().getSize().y / 2 + 50.f));
+	selectedCharacter.setScale(sf::Vector2f(2.5f, 2.5f));
+	selectedCharacter.setTextureRect(sf::IntRect(2, 4, 29, 52));
 
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 
@@ -29,7 +33,7 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 
 	MenuOption volumeOption(volume);
 
-	volumeOption.setLeftRight(
+	volumeOption.setLeftRightFunctions(
 		[context](MenuOption* option)
 		{
 			float volume = context.soundPlayer->getVolume();
@@ -69,8 +73,29 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 	sf::Text character("CH: " + charactersMap[*context.currentCharacterID], font);
 	MenuOption characterOption(character);
 	
-	characterOption.setLeftRight(
-			[charactersMap, context]( MenuOption* option)
+	characterOption.setLeftRightFunctions(
+			[charactersMap, context, this]( MenuOption* option)
+		{
+			for (auto ch = charactersMap.begin(); ch != charactersMap.end(); ++ch)
+			{
+				if (ch->first == *context.currentCharacterID)
+				{
+					
+					if (ch == charactersMap.begin())
+					{
+						ch = charactersMap.end();
+					}
+
+					--ch;
+
+					*context.currentCharacterID = ch->first;
+					break;
+				}
+			}
+			option->setString("CH: " + charactersMap.at(*context.currentCharacterID));
+			selectedCharacter.setTexture(context.textures->get(*context.currentCharacterID));
+
+		}, [charactersMap, context, this](MenuOption* option)
 		{
 			for (auto ch = charactersMap.begin(); ch != charactersMap.end(); ++ch)
 			{
@@ -87,84 +112,14 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 				}
 			}
 			option->setString("CH: " + charactersMap.at(*context.currentCharacterID));
-
-		}, [charactersMap, context](MenuOption* option)
-		{
-			for (auto ch = charactersMap.begin(); ch != charactersMap.end(); ++ch)
-			{
-				if (ch->first == *context.currentCharacterID)
-				{
-					++ch;
-					if (ch == charactersMap.end())
-					{
-						ch = charactersMap.begin();
-					}
-
-					*context.currentCharacterID = ch->first;
-					break;
-				}
-			}
-			option->setString("CH: " + charactersMap.at(*context.currentCharacterID));
+			selectedCharacter.setTexture(context.textures->get(*context.currentCharacterID));
 		});
 
 	settingsMenu.addSelectableOption(characterOption);
 
-	/*std::vector<sf::Vector2u> resolutionVector;
-
-	resolutionVector.push_back(sf::Vector2u(1024, 576));
-	resolutionVector.push_back(sf::Vector2u(1280, 720));
-	resolutionVector.push_back(sf::Vector2u(1400, 800));
-	resolutionVector.push_back(sf::Vector2u(1600, 900));
-	resolutionVector.push_back(sf::Vector2u(1920, 1080));
-
-
-	sf::Text resolutionText(std::to_string(context.window->getSize().x) + "x" + std::to_string(context.window->getSize().y), font);
-	MenuOption resolutionOption(resolutionText);
-
-	resolutionOption.setLeftRight(
-		[resolutionVector, context](MenuOption* option)
-		{
-			for (std::size_t i = 0; i < resolutionVector.size(); ++i)
-			{
-				if (resolutionVector[i].x == context.window->getSize().x)
-				{
-					if (i == 0)
-					{
-						i = resolutionVector.size() - 1;
-					}
-					else
-					{
-						--i;
-					}
-
-					context.window->setSize(resolutionVector[i]);
-					break;
-				}
-			}
-
-			option->setString(std::to_string(context.window->getSize().x) + "x" + std::to_string(context.window->getSize().y));
-
-		}, [resolutionVector, context](MenuOption* option)
-		{
-
-			for (std::size_t i = 0; i < resolutionVector.size(); ++i)
-			{
-				if (resolutionVector[i].x == context.window->getSize().x)
-				{
-					i = (i + 1) % resolutionVector.size();
-					context.window->setSize(resolutionVector[i]);
-					break;
-				}
-			}
-			option->setString(std::to_string(context.window->getSize().x) + "x" + std::to_string(context.window->getSize().y));
-		});
-
-	settingsMenu.addSelectableOption(resolutionOption);*/
-
-
 	sf::Text floor("Floor: " + std::to_string(Platforms::startingPlatform), font);
 	MenuOption floorOption(floor);
-	floorOption.setLeftRight(
+	floorOption.setLeftRightFunctions(
 			[](MenuOption* option)
 		{
 			if (Platforms::startingPlatform > 0)
@@ -196,6 +151,7 @@ void SettingsState::draw()
 {
 	context.window->draw(background);
 	context.window->draw(settingsMenu);
+	context.window->draw(selectedCharacter);
 }
 
 bool SettingsState::update(sf::Time)

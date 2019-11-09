@@ -26,19 +26,25 @@ class Tower : private sf::NonCopyable
 {
 public:
 	explicit							Tower(sf::RenderWindow& window, State::Context gameContext);
+
+	void								initialize();
+
 	void								update(sf::Time dt);
 	void								draw();
+
 	float								ScrollSpeed();
 	void								incrementScrollSpeed();
+
 	void								move(sf::Vector2f v);
 	bool								GameOver() const;
-	void								initialize();
 
 	void								drawComboText(float floors);
 
+	static const int					ScrollSpeedIncrement = -50;
+
 private:
 	void								buildScene();
-	
+	void								moveWorld(sf::Vector2f moveDistance);
 
 
 private:

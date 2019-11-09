@@ -4,7 +4,7 @@
 ComboCounter::ComboCounter(State::Context gameContext, Tower& gameTower, Player& pl)
 	:tower(gameTower)
 	, player(pl)
-	, comboText("   0 \nFloors", gameContext.fonts->get(Fonts::ID::Main))
+	, comboText("   0 \n Floors", gameContext.fonts->get(Fonts::ID::Main))
 	, comboTimer()
 	, timerStarted(false)
 	, comboNumber(0)
@@ -21,8 +21,8 @@ ComboCounter::ComboCounter(State::Context gameContext, Tower& gameTower, Player&
 
 	comboBarFront.setPosition(5.f, 5.f);
 
-	comboBarBack.setFillColor(sf::Color(0x009688FF));
-	comboBarFront.setFillColor(sf::Color(0x81D4FAFF));
+	comboBarBack.setFillColor(gameContext.colorHolder->get(Colors::ID::BackBarColor));
+	comboBarFront.setFillColor(gameContext.colorHolder->get(Colors::ID::FrontBarColor));
 }
 
 void ComboCounter::updateCurrent(sf::Time dt)
@@ -49,16 +49,19 @@ void ComboCounter::updateCurrent(sf::Time dt)
 		comboTimer.restart();
 	}
 
+	// Update combo bar
 	float timerDiff = (comboTimer.getElapsedTime().asSeconds() * (comboBarHeight / 3));
 	comboBarFront.setPosition(5.f, 5.f + timerDiff);
 	comboBarFront.setSize(sf::Vector2f(comboBarWidth, comboBarHeight - timerDiff));
+
+	// Update combo text
 	if (player.getCombo() == 0)
 	{
 		comboText.setString("");
 	}
 	else
 	{
-		comboText.setString("   " + std::to_string(player.getCombo()) + "\nFloors");
+		comboText.setString("   " + std::to_string(player.getCombo()) + "\n Floors");
 	}
 
 }

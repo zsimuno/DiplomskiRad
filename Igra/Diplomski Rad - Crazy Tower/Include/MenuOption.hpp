@@ -1,5 +1,6 @@
 #ifndef MENUOPTION_HPP
 #define MENUOPTION_HPP
+
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -22,7 +23,7 @@ public:
 	void					deselect();
 	void					click();
 
-	void					setLeftRight(MenuSelectFunction onLeft, MenuSelectFunction onRight);
+	void					setLeftRightFunctions(MenuSelectFunction onLeft, MenuSelectFunction onRight);
 
 	void					pressLeft();
 	void					pressRight();
@@ -44,8 +45,10 @@ private:
 	sf::Text				optionText;
 	sf::Text				arrowLeft;
 	sf::Text				arrowRight;
+
 	sf::RectangleShape		optionRect;
 	sf::RectangleShape		shadowRect;
+
 	sf::Color				primaryColor;
 	sf::Color				secondaryColor;
 	sf::Color				outlineColor;

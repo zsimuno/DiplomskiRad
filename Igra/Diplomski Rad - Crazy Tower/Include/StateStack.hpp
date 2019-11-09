@@ -38,7 +38,7 @@ public:
 	bool				isEmpty() const;
 
 private:
-	State::Ptr			createState(GameStates::ID stateID);
+	State::StatePointer	createState(GameStates::ID stateID);
 	void				applyPendingChanges();
 
 private:
@@ -51,11 +51,11 @@ private:
 	};
 
 private:
-	std::vector<State::Ptr>									stack;
-	std::vector<PendingChange>								pending;
+	std::vector<State::StatePointer>								stack;
+	std::vector<PendingChange>										pending;
 
-	State::Context											context;
-	std::map<GameStates::ID, std::function<State::Ptr()>>	states;
+	State::Context													context;
+	std::map<GameStates::ID, std::function<State::StatePointer()>>	states;
 };
 
 template <typename T>
@@ -63,7 +63,7 @@ void StateStack::registerState(GameStates::ID stateID)
 {
 	states[stateID] = [this]()
 	{
-		return State::Ptr(new T(*this, context));
+		return State::StatePointer(new T(*this, context));
 	};
 }
 

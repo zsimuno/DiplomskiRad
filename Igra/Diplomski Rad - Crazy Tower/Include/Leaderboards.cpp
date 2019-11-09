@@ -83,10 +83,8 @@ Leaderboards::~Leaderboards()
 
 bool Leaderboards::checkScore(int floor, int combo)
 {
-
 	for (auto score : floorRecords)
 	{
-
 		if (floor > score.floor)
 		{
 			savedCombo = combo;

@@ -31,19 +31,15 @@ bool GameState::update(sf::Time dt)
 		{
 			stackPush(GameStates::ID::GameOver);
 		}
-		
 	}
-
 	return true;
 }
 
 bool GameState::handleEvent(const sf::Event& event)
 {
-
-	
 	if (event.type == sf::Event::KeyPressed )
 	{
-		// Escape or "P" pressed, trigger the pause screen
+		// If "Escape" or "P" pressed then trigger the pause screen
 		if (event.key.code == sf::Keyboard::Escape || event.key.code == sf::Keyboard::P)
 		{
 			stackPush(GameStates::ID::Pause);

@@ -19,6 +19,7 @@ public:
 private:
 	Menu				settingsMenu;
 	sf::Sprite			background;
+	sf::Sprite			selectedCharacter;
 };
 
 #endif // SETTINGSSTATE_HPP

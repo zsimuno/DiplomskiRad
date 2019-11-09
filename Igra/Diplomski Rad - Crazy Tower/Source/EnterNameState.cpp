@@ -26,23 +26,24 @@ EnterNameState::EnterNameState(StateStack& stack, Context context)
 
 	Utility::centerOrigin(title);
 	Utility::centerOrigin(nameEnterLabel);
+	Utility::centerOrigin(nameInput);
 
 	title.setPosition(context.window->getView().getSize().x / 5, 50.f);
-	title.setOutlineColor(sf::Color::White);
+	title.setFillColor(sf::Color::White);
 	title.setOutlineThickness(3);
 	title.setCharacterSize(150);
-	title.setFillColor(sf::Color(0x01579BFF));
+	title.setOutlineColor(context.colorHolder->get(Colors::ID::Blue));
 
 	nameEnterLabel.setCharacterSize(90);
-	nameInput.setCharacterSize(100);
+	nameInput.setCharacterSize(120);
 
-	nameEnterLabel.setOutlineColor(sf::Color::White);
+	nameEnterLabel.setFillColor(sf::Color::White);
 	nameEnterLabel.setOutlineThickness(3);
-	nameEnterLabel.setFillColor(sf::Color(0x01579BFF));
+	nameEnterLabel.setOutlineColor(context.colorHolder->get(Colors::ID::Blue));
 
-	nameInput.setOutlineColor(sf::Color::Black);
+	nameInput.setOutlineColor(sf::Color::White);
 	nameInput.setOutlineThickness(3);
-	nameInput.setFillColor(sf::Color::White);
+	nameInput.setFillColor(context.colorHolder->get(Colors::ID::Blue));
 
 	nameEnterLabel.setPosition(context.window->getView().getSize().x / 4, context.window->getView().getSize().y / 2);
 	nameInput.setPosition(context.window->getView().getSize().x / 2, context.window->getView().getSize().y / 2 + 140.f);
@@ -63,6 +64,7 @@ void EnterNameState::draw()
 
 bool EnterNameState::update(sf::Time dt)
 {
+	// Blink text every second
 	if (blinkTimer.getElapsedTime().asSeconds() > 1.f)
 	{
 		blinkTimer.restart();
@@ -88,6 +90,7 @@ bool EnterNameState::handleEvent(const sf::Event& event)
 		switch (event.key.code)
 		{
 		case sf::Keyboard::Return:
+		case sf::Keyboard::Escape:
 			context.leaderboards->addNewScore(nameInputString);
 			stackPop();
 			stackPush(GameStates::ID::GameOver);
@@ -99,9 +102,11 @@ bool EnterNameState::handleEvent(const sf::Event& event)
 			{
 				currentCharacter = 2;
 			}
+			nameInput.setString(nameInputString);
 			break;
 		case sf::Keyboard::Right:
 			currentCharacter = (currentCharacter + 1) % 3;
+			nameInput.setString(nameInputString);
 			break;
 		default:
 			break;

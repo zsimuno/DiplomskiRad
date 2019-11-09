@@ -4,11 +4,12 @@
 #include <GameStates.hpp>
 #include <Leaderboards.hpp>
 #include <ResourceIdentifiers.hpp>
+#include <ThemePlayer.hpp>
+#include <SoundPlayer.hpp>
+#include <ColorHolder.hpp>
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
-#include <ThemePlayer.hpp>
-#include <SoundPlayer.hpp>
 
 namespace sf
 {
@@ -20,11 +21,11 @@ class StateStack;
 class State
 {
 public:
-	typedef std::unique_ptr<State> Ptr;
+	typedef std::unique_ptr<State> StatePointer;
 
 	struct Context
 	{
-		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Textures::ID& character, Leaderboards& boards, SoundPlayer& sPlayer, ThemePlayer& tPlayer);
+		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Textures::ID& character, Leaderboards& boards, SoundPlayer& sPlayer, ThemePlayer& tPlayer, ColorHolder& cHolder);
 
 		sf::RenderWindow* window;
 		TextureHolder* textures;
@@ -33,6 +34,7 @@ public:
 		Leaderboards* leaderboards;
 		SoundPlayer* soundPlayer;
 		ThemePlayer* themePlayer;
+		ColorHolder* colorHolder;
 	};
 
 public:

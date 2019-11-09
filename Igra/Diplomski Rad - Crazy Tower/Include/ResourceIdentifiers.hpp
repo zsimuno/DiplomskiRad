@@ -1,8 +1,6 @@
 #ifndef RESOURCEIDENTIFIERS_HPP
 #define RESOURCEIDENTIFIERS_HPP
 
-
-// Forward declaration of SFML classes
 namespace sf
 {
 	class Texture;
@@ -105,7 +103,16 @@ namespace Themes
 	};
 }
 
-
+namespace Colors
+{
+	enum class ID
+	{
+		Blue,
+		Yellow,
+		FrontBarColor,
+		BackBarColor,
+	};
+}
 
 template <typename Resource, typename Identifier>
 class ResourceHolder;

@@ -4,7 +4,7 @@
 #include <ResourceHolder.hpp>
 
 
-State::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& gfonts, Textures::ID& character, Leaderboards& boards, SoundPlayer& sPlayer, ThemePlayer& tPlayer)
+State::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& gfonts, Textures::ID& character, Leaderboards& boards, SoundPlayer& sPlayer, ThemePlayer& tPlayer, ColorHolder& cHolder)
 	:window(&window)
 	, textures(&textures)
 	, fonts(&gfonts)
@@ -12,6 +12,7 @@ State::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontH
 	, leaderboards(&boards)
 	, soundPlayer(&sPlayer)
 	, themePlayer(&tPlayer)
+	, colorHolder(&cHolder)
 {
 }
 

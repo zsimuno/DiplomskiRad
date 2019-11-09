@@ -30,8 +30,8 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 	sf::Text restart("Try again", font);
 	gameOverMenu.addOption(restart, [context, this]()
 		{
+			context.soundPlayer->play(Sounds::ID::TryAgain);
 			context.themePlayer->play(Themes::ID::InGameTheme);
-			context.soundPlayer->play(Sounds::ID::Hi);
 			stackPop();
 		});
 

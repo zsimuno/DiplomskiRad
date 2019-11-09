@@ -1,5 +1,6 @@
 #ifndef MENU_HPP
 #define MENU_HPP
+
 #include <MenuOption.hpp>
 #include <SoundPlayer.hpp>
 
@@ -11,12 +12,14 @@ class Menu : public sf::Drawable, public sf::Transformable
 {
 public:
 
-	Menu(sf::Text menuTitle, float menuWidth, float menuHeight, SoundPlayer& player);
+								Menu(sf::Text menuTitle, float menuWidth, float menuHeight, SoundPlayer& player);
 
 	void						addOption(sf::Text optionText, MenuOption::MenuOptionFunction onClick);
-	void						addSelectableOption(sf::Text optionText, MenuOption::MenuSelectFunction onLeft, MenuOption::MenuSelectFunction onRight);
 	void						addOption(MenuOption option);
+
+	void						addSelectableOption(sf::Text optionText, MenuOption::MenuSelectFunction onLeft, MenuOption::MenuSelectFunction onRight);
 	void						addSelectableOption(MenuOption option);
+
 	virtual void				draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	void						handleEvent(const sf::Event & event);
 

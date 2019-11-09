@@ -9,15 +9,14 @@
 #include <SFML/System/Clock.hpp>
 
 
-class EnterNameState :
-	public State
+class EnterNameState : public State
 {
 public:
-	EnterNameState(StateStack& stack, Context context);
+						EnterNameState(StateStack& stack, Context context);
 
-	virtual void draw() override;
-	virtual bool update(sf::Time dt) override;
-	virtual bool handleEvent(const sf::Event& event) override;
+	virtual void		draw() override;
+	virtual bool		update(sf::Time dt) override;
+	virtual bool		handleEvent(const sf::Event& event) override;
 
 private:
 	sf::RectangleShape	background;

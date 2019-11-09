@@ -7,16 +7,14 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
-
-class GameOverState :
-	public State
+class GameOverState : public State
 {
 public:
-	GameOverState(StateStack& stack, Context context);
+						GameOverState(StateStack& stack, Context context);
 
-	virtual void draw() override;
-	virtual bool update(sf::Time dt) override;
-	virtual bool handleEvent(const sf::Event& event) override;
+	virtual void		draw() override;
+	virtual bool		update(sf::Time dt) override;
+	virtual bool		handleEvent(const sf::Event& event) override;
 
 private:
 	sf::RectangleShape	background;

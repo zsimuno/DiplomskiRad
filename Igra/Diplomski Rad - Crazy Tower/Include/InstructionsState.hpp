@@ -10,7 +10,7 @@
 class InstructionsState : public State
 {
 public:
-	InstructionsState(StateStack& stack, Context context);
+						InstructionsState(StateStack& stack, Context context);
 
 	virtual void		draw() override;
 	virtual bool		update(sf::Time dt) override;

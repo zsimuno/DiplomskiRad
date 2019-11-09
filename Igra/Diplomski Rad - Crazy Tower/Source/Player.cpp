@@ -3,29 +3,21 @@
 #include <Utility.hpp>
 #include <Platforms.hpp>
 #include <Tower.hpp>
+
 #include <iostream>
 
-
-
-
-Player::Player(State::Context& context, Platforms& towerPlatforms, sf::FloatRect& bounds, Tower& tower)
-	: sprite(context.textures->get(*context.currentCharacterID))
+Player::Player(State::Context& context, Platforms& towerPlatforms, Tower& tower)
+	: context(context)
+	, platforms(towerPlatforms)
+	, tower(tower)
+	, sprite(context.textures->get(*context.currentCharacterID))
 	, data(initializePlayerData())
-	, playerVelocity(0, 0)
 	, mirroredSprite(false)
 	, animation(data, sprite, *this)
-	, platforms(towerPlatforms)
-	, currentPlatformBounds(0.f, 0.f, 0.f, 0.f)
-	, inCombo(false)
-	, currentCombo(0)
-	, previousPlatformFloor(Platforms::startingPlatform)
-	, maxCombo(0)
-	, isOnPlatform(true)
-	, currentBounds(bounds)
-	, tower(tower)
-	, context(context)
-	, highestPlatform(Platforms::startingPlatform)
+	, isOnEdge(false)
 {
+	initialize();
+
 	sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Idle1]);
 	sprite.setScale(sf::Vector2f(1.5, 1.5));
 	Utility::centerOrigin(sprite);
@@ -37,16 +29,13 @@ void Player::initialize()
 	currentPlatformBounds = sf::FloatRect(0.f, 0.f, 0.f, 0.f);
 	inCombo = false;
 	isOnPlatform = true;
-	animation.setIdle();
+	animation.setIdleSprite();
 	currentCombo = 0;
 	maxCombo = 0;
 	previousPlatformFloor = Platforms::startingPlatform;
 	highestPlatform = Platforms::startingPlatform;
 }
 
-void Player::handleEvent()
-{
-}
 
 void Player::handleRealtimeInput()
 {
@@ -77,11 +66,6 @@ void Player::handleRealtimeInput()
 void Player::setVelocity(sf::Vector2f v)
 {
 	playerVelocity = v;
-}
-
-void Player::addVelocity(sf::Vector2f v)
-{
-	playerVelocity += v;
 }
 
 sf::Vector2f Player::getVelocity() const
@@ -122,7 +106,7 @@ void Player::setOnPlatform(Platform* platform)
 	previousPlatformFloor = plat;
 	isOnPlatform = true;
 	playerVelocity.y = 0.0f;
-	animation.setIdle();
+	animation.setIdleSprite();
 
 	this->setPosition(this->getPosition().x, platPos.y - getBounds().height - getBounds().top);
 }
@@ -137,7 +121,7 @@ Platforms& Player::getPlatforms()
 	return platforms;
 }
 
-sf::FloatRect Player::getCurrentPlatformBounds()
+sf::FloatRect Player::getCurrentPlatformBounds() const
 {
 	return currentPlatformBounds;
 }
@@ -178,34 +162,58 @@ void Player::endCombo()
 	currentCombo = 0;
 }
 
+bool Player::playerisOnEdge()
+{
+	return isOnEdge;
+}
+
 
 void Player::updateCurrent(sf::Time dt)
 {
 	float dtAsSeconds = dt.asSeconds();
 
-	playerVelocity.x *= 55.f * dtAsSeconds;
-
 	this->handleRealtimeInput();
+
+	playerVelocity.x *= 0.9f;
+
+	animation.updateSprite(dt);
 
 	if (!isOnPlatform)
 	{
 		playerVelocity.y += data.fallSpeed;
-		platforms.isOnPlatform(*this, dtAsSeconds);
+		platforms.isPlayerOnPlatform(*this, dtAsSeconds);
 	}
 	else if (currentPlatformBounds.width != 0.f)
 	{
+		// Is player falling of the platform
 		sf::FloatRect playerRect(sf::Vector2f(getPosition().x + getBounds().left, getPosition().y + getBounds().top),
 			sf::Vector2f(getBounds().width, getBounds().height));
-		// Is player falling of the platform
+		
 		if (!(playerRect.left + playerRect.width > currentPlatformBounds.left&&
 			playerRect.left < currentPlatformBounds.left + currentPlatformBounds.width))
 		{
 			isOnPlatform = false;
-			endCombo();
+		}
+
+		// Is player standing on the edge
+		if (abs(playerVelocity.x) < 2  
+			&& (playerRect.left   < currentPlatformBounds.left - 10.f 
+			|| playerRect.left + playerRect.width  > currentPlatformBounds.left + currentPlatformBounds.width + 10.f) 
+			&& getPlatformNumber() % 50 != 0 )
+		{
+			// Play the sound only first time
+			if (!isOnEdge)
+			{
+				context.soundPlayer->play(Sounds::ID::Ledge);
+			}
+			isOnEdge = true;
+		}
+		else
+		{
+			isOnEdge = false;
 		}
 	}
 
-	animation.updateSprite(dt);
 
 	// Mirror sprite depending on moving direction
 	if ((playerVelocity.x < -1 && !mirroredSprite) || (playerVelocity.x > 1 && mirroredSprite))
@@ -220,12 +228,12 @@ void Player::updateCurrent(sf::Time dt)
 
 void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	//sf::RectangleShape shape(sf::Vector2f(getBounds().width, getBounds().height));
+	sf::RectangleShape shape(sf::Vector2f(getBounds().width, getBounds().height));
 
-	//shape.setPosition(sf::Vector2f(getBounds().left, getBounds().top));
-	//shape.setFillColor(sf::Color::White);
+	shape.setPosition(sf::Vector2f(getBounds().left, getBounds().top));
+	shape.setFillColor(sf::Color::White);
 
-	//target.draw(shape, states);
+	target.draw(shape, states);
 
 	target.draw(sprite, states);
 }

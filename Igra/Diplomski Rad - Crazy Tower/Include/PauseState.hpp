@@ -8,11 +8,10 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
-class PauseState :
-	public State
+class PauseState : public State
 {
 public:
-	PauseState(StateStack& stack, Context context);
+						PauseState(StateStack& stack, Context context);
 
 	virtual void		draw() override;
 	virtual bool		update(sf::Time dt) override;

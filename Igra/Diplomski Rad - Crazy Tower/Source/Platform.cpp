@@ -5,8 +5,6 @@
 
 #include <SFML/Graphics/Font.hpp>
 
-
-
 Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context context, int previousPlatform)
 	: platformRect()
 	, platformNumber(floorNumber)
@@ -75,7 +73,7 @@ Platform::Platform(int floorNumber, sf::FloatRect towerBounds, State::Context co
 	platformSprite.setTexture(texture);
 	platformSprite.setTextureRect(textureRect);
 
-	// Only display floor on floors that are divisible by 10
+	// Only display floor number on floors that are divisible by 10
 	if (platformNumber % 10 != 0)
 	{
 		return;
@@ -99,7 +97,7 @@ sf::FloatRect Platform::getBounds()
 	return platformRect;
 }
 
-bool Platform::isOnPlatform(Player& player, float dtAsSeconds)
+bool Platform::isPlayerOnPlatform(Player& player, float dtAsSeconds)
 {
 	sf::FloatRect playerRect(sf::Vector2f(player.getPosition().x + player.getBounds().left, player.getPosition().y + player.getBounds().top),
 							 sf::Vector2f(player.getBounds().width, player.getBounds().height));

@@ -23,3 +23,7 @@ void Utility::centerOrigin(sf::RectangleShape& shape)
 	sf::FloatRect bounds = shape.getLocalBounds();
 	shape.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 }
+
+float Utility::mapValue(float value, float istart, float istop, float ostart, float ostop) {
+	return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
+}

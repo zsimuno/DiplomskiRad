@@ -14,11 +14,11 @@
 
 
 class Tower;
-class TowerWalls : 
-	public SceneNode
+
+class TowerWalls : public SceneNode
 {
 public:
-	TowerWalls(float wallWidth, Tower& gameTower, Player& player, State::Context context);
+							TowerWalls(float wallWidth, Tower& gameTower, Player& player, State::Context context);
 
 	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 

@@ -10,11 +10,11 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-class    Game : sf::NonCopyable
+class Game : sf::NonCopyable
 {
 public:
-	Game();
-	void					 run();
+							Game();
+	void					run();
 
 private:
 	void					processInput();
@@ -23,6 +23,7 @@ private:
 
 	void					registerStates();
 	void					loadResources();
+	void					insertColors();
 
 private:
 	sf::RenderWindow		window;
@@ -32,6 +33,7 @@ private:
 	Leaderboards			leaderboards;
 	SoundPlayer				soundPlayer;
 	ThemePlayer				themePlayer;
+	ColorHolder				colorHolder;
 
 	StateStack				stateStack;
 

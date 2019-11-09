@@ -10,6 +10,7 @@ public:
 	static void			centerOrigin(sf::Sprite& sprite);
 	static void			centerOrigin(sf::Text& text);
 	static void			centerOrigin(sf::RectangleShape& shape);
+	static float		mapValue(float value, float istart, float istop, float ostart, float ostop);
 };
 
 #endif // UTILITY_HPP

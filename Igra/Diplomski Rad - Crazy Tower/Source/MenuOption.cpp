@@ -4,7 +4,6 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
-
 MenuOption::MenuOption(sf::Text text, MenuOptionFunction onClick)
 	: optionText(text)
 	, onClickAction(onClick)
@@ -37,7 +36,7 @@ MenuOption::MenuOption(sf::Text text, MenuOptionFunction onClick)
 MenuOption::MenuOption(sf::Text text, MenuSelectFunction onLeft, MenuSelectFunction onRight)
 	: MenuOption(text)
 {
-	setLeftRight(onLeft, onRight);
+	setLeftRightFunctions(onLeft, onRight);
 }
 
 
@@ -60,7 +59,7 @@ void MenuOption::click()
 	onClickAction();
 }
 
-void MenuOption::setLeftRight(MenuSelectFunction onLeft, MenuSelectFunction onRight)
+void MenuOption::setLeftRightFunctions(MenuSelectFunction onLeft, MenuSelectFunction onRight)
 {
 	onLeftAction = onLeft;
 	onRightAction = onRight;

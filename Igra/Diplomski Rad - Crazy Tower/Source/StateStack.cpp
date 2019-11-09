@@ -1,6 +1,6 @@
 #include <StateStack.hpp>
-#include <assert.h>
 
+#include <assert.h>
 
 StateStack::StateStack(State::Context context)
 	: stack()
@@ -23,7 +23,7 @@ void StateStack::update(sf::Time dt)
 
 void StateStack::draw()
 {
-	for(State::Ptr & state: stack)
+	for(State::StatePointer & state: stack)
 		state->draw();
 }
 
@@ -58,7 +58,7 @@ bool StateStack::isEmpty() const
 	return stack.empty();
 }
 
-State::Ptr StateStack::createState(GameStates::ID stateID)
+State::StatePointer StateStack::createState(GameStates::ID stateID)
 {
 	auto found = states.find(stateID);
 	assert(found != states.end());
