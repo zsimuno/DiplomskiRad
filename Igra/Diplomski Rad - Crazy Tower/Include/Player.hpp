@@ -45,6 +45,7 @@ public:
 
 	bool						playerisOnEdge();
 
+	sf::FloatRect				getPrevFrameBounds() const;
 private:
 
 	virtual void			    updateCurrent(sf::Time dt) override;
@@ -59,6 +60,7 @@ private:
 	State::Context&				context;
 
 	sf::FloatRect				currentPlatformBounds;
+	sf::FloatRect				prevFrameBounds;
 	bool					    isOnPlatform;
 
 	bool						inCombo;

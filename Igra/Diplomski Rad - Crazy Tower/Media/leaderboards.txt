@@ -1,9 +1,9 @@
 Highest combo
 1 500 300 GGG
-2 205 111 bbb
-3 208 104 bbb
-4 119 95 bbb
-5 78 78 dsa
+2 183 140 azz
+3 205 111 bbb
+4 208 104 bbb
+5 108 104 voz
 Highest floor
 1 547 14 jaa
 2 534 15 Zvi

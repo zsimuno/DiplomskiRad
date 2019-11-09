@@ -167,6 +167,11 @@ bool Player::playerisOnEdge()
 	return isOnEdge;
 }
 
+sf::FloatRect Player::getPrevFrameBounds() const
+{
+	return prevFrameBounds;
+}
+
 
 void Player::updateCurrent(sf::Time dt)
 {
@@ -182,6 +187,8 @@ void Player::updateCurrent(sf::Time dt)
 	{
 		playerVelocity.y += data.fallSpeed;
 		platforms.isPlayerOnPlatform(*this, dtAsSeconds);
+		sf::FloatRect bounds(getBounds());
+		prevFrameBounds = sf::FloatRect(getPosition().x - bounds.width / 2, getPosition().y - bounds.height / 2, bounds.width, bounds.height);
 	}
 	else if (currentPlatformBounds.width != 0.f)
 	{
@@ -228,12 +235,12 @@ void Player::updateCurrent(sf::Time dt)
 
 void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	sf::RectangleShape shape(sf::Vector2f(getBounds().width, getBounds().height));
+	//sf::RectangleShape shape(sf::Vector2f(getBounds().width, getBounds().height));
 
-	shape.setPosition(sf::Vector2f(getBounds().left, getBounds().top));
-	shape.setFillColor(sf::Color::White);
+	//shape.setPosition(sf::Vector2f(getBounds().left, getBounds().top));
+	//shape.setFillColor(sf::Color::White);
 
-	target.draw(shape, states);
+	//target.draw(shape, states);
 
 	target.draw(sprite, states);
 }

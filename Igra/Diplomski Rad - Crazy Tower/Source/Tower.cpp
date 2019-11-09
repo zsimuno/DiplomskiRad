@@ -84,8 +84,6 @@ void Tower::moveWorld(sf::Vector2f moveDistance)
 	insideTowerBounds.top += moveDistance.y;
 	rectangle->move(moveDistance);
 	comboText.move(moveDistance);
-
-
 }
 
 

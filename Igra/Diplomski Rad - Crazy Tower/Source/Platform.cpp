@@ -99,23 +99,31 @@ sf::FloatRect Platform::getBounds()
 
 bool Platform::isPlayerOnPlatform(Player& player, float dtAsSeconds)
 {
-	sf::FloatRect playerRect(sf::Vector2f(player.getPosition().x + player.getBounds().left, player.getPosition().y + player.getBounds().top),
+	sf::Vector2f velocity = player.getVelocity();
+
+	if (velocity.y < 0)
+	{
+		return false;
+	}
+
+	sf::FloatRect previousFrame(player.getPrevFrameBounds());
+	sf::FloatRect currentFrame(sf::Vector2f(player.getPosition().x + player.getBounds().left, player.getPosition().y + player.getBounds().top),
 							 sf::Vector2f(player.getBounds().width, player.getBounds().height));
 
 	sf::Vector2f platPos = getWorldPosition();
 
 	// Is player in the same x position as the platform
-	if (!(playerRect.left + playerRect.width > platPos.x&&
-		playerRect.left < platPos.x + platformRect.width))
+	if (!(currentFrame.left + currentFrame.width > platPos.x&&
+		currentFrame.left < platPos.x + platformRect.width))
 	{
 		return false;
 	}
 
-	sf::Vector2f velocity = player.getVelocity();
+	
 
-	// Is player this frame above and the next will be below the platform
-	if (playerRect.top + playerRect.height < platPos.y &&
-		playerRect.top + playerRect.height + (velocity.y) * dtAsSeconds >= platPos.y)
+	// Is player this frame below and the last one above the platform
+	if (previousFrame.top + previousFrame.height < platPos.y &&
+		currentFrame.top + currentFrame.height >= platPos.y)
 	{
 		player.setOnPlatform(this);
 		return true;
