@@ -38,7 +38,7 @@ void PlayerAnimation::updateSprite(sf::Time dt)
 
 void PlayerAnimation::setRotatingSprite(float timeSec, sf::Vector2f playerVelocity)
 {
-	if (playerVelocity.y < -1500.f && !isRotatingSprite)
+	if (playerVelocity.y < -1800.f && !isRotatingSprite)
 	{
 		isRotatingSprite = true;
 		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Rotate]);
@@ -69,7 +69,7 @@ void PlayerAnimation::setRotatingSprite(float timeSec, sf::Vector2f playerVeloci
 
 void PlayerAnimation::setOnPlatformSprite(float timeSec, sf::Vector2f playerVelocity)
 {
-	if (abs(playerVelocity.x) < 2)
+	if (abs(playerVelocity.x) < 5)
 	{
 		sprite.setTextureRect(data.playerTexturesMap[PlayerSprite::ID::Jump]);
 	}

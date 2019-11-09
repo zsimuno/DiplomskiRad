@@ -97,6 +97,7 @@ sf::FloatRect Platform::getBounds()
 	return platformRect;
 }
 
+// TODO: fix when player falls in rotation and sprite changes
 bool Platform::isPlayerOnPlatform(Player& player, float dtAsSeconds)
 {
 	sf::Vector2f velocity = player.getVelocity();

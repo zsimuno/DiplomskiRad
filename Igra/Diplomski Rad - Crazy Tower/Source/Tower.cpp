@@ -44,7 +44,7 @@ void Tower::update(sf::Time dt)
 		position.x + bounds.width/2 >= insideTowerBounds.left + insideTowerBounds.width )
 	{
 		sf::Vector2f velocity = player->getVelocity();
-		velocity.x = -1.5f*velocity.x;
+		velocity.x = -2.f*velocity.x;
 		player->setVelocity(velocity);
 	}
 
@@ -61,7 +61,7 @@ void Tower::update(sf::Time dt)
 	sf::Vector2f velocity = player->getVelocity();
 	if (position.y < insideTowerBounds.top + insideTowerBounds.height / 4 && velocity.y < 0)
 	{
-		moveWorld(sf::Vector2f(0.f, velocity.y * dt.asSeconds() * Utility::mapValue(position.y, insideTowerBounds.height / 4, insideTowerBounds.top, 0, 1)));
+		moveWorld(sf::Vector2f(0.f, velocity.y * dt.asSeconds() * Utility::mapValue(position.y, insideTowerBounds.height / 3, insideTowerBounds.top, 0, 1)));
 	}
 
 

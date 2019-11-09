@@ -1,12 +1,12 @@
 Highest combo
-1 500 300 GGG
-2 183 140 azz
-3 205 111 bbb
-4 208 104 bbb
-5 108 104 voz
+1 700 75 bbb
+2 183 72 azz
+3 313 60 abc
+4 200 35 bbb
+5 345 30 voz
 Highest floor
-1 547 14 jaa
-2 534 15 Zvi
-3 514 0 abc
-4 512 7 nnn
-5 503 0 asd
+1 700 75 bbb
+2 345 30 aaa
+3 313 60 abc
+4 200 35 ivo
+5 190 10 zvo

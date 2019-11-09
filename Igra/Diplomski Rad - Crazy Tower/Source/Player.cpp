@@ -41,13 +41,13 @@ void Player::handleRealtimeInput()
 {
 	if (isOnPlatform && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		playerVelocity.y -= data.jumpSpeed + 1.1f * abs(playerVelocity.x);
+		playerVelocity.y -= data.jumpSpeed + 1.2f * abs(playerVelocity.x);
 		isOnPlatform = false;
-		if (playerVelocity.y > -1000.f)
+		if (playerVelocity.y > -1400.f)
 		{
 			context.soundPlayer->play(Sounds::ID::Jump1);
 		} 
-		else if (playerVelocity.y > -1500.f)
+		else if (playerVelocity.y > -1800.f)
 		{
 			context.soundPlayer->play(Sounds::ID::Jump2);
 		} 
@@ -58,9 +58,58 @@ void Player::handleRealtimeInput()
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		playerVelocity.x -= data.moveSpeed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		playerVelocity.x += data.moveSpeed;
+	{
+		playerVelocity.x = playerVelocity.x * data.moveAcceleration - (data.maxMoveSpeed * (1 - data.moveAcceleration));
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		playerVelocity.x = playerVelocity.x * data.moveAcceleration + (data.maxMoveSpeed * (1 - data.moveAcceleration));
+	}
+	else
+	{
+		playerVelocity.x = playerVelocity.x * data.moveAcceleration;
+	}
+
+
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	//{
+	//	playerVelocity.x += (-data.maxMoveSpeed * data.moveAcceleration);
+	//}
+	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	//{
+	//	playerVelocity.x += (data.maxMoveSpeed * data.moveAcceleration);
+	//}
+	//else
+	//{
+	//	if (playerVelocity.x < 0)
+	//	{
+	//		playerVelocity.x = playerVelocity.x + (data.moveDeceleration * data.maxMoveSpeed);
+	//			if (playerVelocity.x > 0)
+	//			{
+	//				playerVelocity.x = 0;
+	//			}
+	//				
+	//	}
+	//	else if (playerVelocity.x > 0)
+	//	{
+	//		playerVelocity.x = playerVelocity.x + (data.moveDeceleration * data.maxMoveSpeed);
+	//			if (playerVelocity.x < 0)
+	//			{
+	//				playerVelocity.x = 0;
+	//			}
+	//	}
+	//}
+
+	// Limit movement
+	if (playerVelocity.x > data.maxMoveSpeed)
+	{
+		playerVelocity.x = data.maxMoveSpeed;
+	}
+	else if (playerVelocity.x < -data.maxMoveSpeed)
+	{
+		playerVelocity.x = -data.maxMoveSpeed;
+	}
+
 }
 
 void Player::setVelocity(sf::Vector2f v)
@@ -82,7 +131,7 @@ void Player::setOnPlatform(Platform* platform)
 {
 	// Combos happen if player jumps more than one platform. Otherwise the combo resets.
 	int plat = platform->getPlatformNumber();
-	if (previousPlatformFloor < plat - 1)
+	if (previousPlatformFloor < plat - 1 || previousPlatformFloor == plat)
 	{
 		inCombo = true;
 		currentCombo += plat - previousPlatformFloor;
@@ -109,6 +158,20 @@ void Player::setOnPlatform(Platform* platform)
 	animation.setIdleSprite();
 
 	this->setPosition(this->getPosition().x, platPos.y - getBounds().height - getBounds().top);
+
+	// If player is set left or right of the platform (happens while rotating)
+	sf::FloatRect playerRect(sf::Vector2f(getPosition().x + getBounds().left, getPosition().y + getBounds().top),
+		sf::Vector2f(getBounds().width, getBounds().height));
+
+	if (playerRect.left + playerRect.width < currentPlatformBounds.left)
+	{
+		this->setPosition(currentPlatformBounds.left - playerRect.width /4 , this->getPosition().y );
+	}
+	else if (playerRect.left > currentPlatformBounds.left + currentPlatformBounds.width)
+	{
+		this->setPosition(currentPlatformBounds.left + currentPlatformBounds.width + playerRect.width / 4, this->getPosition().y );
+	}
+
 }
 
 bool Player::isStandingOnPlatform() const
@@ -179,14 +242,13 @@ void Player::updateCurrent(sf::Time dt)
 
 	this->handleRealtimeInput();
 
-	playerVelocity.x *= 0.9f;
-
 	animation.updateSprite(dt);
 
 	if (!isOnPlatform)
 	{
 		playerVelocity.y += data.fallSpeed;
 		platforms.isPlayerOnPlatform(*this, dtAsSeconds);
+
 		sf::FloatRect bounds(getBounds());
 		prevFrameBounds = sf::FloatRect(getPosition().x - bounds.width / 2, getPosition().y - bounds.height / 2, bounds.width, bounds.height);
 	}
@@ -235,13 +297,6 @@ void Player::updateCurrent(sf::Time dt)
 
 void Player::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	//sf::RectangleShape shape(sf::Vector2f(getBounds().width, getBounds().height));
-
-	//shape.setPosition(sf::Vector2f(getBounds().left, getBounds().top));
-	//shape.setFillColor(sf::Color::White);
-
-	//target.draw(shape, states);
-
 	target.draw(sprite, states);
 }
 
