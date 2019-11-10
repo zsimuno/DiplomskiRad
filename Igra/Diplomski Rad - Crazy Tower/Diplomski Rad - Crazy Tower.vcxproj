@@ -106,7 +106,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Include\Leaderboards.cpp" />
     <ClCompile Include="Source\ColorHolder.cpp" />
     <ClCompile Include="Source\ComboCounter.cpp" />
     <ClCompile Include="Source\EnterNameState.cpp" />
@@ -115,6 +114,7 @@
     <ClCompile Include="Source\GameOverState.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\InstructionsState.cpp" />
+    <ClCompile Include="Source\Leaderboards.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="Source\MainMenuState.cpp" />
     <ClCompile Include="Source\Menu.cpp" />

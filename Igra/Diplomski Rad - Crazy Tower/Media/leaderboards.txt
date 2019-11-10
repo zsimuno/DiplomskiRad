@@ -2,8 +2,8 @@ Highest combo
 1 700 75 bbb
 2 183 72 azz
 3 313 60 abc
-4 200 35 bbb
-5 6 6 zzz
+4 114 52 xyv
+5 70 39 dan
 Highest floor
 1 700 75 bbb
 2 345 30 aaa
